@@ -1,0 +1,13 @@
+dataset,column,data_type,total_rows,missing_count,missing_pct,unique_count,min_value,max_value,negative_count,sample_values
+district_dfsi,District,str,13,0,0.0,13,,,0,"['Almora', 'Bageshwar', 'Chamoli']"
+district_dfsi,State_Name,str,13,0,0.0,1,,,0,['UTTARAKHAND']
+district_dfsi,DFSI,float64,13,0,0.0,13,7.103,18.058,0,"[np.float64(7.102979287602845), np.float64(12.479758572738648), np.float64(18.05"
+district_flooded_area,District,str,13,0,0.0,13,,,0,"['Almora', 'Bageshwar', 'Chamoli']"
+district_flooded_area,Percent_Flooded_Area,float64,13,0,0.0,13,0.4507,2.0619,0,"[np.float64(0.649027255), np.float64(0.57268385), np.float64(1.044647093)]"
+district_flooded_area,Parmanent_Water,float64,13,0,0.0,13,0.0005,0.7853,0,"[np.float64(0.000454012), np.float64(0.001914048), np.float64(0.05612071)]"
+district_flooded_area,Corrected_Percent_Flooded_Area,float64,13,0,0.0,13,0.3184,1.8754,0,"[np.float64(0.648573243), np.float64(0.570769802), np.float64(0.988526383)]"
+district_flood_impact,District,str,13,0,0.0,13,,,0,"['Almora', 'Bageshwar', 'Chamoli']"
+district_flood_impact,Human_fatality,int64,13,0,0.0,12,0.0,1636.0,0,"[np.int64(0), np.int64(40), np.int64(1546)]"
+district_flood_impact,Human_injured,int64,13,0,0.0,11,0.0,79.0,0,"[np.int64(0), np.int64(13), np.int64(75)]"
+district_flood_impact,Population,int64,13,0,0.0,13,248925.0,2449262.0,0,"[np.int64(618943), np.int64(256564), np.int64(426828)]"
+district_flood_impact,Mean_Flood_Duration,float64,13,1,7.69,6,2.0,7.0,0,"[np.float64(2.0), np.float64(4.0), np.float64(6.0)]"

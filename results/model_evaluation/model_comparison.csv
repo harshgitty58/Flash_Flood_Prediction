@@ -1,0 +1,4 @@
+model,feature_set,threshold,training_time_seconds,val_roc_auc,val_pr_auc,val_precision,val_recall,val_f1,val_specificity,val_balanced_accuracy,val_mcc,val_brier,val_log_loss,test_roc_auc,test_pr_auc,test_precision,test_recall,test_f1,test_specificity,test_balanced_accuracy,test_mcc,test_brier,test_log_loss
+Logistic Regression,Exp_E_Full_Multimodal,0.05,0.18,0.8451,0.025,0.0031,1.0,0.0061,0.0052,0.5026,0.004,0.0195,0.1461,0.8808,0.005,0.0015,1.0,0.003,0.2098,0.6049,0.0177,0.0144,0.1172
+Random Forest,Exp_E_Full_Multimodal,0.05,2.55,0.5314,0.0046,0.004,0.2105,0.0078,0.8371,0.5238,0.0071,0.0043,0.0397,0.1829,0.0007,0.0,0.0,0.0,0.4832,0.2416,-0.0356,0.0055,0.0673
+XGBoost,Exp_E_Full_Multimodal,0.25,1.28,0.9299,0.3124,0.2895,0.5789,0.386,0.9956,0.7873,0.4069,0.0368,0.2111,0.6672,0.0021,0.0012,0.1176,0.0023,0.8802,0.4989,-0.0002,0.0584,0.2619

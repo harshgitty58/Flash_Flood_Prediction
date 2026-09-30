@@ -1,0 +1,16 @@
+experiment,model,feature_count,threshold,train_time_sec,val_roc_auc,val_pr_auc,val_precision,val_recall,val_f1,val_specificity,val_balanced_accuracy,val_mcc,val_brier,val_log_loss
+Exp_A_Rainfall_Only,Logistic Regression,10,0.05,4.23,0.5898,0.004,0.0,0.0,0.0,0.9895,0.4947,-0.0057,0.0038,0.0333
+Exp_A_Rainfall_Only,Random Forest,10,0.05,2.33,0.5394,0.0039,0.0,0.0,0.0,0.9183,0.4591,-0.0165,0.0054,0.0833
+Exp_A_Rainfall_Only,XGBoost,10,0.05,1.78,0.3564,0.0023,0.0,0.0,0.0,0.9864,0.4932,-0.0065,0.0035,0.0281
+Exp_B_Rainfall_Discharge,Logistic Regression,14,0.05,0.25,0.5898,0.004,0.0,0.0,0.0,0.9895,0.4947,-0.0057,0.0038,0.0333
+Exp_B_Rainfall_Discharge,Random Forest,14,0.05,2.36,0.5612,0.0037,0.0,0.0,0.0,0.9222,0.4611,-0.0161,0.0051,0.0733
+Exp_B_Rainfall_Discharge,XGBoost,14,0.05,1.73,0.3564,0.0023,0.0,0.0,0.0,0.9864,0.4932,-0.0065,0.0035,0.0281
+Exp_C_Rainfall_Discharge_FloodHist,Logistic Regression,21,0.05,0.25,0.8402,0.0366,0.0031,1.0,0.0061,0.0052,0.5026,0.004,0.0196,0.1465
+Exp_C_Rainfall_Discharge_FloodHist,Random Forest,21,0.1,2.25,0.5614,0.004,0.007,0.2105,0.0135,0.9079,0.5592,0.0226,0.0069,0.0546
+Exp_C_Rainfall_Discharge_FloodHist,XGBoost,21,0.3,1.53,0.8548,0.0824,0.0093,0.7368,0.0184,0.7586,0.7477,0.0639,0.1341,0.4294
+Exp_D_Rainfall_Discharge_Flood_Landslide,Logistic Regression,25,0.05,0.22,0.8259,0.0173,0.0031,1.0,0.0061,0.0052,0.5026,0.004,0.0193,0.1454
+Exp_D_Rainfall_Discharge_Flood_Landslide,Random Forest,25,0.1,2.54,0.5503,0.0056,0.0044,0.2105,0.0086,0.8531,0.5318,0.0099,0.0071,0.0587
+Exp_D_Rainfall_Discharge_Flood_Landslide,XGBoost,25,0.65,1.32,0.8386,0.0794,0.0091,0.6316,0.018,0.7892,0.7104,0.0569,0.1579,0.4852
+Exp_E_Full_Multimodal,Logistic Regression,32,0.05,0.22,0.8451,0.025,0.0031,1.0,0.0061,0.0052,0.5026,0.004,0.0195,0.1461
+Exp_E_Full_Multimodal,Random Forest,32,0.05,2.69,0.5314,0.0046,0.004,0.2105,0.0078,0.8371,0.5238,0.0071,0.0043,0.0397
+Exp_E_Full_Multimodal,XGBoost,32,0.25,1.2,0.9299,0.3124,0.2895,0.5789,0.386,0.9956,0.7873,0.4069,0.0368,0.2111

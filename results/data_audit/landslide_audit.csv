@@ -1,0 +1,9 @@
+dataset,column,data_type,total_rows,missing_count,missing_pct,unique_count,min_value,max_value,negative_count,sample_values
+uttarakhand_landslide_inventory,sl_no,int64,5443,0,0.0,5443,30549.0,36071.0,0,"[np.int64(30549), np.int64(30550), np.int64(30551)]"
+uttarakhand_landslide_inventory,slide_no,str,5443,0,0.0,5439,,,0,"['UK/CHA/62C04/2017/34', 'UK/CHA/62C04/2017/24', 'UK/CHA/53O16/2017/9']"
+uttarakhand_landslide_inventory,state,str,5443,0,0.0,1,,,0,['Uttarakhand']
+uttarakhand_landslide_inventory,district,str,5443,1,0.02,13,,,0,"['Champawat', 'Nainital', 'Pithoragarh']"
+uttarakhand_landslide_inventory,location_details,str,5443,1728,31.75,1317,,,0,"['Katal', 'Adhauri', 'Durgapipal']"
+uttarakhand_landslide_inventory,latitude,float64,5443,0,0.0,5271,6.0,409.0,0,"[np.float64(29.135275), np.float64(29.139732), np.float64(29.142636)]"
+uttarakhand_landslide_inventory,longitude,float64,5443,0,0.0,5289,0.5,500.0,0,"[np.float64(80.090843), np.float64(80.073974), np.float64(79.958384)]"
+uttarakhand_landslide_inventory,material_movement_history_raw,str,5443,0,0.0,366,,,0,"['Debris Slide 2014', 'Rock Slide 2012', 'Rock Slide 2014']"

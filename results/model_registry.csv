@@ -1,0 +1,7 @@
+model_id,model_name,feature_set,train_start,train_end,threshold,val_roc_auc,val_pr_auc,val_f1,model_path,notes
+logistic regression_20260923_000130,Logistic Regression,32 features,2022-01-31,2024-08-05,0.05,,,0.0,models\logistic_regression\model.joblib,Trained on Exp_E_Full_Multimodal with 1.9s training time
+random forest_20260923_000130,Random Forest,32 features,2022-01-31,2024-08-05,0.05,,,0.0,models\random_forest\model.joblib,Trained on Exp_E_Full_Multimodal with 7.6s training time
+xgboost_20260923_000130,XGBoost,32 features,2022-01-31,2024-08-05,0.05,,,0.0,models\xgboost\model.joblib,Trained on Exp_E_Full_Multimodal with 2.1s training time
+logistic regression_20260923_001321,Logistic Regression,32 features,2022-01-31,2022-12-31,0.05,0.8808,0.005,0.003,models\logistic_regression\model.joblib,Trained on Exp_E_Full_Multimodal with 0.2s training time
+random forest_20260923_001321,Random Forest,32 features,2022-01-31,2022-12-31,0.05,0.1829,0.0007,0.0,models\random_forest\model.joblib,Trained on Exp_E_Full_Multimodal with 2.5s training time
+xgboost_20260923_001321,XGBoost,32 features,2022-01-31,2022-12-31,0.25,0.6672,0.0021,0.0023,models\xgboost\model.joblib,Trained on Exp_E_Full_Multimodal with 1.3s training time

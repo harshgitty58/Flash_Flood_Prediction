@@ -1,0 +1,21 @@
+dataset,column,data_type,total_rows,missing_count,missing_pct,unique_count,min_value,max_value,negative_count,sample_values
+cwc_rainfall_uttarakhand,SlNo,int64,46379,0,0.0,37410,1.0,37410.0,0,"[np.int64(1), np.int64(2), np.int64(3)]"
+cwc_rainfall_uttarakhand,Station,str,46379,0,0.0,47,,,0,"['Almora_1', 'Assan_1', 'Badrinath_1']"
+cwc_rainfall_uttarakhand,Agency,str,46379,0,0.0,1,,,0,['Uttarakhand']
+cwc_rainfall_uttarakhand,State LGD Code,int64,46379,0,0.0,1,5.0,5.0,0,[np.int64(5)]
+cwc_rainfall_uttarakhand,State,str,46379,0,0.0,1,,,0,['Uttarakhand']
+cwc_rainfall_uttarakhand,District LGD Code,int64,46379,0,0.0,13,45.0,57.0,0,"[np.int64(45), np.int64(49), np.int64(47)]"
+cwc_rainfall_uttarakhand,District,str,46379,0,0.0,13,,,0,"['Almora', 'Dehradun', 'Chamoli']"
+cwc_rainfall_uttarakhand,Tehsil,str,46379,0,0.0,11,,,0,"['-', 'Vikasnagar', 'Chakrata']"
+cwc_rainfall_uttarakhand,Block,str,46379,0,0.0,1,,,0,['-']
+cwc_rainfall_uttarakhand,Village,str,46379,0,0.0,1,,,0,['-']
+cwc_rainfall_uttarakhand,River,str,46379,0,0.0,2,,,0,"['-', 'Kali']"
+cwc_rainfall_uttarakhand,Basin,str,46379,0,0.0,2,,,0,"['-', 'Ganga']"
+cwc_rainfall_uttarakhand,Tributary,str,46379,0,0.0,1,,,0,['-']
+cwc_rainfall_uttarakhand,Subtributary,str,46379,0,0.0,1,,,0,['-']
+cwc_rainfall_uttarakhand,SubSubtributary,str,46379,0,0.0,1,,,0,['-']
+cwc_rainfall_uttarakhand,Local River,str,46379,0,0.0,1,,,0,['-']
+cwc_rainfall_uttarakhand,Latitude,float64,46379,0,0.0,48,28.9297,31.0153,0,"[np.float64(29.59575833), np.float64(29.59631389), np.float64(30.43582222)]"
+cwc_rainfall_uttarakhand,Longitude,float64,46379,0,0.0,48,77.6658,80.5405,0,"[np.float64(79.65063889), np.float64(79.65005556), np.float64(77.66580833)]"
+cwc_rainfall_uttarakhand,Data Acquisition Time,str,46379,0,0.0,13964,,,0,"['05-10-2022 10.00', '05-10-2022 11.00', '05-10-2022 12.00']"
+cwc_rainfall_uttarakhand,Telemetry Hourly Rainfall (mm),float64,46379,0,0.0,716,-503.5,511.5,73,"[np.float64(1.0), np.float64(0.5), np.float64(3.0)]"

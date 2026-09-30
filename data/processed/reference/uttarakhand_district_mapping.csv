@@ -1,0 +1,23 @@
+source_name,standard_district,source_dataset,mapping_status,notes
+Almora,Almora,All,Exact,Official Uttarakhand district
+Bageshwar,Bageshwar,All,Exact,Official Uttarakhand district
+Chamoli,Chamoli,All,Exact,Official Uttarakhand district
+Champawat,Champawat,All,Exact,Official Uttarakhand district
+Dehradun,Dehradun,All,Exact,Official Uttarakhand district
+Haridwar,Haridwar,All,Exact,Official Uttarakhand district
+Hardwar,Haridwar,DFSI / Historical,Standardized,Colonial / alternate spelling of Haridwar
+Nainital,Nainital,All,Exact,Official Uttarakhand district
+Pauri Garhwal,Pauri Garhwal,All,Exact,Official Uttarakhand district
+PAURI GARHWAL,Pauri Garhwal,CWC / Inventory,Standardized,Case normalization
+Garhwal,Garhwal (Regional),Flood Impact / DFSI,Preserved Regional,Historical administrative division covering multiple districts; preserved without false precision
+Pithoragarh,Pithoragarh,All,Exact,Official Uttarakhand district
+Pithorgarh,Pithoragarh,Flood Inventory,Standardized,Spelling variation
+Rudraprayag,Rudraprayag,All,Exact,Official Uttarakhand district
+Tehri Garhwal,Tehri Garhwal,All,Exact,Official Uttarakhand district
+Tehri Garhwal ,Tehri Garhwal,Flood Inventory,Standardized,Trailing whitespace stripped
+Udham Singh Nagar,Udham Singh Nagar,All,Exact,Official Uttarakhand district
+UDHAM SINGH NAGAR,Udham Singh Nagar,CWC / Inventory,Standardized,Case normalization
+Uttarkashi,Uttarkashi,All,Exact,Official Uttarakhand district
+Uttar Kashi,Uttarkashi,Flood Inventory,Standardized,Space separated variant
+Uttar Kashi Kashi,Uttarkashi,Flood Inventory,Standardized,Duplicated name anomaly in IMD historical inventory
+Bageshwari,Bageshwar,Flood Inventory,Standardized,Tehsil/subdivision reference to Bageshwar

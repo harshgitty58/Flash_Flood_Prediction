@@ -1,0 +1,9 @@
+dataset,column,data_type,total_rows,missing_count,missing_pct,unique_count,min_value,max_value,negative_count,sample_values
+cwc_river_discharge_hourly,station,str,90303,0,0.0,7,,,0,"['Karnaprayag (P)', 'Kheri_5', 'Koteshwar']"
+cwc_river_discharge_hourly,district,str,90303,0,0.0,6,,,0,"['Chamoli', 'Almora', 'Tehri Garhwal']"
+cwc_river_discharge_hourly,latitude,float64,90303,0,0.0,7,29.6057,30.7481,0,"[np.float64(30.2525), np.float64(29.6057), np.float64(30.26527778)]"
+cwc_river_discharge_hourly,longitude,float64,90303,0,0.0,7,78.4533,79.5175,0,"[np.float64(79.22138889), np.float64(79.0927), np.float64(78.50333333)]"
+cwc_river_discharge_hourly,datetime,str,90303,0,0.0,20943,,,0,"['2023-06-07 07:00:00', '2023-06-07 08:00:00', '2023-06-07 09:00:00']"
+cwc_river_discharge_hourly,discharge_m3s,float64,90303,0,0.0,42881,0.0,2985.17,0,"[np.float64(27.25), np.float64(26.75), np.float64(27.5)]"
+cwc_river_discharge_hourly,valid_observations,int64,90303,0,0.0,4,1.0,4.0,0,"[np.int64(4), np.int64(3), np.int64(1)]"
+cwc_river_discharge_hourly,data_completeness,str,90303,0,0.0,2,,,0,"['complete_hour', 'partial_hour']"

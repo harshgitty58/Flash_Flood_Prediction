@@ -1,0 +1,23 @@
+dataset,column,data_type,total_rows,missing_count,missing_pct,unique_count,min_value,max_value,negative_count,sample_values
+uttarakhand_flood_inventory,UEI,str,121,0,0.0,121,,,0,"['UEI-IMD-FL-1970-0002', 'UEI-IMD-FL-1979-0057', 'UEI-IMD-FL-1979-0058']"
+uttarakhand_flood_inventory,Start_Date,str,121,0,0.0,111,,,0,"['1970-07-15 00:00:00', '1979-03-09 00:00:00', '1979-07-08 00:00:00']"
+uttarakhand_flood_inventory,End_Date,str,121,0,0.0,111,,,0,"['1970-07-29 00:00:00', '1979-03-09 00:00:00', '1979-07-28 00:00:00']"
+uttarakhand_flood_inventory,Duration_Days,float64,121,0,0.0,12,1.0,52.0,0,"[np.float64(15.0), np.float64(1.0), np.float64(21.0)]"
+uttarakhand_flood_inventory,Main Cause,str,121,0,0.0,42,,,0,"['flood', 'heavy rains', 'severe floods']"
+uttarakhand_flood_inventory,Location,float64,121,121,100.0,0,,,0,[]
+uttarakhand_flood_inventory,Districts,str,121,0,0.0,44,,,0,"['Entire village', 'Chamoli', 'Azamgarh, Bahraich, Ballia, Bara Banki, Basti, Ch"
+uttarakhand_flood_inventory,State,str,121,0,0.0,3,,,0,"['Uttarakhand', 'Uttar Pradesh, Uttarakhand', 'Uttar Pradesh , Uttarakhand']"
+uttarakhand_flood_inventory,Latitude,float64,121,121,100.0,0,,,0,[]
+uttarakhand_flood_inventory,Longitude,float64,121,121,100.0,0,,,0,[]
+uttarakhand_flood_inventory,Severity,float64,121,121,100.0,0,,,0,[]
+uttarakhand_flood_inventory,Area Affected,float64,121,121,100.0,0,,,0,[]
+uttarakhand_flood_inventory,Human fatality,float64,121,26,21.49,35,1.0,5000.0,0,"[np.float64(11.0), np.float64(25.0), np.float64(49.0)]"
+uttarakhand_flood_inventory,Human injured,float64,121,92,76.03,15,1.0,55.0,0,"[np.float64(7.0), np.float64(24.0), np.float64(5.0)]"
+uttarakhand_flood_inventory,Human Displaced,float64,121,109,90.08,9,1.0,205.0,0,"[np.float64(2.0), np.float64(1.0), np.float64(8.0)]"
+uttarakhand_flood_inventory,Animal Fatality,float64,121,107,88.43,14,5.0,5239.0,0,"[np.float64(5239.0), np.float64(513.0), np.float64(38.0)]"
+uttarakhand_flood_inventory,Description of Casualties/injured,str,121,49,40.5,70,,,0,"['11 human lives lost', 'i)25 persons killed in massive land-slides in Gyansu vi"
+uttarakhand_flood_inventory,Extent of damage,str,121,58,47.93,61,,,0,['Flooding of Alakanda river caused considerable loss of life among pilgrims. A 
+uttarakhand_flood_inventory,Event Source,str,121,0,0.0,1,,,0,['IMD']
+uttarakhand_flood_inventory,Event Souce ID,float64,121,121,100.0,0,,,0,[]
+uttarakhand_flood_inventory,District_LGD_Codes,str,121,12,9.92,39,,,0,"['47', '123, 125, 126, 129, 131, 47, 49, 137, 140, 514, 148, 159, 183', '47, 55,"
+uttarakhand_flood_inventory,State_Codes,str,121,0,0.0,2,,,0,"['5', '9,5']"

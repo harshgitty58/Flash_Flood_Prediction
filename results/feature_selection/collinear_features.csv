@@ -1,0 +1,3 @@
+feature_1,feature_2,correlation
+day_of_year,month,0.9798
+district_mean_flood_duration_days,longitude,0.9565
