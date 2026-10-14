@@ -1,0 +1,2 @@
+year,roc_auc,pr_auc,precision,recall,f1,specificity,balanced_accuracy,mcc,brier,log_loss,threshold
+2023,0.5345,0.0364,0.0605,0.125,0.0815,0.9619,0.5434,0.0611,0.0683,0.2822,0.7

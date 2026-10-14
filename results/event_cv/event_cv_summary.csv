@@ -1,0 +1,10 @@
+experiment,features,folds,rows,positives,pooled_roc_auc,pooled_pr_auc,base_rate,mean_fold_roc_auc,min_fold_roc_auc
+Exp_A_Rainfall_Only,10,6,15473,1248,0.4971,0.0929,0.0807,0.5207,0.3467
+Exp_B_Rainfall_Discharge,14,6,15473,1248,0.5477,0.1012,0.0807,0.6262,0.4508
+Exp_C_Rainfall_Discharge_FloodHist,21,6,15473,1248,0.7724,0.2226,0.0807,0.7966,0.6286
+Exp_D_Rainfall_Discharge_Flood_Landslide,25,6,15473,1248,0.7715,0.2364,0.0807,0.7579,0.5679
+Exp_E_Full_Multimodal,32,6,15473,1248,0.6546,0.1412,0.0807,0.6619,0.5
+Exp_F_No_Location,30,6,15473,1248,0.6138,0.126,0.0807,0.6489,0.3786
+Exp_G_Static_History,23,6,15473,1248,0.7008,0.1856,0.0807,0.7703,0.5801
+Exp_H_Multisource,42,6,15473,1248,0.7032,0.1466,0.0807,0.7235,0.5846
+Exp_T_Trigger_Only,29,6,15473,1248,0.6016,0.1038,0.0807,0.5654,0.4728

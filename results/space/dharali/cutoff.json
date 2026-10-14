@@ -1,0 +1,152 @@
+{
+  "destination": "AOI exit",
+  "settlements": [
+    {
+      "name": "Suki",
+      "place": "village",
+      "lon": 78.7013,
+      "lat": 31.00296,
+      "snap_m": 59,
+      "before_km": 0.0,
+      "after_km": 0.0,
+      "status": "connected"
+    },
+    {
+      "name": "Sunagar",
+      "place": "village",
+      "lon": 78.71155,
+      "lat": 31.01578,
+      "snap_m": 53,
+      "before_km": 2.69,
+      "after_km": 2.69,
+      "status": "connected"
+    },
+    {
+      "name": "Harsil",
+      "place": "village",
+      "lon": 78.75065,
+      "lat": 31.03691,
+      "snap_m": 41,
+      "before_km": 9.82,
+      "after_km": null,
+      "status": "CUT OFF"
+    },
+    {
+      "name": "Jhala",
+      "place": "village",
+      "lon": 78.71014,
+      "lat": 31.02486,
+      "snap_m": 11,
+      "before_km": null,
+      "after_km": null,
+      "status": "not connected before"
+    },
+    {
+      "name": "Jhala",
+      "place": "hamlet",
+      "lon": 78.70507,
+      "lat": 31.01959,
+      "snap_m": 14,
+      "before_km": 2.37,
+      "after_km": 2.37,
+      "status": "connected"
+    },
+    {
+      "name": "Jaspur",
+      "place": "village",
+      "lon": 78.70643,
+      "lat": 31.02594,
+      "snap_m": 27,
+      "before_km": 0.61,
+      "after_km": 0.61,
+      "status": "connected"
+    },
+    {
+      "name": "Dhakroliya",
+      "place": "hamlet",
+      "lon": 78.73124,
+      "lat": 31.03492,
+      "snap_m": 126,
+      "before_km": 6.25,
+      "after_km": null,
+      "status": "CUT OFF"
+    },
+    {
+      "name": "Halunga",
+      "place": "hamlet",
+      "lon": 78.74367,
+      "lat": 31.03344,
+      "snap_m": 230,
+      "before_km": 7.65,
+      "after_km": null,
+      "status": "CUT OFF"
+    },
+    {
+      "name": "Bagori",
+      "place": "village",
+      "lon": 78.74169,
+      "lat": 31.03959,
+      "snap_m": 12,
+      "before_km": 8.44,
+      "after_km": null,
+      "status": "CUT OFF"
+    },
+    {
+      "name": "Bhaironghati",
+      "place": "hamlet",
+      "lon": 78.86788,
+      "lat": 31.02672,
+      "snap_m": 20,
+      "before_km": 4.34,
+      "after_km": null,
+      "status": "CUT OFF"
+    },
+    {
+      "name": "Lanka",
+      "place": "village",
+      "lon": 78.86798,
+      "lat": 31.03024,
+      "snap_m": 43,
+      "before_km": 5.43,
+      "after_km": null,
+      "status": "CUT OFF"
+    },
+    {
+      "name": "Dharali",
+      "place": "village",
+      "lon": 78.77984,
+      "lat": 31.03967,
+      "snap_m": 38,
+      "before_km": null,
+      "after_km": null,
+      "status": "not connected before"
+    },
+    {
+      "name": "Bagori",
+      "place": "village",
+      "lon": 78.75916,
+      "lat": 31.03987,
+      "snap_m": 116,
+      "before_km": null,
+      "after_km": null,
+      "status": "not connected before"
+    },
+    {
+      "name": "Mukhba",
+      "place": "village",
+      "lon": 78.77992,
+      "lat": 31.04496,
+      "snap_m": 60,
+      "before_km": null,
+      "after_km": null,
+      "status": "not connected before"
+    }
+  ],
+  "removed_road_ids": 14,
+  "counts": {
+    "CUT OFF": 6,
+    "longer route": 0,
+    "connected": 4,
+    "not connected before": 4
+  }
+}

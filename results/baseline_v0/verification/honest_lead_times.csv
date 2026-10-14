@@ -1,0 +1,9 @@
+district,event_day,status,lead_h_before_event_day
+Dehradun,2023-07-09,baseline (already on),
+Uttarkashi,2023-07-10,warned,10.0
+Pithoragarh,2023-07-11,missed,
+Chamoli,2023-07-16,warned,-20.0
+Tehri Garhwal,2023-08-06,warned,2.0
+Dehradun,2023-08-14,baseline (already on),
+Tehri Garhwal,2023-08-14,warned,-5.0
+Tehri Garhwal,2023-08-21,missed,

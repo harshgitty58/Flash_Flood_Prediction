@@ -1,0 +1,8 @@
+{
+  "experiment": "Exp_G_Static_History",
+  "alarm_threshold": 0.7117,
+  "hourly_false_alarm_rate": 0.05,
+  "events_evaluated": 19,
+  "events_detected": 8,
+  "median_lead_time_h": 36.0
+}

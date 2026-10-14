@@ -7,21 +7,23 @@ import pandas as pd
 import numpy as np
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
 from typing import Tuple, Any
+from src.normalization import FeatureNormalizer
+
+def _imputer() -> SimpleImputer:
+    # pandas output keeps feature names so the normaliser can pick a method per feature
+    return SimpleImputer(strategy="median", keep_empty_features=True).set_output(transform="pandas")
+
 
 def get_logistic_preprocessor() -> Pipeline:
-    """Constructs preprocessing pipeline for Logistic Regression: Median Imputation + StandardScaler."""
-    return Pipeline([
-        ("imputer", SimpleImputer(strategy="median", keep_empty_features=True)),
-        ("scaler", StandardScaler()),
-    ])
+    """Logistic Regression: median imputation + parameterised normalisation (log/robust/z-score per feature)."""
+    return Pipeline([("imputer", _imputer()), ("normalizer", FeatureNormalizer())])
+
 
 def get_tree_preprocessor() -> Pipeline:
-    """Constructs preprocessing pipeline for Tree models (RF, XGBoost): Median Imputation."""
-    return Pipeline([
-        ("imputer", SimpleImputer(strategy="median", keep_empty_features=True)),
-    ])
+    """Tree models: same imputation + normalisation. Monotone transforms do not change tree splits, but one
+    shared, saved parameter set keeps training and inference (backend /predict) identical for every model."""
+    return Pipeline([("imputer", _imputer()), ("normalizer", FeatureNormalizer())])
 
 def calculate_scale_pos_weight(y_train: pd.Series) -> float:
     """Calculates scale_pos_weight strictly from the training partition: negative_count / positive_count."""

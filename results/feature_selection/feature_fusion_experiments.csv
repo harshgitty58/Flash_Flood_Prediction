@@ -1,16 +1,28 @@
 experiment,model,feature_count,threshold,train_time_sec,val_roc_auc,val_pr_auc,val_precision,val_recall,val_f1,val_specificity,val_balanced_accuracy,val_mcc,val_brier,val_log_loss
-Exp_A_Rainfall_Only,Logistic Regression,10,0.05,4.23,0.5898,0.004,0.0,0.0,0.0,0.9895,0.4947,-0.0057,0.0038,0.0333
-Exp_A_Rainfall_Only,Random Forest,10,0.05,2.33,0.5394,0.0039,0.0,0.0,0.0,0.9183,0.4591,-0.0165,0.0054,0.0833
-Exp_A_Rainfall_Only,XGBoost,10,0.05,1.78,0.3564,0.0023,0.0,0.0,0.0,0.9864,0.4932,-0.0065,0.0035,0.0281
-Exp_B_Rainfall_Discharge,Logistic Regression,14,0.05,0.25,0.5898,0.004,0.0,0.0,0.0,0.9895,0.4947,-0.0057,0.0038,0.0333
-Exp_B_Rainfall_Discharge,Random Forest,14,0.05,2.36,0.5612,0.0037,0.0,0.0,0.0,0.9222,0.4611,-0.0161,0.0051,0.0733
-Exp_B_Rainfall_Discharge,XGBoost,14,0.05,1.73,0.3564,0.0023,0.0,0.0,0.0,0.9864,0.4932,-0.0065,0.0035,0.0281
-Exp_C_Rainfall_Discharge_FloodHist,Logistic Regression,21,0.05,0.25,0.8402,0.0366,0.0031,1.0,0.0061,0.0052,0.5026,0.004,0.0196,0.1465
-Exp_C_Rainfall_Discharge_FloodHist,Random Forest,21,0.1,2.25,0.5614,0.004,0.007,0.2105,0.0135,0.9079,0.5592,0.0226,0.0069,0.0546
-Exp_C_Rainfall_Discharge_FloodHist,XGBoost,21,0.3,1.53,0.8548,0.0824,0.0093,0.7368,0.0184,0.7586,0.7477,0.0639,0.1341,0.4294
-Exp_D_Rainfall_Discharge_Flood_Landslide,Logistic Regression,25,0.05,0.22,0.8259,0.0173,0.0031,1.0,0.0061,0.0052,0.5026,0.004,0.0193,0.1454
-Exp_D_Rainfall_Discharge_Flood_Landslide,Random Forest,25,0.1,2.54,0.5503,0.0056,0.0044,0.2105,0.0086,0.8531,0.5318,0.0099,0.0071,0.0587
-Exp_D_Rainfall_Discharge_Flood_Landslide,XGBoost,25,0.65,1.32,0.8386,0.0794,0.0091,0.6316,0.018,0.7892,0.7104,0.0569,0.1579,0.4852
-Exp_E_Full_Multimodal,Logistic Regression,32,0.05,0.22,0.8451,0.025,0.0031,1.0,0.0061,0.0052,0.5026,0.004,0.0195,0.1461
-Exp_E_Full_Multimodal,Random Forest,32,0.05,2.69,0.5314,0.0046,0.004,0.2105,0.0078,0.8371,0.5238,0.0071,0.0043,0.0397
-Exp_E_Full_Multimodal,XGBoost,32,0.25,1.2,0.9299,0.3124,0.2895,0.5789,0.386,0.9956,0.7873,0.4069,0.0368,0.2111
+Exp_A_Rainfall_Only,Logistic Regression,10,0.3,5.52,0.5175,0.0425,0.046,0.7789,0.0869,0.2817,0.5303,0.0273,0.3138,0.9354
+Exp_A_Rainfall_Only,Random Forest,10,0.25,36.28,0.5314,0.0448,0.0541,0.4421,0.0964,0.656,0.5491,0.0416,0.1557,0.4661
+Exp_A_Rainfall_Only,XGBoost,10,0.05,7.17,0.4861,0.0419,0.0426,1.0,0.0817,0.0,0.5,0.0,0.1354,0.4355
+Exp_B_Rainfall_Discharge,Logistic Regression,14,0.3,3.6,0.495,0.0394,0.0453,0.6586,0.0847,0.3818,0.5202,0.0168,0.2906,0.9035
+Exp_B_Rainfall_Discharge,Random Forest,14,0.35,31.05,0.5373,0.0469,0.054,0.3796,0.0946,0.7043,0.5419,0.037,0.1524,0.4624
+Exp_B_Rainfall_Discharge,XGBoost,14,0.25,4.68,0.4881,0.0422,0.0467,0.3924,0.0835,0.6437,0.5181,0.0152,0.1353,0.4353
+Exp_C_Rainfall_Discharge_FloodHist,Logistic Regression,21,0.75,5.6,0.6827,0.0885,0.1588,0.2697,0.1999,0.9364,0.6031,0.1607,0.105,0.4004
+Exp_C_Rainfall_Discharge_FloodHist,Random Forest,21,0.35,21.95,0.5671,0.1384,0.2278,0.2639,0.2445,0.9602,0.612,0.2089,0.0461,0.5142
+Exp_C_Rainfall_Discharge_FloodHist,XGBoost,21,0.05,5.9,0.6071,0.0758,0.0426,1.0,0.0817,0.0,0.5,0.0,0.0606,0.266
+Exp_D_Rainfall_Discharge_Flood_Landslide,Logistic Regression,25,0.8,8.69,0.6772,0.0888,0.1697,0.25,0.2022,0.9456,0.5978,0.1628,0.1041,0.4009
+Exp_D_Rainfall_Discharge_Flood_Landslide,Random Forest,25,0.3,24.06,0.6063,0.1505,0.1946,0.3484,0.2497,0.9358,0.6421,0.2162,0.0467,0.5529
+Exp_D_Rainfall_Discharge_Flood_Landslide,XGBoost,25,0.05,6.57,0.613,0.1114,0.0,0.0,0.0,1.0,0.5,0.0,0.0426,0.4596
+Exp_E_Full_Multimodal,Logistic Regression,32,0.4,10.98,0.6238,0.0918,0.1199,0.3808,0.1824,0.8756,0.6282,0.1514,0.1198,0.4476
+Exp_E_Full_Multimodal,Random Forest,32,0.35,22.9,0.6124,0.1158,0.1475,0.3275,0.2035,0.9158,0.6217,0.1679,0.0543,0.4943
+Exp_E_Full_Multimodal,XGBoost,32,0.05,8.9,0.6349,0.0649,0.0426,1.0,0.0817,0.0,0.5,0.0,0.0852,0.3227
+Exp_F_No_Location,Logistic Regression,30,0.1,15.33,0.6858,0.0919,0.1635,0.1505,0.1567,0.9657,0.5581,0.1209,0.045,0.6496
+Exp_F_No_Location,Random Forest,30,0.4,40.55,0.6415,0.11,0.1491,0.2882,0.1965,0.9268,0.6075,0.158,0.0581,0.2255
+Exp_F_No_Location,XGBoost,30,0.05,11.71,0.6967,0.0894,0.0,0.0,0.0,1.0,0.5,0.0,0.0426,0.4334
+Exp_G_Static_History,Logistic Regression,23,0.85,11.78,0.6422,0.0755,0.1242,0.2188,0.1584,0.9313,0.575,0.1151,0.1428,0.4818
+Exp_G_Static_History,Random Forest,23,0.45,35.13,0.6323,0.1131,0.1501,0.3576,0.2115,0.9099,0.6338,0.179,0.0783,0.5006
+Exp_G_Static_History,XGBoost,23,0.25,9.23,0.7193,0.1087,0.1389,0.3657,0.2013,0.8991,0.6324,0.1695,0.0859,0.3223
+Exp_H_Multisource,Logistic Regression,42,0.65,25.73,0.6233,0.0686,0.0854,0.2766,0.1305,0.8682,0.5724,0.0848,0.1379,0.5024
+Exp_H_Multisource,Random Forest,42,0.4,47.74,0.7108,0.1612,0.157,0.3264,0.212,0.922,0.6242,0.1766,0.0622,0.2205
+Exp_H_Multisource,XGBoost,42,0.2,13.5,0.7387,0.1541,0.1378,0.353,0.1982,0.9017,0.6274,0.165,0.0733,0.2944
+Exp_T_Trigger_Only,Logistic Regression,29,0.8,16.45,0.4701,0.0456,0.0576,0.2025,0.0897,0.8526,0.5276,0.0312,0.2162,0.8356
+Exp_T_Trigger_Only,Random Forest,29,0.35,35.71,0.555,0.1078,0.0931,0.294,0.1414,0.8726,0.5833,0.0986,0.0816,0.3045
+Exp_T_Trigger_Only,XGBoost,29,0.2,8.21,0.5243,0.0947,0.0698,0.2326,0.1074,0.8621,0.5474,0.0548,0.0796,0.3089

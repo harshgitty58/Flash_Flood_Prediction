@@ -1,0 +1,189 @@
+{
+  "model": "logistic",
+  "validation_pr_auc": {
+    "logistic": 0.1968,
+    "xgb_monotone": 0.0852
+  },
+  "threshold": 0.9744,
+  "counts": {
+    "train": {
+      "district_days": 6695,
+      "positives": 18
+    },
+    "validation": {
+      "district_days": 403,
+      "positives": 15
+    },
+    "test": {
+      "district_days": 325,
+      "positives": 22
+    }
+  },
+  "test_all": {
+    "roc_auc": 0.782,
+    "pr_auc": 0.24,
+    "base_rate": 0.068,
+    "brier": 0.2505,
+    "tp": 3,
+    "fp": 7,
+    "fn": 19,
+    "tn": 296,
+    "POD": 0.136,
+    "FAR": 0.7,
+    "POFD": 0.023,
+    "CSI": 0.103,
+    "ETS": 0.082,
+    "HSS": 0.152,
+    "bias": 0.455,
+    "CSI_ci95": [
+      0.0,
+      0.232
+    ]
+  },
+  "test_common_with_hybrid": {
+    "district_days": 276,
+    "district_day_model": {
+      "tp": 3,
+      "fp": 7,
+      "fn": 16,
+      "tn": 250,
+      "POD": 0.158,
+      "FAR": 0.7,
+      "POFD": 0.027,
+      "CSI": 0.115,
+      "ETS": 0.091,
+      "HSS": 0.167,
+      "bias": 0.526,
+      "CSI_ci95": [
+        0.0,
+        0.259
+      ]
+    },
+    "hybrid": {
+      "tp": 12,
+      "fp": 52,
+      "fn": 7,
+      "tn": 205,
+      "POD": 0.632,
+      "FAR": 0.812,
+      "POFD": 0.202,
+      "CSI": 0.169,
+      "ETS": 0.114,
+      "HSS": 0.205,
+      "bias": 3.368,
+      "CSI_ci95": [
+        0.091,
+        0.253
+      ]
+    }
+  },
+  "test_v2_truth": {
+    "tp": 3,
+    "fp": 7,
+    "fn": 43,
+    "tn": 272,
+    "POD": 0.065,
+    "FAR": 0.7,
+    "POFD": 0.025,
+    "CSI": 0.057,
+    "ETS": 0.031,
+    "HSS": 0.06,
+    "bias": 0.217
+  },
+  "external_district_day_model": {
+    "events_scored": 29,
+    "detected": 1,
+    "POD": 0.034,
+    "ci95": [
+      0.0,
+      0.103
+    ],
+    "alert_burden": [
+      {
+        "monsoon": 2023,
+        "alert_district_days": 3,
+        "share_near_event": 0.0
+      },
+      {
+        "monsoon": 2024,
+        "alert_district_days": 25,
+        "share_near_event": 0.04
+      },
+      {
+        "monsoon": 2025,
+        "alert_district_days": 11,
+        "share_near_event": 0.182
+      },
+      {
+        "monsoon": 2026,
+        "alert_district_days": 31,
+        "share_near_event": 0.0
+      }
+    ]
+  },
+  "external_hybrid": {
+    "events_scored": 21,
+    "detected": 7,
+    "POD": 0.333,
+    "ci95": [
+      0.143,
+      0.524
+    ],
+    "alert_burden": [
+      {
+        "monsoon": 2023,
+        "alert_district_days": 81,
+        "share_near_event": 0.0
+      },
+      {
+        "monsoon": 2024,
+        "alert_district_days": 370,
+        "share_near_event": 0.054
+      },
+      {
+        "monsoon": 2025,
+        "alert_district_days": 171,
+        "share_near_event": 0.047
+      },
+      {
+        "monsoon": 2026,
+        "alert_district_days": 318,
+        "share_near_event": 0.0
+      }
+    ]
+  },
+  "coverage": {
+    "district_days_with_any_gauge": 18374,
+    "district_days": 21931,
+    "replay_days_without_cwc": 5038
+  },
+  "coefficients": {
+    "is_monsoon": 4.445,
+    "landslide_count_10km": 2.556,
+    "era5_max_3d": -2.133,
+    "rain_hm_max": 1.984,
+    "sm_0_7": 1.877,
+    "district_mean_flood_duration_days": 1.859,
+    "rain_hm_mean": -1.312,
+    "district_flooded_area_pct": 0.982,
+    "era5_mean": 0.857,
+    "rain_hm_max_3d": -0.764,
+    "district_flood_severity_index": 0.661,
+    "era5_max": -0.647,
+    "rain_cwc_max_3d": -0.422,
+    "rain_cwc_mean": 0.383,
+    "is_landslide_hotspot": 0.266,
+    "rain_cwc_max": 0.229,
+    "rain_cwc_imax": -0.228,
+    "n_hm": -0.202,
+    "n_cwc": 0.185,
+    "district_historical_fatalities": -0.157,
+    "rain_any_max": 0.139
+  },
+  "decision": {
+    "csi_ok": false,
+    "external_pod_ok": false,
+    "burden_ok": true,
+    "adopt": false
+  }
+}

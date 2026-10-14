@@ -1,0 +1,4 @@
+split,total_records,flood_positives,flood_negatives,positive_rate_pct,date_start,date_end
+Train,94154,271,93883,0.288,2022-06-21,2023-06-30
+Validation,20280,384,19896,1.893,2023-07-01,2023-07-31
+Test,12469,240,12229,1.925,2023-08-01,2023-08-25

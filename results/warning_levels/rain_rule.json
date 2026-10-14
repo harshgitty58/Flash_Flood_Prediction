@@ -1,0 +1,99 @@
+{
+  "rule": {
+    "alert_24h": 64.5,
+    "fresh_6h": 0.0,
+    "susceptibility": true
+  },
+  "adopted": false,
+  "best_candidate": {
+    "alert_24h": 64.5,
+    "fresh_6h": 10.0,
+    "susceptibility": false
+  },
+  "default_rule": {
+    "alert_24h": 64.5,
+    "fresh_6h": 0.0,
+    "susceptibility": true
+  },
+  "adoption_rule": "best candidate's validation CSI CI lower bound > default validation CSI",
+  "objective": "validation district-day CSI, hybrid >= ALERT, v1 labels",
+  "grid_size": 32,
+  "district_day_scores": {
+    "deployed_before": {
+      "validation": {
+        "tp": 8,
+        "fp": 139,
+        "fn": 7,
+        "tn": 229,
+        "POD": 0.533,
+        "FAR": 0.946,
+        "POFD": 0.378,
+        "CSI": 0.052,
+        "ETS": 0.015,
+        "HSS": 0.03,
+        "bias": 9.8,
+        "alert_dd": 147,
+        "CSI_ci95": [
+          0.018,
+          0.09
+        ]
+      },
+      "test": {
+        "tp": 12,
+        "fp": 52,
+        "fn": 7,
+        "tn": 205,
+        "POD": 0.632,
+        "FAR": 0.812,
+        "POFD": 0.202,
+        "CSI": 0.169,
+        "ETS": 0.114,
+        "HSS": 0.205,
+        "bias": 3.368,
+        "alert_dd": 64,
+        "CSI_ci95": [
+          0.091,
+          0.253
+        ]
+      }
+    },
+    "tuned": {
+      "validation": {
+        "tp": 10,
+        "fp": 129,
+        "fn": 5,
+        "tn": 239,
+        "POD": 0.667,
+        "FAR": 0.928,
+        "POFD": 0.351,
+        "CSI": 0.069,
+        "ETS": 0.033,
+        "HSS": 0.064,
+        "bias": 9.267,
+        "alert_dd": 139,
+        "CSI_ci95": [
+          0.025,
+          0.124
+        ]
+      },
+      "test": {
+        "tp": 12,
+        "fp": 52,
+        "fn": 7,
+        "tn": 205,
+        "POD": 0.632,
+        "FAR": 0.812,
+        "POFD": 0.202,
+        "CSI": 0.169,
+        "ETS": 0.114,
+        "HSS": 0.205,
+        "bias": 3.368,
+        "alert_dd": 64,
+        "CSI_ci95": [
+          0.093,
+          0.245
+        ]
+      }
+    }
+  }
+}

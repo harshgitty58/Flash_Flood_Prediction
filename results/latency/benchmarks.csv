@@ -1,0 +1,15 @@
+path,variant,p50_ms,p95_ms,bytes
+"API startup (load model, calibration, data)",new,864.9,,
+GET /risk/snapshot,new,1.224,1.731,
+"GET /risk/snapshot (cached, 304)",new,0.639,1.167,
+GET /model/summary,new,1.799,2.77,
+"GET /model/summary (cached, 304)",new,1.142,2.34,
+GET /metrics,new,7.897,8.608,
+"GET /metrics (cached, 304)",new,0.587,1.32,
+buildings for one view,old: full GeoJSON,2607.503,3046.709,66452623.0
+buildings for one view,new: densest quadtree tile,156.14,174.614,740095.0
+"POST /predict (1 station, 1 new hour)",new,15.096,17.088,
+features for 1 station-hour,old: batch recompute (96 h),1.271,1.688,
+features for 1 station-hour,new: O(1) incremental,0.167,0.234,
+calibrate 1 score,old: exact Venn-Abers (2 isotonic fits),4.323,4.366,
+calibrate 1 score,new: lookup table (np.interp),0.006,0.007,

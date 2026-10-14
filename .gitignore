@@ -32,3 +32,15 @@ desktop.ini
 
 # Parquet (large ML dataset) - comment out if you want it tracked
 # data/processed/final/*.parquet
+data/external/
+
+# Large, regenerable outputs (rebuilt by scripts/run_all.py / src.space.run); GitHub rejects files > 100 MB
+results/impact/buildings.geojson
+results/conformal/cp_replay_predictions.csv
+results/shap/shap_top_drivers.csv
+results/warning_levels/replay_warning_levels.csv
+results/space/*/osm_before.json
+models/space/best.pt
+node_modules/
+web/dist/
+*.log

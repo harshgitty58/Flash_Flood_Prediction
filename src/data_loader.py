@@ -69,7 +69,36 @@ FEATURE_EXPERIMENTS: Dict[str, List[str]] = {
     "Exp_E_Full_Multimodal": (
         RAINFALL_FEATURES + DISCHARGE_FEATURES + HISTORICAL_FLOOD_FEATURES + LANDSLIDE_FEATURES + TEMPORAL_SPATIAL_FEATURES
     ),
+    # Exp E without raw latitude/longitude: tests whether the model generalises beyond memorising flood locations.
+    "Exp_F_No_Location": (
+        RAINFALL_FEATURES + DISCHARGE_FEATURES + HISTORICAL_FLOOD_FEATURES + LANDSLIDE_FEATURES
+        + [f for f in TEMPORAL_SPATIAL_FEATURES if f not in ("latitude", "longitude")]
+    ),
 }
+
+# Exp D without the two time-varying history counters. They drift without bound once the flood inventory stops
+# (2023-08), so replay-period predictions extrapolated; the static district susceptibility indices are kept.
+FEATURE_EXPERIMENTS["Exp_G_Static_History"] = [
+    f for f in FEATURE_EXPERIMENTS["Exp_D_Rainfall_Discharge_Flood_Landslide"]
+    if f not in ("days_since_last_flood_prior_t", "historical_flood_count_prior_t")
+]
+
+# Phase 2/3 external + relative features (src/enrich_features.py)
+ERA5_FEATURES = ["era5_1h", "era5_3h", "era5_6h", "era5_24h", "era5_72h", "era5_max_1h_24h"]
+SOIL_FEATURES = ["sm_0_7", "sm_7_28", "sm_anom"]
+RELATIVE_FEATURES = ["pct_rain_24h", "pct_era5_24h", "pct_rain_72h", "z_rain_24h_month", "agree_log_ratio", "agree_both_wet"]
+TERRAIN_FEATURES = ["terrain_elev_m", "terrain_slope_deg", "terrain_relief_2km_m", "terrain_tpi_1km_m"]
+DYNAMIC_FEATURES = RAINFALL_FEATURES + DISCHARGE_FEATURES + ERA5_FEATURES + SOIL_FEATURES + RELATIVE_FEATURES
+
+# H: G + second rain source + soil moisture + station-relative rain + terrain
+FEATURE_EXPERIMENTS["Exp_H_Multisource"] = (FEATURE_EXPERIMENTS["Exp_G_Static_History"] + ERA5_FEATURES + SOIL_FEATURES
+                                            + RELATIVE_FEATURES + TERRAIN_FEATURES)
+# T: trigger-only (dynamic signals, no district constants) — tests whether the data can predict *when*
+FEATURE_EXPERIMENTS["Exp_T_Trigger_Only"] = DYNAMIC_FEATURES
+
+# Feature set used for the final tuned models and all downstream outputs.
+# Chosen by leave-one-event-out CV (src/event_cv.py): best pooled ROC-AUC, no coordinates, no drifting counters.
+FINAL_EXPERIMENT = "Exp_G_Static_History"
 
 def load_ml_dataset() -> pd.DataFrame:
     """Loads the final ML-ready dataset produced in Objective 2."""

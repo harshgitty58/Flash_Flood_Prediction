@@ -1,0 +1,654 @@
+{
+  "labels": {
+    "y_v1": {
+      "train": {
+        "rows": 94154,
+        "positives": 367,
+        "district_days_pos": 8
+      },
+      "validation": {
+        "rows": 20280,
+        "positives": 864,
+        "district_days_pos": 15
+      },
+      "test": {
+        "rows": 12469,
+        "positives": 720,
+        "district_days_pos": 19
+      }
+    },
+    "y_v2": {
+      "train": {
+        "rows": 94154,
+        "positives": 974,
+        "district_days_pos": 25
+      },
+      "validation": {
+        "rows": 20280,
+        "positives": 1752,
+        "district_days_pos": 30
+      },
+      "test": {
+        "rows": 12469,
+        "positives": 1357,
+        "district_days_pos": 35
+      }
+    },
+    "y_v2_masked": {
+      "train": {
+        "rows": 91331,
+        "positives": 974,
+        "district_days_pos": 25
+      },
+      "validation": {
+        "rows": 13165,
+        "positives": 1752,
+        "district_days_pos": 30
+      },
+      "test": {
+        "rows": 11398,
+        "positives": 1357,
+        "district_days_pos": 35
+      }
+    }
+  },
+  "event_cv": {
+    "v1": {
+      "episodes": 6,
+      "folds": 6,
+      "pooled_roc_auc": 0.7006,
+      "pooled_pr_auc": 0.1879,
+      "base_rate": 0.0807
+    },
+    "v2": {
+      "episodes": 8,
+      "folds": 8,
+      "pooled_roc_auc": 0.7814,
+      "pooled_pr_auc": 0.3642,
+      "base_rate": 0.147
+    },
+    "v2_masked": {
+      "episodes": 8,
+      "folds": 8,
+      "pooled_roc_auc": 0.7557,
+      "pooled_pr_auc": 0.3881,
+      "base_rate": 0.1875
+    }
+  },
+  "decision": {
+    "rule": "adopt v2 if, for XGBoost, the v2-trained model is at least as good as v1-trained on BOTH truths (PR-AUC and district-day CSI) and event-CV PR-AUC improves",
+    "v2_on_v1_truth_ok": false,
+    "v2_on_v2_truth_ok": false,
+    "event_cv_ok": true,
+    "adopt_v2": false
+  },
+  "grid": [
+    {
+      "model": "XGBoost",
+      "trained_on": "v1",
+      "scored_on": "v1",
+      "threshold": 0.25,
+      "roc_auc": 0.7076,
+      "pr_auc": 0.1501,
+      "precision": 0.2223,
+      "recall": 0.5736,
+      "f1": 0.3204,
+      "test_base_rate": 0.0577,
+      "dd_POD": 0.474,
+      "dd_FAR": 0.82,
+      "dd_CSI": 0.15,
+      "dd_HSS": 0.179,
+      "dd_CSI_ci95": [
+        0.085,
+        0.223
+      ],
+      "dd_tp_fp_fn": "9/41/10"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v1",
+      "scored_on": "v2",
+      "threshold": 0.25,
+      "roc_auc": 0.647,
+      "pr_auc": 0.2059,
+      "precision": 0.3428,
+      "recall": 0.4694,
+      "f1": 0.3963,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.4,
+      "dd_FAR": 0.72,
+      "dd_CSI": 0.197,
+      "dd_HSS": 0.212,
+      "dd_CSI_ci95": [
+        0.124,
+        0.292
+      ],
+      "dd_tp_fp_fn": "14/36/21"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v1",
+      "scored_on": "v2_masked",
+      "threshold": 0.25,
+      "roc_auc": 0.6421,
+      "pr_auc": 0.2157,
+      "precision": 0.3595,
+      "recall": 0.4694,
+      "f1": 0.4072,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.4,
+      "dd_FAR": 0.696,
+      "dd_CSI": 0.209,
+      "dd_HSS": 0.226,
+      "dd_CSI_ci95": [
+        0.129,
+        0.305
+      ],
+      "dd_tp_fp_fn": "14/32/21"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v2",
+      "scored_on": "v1",
+      "threshold": 0.65,
+      "roc_auc": 0.6858,
+      "pr_auc": 0.1126,
+      "precision": 0.122,
+      "recall": 0.2444,
+      "f1": 0.1627,
+      "test_base_rate": 0.0577,
+      "dd_POD": 0.368,
+      "dd_FAR": 0.857,
+      "dd_CSI": 0.115,
+      "dd_HSS": 0.118,
+      "dd_CSI_ci95": [
+        0.051,
+        0.183
+      ],
+      "dd_tp_fp_fn": "7/42/12"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v2",
+      "scored_on": "v2",
+      "threshold": 0.65,
+      "roc_auc": 0.6371,
+      "pr_auc": 0.1844,
+      "precision": 0.2426,
+      "recall": 0.2579,
+      "f1": 0.25,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.343,
+      "dd_FAR": 0.755,
+      "dd_CSI": 0.167,
+      "dd_HSS": 0.162,
+      "dd_CSI_ci95": [
+        0.097,
+        0.253
+      ],
+      "dd_tp_fp_fn": "12/37/23"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v2",
+      "scored_on": "v2_masked",
+      "threshold": 0.65,
+      "roc_auc": 0.6338,
+      "pr_auc": 0.1982,
+      "precision": 0.2684,
+      "recall": 0.2579,
+      "f1": 0.2631,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.343,
+      "dd_FAR": 0.733,
+      "dd_CSI": 0.176,
+      "dd_HSS": 0.174,
+      "dd_CSI_ci95": [
+        0.105,
+        0.265
+      ],
+      "dd_tp_fp_fn": "12/33/23"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v2_masked",
+      "scored_on": "v1",
+      "threshold": 0.7,
+      "roc_auc": 0.6865,
+      "pr_auc": 0.1135,
+      "precision": 0.122,
+      "recall": 0.2444,
+      "f1": 0.1627,
+      "test_base_rate": 0.0577,
+      "dd_POD": 0.368,
+      "dd_FAR": 0.857,
+      "dd_CSI": 0.115,
+      "dd_HSS": 0.118,
+      "dd_CSI_ci95": [
+        0.051,
+        0.183
+      ],
+      "dd_tp_fp_fn": "7/42/12"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v2_masked",
+      "scored_on": "v2",
+      "threshold": 0.7,
+      "roc_auc": 0.6363,
+      "pr_auc": 0.1826,
+      "precision": 0.2426,
+      "recall": 0.2579,
+      "f1": 0.25,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.343,
+      "dd_FAR": 0.755,
+      "dd_CSI": 0.167,
+      "dd_HSS": 0.162,
+      "dd_CSI_ci95": [
+        0.097,
+        0.253
+      ],
+      "dd_tp_fp_fn": "12/37/23"
+    },
+    {
+      "model": "XGBoost",
+      "trained_on": "v2_masked",
+      "scored_on": "v2_masked",
+      "threshold": 0.7,
+      "roc_auc": 0.6332,
+      "pr_auc": 0.1968,
+      "precision": 0.2684,
+      "recall": 0.2579,
+      "f1": 0.2631,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.343,
+      "dd_FAR": 0.733,
+      "dd_CSI": 0.176,
+      "dd_HSS": 0.174,
+      "dd_CSI_ci95": [
+        0.105,
+        0.265
+      ],
+      "dd_tp_fp_fn": "12/33/23"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v1",
+      "scored_on": "v1",
+      "threshold": 0.45,
+      "roc_auc": 0.7881,
+      "pr_auc": 0.1523,
+      "precision": 0.1731,
+      "recall": 0.3694,
+      "f1": 0.2357,
+      "test_base_rate": 0.0577,
+      "dd_POD": 0.474,
+      "dd_FAR": 0.82,
+      "dd_CSI": 0.15,
+      "dd_HSS": 0.179,
+      "dd_CSI_ci95": [
+        0.085,
+        0.223
+      ],
+      "dd_tp_fp_fn": "9/41/10"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v1",
+      "scored_on": "v2",
+      "threshold": 0.45,
+      "roc_auc": 0.7285,
+      "pr_auc": 0.2329,
+      "precision": 0.2889,
+      "recall": 0.3272,
+      "f1": 0.3068,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.4,
+      "dd_FAR": 0.72,
+      "dd_CSI": 0.197,
+      "dd_HSS": 0.212,
+      "dd_CSI_ci95": [
+        0.124,
+        0.292
+      ],
+      "dd_tp_fp_fn": "14/36/21"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v1",
+      "scored_on": "v2_masked",
+      "threshold": 0.45,
+      "roc_auc": 0.7255,
+      "pr_auc": 0.2473,
+      "precision": 0.3178,
+      "recall": 0.3272,
+      "f1": 0.3224,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.4,
+      "dd_FAR": 0.696,
+      "dd_CSI": 0.209,
+      "dd_HSS": 0.226,
+      "dd_CSI_ci95": [
+        0.129,
+        0.305
+      ],
+      "dd_tp_fp_fn": "14/32/21"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v2",
+      "scored_on": "v1",
+      "threshold": 0.05,
+      "roc_auc": 0.7628,
+      "pr_auc": 0.1276,
+      "precision": 0.112,
+      "recall": 0.6903,
+      "f1": 0.1927,
+      "test_base_rate": 0.0577,
+      "dd_POD": 0.737,
+      "dd_FAR": 0.9,
+      "dd_CSI": 0.097,
+      "dd_HSS": 0.062,
+      "dd_CSI_ci95": [
+        0.054,
+        0.136
+      ],
+      "dd_tp_fp_fn": "14/126/5"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v2",
+      "scored_on": "v2",
+      "threshold": 0.05,
+      "roc_auc": 0.7206,
+      "pr_auc": 0.2046,
+      "precision": 0.1877,
+      "recall": 0.6139,
+      "f1": 0.2874,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.629,
+      "dd_FAR": 0.843,
+      "dd_CSI": 0.144,
+      "dd_HSS": 0.061,
+      "dd_CSI_ci95": [
+        0.086,
+        0.204
+      ],
+      "dd_tp_fp_fn": "22/118/13"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v2",
+      "scored_on": "v2_masked",
+      "threshold": 0.05,
+      "roc_auc": 0.711,
+      "pr_auc": 0.2197,
+      "precision": 0.1948,
+      "recall": 0.6139,
+      "f1": 0.2957,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.629,
+      "dd_FAR": 0.836,
+      "dd_CSI": 0.15,
+      "dd_HSS": 0.058,
+      "dd_CSI_ci95": [
+        0.091,
+        0.208
+      ],
+      "dd_tp_fp_fn": "22/112/13"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v2_masked",
+      "scored_on": "v1",
+      "threshold": 0.05,
+      "roc_auc": 0.7543,
+      "pr_auc": 0.1325,
+      "precision": 0.1287,
+      "recall": 0.6056,
+      "f1": 0.2123,
+      "test_base_rate": 0.0577,
+      "dd_POD": 0.579,
+      "dd_FAR": 0.901,
+      "dd_CSI": 0.092,
+      "dd_HSS": 0.059,
+      "dd_CSI_ci95": [
+        0.053,
+        0.135
+      ],
+      "dd_tp_fp_fn": "11/100/8"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v2_masked",
+      "scored_on": "v2",
+      "threshold": 0.05,
+      "roc_auc": 0.7006,
+      "pr_auc": 0.2066,
+      "precision": 0.199,
+      "recall": 0.4967,
+      "f1": 0.2841,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.543,
+      "dd_FAR": 0.829,
+      "dd_CSI": 0.15,
+      "dd_HSS": 0.084,
+      "dd_CSI_ci95": [
+        0.088,
+        0.229
+      ],
+      "dd_tp_fp_fn": "19/92/16"
+    },
+    {
+      "model": "Random Forest",
+      "trained_on": "v2_masked",
+      "scored_on": "v2_masked",
+      "threshold": 0.05,
+      "roc_auc": 0.6949,
+      "pr_auc": 0.2224,
+      "precision": 0.2078,
+      "recall": 0.4967,
+      "f1": 0.293,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.543,
+      "dd_FAR": 0.822,
+      "dd_CSI": 0.154,
+      "dd_HSS": 0.079,
+      "dd_CSI_ci95": [
+        0.091,
+        0.233
+      ],
+      "dd_tp_fp_fn": "19/88/16"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v1",
+      "scored_on": "v1",
+      "threshold": 0.85,
+      "roc_auc": 0.7407,
+      "pr_auc": 0.1389,
+      "precision": 0.1693,
+      "recall": 0.2111,
+      "f1": 0.1879,
+      "test_base_rate": 0.0577,
+      "dd_POD": 0.368,
+      "dd_FAR": 0.837,
+      "dd_CSI": 0.127,
+      "dd_HSS": 0.144,
+      "dd_CSI_ci95": [
+        0.061,
+        0.193
+      ],
+      "dd_tp_fp_fn": "7/36/12"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v1",
+      "scored_on": "v2",
+      "threshold": 0.85,
+      "roc_auc": 0.7071,
+      "pr_auc": 0.2212,
+      "precision": 0.2996,
+      "recall": 0.1982,
+      "f1": 0.2386,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.343,
+      "dd_FAR": 0.721,
+      "dd_CSI": 0.182,
+      "dd_HSS": 0.195,
+      "dd_CSI_ci95": [
+        0.112,
+        0.264
+      ],
+      "dd_tp_fp_fn": "12/31/23"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v1",
+      "scored_on": "v2_masked",
+      "threshold": 0.85,
+      "roc_auc": 0.7103,
+      "pr_auc": 0.2413,
+      "precision": 0.3317,
+      "recall": 0.1982,
+      "f1": 0.2482,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.343,
+      "dd_FAR": 0.692,
+      "dd_CSI": 0.194,
+      "dd_HSS": 0.212,
+      "dd_CSI_ci95": [
+        0.122,
+        0.277
+      ],
+      "dd_tp_fp_fn": "12/27/23"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v2",
+      "scored_on": "v1",
+      "threshold": 0.05,
+      "roc_auc": 0.8467,
+      "pr_auc": 0.1802,
+      "precision": 0.1209,
+      "recall": 0.9625,
+      "f1": 0.2149,
+      "test_base_rate": 0.0577,
+      "dd_POD": 1.0,
+      "dd_FAR": 0.894,
+      "dd_CSI": 0.106,
+      "dd_HSS": 0.076,
+      "dd_CSI_ci95": [
+        0.061,
+        0.152
+      ],
+      "dd_tp_fp_fn": "19/161/0"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v2",
+      "scored_on": "v2",
+      "threshold": 0.05,
+      "roc_auc": 0.7812,
+      "pr_auc": 0.2323,
+      "precision": 0.197,
+      "recall": 0.832,
+      "f1": 0.3186,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.943,
+      "dd_FAR": 0.817,
+      "dd_CSI": 0.181,
+      "dd_HSS": 0.12,
+      "dd_CSI_ci95": [
+        0.131,
+        0.243
+      ],
+      "dd_tp_fp_fn": "33/147/2"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v2",
+      "scored_on": "v2_masked",
+      "threshold": 0.05,
+      "roc_auc": 0.7838,
+      "pr_auc": 0.2604,
+      "precision": 0.2109,
+      "recall": 0.832,
+      "f1": 0.3365,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.943,
+      "dd_FAR": 0.802,
+      "dd_CSI": 0.195,
+      "dd_HSS": 0.132,
+      "dd_CSI_ci95": [
+        0.142,
+        0.257
+      ],
+      "dd_tp_fp_fn": "33/134/2"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v2_masked",
+      "scored_on": "v1",
+      "threshold": 0.05,
+      "roc_auc": 0.8441,
+      "pr_auc": 0.1794,
+      "precision": 0.1159,
+      "recall": 0.9625,
+      "f1": 0.2068,
+      "test_base_rate": 0.0577,
+      "dd_POD": 1.0,
+      "dd_FAR": 0.898,
+      "dd_CSI": 0.102,
+      "dd_HSS": 0.069,
+      "dd_CSI_ci95": [
+        0.059,
+        0.147
+      ],
+      "dd_tp_fp_fn": "19/167/0"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v2_masked",
+      "scored_on": "v2",
+      "threshold": 0.05,
+      "roc_auc": 0.7834,
+      "pr_auc": 0.2325,
+      "precision": 0.1908,
+      "recall": 0.8408,
+      "f1": 0.311,
+      "test_base_rate": 0.1088,
+      "dd_POD": 0.971,
+      "dd_FAR": 0.817,
+      "dd_CSI": 0.182,
+      "dd_HSS": 0.12,
+      "dd_CSI_ci95": [
+        0.128,
+        0.252
+      ],
+      "dd_tp_fp_fn": "34/152/1"
+    },
+    {
+      "model": "Logistic Regression",
+      "trained_on": "v2_masked",
+      "scored_on": "v2_masked",
+      "threshold": 0.05,
+      "roc_auc": 0.7858,
+      "pr_auc": 0.2604,
+      "precision": 0.2043,
+      "recall": 0.8408,
+      "f1": 0.3287,
+      "test_base_rate": 0.1191,
+      "dd_POD": 0.971,
+      "dd_FAR": 0.803,
+      "dd_CSI": 0.195,
+      "dd_HSS": 0.131,
+      "dd_CSI_ci95": [
+        0.139,
+        0.262
+      ],
+      "dd_tp_fp_fn": "34/139/1"
+    }
+  ]
+}

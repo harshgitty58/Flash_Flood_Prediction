@@ -1,0 +1,74 @@
+[
+  {
+    "file": "hero-alaknanda.webp",
+    "caption": "Alaknanda valley, Chamoli: the Garhwal Himalaya from Sentinel-2",
+    "scene": "S2B_44RLU_20250110_0_L2A",
+    "date": "2025-01-10",
+    "cloud": 0.001443,
+    "credit": "Contains modified Copernicus Sentinel data 2025"
+  },
+  {
+    "file": "dharali.webp",
+    "caption": "Dharali and the Kheer Ganga debris fan after the 5 Aug 2025 flash flood",
+    "scene": "S2B_44RKV_20251109_0_L2A",
+    "date": "2025-11-09",
+    "cloud": 0.001679,
+    "credit": "Contains modified Copernicus Sentinel data 2025"
+  },
+  {
+    "file": "kedarnath.webp",
+    "caption": "Mandakini valley, Kedarnath route (31 Jul 2024 cloudburst)",
+    "scene": "S2B_44RLU_20241214_0_L2A",
+    "date": "2024-12-14",
+    "cloud": 0,
+    "credit": "Contains modified Copernicus Sentinel data 2024"
+  },
+  {
+    "file": "haridwar.webp",
+    "caption": "The braided Ganga at Haridwar, a flood-plain zoning hotspot",
+    "scene": "S2A_44RKU_20241119_0_L2A",
+    "date": "2024-11-19",
+    "cloud": 1.4e-05,
+    "credit": "Contains modified Copernicus Sentinel data 2024"
+  },
+  {
+    "file": "haldwani.webp",
+    "caption": "Gaula river fan at Haldwani (140 mm in 24 h on 12 Sep 2024)",
+    "scene": "S2C_44RLT_20241216_1_L2A",
+    "date": "2024-12-16",
+    "cloud": 2.3e-05,
+    "credit": "Contains modified Copernicus Sentinel data 2024"
+  },
+  {
+    "file": "joshimath.webp",
+    "caption": "Joshimath and the Alaknanda\u2013Dhauliganga confluence",
+    "scene": "S2A_44RLU_20241206_0_L2A",
+    "date": "2024-12-06",
+    "cloud": 0.008036,
+    "credit": "Contains modified Copernicus Sentinel data 2024"
+  },
+  {
+    "file": "real-rudraprayag-2013.webp",
+    "caption": "panorama view of Rudraprayag sangam on june 21, 2013.  Alaknanda river flowing in from the right, wh",
+    "credit": "Photo: Mukerjee, CC BY-SA 3.0, via Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:P1000111_pano-rudraprayag-sangam-crp-g-2600w.jpg"
+  },
+  {
+    "file": "real-broken-bridge.webp",
+    "caption": "broken end of footbridge over the Mandakini river at rudraprayag sangam.",
+    "credit": "Photo: Mukerjee, CC BY-SA 3.0, via Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Mandakini-left-bank-broken-bridge-rudraprayag-sangam-g.jpg"
+  },
+  {
+    "file": "real-uttarkashi-2013.webp",
+    "caption": "i have capture this picture during the Uttarkashi flood 2013, i was there at that time for office wo",
+    "credit": "Photo: sumit, CC BY-SA 4.0, via Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Uttarkashi_flood_2013.jpg"
+  },
+  {
+    "file": "real-tharali-road.webp",
+    "caption": "There have been instances a lot of landslides every monsoon season in the Himalayan Region of Uttara",
+    "credit": "Photo: Nitin Maletha, CC BY-SA 4.0, via Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:Road_in_Tharali_is_Covered_with_the_Slide_Materials_which_have_already_claimed_a_Temple.jpg"
+  }
+]

@@ -1,0 +1,146 @@
+{
+  "fit_window": {
+    "start": "2022-06-21 19:00:00",
+    "end": "2023-06-30 23:00:00"
+  },
+  "features": [
+    {
+      "feature": "rain_1h",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 0.47343192182009736
+    },
+    {
+      "feature": "rain_3h",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 0.7305050266517387
+    },
+    {
+      "feature": "rain_6h",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 0.9322347022588979
+    },
+    {
+      "feature": "rain_12h",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 0.4054651081081644
+    },
+    {
+      "feature": "rain_24h",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 1.3862943611198906
+    },
+    {
+      "feature": "rain_48h",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 2.4423470353692043
+    },
+    {
+      "feature": "rain_72h",
+      "method": "log_robust",
+      "center": 0.6931471805599453,
+      "scale": 3.1354942159291497
+    },
+    {
+      "feature": "rain_max_intensity_24h",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 0.4054651081081644
+    },
+    {
+      "feature": "rain_intensity_change_1h",
+      "method": "signed_log",
+      "center": 0.0,
+      "scale": 0.3899647966842201
+    },
+    {
+      "feature": "api_decay_85",
+      "method": "log_robust",
+      "center": 0.0,
+      "scale": 0.5399960010657705
+    },
+    {
+      "feature": "discharge_clean",
+      "method": "log_robust",
+      "center": 3.926911617921897,
+      "scale": 0.14429948248655047
+    },
+    {
+      "feature": "discharge_change_1h",
+      "method": "signed_log",
+      "center": 0.0,
+      "scale": 0.2157276210415799
+    },
+    {
+      "feature": "discharge_change_3h",
+      "method": "signed_log",
+      "center": 0.0,
+      "scale": 0.28014009340053575
+    },
+    {
+      "feature": "discharge_anomaly",
+      "method": "signed_log",
+      "center": -4.060304799988139,
+      "scale": 0.5460138309119148
+    },
+    {
+      "feature": "district_flood_severity_index",
+      "method": "zscore",
+      "center": 13.568766891163435,
+      "scale": 2.9406479563525934
+    },
+    {
+      "feature": "district_flooded_area_pct",
+      "method": "zscore",
+      "center": 0.9314091717710133,
+      "scale": 0.451711664292576
+    },
+    {
+      "feature": "district_historical_fatalities",
+      "method": "log_robust",
+      "center": 3.713572066704308,
+      "scale": 2.155201587561371
+    },
+    {
+      "feature": "district_population",
+      "method": "log_robust",
+      "center": 13.335770079076635,
+      "scale": 1.6471043959276006
+    },
+    {
+      "feature": "district_mean_flood_duration_days",
+      "method": "zscore",
+      "center": 3.4973872591711452,
+      "scale": 1.7558748211273487
+    },
+    {
+      "feature": "dist_to_nearest_landslide_km",
+      "method": "zscore",
+      "center": 7.17690050343055,
+      "scale": 9.861409685288098
+    },
+    {
+      "feature": "landslide_count_5km",
+      "method": "log_robust",
+      "center": 2.0794415416798357,
+      "scale": 2.70805020110221
+    },
+    {
+      "feature": "landslide_count_10km",
+      "method": "log_robust",
+      "center": 2.8903717578961645,
+      "scale": 2.1517622032594623
+    },
+    {
+      "feature": "is_landslide_hotspot",
+      "method": "passthrough",
+      "center": 0.0,
+      "scale": 1.0
+    }
+  ]
+}

@@ -26,7 +26,12 @@ def compute_station_landslide_features(stations_df: pd.DataFrame, landslides_df:
     land_lats = landslides_df["latitude"].values
     land_lons = landslides_df["longitude"].values
     
-    unique_stations = stations_df[["station", "latitude", "longitude", "district"]].drop_duplicates().copy()
+    # One row per station: some gauges report slightly different coordinates over time (e.g. Almora_1),
+    # which would fan out the station x hour merge. Use each station's most frequent coordinate.
+    unique_stations = (
+        stations_df.groupby(["station", "latitude", "longitude", "district"]).size().rename("n").reset_index()
+        .sort_values("n", ascending=False).drop_duplicates("station").drop(columns="n").copy()
+    )
     
     min_distances = []
     count_5km = []

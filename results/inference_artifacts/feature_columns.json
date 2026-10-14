@@ -1,0 +1,28 @@
+{
+  "experiment": "Exp_G_Static_History",
+  "features": [
+    "rain_1h",
+    "rain_3h",
+    "rain_6h",
+    "rain_12h",
+    "rain_24h",
+    "rain_48h",
+    "rain_72h",
+    "rain_max_intensity_24h",
+    "rain_intensity_change_1h",
+    "api_decay_85",
+    "discharge_clean",
+    "discharge_change_1h",
+    "discharge_change_3h",
+    "discharge_anomaly",
+    "district_flood_severity_index",
+    "district_flooded_area_pct",
+    "district_historical_fatalities",
+    "district_population",
+    "district_mean_flood_duration_days",
+    "dist_to_nearest_landslide_km",
+    "landslide_count_5km",
+    "landslide_count_10km",
+    "is_landslide_hotspot"
+  ]
+}

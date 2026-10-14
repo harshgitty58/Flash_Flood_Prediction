@@ -1,0 +1,35 @@
+{
+  "calibration_rows": 20280,
+  "calibration_positives": 864,
+  "test_rows": 12469,
+  "test_positives": 720,
+  "mean_interval_width": 0.0006,
+  "brier_raw": 0.09282,
+  "brier_calibrated": 0.05179,
+  "coverage": [
+    {
+      "nominal": 0.8,
+      "coverage_all": 0.8841,
+      "coverage_flood": 1.0,
+      "coverage_no_flood": 0.877,
+      "share_uncertain": 0.8508,
+      "share_flood_singleton": 0.1492
+    },
+    {
+      "nominal": 0.9,
+      "coverage_all": 0.8841,
+      "coverage_flood": 1.0,
+      "coverage_no_flood": 0.877,
+      "share_uncertain": 0.851,
+      "share_flood_singleton": 0.149
+    },
+    {
+      "nominal": 0.95,
+      "coverage_all": 0.9726,
+      "coverage_flood": 1.0,
+      "coverage_no_flood": 0.9709,
+      "share_uncertain": 0.9658,
+      "share_flood_singleton": 0.0342
+    }
+  ]
+}

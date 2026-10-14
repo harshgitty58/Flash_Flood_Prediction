@@ -1,0 +1,132 @@
+{
+  "threshold_rule": "frequency bias 2 on training",
+  "threshold": 0.964,
+  "test": {
+    "roc_auc": 0.753,
+    "pr_auc": 0.155,
+    "base_rate": 0.068,
+    "tp": 4,
+    "fp": 20,
+    "fn": 18,
+    "tn": 283,
+    "POD": 0.182,
+    "FAR": 0.833,
+    "POFD": 0.066,
+    "CSI": 0.095,
+    "ETS": 0.059,
+    "HSS": 0.111,
+    "bias": 1.091
+  },
+  "test_common": {
+    "pooled": {
+      "tp": 4,
+      "fp": 19,
+      "fn": 15,
+      "tn": 238,
+      "POD": 0.211,
+      "FAR": 0.826,
+      "POFD": 0.074,
+      "CSI": 0.105,
+      "ETS": 0.066,
+      "HSS": 0.124,
+      "bias": 1.211,
+      "CSI_ci95": [
+        0.025,
+        0.2
+      ]
+    },
+    "hybrid": {
+      "tp": 12,
+      "fp": 52,
+      "fn": 7,
+      "tn": 205,
+      "POD": 0.632,
+      "FAR": 0.812,
+      "POFD": 0.202,
+      "CSI": 0.169,
+      "ETS": 0.114,
+      "HSS": 0.205,
+      "bias": 3.368,
+      "CSI_ci95": [
+        0.091,
+        0.253
+      ]
+    }
+  },
+  "external_pooled": {
+    "events_scored": 29,
+    "detected": 3,
+    "POD": 0.103,
+    "ci95": [
+      0.0,
+      0.207
+    ],
+    "alert_burden": [
+      {
+        "monsoon": 2023,
+        "alert_district_days": 16,
+        "share_near_event": 0.0
+      },
+      {
+        "monsoon": 2024,
+        "alert_district_days": 98,
+        "share_near_event": 0.031
+      },
+      {
+        "monsoon": 2025,
+        "alert_district_days": 58,
+        "share_near_event": 0.103
+      },
+      {
+        "monsoon": 2026,
+        "alert_district_days": 83,
+        "share_near_event": 0.0
+      }
+    ]
+  },
+  "external_hybrid": {
+    "events_scored": 21,
+    "detected": 7,
+    "POD": 0.333,
+    "ci95": [
+      0.143,
+      0.524
+    ],
+    "alert_burden": [
+      {
+        "monsoon": 2023,
+        "alert_district_days": 81,
+        "share_near_event": 0.0
+      },
+      {
+        "monsoon": 2024,
+        "alert_district_days": 370,
+        "share_near_event": 0.054
+      },
+      {
+        "monsoon": 2025,
+        "alert_district_days": 171,
+        "share_near_event": 0.047
+      },
+      {
+        "monsoon": 2026,
+        "alert_district_days": 318,
+        "share_near_event": 0.0
+      }
+    ]
+  },
+  "ranking_recall_at_3": {
+    "test_model": 0.455,
+    "test_prior": 0.409,
+    "external_model": 0.345,
+    "external_prior": 0.207,
+    "chance": 0.231
+  },
+  "decision": {
+    "csi_ok": false,
+    "external_pod_ok": false,
+    "burden_ok": true,
+    "adopt_alert_layer": false,
+    "offer_ranking_view": true
+  }
+}

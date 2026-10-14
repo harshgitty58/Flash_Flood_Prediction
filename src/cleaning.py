@@ -24,9 +24,16 @@ from src.district_mapping import standardize_district_name
 
 def parse_cwc_timestamp(s: pd.Series) -> pd.Series:
     """Parses CWC timestamp string formatted typically as 'DD-MM-YYYY HH.MM' into datetime."""
-    # Convert '05-10-2022 10.00' -> '05-10-2022 10:00:00'
-    cleaned = s.astype(str).str.replace(r'(\d{2})\.(\d{2})$', r'\1:\2:00', regex=True)
+    # Convert '05-10-2022 10.00' -> '05-10-2022 10:00:00'. Hours 0-9 come without a leading zero
+    # ('06-10-2022 0.00'); a two-digit-only pattern silently dropped ~47 % of all rows.
+    cleaned = s.astype(str).str.strip().str.replace(
+        r'\s(\d{1,2})\.(\d{2})$', lambda m: f" {int(m.group(1)):02d}:{m.group(2)}:00", regex=True)
     return pd.to_datetime(cleaned, format='%d-%m-%Y %H:%M:%S', errors='coerce')
+
+SENTINEL_MM = 511.5
+MAX_PLAUSIBLE_MM_HR = 150.0
+FAULTY_SHARE = 0.20
+
 
 def clean_rainfall_data() -> pd.DataFrame:
     """Cleans and standardizes CWC hourly telemetry rainfall."""
@@ -59,23 +66,28 @@ def clean_rainfall_data() -> pd.DataFrame:
     # 4. Numeric conversion & Quality flagging
     df["rainfall_raw"] = pd.to_numeric(df["rainfall_raw"], errors="coerce")
     
+    # Faulty-gauge quarantine: a station whose non-sentinel readings exceed 100 mm/h more than FAULTY_SHARE
+    # of the time is reporting garbage (e.g. Yamuna Colony: median 272 mm/h).
+    r = df["rainfall_raw"]
+    non_sentinel = r.where((r >= 0) & (r != SENTINEL_MM))
+    share_over_100 = (non_sentinel > 100).groupby(df["station"]).mean()
+    faulty = set(share_over_100[share_over_100 > FAULTY_SHARE].index)
+
     conditions = [
-        df["rainfall_raw"].isna(),
-        df["rainfall_raw"] < 0,
-        df["rainfall_raw"] > 350,  # Extreme / physical cloudburst limit (> 350 mm/hr)
-        df["rainfall_raw"] >= 0,
+        r.isna(),
+        r < 0,
+        r == SENTINEL_MM,                  # 511.5 = telemetry error code
+        df["station"].isin(faulty),
+        r > MAX_PLAUSIBLE_MM_HR,           # > 150 mm in one hour: beyond credible gauge readings
+        r >= 0,
     ]
-    flags = [
-        "missing",
-        "negative_invalid",
-        "extreme_suspect",
-        "valid",
-    ]
+    flags = ["missing", "negative_invalid", "sentinel", "faulty_station", "implausible", "valid"]
     df["rainfall_quality_flag"] = np.select(conditions, flags, default="unknown")
-    
-    # Create clean modelling variable: negative values set to NaN (not 0)
-    df["rainfall_clean"] = df["rainfall_raw"].copy()
-    df.loc[df["rainfall_quality_flag"].isin(["negative_invalid", "missing"]), "rainfall_clean"] = np.nan
+    print("Rainfall quality flags:", df["rainfall_quality_flag"].value_counts().to_dict())
+    print("Quarantined (faulty) gauges:", sorted(faulty))
+
+    # Clean modelling variable: anything not 'valid' is NaN (never 0)
+    df["rainfall_clean"] = r.where(df["rainfall_quality_flag"] == "valid")
     
     # 5. Handle duplicate (station, datetime) records
     # Rule: Keep max valid observation or first non-null

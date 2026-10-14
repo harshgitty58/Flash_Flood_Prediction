@@ -1,0 +1,212 @@
+{
+ "checked_at": "2026-10-13T22:29:28",
+ "external": [
+  {
+   "name": "carto_style",
+   "ok": true,
+   "status": 206,
+   "ms": 876
+  },
+  {
+   "name": "carto_glyphs",
+   "ok": true,
+   "status": 206,
+   "ms": 235
+  },
+  {
+   "name": "esri_imagery",
+   "ok": true,
+   "status": 206,
+   "ms": 225
+  },
+  {
+   "name": "esri_labels",
+   "ok": true,
+   "status": 206,
+   "ms": 56
+  },
+  {
+   "name": "aws_terrain_dem",
+   "ok": true,
+   "status": 206,
+   "ms": 919
+  },
+  {
+   "name": "opentopomap",
+   "ok": true,
+   "status": 200,
+   "ms": 1199
+  },
+  {
+   "name": "overpass_main",
+   "ok": true,
+   "status": 206,
+   "ms": 839
+  },
+  {
+   "name": "overpass_private_coffee",
+   "ok": false,
+   "status": null,
+   "ms": 10547,
+   "error": "ReadTimeout"
+  },
+  {
+   "name": "ms_footprints_index",
+   "ok": true,
+   "status": 206,
+   "ms": 2694
+  },
+  {
+   "name": "google_fonts",
+   "ok": true,
+   "status": 200,
+   "ms": 915
+  }
+ ],
+ "local_api": [],
+ "local_api_running": false,
+ "latency": [
+  {
+   "path": "API startup (load model, calibration, data)",
+   "variant": "new",
+   "p50_ms": 864.9,
+   "p95_ms": null,
+   "bytes": null
+  },
+  {
+   "path": "GET /risk/snapshot",
+   "variant": "new",
+   "p50_ms": 1.224,
+   "p95_ms": 1.731,
+   "bytes": null
+  },
+  {
+   "path": "GET /risk/snapshot (cached, 304)",
+   "variant": "new",
+   "p50_ms": 0.639,
+   "p95_ms": 1.167,
+   "bytes": null
+  },
+  {
+   "path": "GET /model/summary",
+   "variant": "new",
+   "p50_ms": 1.799,
+   "p95_ms": 2.77,
+   "bytes": null
+  },
+  {
+   "path": "GET /model/summary (cached, 304)",
+   "variant": "new",
+   "p50_ms": 1.142,
+   "p95_ms": 2.34,
+   "bytes": null
+  },
+  {
+   "path": "GET /metrics",
+   "variant": "new",
+   "p50_ms": 7.897,
+   "p95_ms": 8.608,
+   "bytes": null
+  },
+  {
+   "path": "GET /metrics (cached, 304)",
+   "variant": "new",
+   "p50_ms": 0.587,
+   "p95_ms": 1.32,
+   "bytes": null
+  },
+  {
+   "path": "buildings for one view",
+   "variant": "old: full GeoJSON",
+   "p50_ms": 2607.503,
+   "p95_ms": 3046.709,
+   "bytes": 66452623.0
+  },
+  {
+   "path": "buildings for one view",
+   "variant": "new: densest quadtree tile",
+   "p50_ms": 156.14,
+   "p95_ms": 174.614,
+   "bytes": 740095.0
+  },
+  {
+   "path": "POST /predict (1 station, 1 new hour)",
+   "variant": "new",
+   "p50_ms": 15.096,
+   "p95_ms": 17.088,
+   "bytes": null
+  },
+  {
+   "path": "features for 1 station-hour",
+   "variant": "old: batch recompute (96 h)",
+   "p50_ms": 1.271,
+   "p95_ms": 1.688,
+   "bytes": null
+  },
+  {
+   "path": "features for 1 station-hour",
+   "variant": "new: O(1) incremental",
+   "p50_ms": 0.167,
+   "p95_ms": 0.234,
+   "bytes": null
+  },
+  {
+   "path": "calibrate 1 score",
+   "variant": "old: exact Venn-Abers (2 isotonic fits)",
+   "p50_ms": 4.323,
+   "p95_ms": 4.366,
+   "bytes": null
+  },
+  {
+   "path": "calibrate 1 score",
+   "variant": "new: lookup table (np.interp)",
+   "p50_ms": 0.006,
+   "p95_ms": 0.007,
+   "bytes": null
+  }
+ ],
+ "notebook_runs": [
+  {
+   "batch": "09_data_window_and_normalization",
+   "status": "ok",
+   "seconds": 44.2,
+   "finished": "2026-10-12T12:11:47"
+  },
+  {
+   "batch": "10_retrain_models",
+   "status": "ok",
+   "seconds": 597.6,
+   "finished": "2026-10-12T12:21:44"
+  },
+  {
+   "batch": "11_event_validation",
+   "status": "ok",
+   "seconds": 48.4,
+   "finished": "2026-10-12T12:22:33"
+  },
+  {
+   "batch": "12_uncertainty_calibration",
+   "status": "ok",
+   "seconds": 28.3,
+   "finished": "2026-10-12T12:23:01"
+  },
+  {
+   "batch": "13_warning_levels_hybrid",
+   "status": "ok",
+   "seconds": 45.1,
+   "finished": "2026-10-12T12:23:46"
+  },
+  {
+   "batch": "14_explainability_robustness_metrics",
+   "status": "ok",
+   "seconds": 240.0,
+   "finished": "2026-10-12T12:27:46"
+  },
+  {
+   "batch": "15_labels_and_model_upgrades",
+   "status": "ok",
+   "seconds": 168.3,
+   "finished": "2026-10-13T20:47:17"
+  }
+ ]
+}

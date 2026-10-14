@@ -1,0 +1,46 @@
+unit,split,level,layer,n,events,base_rate,tp,fp,fn,tn,POD,FAR,POFD,CSI,ETS,HSS,bias
+station-hour,validation,≥ ALERT,hybrid (deployed),20280,384,0.0189,83,2459,301,17437,0.216,0.967,0.124,0.029,0.012,0.025,6.62
+station-hour,validation,≥ ALERT,ML only,20280,384,0.0189,56,252,328,19644,0.146,0.818,0.013,0.088,0.08,0.147,0.802
+station-hour,validation,≥ ALERT,rainfall rule only,20280,384,0.0189,27,2207,357,17689,0.07,0.988,0.111,0.01,-0.006,-0.012,5.818
+station-hour,validation,≥ ALERT,district prior only,20280,384,0.0189,384,19896,0,0,1.0,0.981,1.0,0.019,0.0,0.0,52.812
+station-hour,validation,≥ SEVERE,hybrid (deployed),20280,384,0.0189,45,1874,339,18022,0.117,0.977,0.094,0.02,0.004,0.008,4.997
+station-hour,validation,≥ SEVERE,ML only,20280,384,0.0189,18,147,366,19749,0.047,0.891,0.007,0.034,0.028,0.055,0.43
+station-hour,validation,≥ SEVERE,rainfall rule only,20280,384,0.0189,27,1727,357,18169,0.07,0.985,0.087,0.013,-0.003,-0.006,4.568
+station-hour,test,≥ ALERT,hybrid (deployed),12469,240,0.0192,113,833,127,11396,0.471,0.881,0.068,0.105,0.09,0.165,3.942
+station-hour,test,≥ ALERT,ML only,12469,240,0.0192,66,736,174,11493,0.275,0.918,0.06,0.068,0.053,0.1,3.342
+station-hour,test,≥ ALERT,rainfall rule only,12469,240,0.0192,60,98,180,12131,0.25,0.62,0.008,0.178,0.17,0.291,0.658
+station-hour,test,≥ ALERT,district prior only,12469,240,0.0192,240,12229,0,0,1.0,0.981,1.0,0.019,0.0,0.0,51.954
+station-hour,test,≥ SEVERE,hybrid (deployed),12469,240,0.0192,74,244,166,11985,0.308,0.767,0.02,0.153,0.142,0.249,1.325
+station-hour,test,≥ SEVERE,ML only,12469,240,0.0192,14,174,226,12055,0.058,0.926,0.014,0.034,0.025,0.049,0.783
+station-hour,test,≥ SEVERE,rainfall rule only,12469,240,0.0192,60,70,180,12159,0.25,0.538,0.006,0.194,0.187,0.315,0.542
+station-hour,both,≥ ALERT,hybrid (deployed),32749,624,0.0191,196,3292,428,28833,0.314,0.944,0.102,0.05,0.034,0.065,5.59
+station-hour,both,≥ ALERT,ML only,32749,624,0.0191,122,988,502,31137,0.196,0.89,0.031,0.076,0.063,0.119,1.779
+station-hour,both,≥ ALERT,rainfall rule only,32749,624,0.0191,87,2305,537,29820,0.139,0.964,0.072,0.03,0.014,0.028,3.833
+station-hour,both,≥ ALERT,district prior only,32749,624,0.0191,624,32125,0,0,1.0,0.981,1.0,0.019,0.0,0.0,52.482
+station-hour,both,≥ SEVERE,hybrid (deployed),32749,624,0.0191,119,2118,505,30007,0.191,0.947,0.066,0.043,0.028,0.055,3.585
+station-hour,both,≥ SEVERE,ML only,32749,624,0.0191,32,321,592,31804,0.051,0.909,0.01,0.034,0.027,0.052,0.566
+station-hour,both,≥ SEVERE,rainfall rule only,32749,624,0.0191,87,1797,537,30328,0.139,0.954,0.056,0.036,0.021,0.042,3.019
+district-day,validation,≥ ALERT,hybrid (deployed),383,4,0.0104,3,177,1,202,0.75,0.983,0.467,0.017,0.006,0.012,45.0
+district-day,validation,≥ ALERT,ML only,383,4,0.0104,2,23,2,356,0.5,0.92,0.061,0.074,0.065,0.122,6.25
+district-day,validation,≥ ALERT,rainfall rule only,383,4,0.0104,2,154,2,225,0.5,0.987,0.406,0.013,0.002,0.005,39.0
+district-day,validation,≥ ALERT,district prior only,383,4,0.0104,4,379,0,0,1.0,0.99,1.0,0.01,0.0,0.0,95.75
+district-day,validation,≥ ALERT,persistence (flood yesterday),383,4,0.0104,0,4,4,375,0.0,1.0,0.011,0.0,-0.005,-0.011,1.0
+district-day,validation,≥ SEVERE,hybrid (deployed),383,4,0.0104,2,156,2,223,0.5,0.987,0.412,0.013,0.002,0.004,39.5
+district-day,validation,≥ SEVERE,ML only,383,4,0.0104,1,16,3,363,0.25,0.941,0.042,0.05,0.041,0.08,4.25
+district-day,validation,≥ SEVERE,rainfall rule only,383,4,0.0104,2,140,2,239,0.5,0.986,0.369,0.014,0.004,0.007,35.5
+district-day,test,≥ ALERT,hybrid (deployed),276,4,0.0145,3,46,1,226,0.75,0.939,0.169,0.06,0.046,0.089,12.25
+district-day,test,≥ ALERT,ML only,276,4,0.0145,1,24,3,248,0.25,0.96,0.088,0.036,0.023,0.045,6.25
+district-day,test,≥ ALERT,rainfall rule only,276,4,0.0145,3,26,1,246,0.75,0.897,0.096,0.1,0.087,0.16,7.25
+district-day,test,≥ ALERT,district prior only,276,4,0.0145,4,272,0,0,1.0,0.986,1.0,0.014,0.0,0.0,69.0
+district-day,test,≥ ALERT,persistence (flood yesterday),276,4,0.0145,0,4,4,268,0.0,1.0,0.015,0.0,-0.007,-0.015,1.0
+district-day,test,≥ SEVERE,hybrid (deployed),276,4,0.0145,3,34,1,238,0.75,0.919,0.125,0.079,0.066,0.123,9.25
+district-day,test,≥ SEVERE,ML only,276,4,0.0145,1,18,3,254,0.25,0.947,0.066,0.045,0.033,0.065,4.75
+district-day,test,≥ SEVERE,rainfall rule only,276,4,0.0145,3,19,1,253,0.75,0.864,0.07,0.13,0.118,0.211,5.5
+district-day,both,≥ ALERT,hybrid (deployed),659,8,0.0121,6,223,2,428,0.75,0.974,0.343,0.026,0.014,0.028,28.625
+district-day,both,≥ ALERT,ML only,659,8,0.0121,3,47,5,604,0.375,0.94,0.072,0.055,0.044,0.084,6.25
+district-day,both,≥ ALERT,rainfall rule only,659,8,0.0121,5,180,3,471,0.625,0.973,0.276,0.027,0.015,0.029,23.125
+district-day,both,≥ ALERT,district prior only,659,8,0.0121,8,651,0,0,1.0,0.988,1.0,0.012,0.0,0.0,82.375
+district-day,both,≥ ALERT,persistence (flood yesterday),659,8,0.0121,0,8,8,643,0.0,1.0,0.012,0.0,-0.006,-0.012,1.0
+district-day,both,≥ SEVERE,hybrid (deployed),659,8,0.0121,5,190,3,461,0.625,0.974,0.292,0.025,0.013,0.027,24.375
+district-day,both,≥ SEVERE,ML only,659,8,0.0121,2,34,6,617,0.25,0.944,0.052,0.048,0.038,0.072,4.5
+district-day,both,≥ SEVERE,rainfall rule only,659,8,0.0121,5,159,3,492,0.625,0.97,0.244,0.03,0.018,0.036,20.5

@@ -1,0 +1,4653 @@
+{
+  "hour_level": [
+    {
+      "model": "logistic_regression",
+      "split": "validation",
+      "threshold": 0.85,
+      "rows": 20280,
+      "positives": 864,
+      "precision": 0.1242,
+      "recall": 0.2188,
+      "f1": 0.1584,
+      "specificity": 0.9313,
+      "balanced_accuracy": 0.575,
+      "mcc": 0.1151,
+      "roc_auc": 0.6422,
+      "pr_auc": 0.0755,
+      "brier": 0.1428,
+      "tp": 189,
+      "fp": 1333,
+      "fn": 675,
+      "tn": 18083,
+      "false_alarms_per_station_month": 38.09,
+      "log_loss": 0.4818
+    },
+    {
+      "model": "logistic_regression",
+      "split": "test",
+      "threshold": 0.85,
+      "rows": 12469,
+      "positives": 720,
+      "precision": 0.1693,
+      "recall": 0.2111,
+      "f1": 0.1879,
+      "specificity": 0.9365,
+      "balanced_accuracy": 0.5738,
+      "mcc": 0.1332,
+      "roc_auc": 0.7407,
+      "pr_auc": 0.1389,
+      "brier": 0.1226,
+      "tp": 152,
+      "fp": 746,
+      "fn": 568,
+      "tn": 11003,
+      "false_alarms_per_station_month": 25.72,
+      "log_loss": 0.4451
+    },
+    {
+      "model": "random_forest",
+      "split": "validation",
+      "threshold": 0.45,
+      "rows": 20280,
+      "positives": 864,
+      "precision": 0.1501,
+      "recall": 0.3576,
+      "f1": 0.2115,
+      "specificity": 0.9099,
+      "balanced_accuracy": 0.6338,
+      "mcc": 0.179,
+      "roc_auc": 0.6323,
+      "pr_auc": 0.1131,
+      "brier": 0.0783,
+      "tp": 309,
+      "fp": 1749,
+      "fn": 555,
+      "tn": 17667,
+      "false_alarms_per_station_month": 49.97,
+      "log_loss": 0.5006
+    },
+    {
+      "model": "random_forest",
+      "split": "test",
+      "threshold": 0.45,
+      "rows": 12469,
+      "positives": 720,
+      "precision": 0.1731,
+      "recall": 0.3694,
+      "f1": 0.2357,
+      "specificity": 0.8918,
+      "balanced_accuracy": 0.6306,
+      "mcc": 0.1854,
+      "roc_auc": 0.7881,
+      "pr_auc": 0.1523,
+      "brier": 0.0955,
+      "tp": 266,
+      "fp": 1271,
+      "fn": 454,
+      "tn": 10478,
+      "false_alarms_per_station_month": 43.83,
+      "log_loss": 0.3173
+    },
+    {
+      "model": "xgboost",
+      "split": "validation",
+      "threshold": 0.25,
+      "rows": 20280,
+      "positives": 864,
+      "precision": 0.1389,
+      "recall": 0.3657,
+      "f1": 0.2013,
+      "specificity": 0.8991,
+      "balanced_accuracy": 0.6324,
+      "mcc": 0.1695,
+      "roc_auc": 0.7193,
+      "pr_auc": 0.1087,
+      "brier": 0.0859,
+      "tp": 316,
+      "fp": 1959,
+      "fn": 548,
+      "tn": 17457,
+      "false_alarms_per_station_month": 55.97,
+      "log_loss": 0.3223
+    },
+    {
+      "model": "xgboost",
+      "split": "test",
+      "threshold": 0.25,
+      "rows": 12469,
+      "positives": 720,
+      "precision": 0.2223,
+      "recall": 0.5736,
+      "f1": 0.3204,
+      "specificity": 0.877,
+      "balanced_accuracy": 0.7253,
+      "mcc": 0.2952,
+      "roc_auc": 0.7076,
+      "pr_auc": 0.1501,
+      "brier": 0.0928,
+      "tp": 413,
+      "fp": 1445,
+      "fn": 307,
+      "tn": 10304,
+      "false_alarms_per_station_month": 49.83,
+      "log_loss": 0.3383
+    }
+  ],
+  "confusion": {
+    "logistic_regression_validation": [
+      [
+        18083,
+        1333
+      ],
+      [
+        675,
+        189
+      ]
+    ],
+    "logistic_regression_test": [
+      [
+        11003,
+        746
+      ],
+      [
+        568,
+        152
+      ]
+    ],
+    "random_forest_validation": [
+      [
+        17667,
+        1749
+      ],
+      [
+        555,
+        309
+      ]
+    ],
+    "random_forest_test": [
+      [
+        10478,
+        1271
+      ],
+      [
+        454,
+        266
+      ]
+    ],
+    "xgboost_validation": [
+      [
+        17457,
+        1959
+      ],
+      [
+        548,
+        316
+      ]
+    ],
+    "xgboost_test": [
+      [
+        10304,
+        1445
+      ],
+      [
+        307,
+        413
+      ]
+    ]
+  },
+  "pr_curve": [
+    {
+      "threshold": 0.0182,
+      "precision": 0.0577,
+      "recall": 1.0,
+      "f1": 0.1092
+    },
+    {
+      "threshold": 0.0643,
+      "precision": 0.1238,
+      "recall": 0.6,
+      "f1": 0.2053
+    },
+    {
+      "threshold": 0.0667,
+      "precision": 0.2231,
+      "recall": 0.5764,
+      "f1": 0.3217
+    },
+    {
+      "threshold": 0.0933,
+      "precision": 0.2223,
+      "recall": 0.5736,
+      "f1": 0.3204
+    },
+    {
+      "threshold": 0.1123,
+      "precision": 0.2474,
+      "recall": 0.5583,
+      "f1": 0.3429
+    },
+    {
+      "threshold": 0.1124,
+      "precision": 0.2477,
+      "recall": 0.5583,
+      "f1": 0.3431
+    },
+    {
+      "threshold": 0.1335,
+      "precision": 0.1972,
+      "recall": 0.1167,
+      "f1": 0.1466
+    },
+    {
+      "threshold": 0.1423,
+      "precision": 0.1976,
+      "recall": 0.1167,
+      "f1": 0.1467
+    },
+    {
+      "threshold": 0.148,
+      "precision": 0.1981,
+      "recall": 0.1167,
+      "f1": 0.1469
+    },
+    {
+      "threshold": 0.1603,
+      "precision": 0.2,
+      "recall": 0.1153,
+      "f1": 0.1463
+    },
+    {
+      "threshold": 0.1649,
+      "precision": 0.2005,
+      "recall": 0.1153,
+      "f1": 0.1464
+    },
+    {
+      "threshold": 0.1667,
+      "precision": 0.199,
+      "recall": 0.1139,
+      "f1": 0.1449
+    },
+    {
+      "threshold": 0.1737,
+      "precision": 0.1995,
+      "recall": 0.1139,
+      "f1": 0.145
+    },
+    {
+      "threshold": 0.175,
+      "precision": 0.201,
+      "recall": 0.1139,
+      "f1": 0.1454
+    },
+    {
+      "threshold": 0.1804,
+      "precision": 0.197,
+      "recall": 0.1083,
+      "f1": 0.1398
+    },
+    {
+      "threshold": 0.1902,
+      "precision": 0.1893,
+      "recall": 0.1028,
+      "f1": 0.1332
+    },
+    {
+      "threshold": 0.1936,
+      "precision": 0.1942,
+      "recall": 0.1028,
+      "f1": 0.1344
+    },
+    {
+      "threshold": 0.2,
+      "precision": 0.1953,
+      "recall": 0.1028,
+      "f1": 0.1347
+    },
+    {
+      "threshold": 0.2039,
+      "precision": 0.1982,
+      "recall": 0.0903,
+      "f1": 0.124
+    },
+    {
+      "threshold": 0.2284,
+      "precision": 0.192,
+      "recall": 0.0861,
+      "f1": 0.1189
+    },
+    {
+      "threshold": 0.2392,
+      "precision": 0.1925,
+      "recall": 0.0861,
+      "f1": 0.119
+    },
+    {
+      "threshold": 0.2595,
+      "precision": 0.1556,
+      "recall": 0.0653,
+      "f1": 0.092
+    }
+  ],
+  "event_cv": [
+    {
+      "experiment": "Exp_A_Rainfall_Only",
+      "features": 10,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.4971,
+      "pooled_pr_auc": 0.0929,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.5207,
+      "min_fold_roc_auc": 0.3467
+    },
+    {
+      "experiment": "Exp_B_Rainfall_Discharge",
+      "features": 14,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.5477,
+      "pooled_pr_auc": 0.1012,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.6262,
+      "min_fold_roc_auc": 0.4508
+    },
+    {
+      "experiment": "Exp_C_Rainfall_Discharge_FloodHist",
+      "features": 21,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.7724,
+      "pooled_pr_auc": 0.2226,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.7966,
+      "min_fold_roc_auc": 0.6286
+    },
+    {
+      "experiment": "Exp_D_Rainfall_Discharge_Flood_Landslide",
+      "features": 25,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.7715,
+      "pooled_pr_auc": 0.2364,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.7579,
+      "min_fold_roc_auc": 0.5679
+    },
+    {
+      "experiment": "Exp_E_Full_Multimodal",
+      "features": 32,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.6546,
+      "pooled_pr_auc": 0.1412,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.6619,
+      "min_fold_roc_auc": 0.5
+    },
+    {
+      "experiment": "Exp_F_No_Location",
+      "features": 30,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.6138,
+      "pooled_pr_auc": 0.126,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.6489,
+      "min_fold_roc_auc": 0.3786
+    },
+    {
+      "experiment": "Exp_G_Static_History",
+      "features": 23,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.7008,
+      "pooled_pr_auc": 0.1856,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.7703,
+      "min_fold_roc_auc": 0.5801
+    },
+    {
+      "experiment": "Exp_H_Multisource",
+      "features": 42,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.7032,
+      "pooled_pr_auc": 0.1466,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.7235,
+      "min_fold_roc_auc": 0.5846
+    },
+    {
+      "experiment": "Exp_T_Trigger_Only",
+      "features": 29,
+      "folds": 6,
+      "rows": 15473,
+      "positives": 1248,
+      "pooled_roc_auc": 0.6016,
+      "pooled_pr_auc": 0.1038,
+      "base_rate": 0.0807,
+      "mean_fold_roc_auc": 0.5654,
+      "min_fold_roc_auc": 0.4728
+    }
+  ],
+  "event_detection": {
+    "experiment": "Exp_G_Static_History",
+    "alarm_threshold": 0.7117,
+    "hourly_false_alarm_rate": 0.05,
+    "events_evaluated": 19,
+    "events_detected": 8,
+    "median_lead_time_h": 36.0
+  },
+  "events": [
+    {
+      "district": "Dehradun",
+      "event_start": "2022-08-19",
+      "stations": 2,
+      "max_p": 0.71,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Dehradun",
+      "event_start": "2022-09-22",
+      "stations": 3,
+      "max_p": 0.704,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Uttarkashi",
+      "event_start": "2022-09-22",
+      "stations": 1,
+      "max_p": 0.484,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Rudraprayag",
+      "event_start": "2023-06-25",
+      "stations": 2,
+      "max_p": 0.786,
+      "detected": true,
+      "lead_time_h": 48.0
+    },
+    {
+      "district": "Dehradun",
+      "event_start": "2023-07-09",
+      "stations": 1,
+      "max_p": 0.748,
+      "detected": true,
+      "lead_time_h": -12.0
+    },
+    {
+      "district": "Udham Singh Nagar",
+      "event_start": "2023-07-09",
+      "stations": 5,
+      "max_p": 0.184,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Uttarkashi",
+      "event_start": "2023-07-10",
+      "stations": 1,
+      "max_p": 0.657,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Pithoragarh",
+      "event_start": "2023-07-11",
+      "stations": 3,
+      "max_p": 0.184,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Rudraprayag",
+      "event_start": "2023-07-11",
+      "stations": 2,
+      "max_p": 0.776,
+      "detected": true,
+      "lead_time_h": 36.0
+    },
+    {
+      "district": "Chamoli",
+      "event_start": "2023-07-16",
+      "stations": 3,
+      "max_p": 0.184,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Rudraprayag",
+      "event_start": "2023-07-16",
+      "stations": 2,
+      "max_p": 0.298,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Rudraprayag",
+      "event_start": "2023-07-17",
+      "stations": 2,
+      "max_p": 0.298,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Tehri Garhwal",
+      "event_start": "2023-08-06",
+      "stations": 1,
+      "max_p": 0.718,
+      "detected": true,
+      "lead_time_h": 12.0
+    },
+    {
+      "district": "Rudraprayag",
+      "event_start": "2023-08-07",
+      "stations": 2,
+      "max_p": 0.769,
+      "detected": true,
+      "lead_time_h": 36.0
+    },
+    {
+      "district": "Rudraprayag",
+      "event_start": "2023-08-09",
+      "stations": 2,
+      "max_p": 0.769,
+      "detected": true,
+      "lead_time_h": 48.0
+    },
+    {
+      "district": "Pauri Garhwal",
+      "event_start": "2023-08-10",
+      "stations": 1,
+      "max_p": 0.576,
+      "detected": false,
+      "lead_time_h": null
+    },
+    {
+      "district": "Rudraprayag",
+      "event_start": "2023-08-10",
+      "stations": 2,
+      "max_p": 0.754,
+      "detected": true,
+      "lead_time_h": 8.0
+    },
+    {
+      "district": "Tehri Garhwal",
+      "event_start": "2023-08-21",
+      "stations": 1,
+      "max_p": 0.723,
+      "detected": true,
+      "lead_time_h": 48.0
+    },
+    {
+      "district": "Pauri Garhwal",
+      "event_start": "2023-08-23",
+      "stations": 2,
+      "max_p": 0.669,
+      "detected": false,
+      "lead_time_h": null
+    }
+  ],
+  "warning_levels": {
+    "validation_tier_ml": {
+      "precision": 0.239,
+      "recall": 0.112,
+      "f1": 0.153,
+      "false_alarm_rate": 0.0159,
+      "alerts": 406
+    },
+    "validation_tier_rain": {
+      "precision": 0.023,
+      "recall": 0.059,
+      "f1": 0.033,
+      "false_alarm_rate": 0.1124,
+      "alerts": 2234
+    },
+    "validation_tier": {
+      "precision": 0.054,
+      "recall": 0.166,
+      "f1": 0.082,
+      "false_alarm_rate": 0.1283,
+      "alerts": 2635
+    },
+    "test_tier_ml": {
+      "precision": 0.222,
+      "recall": 0.574,
+      "f1": 0.32,
+      "false_alarm_rate": 0.123,
+      "alerts": 1858
+    },
+    "test_tier_rain": {
+      "precision": 0.38,
+      "recall": 0.083,
+      "f1": 0.137,
+      "false_alarm_rate": 0.0083,
+      "alerts": 158
+    },
+    "test_tier": {
+      "precision": 0.234,
+      "recall": 0.65,
+      "f1": 0.344,
+      "false_alarm_rate": 0.1305,
+      "alerts": 2001
+    }
+  },
+  "splits": {
+    "train": {
+      "start": "2022-06-21 19:00:00",
+      "end": "2023-06-30 23:00:00",
+      "rows": 94154,
+      "positives": 367,
+      "stations": 37
+    },
+    "validation": {
+      "start": "2023-07-01 00:00:00",
+      "end": "2023-07-31 23:00:00",
+      "rows": 20280,
+      "positives": 864,
+      "stations": 35
+    },
+    "test": {
+      "start": "2023-08-01 00:00:00",
+      "end": "2023-08-25 23:00:00",
+      "rows": 12469,
+      "positives": 720,
+      "stations": 29
+    },
+    "rule": {
+      "train_end": "2023-07-01",
+      "val_end": "2023-08-01",
+      "study_start": "2022-02-01",
+      "unlabelled_rows_excluded": true
+    }
+  },
+  "verification": {
+    "contingency": [
+      {
+        "unit": "station-hour",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "hybrid (deployed)",
+        "n": 20280,
+        "events": 864,
+        "base_rate": 0.0426,
+        "tp": 143,
+        "fp": 2492,
+        "fn": 721,
+        "tn": 16924,
+        "POD": 0.166,
+        "FAR": 0.946,
+        "POFD": 0.128,
+        "CSI": 0.043,
+        "ETS": 0.009,
+        "HSS": 0.019,
+        "bias": 3.05,
+        "ci95": {
+          "POD": [
+            0.081,
+            0.272
+          ],
+          "FAR": [
+            0.892,
+            0.983
+          ],
+          "POFD": [
+            0.091,
+            0.171
+          ],
+          "CSI": [
+            0.016,
+            0.076
+          ],
+          "ETS": [
+            -0.012,
+            0.035
+          ],
+          "HSS": [
+            -0.025,
+            0.068
+          ],
+          "bias": [
+            1.613,
+            8.154
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "ML only",
+        "n": 20280,
+        "events": 864,
+        "base_rate": 0.0426,
+        "tp": 97,
+        "fp": 309,
+        "fn": 767,
+        "tn": 19107,
+        "POD": 0.112,
+        "FAR": 0.761,
+        "POFD": 0.016,
+        "CSI": 0.083,
+        "ETS": 0.069,
+        "HSS": 0.129,
+        "bias": 0.47,
+        "ci95": {
+          "POD": [
+            0.049,
+            0.218
+          ],
+          "FAR": [
+            0.572,
+            0.917
+          ],
+          "POFD": [
+            0.009,
+            0.023
+          ],
+          "CSI": [
+            0.033,
+            0.133
+          ],
+          "ETS": [
+            0.022,
+            0.12
+          ],
+          "HSS": [
+            0.043,
+            0.214
+          ],
+          "bias": [
+            0.237,
+            1.342
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "rainfall rule only",
+        "n": 20280,
+        "events": 864,
+        "base_rate": 0.0426,
+        "tp": 51,
+        "fp": 2183,
+        "fn": 813,
+        "tn": 17233,
+        "POD": 0.059,
+        "FAR": 0.977,
+        "POFD": 0.112,
+        "CSI": 0.017,
+        "ETS": -0.015,
+        "HSS": -0.03,
+        "bias": 2.586,
+        "ci95": {
+          "POD": [
+            0.002,
+            0.127
+          ],
+          "FAR": [
+            0.937,
+            1.0
+          ],
+          "POFD": [
+            0.073,
+            0.155
+          ],
+          "CSI": [
+            0.0,
+            0.04
+          ],
+          "ETS": [
+            -0.032,
+            0.006
+          ],
+          "HSS": [
+            -0.065,
+            0.012
+          ],
+          "bias": [
+            1.303,
+            7.2
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "district prior only",
+        "n": 20280,
+        "events": 864,
+        "base_rate": 0.0426,
+        "tp": 864,
+        "fp": 19416,
+        "fn": 0,
+        "tn": 0,
+        "POD": 1.0,
+        "FAR": 0.957,
+        "POFD": 1.0,
+        "CSI": 0.043,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 23.472,
+        "ci95": {
+          "POD": [
+            1.0,
+            1.0
+          ],
+          "FAR": [
+            0.926,
+            0.984
+          ],
+          "POFD": [
+            1.0,
+            1.0
+          ],
+          "CSI": [
+            0.016,
+            0.074
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            13.432,
+            63.586
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "validation",
+        "level": "\u2265 SEVERE",
+        "layer": "hybrid (deployed)",
+        "n": 20280,
+        "events": 864,
+        "base_rate": 0.0426,
+        "tp": 51,
+        "fp": 1594,
+        "fn": 813,
+        "tn": 17822,
+        "POD": 0.059,
+        "FAR": 0.969,
+        "POFD": 0.082,
+        "CSI": 0.021,
+        "ETS": -0.008,
+        "HSS": -0.016,
+        "bias": 1.904,
+        "ci95": {
+          "POD": [
+            0.002,
+            0.127
+          ],
+          "FAR": [
+            0.911,
+            0.999
+          ],
+          "POFD": [
+            0.051,
+            0.115
+          ],
+          "CSI": [
+            0.0,
+            0.049
+          ],
+          "ETS": [
+            -0.026,
+            0.018
+          ],
+          "HSS": [
+            -0.054,
+            0.035
+          ],
+          "bias": [
+            0.914,
+            5.378
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "validation",
+        "level": "\u2265 SEVERE",
+        "layer": "ML only",
+        "n": 20280,
+        "events": 864,
+        "base_rate": 0.0426,
+        "tp": 0,
+        "fp": 0,
+        "fn": 864,
+        "tn": 19416,
+        "POD": 0.0,
+        "FAR": null,
+        "POFD": 0.0,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 0.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.0
+          ],
+          "FAR": [
+            null,
+            null
+          ],
+          "POFD": [
+            0.0,
+            0.0
+          ],
+          "CSI": [
+            0.0,
+            0.0
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "validation",
+        "level": "\u2265 SEVERE",
+        "layer": "rainfall rule only",
+        "n": 20280,
+        "events": 864,
+        "base_rate": 0.0426,
+        "tp": 51,
+        "fp": 1594,
+        "fn": 813,
+        "tn": 17822,
+        "POD": 0.059,
+        "FAR": 0.969,
+        "POFD": 0.082,
+        "CSI": 0.021,
+        "ETS": -0.008,
+        "HSS": -0.016,
+        "bias": 1.904,
+        "ci95": {
+          "POD": [
+            0.002,
+            0.127
+          ],
+          "FAR": [
+            0.911,
+            0.999
+          ],
+          "POFD": [
+            0.051,
+            0.115
+          ],
+          "CSI": [
+            0.0,
+            0.049
+          ],
+          "ETS": [
+            -0.026,
+            0.018
+          ],
+          "HSS": [
+            -0.054,
+            0.035
+          ],
+          "bias": [
+            0.914,
+            5.378
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "hybrid (deployed)",
+        "n": 12469,
+        "events": 720,
+        "base_rate": 0.0577,
+        "tp": 468,
+        "fp": 1533,
+        "fn": 252,
+        "tn": 10216,
+        "POD": 0.65,
+        "FAR": 0.766,
+        "POFD": 0.13,
+        "CSI": 0.208,
+        "ETS": 0.165,
+        "HSS": 0.283,
+        "bias": 2.779,
+        "ci95": {
+          "POD": [
+            0.45,
+            0.822
+          ],
+          "FAR": [
+            0.664,
+            0.875
+          ],
+          "POFD": [
+            0.116,
+            0.144
+          ],
+          "CSI": [
+            0.108,
+            0.305
+          ],
+          "ETS": [
+            0.075,
+            0.252
+          ],
+          "HSS": [
+            0.139,
+            0.403
+          ],
+          "bias": [
+            2.079,
+            4.544
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "ML only",
+        "n": 12469,
+        "events": 720,
+        "base_rate": 0.0577,
+        "tp": 413,
+        "fp": 1445,
+        "fn": 307,
+        "tn": 10304,
+        "POD": 0.574,
+        "FAR": 0.778,
+        "POFD": 0.123,
+        "CSI": 0.191,
+        "ETS": 0.149,
+        "HSS": 0.259,
+        "bias": 2.581,
+        "ci95": {
+          "POD": [
+            0.385,
+            0.75
+          ],
+          "FAR": [
+            0.674,
+            0.886
+          ],
+          "POFD": [
+            0.109,
+            0.137
+          ],
+          "CSI": [
+            0.098,
+            0.283
+          ],
+          "ETS": [
+            0.064,
+            0.234
+          ],
+          "HSS": [
+            0.12,
+            0.379
+          ],
+          "bias": [
+            1.902,
+            4.294
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "rainfall rule only",
+        "n": 12469,
+        "events": 720,
+        "base_rate": 0.0577,
+        "tp": 60,
+        "fp": 98,
+        "fn": 660,
+        "tn": 11651,
+        "POD": 0.083,
+        "FAR": 0.62,
+        "POFD": 0.008,
+        "CSI": 0.073,
+        "ETS": 0.063,
+        "HSS": 0.118,
+        "bias": 0.219,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.195
+          ],
+          "FAR": [
+            0.344,
+            1.0
+          ],
+          "POFD": [
+            0.004,
+            0.014
+          ],
+          "CSI": [
+            0.0,
+            0.172
+          ],
+          "ETS": [
+            -0.005,
+            0.159
+          ],
+          "HSS": [
+            -0.011,
+            0.274
+          ],
+          "bias": [
+            0.091,
+            0.392
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "district prior only",
+        "n": 12469,
+        "events": 720,
+        "base_rate": 0.0577,
+        "tp": 720,
+        "fp": 11749,
+        "fn": 0,
+        "tn": 0,
+        "POD": 1.0,
+        "FAR": 0.942,
+        "POFD": 1.0,
+        "CSI": 0.058,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 17.318,
+        "ci95": {
+          "POD": [
+            1.0,
+            1.0
+          ],
+          "FAR": [
+            0.92,
+            0.966
+          ],
+          "POFD": [
+            1.0,
+            1.0
+          ],
+          "CSI": [
+            0.034,
+            0.08
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            12.463,
+            29.516
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "test",
+        "level": "\u2265 SEVERE",
+        "layer": "hybrid (deployed)",
+        "n": 12469,
+        "events": 720,
+        "base_rate": 0.0577,
+        "tp": 18,
+        "fp": 43,
+        "fn": 702,
+        "tn": 11706,
+        "POD": 0.025,
+        "FAR": 0.705,
+        "POFD": 0.004,
+        "CSI": 0.024,
+        "ETS": 0.019,
+        "HSS": 0.037,
+        "bias": 0.085,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.078
+          ],
+          "FAR": [
+            0.294,
+            1.0
+          ],
+          "POFD": [
+            0.001,
+            0.007
+          ],
+          "CSI": [
+            0.0,
+            0.074
+          ],
+          "ETS": [
+            -0.005,
+            0.067
+          ],
+          "HSS": [
+            -0.01,
+            0.126
+          ],
+          "bias": [
+            0.028,
+            0.164
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "test",
+        "level": "\u2265 SEVERE",
+        "layer": "ML only",
+        "n": 12469,
+        "events": 720,
+        "base_rate": 0.0577,
+        "tp": 0,
+        "fp": 0,
+        "fn": 720,
+        "tn": 11749,
+        "POD": 0.0,
+        "FAR": null,
+        "POFD": 0.0,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 0.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.0
+          ],
+          "FAR": [
+            null,
+            null
+          ],
+          "POFD": [
+            0.0,
+            0.0
+          ],
+          "CSI": [
+            0.0,
+            0.0
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "test",
+        "level": "\u2265 SEVERE",
+        "layer": "rainfall rule only",
+        "n": 12469,
+        "events": 720,
+        "base_rate": 0.0577,
+        "tp": 18,
+        "fp": 43,
+        "fn": 702,
+        "tn": 11706,
+        "POD": 0.025,
+        "FAR": 0.705,
+        "POFD": 0.004,
+        "CSI": 0.024,
+        "ETS": 0.019,
+        "HSS": 0.037,
+        "bias": 0.085,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.078
+          ],
+          "FAR": [
+            0.294,
+            1.0
+          ],
+          "POFD": [
+            0.001,
+            0.007
+          ],
+          "CSI": [
+            0.0,
+            0.074
+          ],
+          "ETS": [
+            -0.005,
+            0.067
+          ],
+          "HSS": [
+            -0.01,
+            0.126
+          ],
+          "bias": [
+            0.028,
+            0.164
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "hybrid (deployed)",
+        "n": 32749,
+        "events": 1584,
+        "base_rate": 0.0484,
+        "tp": 611,
+        "fp": 4025,
+        "fn": 973,
+        "tn": 27140,
+        "POD": 0.386,
+        "FAR": 0.868,
+        "POFD": 0.129,
+        "CSI": 0.109,
+        "ETS": 0.072,
+        "HSS": 0.134,
+        "bias": 2.927,
+        "ci95": {
+          "POD": [
+            0.246,
+            0.577
+          ],
+          "FAR": [
+            0.797,
+            0.922
+          ],
+          "POFD": [
+            0.105,
+            0.154
+          ],
+          "CSI": [
+            0.064,
+            0.162
+          ],
+          "ETS": [
+            0.031,
+            0.121
+          ],
+          "HSS": [
+            0.059,
+            0.217
+          ],
+          "bias": [
+            1.995,
+            4.758
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "ML only",
+        "n": 32749,
+        "events": 1584,
+        "base_rate": 0.0484,
+        "tp": 510,
+        "fp": 1754,
+        "fn": 1074,
+        "tn": 29411,
+        "POD": 0.322,
+        "FAR": 0.775,
+        "POFD": 0.056,
+        "CSI": 0.153,
+        "ETS": 0.124,
+        "HSS": 0.221,
+        "bias": 1.429,
+        "ci95": {
+          "POD": [
+            0.189,
+            0.505
+          ],
+          "FAR": [
+            0.678,
+            0.861
+          ],
+          "POFD": [
+            0.041,
+            0.071
+          ],
+          "CSI": [
+            0.094,
+            0.221
+          ],
+          "ETS": [
+            0.067,
+            0.193
+          ],
+          "HSS": [
+            0.126,
+            0.323
+          ],
+          "bias": [
+            0.922,
+            2.302
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "rainfall rule only",
+        "n": 32749,
+        "events": 1584,
+        "base_rate": 0.0484,
+        "tp": 111,
+        "fp": 2281,
+        "fn": 1473,
+        "tn": 28884,
+        "POD": 0.07,
+        "FAR": 0.954,
+        "POFD": 0.073,
+        "CSI": 0.029,
+        "ETS": -0.001,
+        "HSS": -0.003,
+        "bias": 1.51,
+        "ci95": {
+          "POD": [
+            0.019,
+            0.129
+          ],
+          "FAR": [
+            0.893,
+            0.989
+          ],
+          "POFD": [
+            0.047,
+            0.104
+          ],
+          "CSI": [
+            0.007,
+            0.058
+          ],
+          "ETS": [
+            -0.021,
+            0.027
+          ],
+          "HSS": [
+            -0.043,
+            0.053
+          ],
+          "bias": [
+            0.838,
+            2.689
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "district prior only",
+        "n": 32749,
+        "events": 1584,
+        "base_rate": 0.0484,
+        "tp": 1584,
+        "fp": 31165,
+        "fn": 0,
+        "tn": 0,
+        "POD": 1.0,
+        "FAR": 0.952,
+        "POFD": 1.0,
+        "CSI": 0.048,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 20.675,
+        "ci95": {
+          "POD": [
+            1.0,
+            1.0
+          ],
+          "FAR": [
+            0.931,
+            0.969
+          ],
+          "POFD": [
+            1.0,
+            1.0
+          ],
+          "CSI": [
+            0.031,
+            0.069
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            14.475,
+            32.703
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "both",
+        "level": "\u2265 SEVERE",
+        "layer": "hybrid (deployed)",
+        "n": 32749,
+        "events": 1584,
+        "base_rate": 0.0484,
+        "tp": 69,
+        "fp": 1637,
+        "fn": 1515,
+        "tn": 29528,
+        "POD": 0.044,
+        "FAR": 0.96,
+        "POFD": 0.053,
+        "CSI": 0.021,
+        "ETS": -0.004,
+        "HSS": -0.009,
+        "bias": 1.077,
+        "ci95": {
+          "POD": [
+            0.006,
+            0.083
+          ],
+          "FAR": [
+            0.901,
+            0.995
+          ],
+          "POFD": [
+            0.031,
+            0.077
+          ],
+          "CSI": [
+            0.003,
+            0.045
+          ],
+          "ETS": [
+            -0.022,
+            0.02
+          ],
+          "HSS": [
+            -0.045,
+            0.039
+          ],
+          "bias": [
+            0.543,
+            1.993
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "both",
+        "level": "\u2265 SEVERE",
+        "layer": "ML only",
+        "n": 32749,
+        "events": 1584,
+        "base_rate": 0.0484,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1584,
+        "tn": 31165,
+        "POD": 0.0,
+        "FAR": null,
+        "POFD": 0.0,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 0.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.0
+          ],
+          "FAR": [
+            null,
+            null
+          ],
+          "POFD": [
+            0.0,
+            0.0
+          ],
+          "CSI": [
+            0.0,
+            0.0
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "unit": "station-hour",
+        "split": "both",
+        "level": "\u2265 SEVERE",
+        "layer": "rainfall rule only",
+        "n": 32749,
+        "events": 1584,
+        "base_rate": 0.0484,
+        "tp": 69,
+        "fp": 1637,
+        "fn": 1515,
+        "tn": 29528,
+        "POD": 0.044,
+        "FAR": 0.96,
+        "POFD": 0.053,
+        "CSI": 0.021,
+        "ETS": -0.004,
+        "HSS": -0.009,
+        "bias": 1.077,
+        "ci95": {
+          "POD": [
+            0.006,
+            0.083
+          ],
+          "FAR": [
+            0.901,
+            0.995
+          ],
+          "POFD": [
+            0.031,
+            0.077
+          ],
+          "CSI": [
+            0.003,
+            0.045
+          ],
+          "ETS": [
+            -0.022,
+            0.02
+          ],
+          "HSS": [
+            -0.045,
+            0.039
+          ],
+          "bias": [
+            0.543,
+            1.993
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "hybrid (deployed)",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 5,
+        "fp": 179,
+        "fn": 3,
+        "tn": 196,
+        "POD": 0.625,
+        "FAR": 0.973,
+        "POFD": 0.477,
+        "CSI": 0.027,
+        "ETS": 0.006,
+        "HSS": 0.013,
+        "bias": 23.0,
+        "ci95": {
+          "POD": [
+            0.331,
+            1.0
+          ],
+          "FAR": [
+            0.943,
+            0.995
+          ],
+          "POFD": [
+            0.38,
+            0.575
+          ],
+          "CSI": [
+            0.005,
+            0.057
+          ],
+          "ETS": [
+            -0.006,
+            0.025
+          ],
+          "HSS": [
+            -0.012,
+            0.048
+          ],
+          "bias": [
+            11.785,
+            84.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "ML only",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 4,
+        "fp": 30,
+        "fn": 4,
+        "tn": 345,
+        "POD": 0.5,
+        "FAR": 0.882,
+        "POFD": 0.08,
+        "CSI": 0.105,
+        "ETS": 0.088,
+        "HSS": 0.162,
+        "bias": 4.25,
+        "ci95": {
+          "POD": [
+            0.25,
+            0.75
+          ],
+          "FAR": [
+            0.759,
+            0.971
+          ],
+          "POFD": [
+            0.059,
+            0.101
+          ],
+          "CSI": [
+            0.027,
+            0.2
+          ],
+          "ETS": [
+            0.018,
+            0.176
+          ],
+          "HSS": [
+            0.036,
+            0.299
+          ],
+          "bias": [
+            2.133,
+            15.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "rainfall rule only",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 3,
+        "fp": 153,
+        "fn": 5,
+        "tn": 222,
+        "POD": 0.375,
+        "FAR": 0.981,
+        "POFD": 0.408,
+        "CSI": 0.019,
+        "ETS": -0.002,
+        "HSS": -0.003,
+        "bias": 19.5,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.5
+          ],
+          "FAR": [
+            0.957,
+            1.0
+          ],
+          "POFD": [
+            0.3,
+            0.515
+          ],
+          "CSI": [
+            0.0,
+            0.041
+          ],
+          "ETS": [
+            -0.011,
+            0.007
+          ],
+          "HSS": [
+            -0.022,
+            0.015
+          ],
+          "bias": [
+            9.735,
+            68.525
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "district prior only",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 8,
+        "fp": 375,
+        "fn": 0,
+        "tn": 0,
+        "POD": 1.0,
+        "FAR": 0.979,
+        "POFD": 1.0,
+        "CSI": 0.021,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 47.875,
+        "ci95": {
+          "POD": [
+            1.0,
+            1.0
+          ],
+          "FAR": [
+            0.958,
+            0.995
+          ],
+          "POFD": [
+            1.0,
+            1.0
+          ],
+          "CSI": [
+            0.005,
+            0.042
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            24.059,
+            190.5
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 ALERT",
+        "layer": "persistence (flood yesterday)",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 1,
+        "fp": 7,
+        "fn": 7,
+        "tn": 368,
+        "POD": 0.125,
+        "FAR": 0.875,
+        "POFD": 0.019,
+        "CSI": 0.067,
+        "ETS": 0.056,
+        "HSS": 0.106,
+        "bias": 1.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.6
+          ],
+          "FAR": [
+            0.625,
+            1.0
+          ],
+          "POFD": [
+            0.005,
+            0.036
+          ],
+          "CSI": [
+            0.0,
+            0.25
+          ],
+          "ETS": [
+            -0.013,
+            0.241
+          ],
+          "HSS": [
+            -0.027,
+            0.388
+          ],
+          "bias": [
+            0.25,
+            3.25
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 SEVERE",
+        "layer": "hybrid (deployed)",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 3,
+        "fp": 131,
+        "fn": 5,
+        "tn": 244,
+        "POD": 0.375,
+        "FAR": 0.978,
+        "POFD": 0.349,
+        "CSI": 0.022,
+        "ETS": 0.001,
+        "HSS": 0.003,
+        "bias": 16.75,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.5
+          ],
+          "FAR": [
+            0.95,
+            1.0
+          ],
+          "POFD": [
+            0.262,
+            0.437
+          ],
+          "CSI": [
+            0.0,
+            0.048
+          ],
+          "ETS": [
+            -0.01,
+            0.013
+          ],
+          "HSS": [
+            -0.019,
+            0.026
+          ],
+          "bias": [
+            8.374,
+            58.6
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 SEVERE",
+        "layer": "ML only",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 0,
+        "fp": 0,
+        "fn": 8,
+        "tn": 375,
+        "POD": 0.0,
+        "FAR": null,
+        "POFD": 0.0,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 0.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.0
+          ],
+          "FAR": [
+            null,
+            null
+          ],
+          "POFD": [
+            0.0,
+            0.0
+          ],
+          "CSI": [
+            0.0,
+            0.0
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "validation",
+        "level": "\u2265 SEVERE",
+        "layer": "rainfall rule only",
+        "n": 383,
+        "events": 8,
+        "base_rate": 0.0209,
+        "tp": 3,
+        "fp": 131,
+        "fn": 5,
+        "tn": 244,
+        "POD": 0.375,
+        "FAR": 0.978,
+        "POFD": 0.349,
+        "CSI": 0.022,
+        "ETS": 0.001,
+        "HSS": 0.003,
+        "bias": 16.75,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.5
+          ],
+          "FAR": [
+            0.95,
+            1.0
+          ],
+          "POFD": [
+            0.262,
+            0.437
+          ],
+          "CSI": [
+            0.0,
+            0.048
+          ],
+          "ETS": [
+            -0.01,
+            0.013
+          ],
+          "HSS": [
+            -0.019,
+            0.026
+          ],
+          "bias": [
+            8.374,
+            58.6
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "hybrid (deployed)",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 7,
+        "fp": 64,
+        "fn": 3,
+        "tn": 202,
+        "POD": 0.7,
+        "FAR": 0.901,
+        "POFD": 0.241,
+        "CSI": 0.095,
+        "ETS": 0.062,
+        "HSS": 0.117,
+        "bias": 7.1,
+        "ci95": {
+          "POD": [
+            0.417,
+            1.0
+          ],
+          "FAR": [
+            0.829,
+            0.965
+          ],
+          "POFD": [
+            0.212,
+            0.273
+          ],
+          "CSI": [
+            0.034,
+            0.165
+          ],
+          "ETS": [
+            0.015,
+            0.118
+          ],
+          "HSS": [
+            0.03,
+            0.211
+          ],
+          "bias": [
+            4.352,
+            18.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "ML only",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 5,
+        "fp": 45,
+        "fn": 5,
+        "tn": 221,
+        "POD": 0.5,
+        "FAR": 0.9,
+        "POFD": 0.169,
+        "CSI": 0.091,
+        "ETS": 0.06,
+        "HSS": 0.113,
+        "bias": 5.0,
+        "ci95": {
+          "POD": [
+            0.222,
+            0.8
+          ],
+          "FAR": [
+            0.82,
+            0.98
+          ],
+          "POFD": [
+            0.155,
+            0.18
+          ],
+          "CSI": [
+            0.019,
+            0.172
+          ],
+          "ETS": [
+            0.006,
+            0.129
+          ],
+          "HSS": [
+            0.013,
+            0.228
+          ],
+          "bias": [
+            2.941,
+            12.5
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "rainfall rule only",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 3,
+        "fp": 26,
+        "fn": 7,
+        "tn": 240,
+        "POD": 0.3,
+        "FAR": 0.897,
+        "POFD": 0.098,
+        "CSI": 0.083,
+        "ETS": 0.056,
+        "HSS": 0.106,
+        "bias": 2.9,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.685
+          ],
+          "FAR": [
+            0.759,
+            1.0
+          ],
+          "POFD": [
+            0.065,
+            0.132
+          ],
+          "CSI": [
+            0.0,
+            0.2
+          ],
+          "ETS": [
+            -0.026,
+            0.167
+          ],
+          "HSS": [
+            -0.053,
+            0.286
+          ],
+          "bias": [
+            1.571,
+            7.4
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "district prior only",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 10,
+        "fp": 266,
+        "fn": 0,
+        "tn": 0,
+        "POD": 1.0,
+        "FAR": 0.964,
+        "POFD": 1.0,
+        "CSI": 0.036,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 27.6,
+        "ci95": {
+          "POD": [
+            1.0,
+            1.0
+          ],
+          "FAR": [
+            0.939,
+            0.986
+          ],
+          "POFD": [
+            1.0,
+            1.0
+          ],
+          "CSI": [
+            0.014,
+            0.061
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            16.351,
+            69.006
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 ALERT",
+        "layer": "persistence (flood yesterday)",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 1,
+        "fp": 9,
+        "fn": 9,
+        "tn": 257,
+        "POD": 0.1,
+        "FAR": 0.9,
+        "POFD": 0.034,
+        "CSI": 0.053,
+        "ETS": 0.034,
+        "HSS": 0.066,
+        "bias": 1.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.273
+          ],
+          "FAR": [
+            0.667,
+            1.0
+          ],
+          "POFD": [
+            0.015,
+            0.059
+          ],
+          "CSI": [
+            0.0,
+            0.167
+          ],
+          "ETS": [
+            -0.021,
+            0.142
+          ],
+          "HSS": [
+            -0.042,
+            0.249
+          ],
+          "bias": [
+            0.4,
+            3.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 SEVERE",
+        "layer": "hybrid (deployed)",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 1,
+        "fp": 13,
+        "fn": 9,
+        "tn": 253,
+        "POD": 0.1,
+        "FAR": 0.929,
+        "POFD": 0.049,
+        "CSI": 0.043,
+        "ETS": 0.022,
+        "HSS": 0.043,
+        "bias": 1.4,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.286
+          ],
+          "FAR": [
+            0.8,
+            1.0
+          ],
+          "POFD": [
+            0.03,
+            0.068
+          ],
+          "CSI": [
+            0.0,
+            0.12
+          ],
+          "ETS": [
+            -0.023,
+            0.097
+          ],
+          "HSS": [
+            -0.047,
+            0.177
+          ],
+          "bias": [
+            0.727,
+            3.75
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 SEVERE",
+        "layer": "ML only",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 0,
+        "fp": 0,
+        "fn": 10,
+        "tn": 266,
+        "POD": 0.0,
+        "FAR": null,
+        "POFD": 0.0,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 0.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.0
+          ],
+          "FAR": [
+            null,
+            null
+          ],
+          "POFD": [
+            0.0,
+            0.0
+          ],
+          "CSI": [
+            0.0,
+            0.0
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "test",
+        "level": "\u2265 SEVERE",
+        "layer": "rainfall rule only",
+        "n": 276,
+        "events": 10,
+        "base_rate": 0.0362,
+        "tp": 1,
+        "fp": 13,
+        "fn": 9,
+        "tn": 253,
+        "POD": 0.1,
+        "FAR": 0.929,
+        "POFD": 0.049,
+        "CSI": 0.043,
+        "ETS": 0.022,
+        "HSS": 0.043,
+        "bias": 1.4,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.286
+          ],
+          "FAR": [
+            0.8,
+            1.0
+          ],
+          "POFD": [
+            0.03,
+            0.068
+          ],
+          "CSI": [
+            0.0,
+            0.12
+          ],
+          "ETS": [
+            -0.023,
+            0.097
+          ],
+          "HSS": [
+            -0.047,
+            0.177
+          ],
+          "bias": [
+            0.727,
+            3.75
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "hybrid (deployed)",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 12,
+        "fp": 243,
+        "fn": 6,
+        "tn": 398,
+        "POD": 0.667,
+        "FAR": 0.953,
+        "POFD": 0.379,
+        "CSI": 0.046,
+        "ETS": 0.02,
+        "HSS": 0.039,
+        "bias": 14.167,
+        "ci95": {
+          "POD": [
+            0.467,
+            0.875
+          ],
+          "FAR": [
+            0.92,
+            0.979
+          ],
+          "POFD": [
+            0.315,
+            0.449
+          ],
+          "CSI": [
+            0.021,
+            0.078
+          ],
+          "ETS": [
+            0.003,
+            0.043
+          ],
+          "HSS": [
+            0.006,
+            0.083
+          ],
+          "bias": [
+            9.107,
+            25.6
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "ML only",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 9,
+        "fp": 75,
+        "fn": 9,
+        "tn": 566,
+        "POD": 0.5,
+        "FAR": 0.893,
+        "POFD": 0.117,
+        "CSI": 0.097,
+        "ETS": 0.074,
+        "HSS": 0.138,
+        "bias": 4.667,
+        "ci95": {
+          "POD": [
+            0.333,
+            0.667
+          ],
+          "FAR": [
+            0.828,
+            0.947
+          ],
+          "POFD": [
+            0.1,
+            0.134
+          ],
+          "CSI": [
+            0.048,
+            0.151
+          ],
+          "ETS": [
+            0.032,
+            0.122
+          ],
+          "HSS": [
+            0.062,
+            0.217
+          ],
+          "bias": [
+            3.0,
+            8.4
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "rainfall rule only",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 6,
+        "fp": 179,
+        "fn": 12,
+        "tn": 462,
+        "POD": 0.333,
+        "FAR": 0.968,
+        "POFD": 0.279,
+        "CSI": 0.03,
+        "ETS": 0.005,
+        "HSS": 0.01,
+        "bias": 10.278,
+        "ci95": {
+          "POD": [
+            0.105,
+            0.538
+          ],
+          "FAR": [
+            0.932,
+            0.99
+          ],
+          "POFD": [
+            0.203,
+            0.358
+          ],
+          "CSI": [
+            0.009,
+            0.063
+          ],
+          "ETS": [
+            -0.013,
+            0.031
+          ],
+          "HSS": [
+            -0.027,
+            0.06
+          ],
+          "bias": [
+            6.207,
+            19.41
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "district prior only",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 18,
+        "fp": 641,
+        "fn": 0,
+        "tn": 0,
+        "POD": 1.0,
+        "FAR": 0.973,
+        "POFD": 1.0,
+        "CSI": 0.027,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 36.611,
+        "ci95": {
+          "POD": [
+            1.0,
+            1.0
+          ],
+          "FAR": [
+            0.958,
+            0.985
+          ],
+          "POFD": [
+            1.0,
+            1.0
+          ],
+          "CSI": [
+            0.015,
+            0.042
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            23.678,
+            66.005
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 ALERT",
+        "layer": "persistence (flood yesterday)",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 2,
+        "fp": 16,
+        "fn": 16,
+        "tn": 625,
+        "POD": 0.111,
+        "FAR": 0.889,
+        "POFD": 0.025,
+        "CSI": 0.059,
+        "ETS": 0.045,
+        "HSS": 0.086,
+        "bias": 1.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.273
+          ],
+          "FAR": [
+            0.722,
+            1.0
+          ],
+          "POFD": [
+            0.012,
+            0.038
+          ],
+          "CSI": [
+            0.0,
+            0.15
+          ],
+          "ETS": [
+            -0.013,
+            0.137
+          ],
+          "HSS": [
+            -0.026,
+            0.241
+          ],
+          "bias": [
+            0.48,
+            2.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 SEVERE",
+        "layer": "hybrid (deployed)",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 4,
+        "fp": 144,
+        "fn": 14,
+        "tn": 497,
+        "POD": 0.222,
+        "FAR": 0.973,
+        "POFD": 0.225,
+        "CSI": 0.025,
+        "ETS": -0.0,
+        "HSS": -0.001,
+        "bias": 8.222,
+        "ci95": {
+          "POD": [
+            0.062,
+            0.364
+          ],
+          "FAR": [
+            0.942,
+            0.994
+          ],
+          "POFD": [
+            0.161,
+            0.291
+          ],
+          "CSI": [
+            0.006,
+            0.051
+          ],
+          "ETS": [
+            -0.016,
+            0.019
+          ],
+          "HSS": [
+            -0.032,
+            0.037
+          ],
+          "bias": [
+            4.758,
+            16.287
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 SEVERE",
+        "layer": "ML only",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 0,
+        "fp": 0,
+        "fn": 18,
+        "tn": 641,
+        "POD": 0.0,
+        "FAR": null,
+        "POFD": 0.0,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 0.0,
+        "ci95": {
+          "POD": [
+            0.0,
+            0.0
+          ],
+          "FAR": [
+            null,
+            null
+          ],
+          "POFD": [
+            0.0,
+            0.0
+          ],
+          "CSI": [
+            0.0,
+            0.0
+          ],
+          "ETS": [
+            0.0,
+            0.0
+          ],
+          "HSS": [
+            0.0,
+            0.0
+          ],
+          "bias": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      {
+        "unit": "district-day",
+        "split": "both",
+        "level": "\u2265 SEVERE",
+        "layer": "rainfall rule only",
+        "n": 659,
+        "events": 18,
+        "base_rate": 0.0273,
+        "tp": 4,
+        "fp": 144,
+        "fn": 14,
+        "tn": 497,
+        "POD": 0.222,
+        "FAR": 0.973,
+        "POFD": 0.225,
+        "CSI": 0.025,
+        "ETS": -0.0,
+        "HSS": -0.001,
+        "bias": 8.222,
+        "ci95": {
+          "POD": [
+            0.062,
+            0.364
+          ],
+          "FAR": [
+            0.942,
+            0.994
+          ],
+          "POFD": [
+            0.161,
+            0.291
+          ],
+          "CSI": [
+            0.006,
+            0.051
+          ],
+          "ETS": [
+            -0.016,
+            0.019
+          ],
+          "HSS": [
+            -0.032,
+            0.037
+          ],
+          "bias": [
+            4.758,
+            16.287
+          ]
+        }
+      }
+    ],
+    "probabilistic": {
+      "station-hour": {
+        "brier": 0.04383,
+        "brier_climatology": 0.0473,
+        "BSS": 0.0733
+      },
+      "district-day": {
+        "note": "not computed: no calibrated daily probability yet (Phase 4 district-day model)"
+      },
+      "reliability_station_hour": [
+        {
+          "bin": 0,
+          "mean_pred": 0.0182,
+          "obs_freq": 0.0238,
+          "n": 22197
+        },
+        {
+          "bin": 1,
+          "mean_pred": 0.0656,
+          "obs_freq": 0.051,
+          "n": 6726
+        },
+        {
+          "bin": 2,
+          "mean_pred": 0.1446,
+          "obs_freq": 0.1864,
+          "n": 3826
+        }
+      ],
+      "ECE_station_hour": 0.0117
+    },
+    "lead_time": {
+      "events": 18,
+      "warned_before": 6,
+      "baseline_only": 7,
+      "missed": 5,
+      "median_lead_h": 3.5,
+      "events_table": [
+        {
+          "district": "Dehradun",
+          "event_day": "2023-07-09",
+          "status": "baseline (already on)",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Udham Singh Nagar",
+          "event_day": "2023-07-09",
+          "status": "baseline (already on)",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Uttarkashi",
+          "event_day": "2023-07-10",
+          "status": "missed",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Pithoragarh",
+          "event_day": "2023-07-11",
+          "status": "missed",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Rudraprayag",
+          "event_day": "2023-07-11",
+          "status": "warned",
+          "lead_h_before_event_day": 5.0
+        },
+        {
+          "district": "Chamoli",
+          "event_day": "2023-07-16",
+          "status": "warned",
+          "lead_h_before_event_day": -20.0
+        },
+        {
+          "district": "Rudraprayag",
+          "event_day": "2023-07-16",
+          "status": "baseline (already on)",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Rudraprayag",
+          "event_day": "2023-07-17",
+          "status": "warned",
+          "lead_h_before_event_day": 16.0
+        },
+        {
+          "district": "Rudraprayag",
+          "event_day": "2023-08-04",
+          "status": "baseline (already on)",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Tehri Garhwal",
+          "event_day": "2023-08-06",
+          "status": "warned",
+          "lead_h_before_event_day": 2.0
+        },
+        {
+          "district": "Rudraprayag",
+          "event_day": "2023-08-07",
+          "status": "baseline (already on)",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Rudraprayag",
+          "event_day": "2023-08-09",
+          "status": "baseline (already on)",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Pauri Garhwal",
+          "event_day": "2023-08-10",
+          "status": "missed",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Rudraprayag",
+          "event_day": "2023-08-10",
+          "status": "baseline (already on)",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Dehradun",
+          "event_day": "2023-08-14",
+          "status": "warned",
+          "lead_h_before_event_day": 48.0
+        },
+        {
+          "district": "Tehri Garhwal",
+          "event_day": "2023-08-14",
+          "status": "warned",
+          "lead_h_before_event_day": -5.0
+        },
+        {
+          "district": "Tehri Garhwal",
+          "event_day": "2023-08-21",
+          "status": "missed",
+          "lead_h_before_event_day": null
+        },
+        {
+          "district": "Pauri Garhwal",
+          "event_day": "2023-08-23",
+          "status": "missed",
+          "lead_h_before_event_day": null
+        }
+      ]
+    },
+    "relative_value": [
+      {
+        "alpha": 0.01,
+        "value": -0.3048
+      },
+      {
+        "alpha": 0.03,
+        "value": 0.2496
+      },
+      {
+        "alpha": 0.05,
+        "value": -0.0433
+      },
+      {
+        "alpha": 0.07,
+        "value": -0.3489
+      },
+      {
+        "alpha": 0.09,
+        "value": -0.6678
+      },
+      {
+        "alpha": 0.11,
+        "value": -1.0011
+      },
+      {
+        "alpha": 0.13,
+        "value": -1.3497
+      },
+      {
+        "alpha": 0.15,
+        "value": -1.7148
+      },
+      {
+        "alpha": 0.17,
+        "value": -2.0974
+      },
+      {
+        "alpha": 0.19,
+        "value": -2.4989
+      },
+      {
+        "alpha": 0.21,
+        "value": -2.9207
+      },
+      {
+        "alpha": 0.23,
+        "value": -3.3645
+      },
+      {
+        "alpha": 0.25,
+        "value": -3.8319
+      },
+      {
+        "alpha": 0.27,
+        "value": -4.3249
+      },
+      {
+        "alpha": 0.29,
+        "value": -4.8457
+      },
+      {
+        "alpha": 0.31,
+        "value": -5.3967
+      },
+      {
+        "alpha": 0.33,
+        "value": -5.9806
+      },
+      {
+        "alpha": 0.35,
+        "value": -6.6004
+      },
+      {
+        "alpha": 0.37,
+        "value": -7.2596
+      },
+      {
+        "alpha": 0.39,
+        "value": -7.962
+      },
+      {
+        "alpha": 0.41,
+        "value": -8.712
+      },
+      {
+        "alpha": 0.43,
+        "value": -9.5147
+      },
+      {
+        "alpha": 0.45,
+        "value": -10.3757
+      },
+      {
+        "alpha": 0.47,
+        "value": -11.3017
+      },
+      {
+        "alpha": 0.49,
+        "value": -12.3003
+      },
+      {
+        "alpha": 0.51,
+        "value": -13.3805
+      },
+      {
+        "alpha": 0.53,
+        "value": -14.5526
+      },
+      {
+        "alpha": 0.55,
+        "value": -15.8289
+      },
+      {
+        "alpha": 0.57,
+        "value": -17.2239
+      },
+      {
+        "alpha": 0.59,
+        "value": -18.755
+      },
+      {
+        "alpha": 0.61,
+        "value": -20.4431
+      },
+      {
+        "alpha": 0.63,
+        "value": -22.3137
+      },
+      {
+        "alpha": 0.65,
+        "value": -24.3981
+      },
+      {
+        "alpha": 0.67,
+        "value": -26.7352
+      },
+      {
+        "alpha": 0.69,
+        "value": -29.3738
+      },
+      {
+        "alpha": 0.71,
+        "value": -32.3764
+      },
+      {
+        "alpha": 0.73,
+        "value": -35.8238
+      },
+      {
+        "alpha": 0.75,
+        "value": -39.8228
+      },
+      {
+        "alpha": 0.77,
+        "value": -44.5173
+      },
+      {
+        "alpha": 0.79,
+        "value": -50.106
+      },
+      {
+        "alpha": 0.81,
+        "value": -56.8712
+      },
+      {
+        "alpha": 0.83,
+        "value": -65.2282
+      },
+      {
+        "alpha": 0.85,
+        "value": -75.8138
+      },
+      {
+        "alpha": 0.87,
+        "value": -89.6565
+      },
+      {
+        "alpha": 0.89,
+        "value": -108.5329
+      },
+      {
+        "alpha": 0.91,
+        "value": -135.7987
+      },
+      {
+        "alpha": 0.93,
+        "value": -178.6451
+      },
+      {
+        "alpha": 0.95,
+        "value": -255.7686
+      },
+      {
+        "alpha": 0.97,
+        "value": -435.7234
+      },
+      {
+        "alpha": 0.99,
+        "value": -1335.4975
+      }
+    ],
+    "breakdown_district": [
+      {
+        "district": "Almora",
+        "days": 56,
+        "events": 0,
+        "tp": 0,
+        "fp": 15,
+        "fn": 0,
+        "tn": 41,
+        "POD": null,
+        "FAR": 1.0,
+        "POFD": 0.268,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": null
+      },
+      {
+        "district": "Bageshwar",
+        "days": 56,
+        "events": 0,
+        "tp": 0,
+        "fp": 27,
+        "fn": 0,
+        "tn": 29,
+        "POD": null,
+        "FAR": 1.0,
+        "POFD": 0.482,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": null
+      },
+      {
+        "district": "Chamoli",
+        "days": 33,
+        "events": 1,
+        "tp": 1,
+        "fp": 9,
+        "fn": 0,
+        "tn": 23,
+        "POD": 1.0,
+        "FAR": 0.9,
+        "POFD": 0.281,
+        "CSI": 0.1,
+        "ETS": 0.072,
+        "HSS": 0.134,
+        "bias": 10.0
+      },
+      {
+        "district": "Champawat",
+        "days": 56,
+        "events": 0,
+        "tp": 0,
+        "fp": 9,
+        "fn": 0,
+        "tn": 47,
+        "POD": null,
+        "FAR": 1.0,
+        "POFD": 0.161,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": null
+      },
+      {
+        "district": "Dehradun",
+        "days": 56,
+        "events": 2,
+        "tp": 2,
+        "fp": 46,
+        "fn": 0,
+        "tn": 8,
+        "POD": 1.0,
+        "FAR": 0.958,
+        "POFD": 0.852,
+        "CSI": 0.042,
+        "ETS": 0.006,
+        "HSS": 0.012,
+        "bias": 24.0
+      },
+      {
+        "district": "Haridwar",
+        "days": 56,
+        "events": 0,
+        "tp": 0,
+        "fp": 13,
+        "fn": 0,
+        "tn": 43,
+        "POD": null,
+        "FAR": 1.0,
+        "POFD": 0.232,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": null
+      },
+      {
+        "district": "Nainital",
+        "days": 56,
+        "events": 0,
+        "tp": 0,
+        "fp": 12,
+        "fn": 0,
+        "tn": 44,
+        "POD": null,
+        "FAR": 1.0,
+        "POFD": 0.214,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": null
+      },
+      {
+        "district": "Pauri Garhwal",
+        "days": 55,
+        "events": 2,
+        "tp": 0,
+        "fp": 22,
+        "fn": 2,
+        "tn": 31,
+        "POD": 0.0,
+        "FAR": 1.0,
+        "POFD": 0.415,
+        "CSI": 0.0,
+        "ETS": -0.034,
+        "HSS": -0.071,
+        "bias": 11.0
+      },
+      {
+        "district": "Pithoragarh",
+        "days": 56,
+        "events": 1,
+        "tp": 0,
+        "fp": 11,
+        "fn": 1,
+        "tn": 44,
+        "POD": 0.0,
+        "FAR": 1.0,
+        "POFD": 0.2,
+        "CSI": 0.0,
+        "ETS": -0.017,
+        "HSS": -0.034,
+        "bias": 11.0
+      },
+      {
+        "district": "Rudraprayag",
+        "days": 56,
+        "events": 7,
+        "tp": 7,
+        "fp": 46,
+        "fn": 0,
+        "tn": 3,
+        "POD": 1.0,
+        "FAR": 0.868,
+        "POFD": 0.939,
+        "CSI": 0.132,
+        "ETS": 0.008,
+        "HSS": 0.016,
+        "bias": 7.571
+      },
+      {
+        "district": "Tehri Garhwal",
+        "days": 56,
+        "events": 3,
+        "tp": 2,
+        "fp": 21,
+        "fn": 1,
+        "tn": 32,
+        "POD": 0.667,
+        "FAR": 0.913,
+        "POFD": 0.396,
+        "CSI": 0.083,
+        "ETS": 0.034,
+        "HSS": 0.065,
+        "bias": 7.667
+      },
+      {
+        "district": "Udham Singh Nagar",
+        "days": 56,
+        "events": 1,
+        "tp": 0,
+        "fp": 12,
+        "fn": 1,
+        "tn": 43,
+        "POD": 0.0,
+        "FAR": 1.0,
+        "POFD": 0.218,
+        "CSI": 0.0,
+        "ETS": -0.017,
+        "HSS": -0.034,
+        "bias": 12.0
+      },
+      {
+        "district": "Uttarkashi",
+        "days": 11,
+        "events": 1,
+        "tp": 0,
+        "fp": 0,
+        "fn": 1,
+        "tn": 10,
+        "POD": 0.0,
+        "FAR": null,
+        "POFD": 0.0,
+        "CSI": 0.0,
+        "ETS": 0.0,
+        "HSS": 0.0,
+        "bias": 0.0
+      }
+    ]
+  },
+  "external_validation": {
+    "summary": {
+      "events": 29,
+      "events_with_station_data": 21,
+      "hybrid_alert_detected": 7,
+      "hybrid_severe_detected": 5,
+      "ml_alert_detected": 3,
+      "ml_severe_detected": 0,
+      "rain_alert_detected": 6,
+      "rain_severe_detected": 5,
+      "pod_hybrid_alert": {
+        "n": 21,
+        "detected": 7,
+        "POD": 0.333,
+        "ci95": [
+          0.143,
+          0.524
+        ]
+      },
+      "pod_ml_alert": {
+        "n": 21,
+        "detected": 3,
+        "POD": 0.143,
+        "ci95": [
+          0.0,
+          0.286
+        ]
+      },
+      "pod_rain_alert": {
+        "n": 21,
+        "detected": 6,
+        "POD": 0.286,
+        "ci95": [
+          0.095,
+          0.476
+        ]
+      },
+      "by_confidence": {
+        "high": {
+          "n": 15,
+          "detected": 4,
+          "POD": 0.267,
+          "ci95": [
+            0.067,
+            0.467
+          ]
+        },
+        "low": {
+          "n": 5,
+          "detected": 2,
+          "POD": 0.4,
+          "ci95": [
+            0.0,
+            0.8
+          ]
+        },
+        "medium": {
+          "n": 1,
+          "detected": 1,
+          "POD": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "by_severity": {
+        "high": {
+          "n": 7,
+          "detected": 3,
+          "POD": 0.429,
+          "ci95": [
+            0.143,
+            0.857
+          ]
+        },
+        "low": {
+          "n": 2,
+          "detected": 1,
+          "POD": 0.5,
+          "ci95": [
+            0.0,
+            1.0
+          ]
+        },
+        "moderate": {
+          "n": 12,
+          "detected": 3,
+          "POD": 0.25,
+          "ci95": [
+            0.0,
+            0.5
+          ]
+        }
+      },
+      "alert_burden": [
+        {
+          "monsoon": 2023,
+          "alert_district_days": 84,
+          "near_documented_event": 0,
+          "share_near_event": 0.0
+        },
+        {
+          "monsoon": 2024,
+          "alert_district_days": 370,
+          "near_documented_event": 20,
+          "share_near_event": 0.054
+        },
+        {
+          "monsoon": 2025,
+          "alert_district_days": 171,
+          "near_documented_event": 8,
+          "share_near_event": 0.047
+        },
+        {
+          "monsoon": 2026,
+          "alert_district_days": 318,
+          "near_documented_event": 0,
+          "share_near_event": 0.0
+        }
+      ],
+      "period": "2023-09-15..2025-09-17",
+      "source_file": "data/external/labels/labels_2022_2025.csv",
+      "note": "Documented-disaster lists are incomplete, so FAR is not computable; alert_burden is the proxy."
+    },
+    "events": [
+      {
+        "event_id": "EV-20230915-ALMO",
+        "date": "2023-09-15",
+        "end_date": "2023-09-15",
+        "district": "Almora",
+        "place": null,
+        "type": "cloudburst",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "sandrp",
+        "stations_reporting": 2,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "sandrp/uttarakhand_cloudbursts_2023.html"
+      },
+      {
+        "event_id": "EV-20240708-ALMO",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Almora",
+        "place": null,
+        "type": "riverine_flood",
+        "severity": "moderate",
+        "date_confidence": "low",
+        "sources": "sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "sitreps/sitrep1_india_floods_2024-07-09.pdf"
+      },
+      {
+        "event_id": "EV-20240708-BAGE",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Bageshwar",
+        "place": null,
+        "type": "riverine_flood",
+        "severity": "moderate",
+        "date_confidence": "low",
+        "sources": "sphere",
+        "stations_reporting": 2,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "sitreps/sitrep1_india_floods_2024-07-09.pdf"
+      },
+      {
+        "event_id": "EV-20240708-CHAM",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Chamoli",
+        "place": null,
+        "type": "riverine_flood",
+        "severity": "moderate",
+        "date_confidence": "low",
+        "sources": "sphere",
+        "stations_reporting": 2,
+        "hybrid_alert": true,
+        "first_alert": "2024-07-08 12:00:00",
+        "lead_h_to_day_end": 12.0,
+        "hybrid_severe": true,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": true,
+        "rain_severe": true,
+        "max_tier": "SEVERE",
+        "trigger_at_max": "rainfall",
+        "source_url": "sitreps/sitrep1_india_floods_2024-07-09.pdf"
+      },
+      {
+        "event_id": "EV-20240708-CHAM",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Champawat",
+        "place": "Banbasa, Tanakpur; Banbasa barrage (Sharda)",
+        "type": "riverine",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "curated;sphere",
+        "stations_reporting": 2,
+        "hybrid_alert": true,
+        "first_alert": "2024-07-07 00:00:00",
+        "lead_h_to_day_end": 48.0,
+        "hybrid_severe": true,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": true,
+        "rain_severe": true,
+        "max_tier": "EXTREME",
+        "trigger_at_max": "rainfall",
+        "source_url": "https://www.newsonair.gov.in/imd-issues-warnings-of-low-to-moderate-threat-of-flash-floods-in-various-districts-of-uttarakhand"
+      },
+      {
+        "event_id": "EV-20240708-PAUR",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Pauri Garhwal",
+        "place": null,
+        "type": "riverine_flood",
+        "severity": "moderate",
+        "date_confidence": "low",
+        "sources": "sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": true,
+        "first_alert": "2024-07-08 01:00:00",
+        "lead_h_to_day_end": 23.0,
+        "hybrid_severe": true,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": true,
+        "rain_severe": true,
+        "max_tier": "SEVERE",
+        "trigger_at_max": "rainfall",
+        "source_url": "sitreps/sitrep1_india_floods_2024-07-09.pdf"
+      },
+      {
+        "event_id": "EV-20240708-PITH",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Pithoragarh",
+        "place": null,
+        "type": "riverine_flood",
+        "severity": "moderate",
+        "date_confidence": "low",
+        "sources": "sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "sitreps/sitrep1_india_floods_2024-07-09.pdf"
+      },
+      {
+        "event_id": "EV-20240708-UDHA",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Udham Singh Nagar",
+        "place": "Khatima, Sitarganj",
+        "type": "riverine",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "curated;sphere",
+        "stations_reporting": 4,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "WATCH",
+        "trigger_at_max": "rainfall",
+        "source_url": "https://www.newsonair.gov.in/imd-issues-warnings-of-low-to-moderate-threat-of-flash-floods-in-various-districts-of-uttarakhand"
+      },
+      {
+        "event_id": "EV-20240708-UTTA",
+        "date": "2024-07-08",
+        "end_date": "2024-07-09",
+        "district": "Uttarkashi",
+        "place": null,
+        "type": "riverine_flood",
+        "severity": "moderate",
+        "date_confidence": "low",
+        "sources": "sphere",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "sitreps/sitrep1_india_floods_2024-07-09.pdf"
+      },
+      {
+        "event_id": "EV-20240731-HARI",
+        "date": "2024-07-31",
+        "end_date": "2024-07-31",
+        "district": "Haridwar",
+        "place": "Bhupatwala, Kankhal, Jwalapur",
+        "type": "urban_flooding",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated",
+        "stations_reporting": 2,
+        "hybrid_alert": true,
+        "first_alert": "2024-07-31 20:00:00",
+        "lead_h_to_day_end": 4.0,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": true,
+        "rain_severe": false,
+        "max_tier": "ALERT",
+        "trigger_at_max": "rainfall",
+        "source_url": "https://reliefweb.int/report/india/situation-report-1-uttarakhand-cloudburst-flash-floods-date-05th-aug-2024-mon-time-900-am-ist"
+      },
+      {
+        "event_id": "EV-20240731-RUDR",
+        "date": "2024-07-31",
+        "end_date": "2024-07-31",
+        "district": "Rudraprayag",
+        "place": "Kedarnath trek route: Ghoraparav, Lincholi, Bhimbali; Bhimbali, Kedarnath trek route",
+        "type": "cloudburst",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated;sphere",
+        "stations_reporting": 3,
+        "hybrid_alert": true,
+        "first_alert": "2024-07-30 00:00:00",
+        "lead_h_to_day_end": 48.0,
+        "hybrid_severe": true,
+        "ml_alert": true,
+        "ml_severe": false,
+        "rain_alert": true,
+        "rain_severe": true,
+        "max_tier": "SEVERE",
+        "trigger_at_max": "rainfall",
+        "source_url": "https://www.businesstoday.in/india/story/kedarnath-cloudburst-200-pilgrims-trapped-red-alert-across-uttarakhand-439642-2024-08-01"
+      },
+      {
+        "event_id": "EV-20240731-TEHR",
+        "date": "2024-07-31",
+        "end_date": "2024-07-31",
+        "district": "Tehri Garhwal",
+        "place": "Ghansali; Bal Ganga & Budhakedar (Bhilangana block); Ghansali, Nautar stream",
+        "type": "cloudburst",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated;sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "WATCH",
+        "trigger_at_max": "rainfall",
+        "source_url": "https://www.socialnews.xyz/2024/07/31/cloudbursts-in-uttarakhand-claim-two-lives-in-tehri-leave-200-stranded-in-kedarnath/"
+      },
+      {
+        "event_id": "EV-20250629-UTTA",
+        "date": "2025-06-29",
+        "end_date": "2025-06-29",
+        "district": "Uttarkashi",
+        "place": "Yamunotri highway (Silai band)",
+        "type": "cloudburst",
+        "severity": "low",
+        "date_confidence": "medium",
+        "sources": "curated",
+        "stations_reporting": 1,
+        "hybrid_alert": true,
+        "first_alert": "2025-06-28 00:00:00",
+        "lead_h_to_day_end": 48.0,
+        "hybrid_severe": false,
+        "ml_alert": true,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "ALERT",
+        "trigger_at_max": "ml",
+        "source_url": "https://news24online.com/india/from-kedarnath-to-dharali-six-devastating-cloudbursts-that-shook-uttarakhand-to-its-core/612417/"
+      },
+      {
+        "event_id": "EV-20250805-UTTA",
+        "date": "2025-08-05",
+        "end_date": "2025-08-05",
+        "district": "Uttarkashi",
+        "place": "Dharali, Sukhi Top, Harsil, Kheer Ganga catchment; Dharali (Kheer Ganga), near Harsil; Dharali village (Uttarkashi district, Uttarakhand state)",
+        "type": "flash_flood",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated;emdat;sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": true,
+        "first_alert": "2025-08-04 00:00:00",
+        "lead_h_to_day_end": 48.0,
+        "hybrid_severe": true,
+        "ml_alert": true,
+        "ml_severe": false,
+        "rain_alert": true,
+        "rain_severe": true,
+        "max_tier": "SEVERE",
+        "trigger_at_max": "rainfall",
+        "source_url": "https://en.wikipedia.org/wiki/2025_Uttarakhand_flash_flood"
+      },
+      {
+        "event_id": "EV-20250806-PAUR",
+        "date": "2025-08-06",
+        "end_date": "2025-08-06",
+        "district": "Pauri Garhwal",
+        "place": "Thalisain block: Bankura (Katola gaad), West Nayyar, Kalgarhi bridge",
+        "type": "flash_flood",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "sandrp;sphere",
+        "stations_reporting": 2,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "WATCH",
+        "trigger_at_max": "rainfall",
+        "source_url": "sitreps/sitrep2_uttarakhand_dharali_2025-08-07.pdf; sandrp/pauri_flashflood_2025-08.html"
+      },
+      {
+        "event_id": "EV-20250822-CHAM",
+        "date": "2025-08-22",
+        "end_date": "2025-08-22",
+        "district": "Chamoli",
+        "place": "Tharali (Tunri stream)",
+        "type": "cloudburst",
+        "severity": "low",
+        "date_confidence": "high",
+        "sources": "curated",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "https://www.newsonair.gov.in/uttarakhand-cloudburst-in-chamoli-district-caused-widespread-damage-in-tharali-tehsil"
+      },
+      {
+        "event_id": "EV-20250829-BAGE",
+        "date": "2025-08-29",
+        "end_date": "2025-08-29",
+        "district": "Bageshwar",
+        "place": "Kapkot (Pausari gram panchayat)",
+        "type": "cloudburst",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "https://thefederal.com/category/states/north/uttarakhand/uttarakhand-cloudburst-in-chamoli-rudraprayag-several-missing-stranded-204024"
+      },
+      {
+        "event_id": "EV-20250829-CHAM",
+        "date": "2025-08-29",
+        "end_date": "2025-08-29",
+        "district": "Chamoli",
+        "place": "Dewal block",
+        "type": "cloudburst",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "https://www.theweek.in/news/india/2025/08/29/uttarakhand-cloudbursts-several-feared-trapped-in-debris-in-rudraprayag-chamoli-districts.amp.html"
+      },
+      {
+        "event_id": "EV-20250829-RUDR",
+        "date": "2025-08-29",
+        "end_date": "2025-08-29",
+        "district": "Rudraprayag",
+        "place": "multiple villages",
+        "type": "cloudburst",
+        "severity": "low",
+        "date_confidence": "high",
+        "sources": "curated",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "https://www.newsonair.gov.in/uttarakhand-cloudburst-in-rudraprayag-chamoli-causes-widespread-damage"
+      },
+      {
+        "event_id": "EV-20250829-TEHR",
+        "date": "2025-08-29",
+        "end_date": "2025-08-29",
+        "district": "Tehri Garhwal",
+        "place": null,
+        "type": "cloudburst",
+        "severity": "low",
+        "date_confidence": "medium",
+        "sources": "curated",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "https://www.nationalheraldindia.com/amp/story/national/cloudbursts-landslides-ravage-uttarakhand-6-dead-11-missing"
+      },
+      {
+        "event_id": "EV-20250915-BAGE",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Bageshwar",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",
+        "type": "flash flood",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "emdat;sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250915-CHAM",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Champawat",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",
+        "type": "flash flood",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "emdat;sphere",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250915-DEHR",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Dehradun",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak; Sahastradhara, Maldevta, Tapkeshwar, P",
+        "type": "cloudburst",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated;emdat;sphere",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250915-HARI",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Haridwar",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",
+        "type": "flash flood",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "emdat;sphere",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250915-NAIN",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Nainital",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",
+        "type": "flash flood",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "emdat;sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "WATCH",
+        "trigger_at_max": "rainfall",
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250915-PAUR",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Pauri Garhwal",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",
+        "type": "flash_flood",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "emdat;sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250915-PITH",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Pithoragarh",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",
+        "type": "flash flood",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "emdat;sphere",
+        "stations_reporting": 0,
+        "hybrid_alert": null,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": null,
+        "ml_alert": null,
+        "ml_severe": null,
+        "rain_alert": null,
+        "rain_severe": null,
+        "max_tier": "NO DATA",
+        "trigger_at_max": null,
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250915-UDHA",
+        "date": "2025-09-15",
+        "end_date": "2025-09-17",
+        "district": "Udham Singh Nagar",
+        "place": "Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",
+        "type": "flash flood",
+        "severity": "moderate",
+        "date_confidence": "high",
+        "sources": "emdat;sphere",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "https://public.emdat.be/ (DisNo. 2025-0803-IND)"
+      },
+      {
+        "event_id": "EV-20250917-CHAM",
+        "date": "2025-09-17",
+        "end_date": "2025-09-17",
+        "district": "Chamoli",
+        "place": "Nanda Nagar",
+        "type": "cloudburst",
+        "severity": "high",
+        "date_confidence": "high",
+        "sources": "curated",
+        "stations_reporting": 1,
+        "hybrid_alert": false,
+        "first_alert": null,
+        "lead_h_to_day_end": null,
+        "hybrid_severe": false,
+        "ml_alert": false,
+        "ml_severe": false,
+        "rain_alert": false,
+        "rain_severe": false,
+        "max_tier": "NORMAL",
+        "trigger_at_max": "none",
+        "source_url": "https://ianslive.in/cloudburst-in-uttarakhands-chamoli-leaves-5-missing-washes-away-six-houses--20250918080222"
+      }
+    ]
+  },
+  "labels": {
+    "sources": {
+      "events": 96,
+      "district_days": 130,
+      "by_year": {
+        "2022": 28,
+        "2023": 40,
+        "2024": 11,
+        "2025": 17
+      },
+      "by_confidence": {
+        "high": 88,
+        "low": 6,
+        "medium": 2
+      },
+      "by_source_family": {
+        "curated": 14,
+        "emdat": 25,
+        "imd": 29,
+        "sandrp": 52,
+        "sphere": 44
+      },
+      "corroborated_events": 22,
+      "excluded": 1,
+      "unresolved": 0
+    },
+    "audit": {
+      "summary": {
+        "overlap_period": [
+          "2022-05-01..2022-10-31",
+          "2023-06-01..2023-08-25"
+        ],
+        "imd_district_days": 28,
+        "sandrp_district_days": 50,
+        "imd_events": 26,
+        "sandrp_events": 48,
+        "imd_days_confirmed_by_sandrp": 8,
+        "imd_confirmation_rate": 0.286,
+        "sandrp_only_days": 42,
+        "sandrp_only_events": 40,
+        "sandrp_only_by_split": {
+          "train": 22,
+          "test": 12,
+          "validation": 8
+        },
+        "sandrp_only_valtest_alerted_by_hybrid": "6/20",
+        "gate": {
+          "rule": "sandrp_only_events >= 25% of imd_events",
+          "share": 1.538,
+          "passed": true
+        },
+        "note": "SANDRP tracks cloudbursts / flash floods in the hills; IMD-only days are mostly heavy-rain floods and landslides it does not list, so a low confirmation rate does not mean IMD is wrong."
+      },
+      "by_district": [
+        {
+          "district": "Bageshwar",
+          "imd_days": 0,
+          "sandrp_days": 4,
+          "matched_imd_days": 0,
+          "sandrp_only_days": 4
+        },
+        {
+          "district": "Chamoli",
+          "imd_days": 2,
+          "sandrp_days": 9,
+          "matched_imd_days": 1,
+          "sandrp_only_days": 8
+        },
+        {
+          "district": "Dehradun",
+          "imd_days": 5,
+          "sandrp_days": 5,
+          "matched_imd_days": 1,
+          "sandrp_only_days": 4
+        },
+        {
+          "district": "Nainital",
+          "imd_days": 0,
+          "sandrp_days": 5,
+          "matched_imd_days": 0,
+          "sandrp_only_days": 5
+        },
+        {
+          "district": "Pauri Garhwal",
+          "imd_days": 3,
+          "sandrp_days": 8,
+          "matched_imd_days": 2,
+          "sandrp_only_days": 6
+        },
+        {
+          "district": "Pithoragarh",
+          "imd_days": 1,
+          "sandrp_days": 6,
+          "matched_imd_days": 0,
+          "sandrp_only_days": 6
+        },
+        {
+          "district": "Rudraprayag",
+          "imd_days": 9,
+          "sandrp_days": 5,
+          "matched_imd_days": 2,
+          "sandrp_only_days": 3
+        },
+        {
+          "district": "Tehri Garhwal",
+          "imd_days": 4,
+          "sandrp_days": 3,
+          "matched_imd_days": 2,
+          "sandrp_only_days": 1
+        },
+        {
+          "district": "Udham Singh Nagar",
+          "imd_days": 1,
+          "sandrp_days": 0,
+          "matched_imd_days": 0,
+          "sandrp_only_days": 0
+        },
+        {
+          "district": "Uttarkashi",
+          "imd_days": 3,
+          "sandrp_days": 5,
+          "matched_imd_days": 0,
+          "sandrp_only_days": 5
+        }
+      ]
+    },
+    "experiment": {
+      "decision": {
+        "rule": "adopt v2 if, for XGBoost, the v2-trained model is at least as good as v1-trained on BOTH truths (PR-AUC and district-day CSI) and event-CV PR-AUC improves",
+        "v2_on_v1_truth_ok": false,
+        "v2_on_v2_truth_ok": false,
+        "event_cv_ok": true,
+        "adopt_v2": false
+      },
+      "event_cv": {
+        "v1": {
+          "episodes": 6,
+          "folds": 6,
+          "pooled_roc_auc": 0.7006,
+          "pooled_pr_auc": 0.1879,
+          "base_rate": 0.0807
+        },
+        "v2": {
+          "episodes": 8,
+          "folds": 8,
+          "pooled_roc_auc": 0.7814,
+          "pooled_pr_auc": 0.3642,
+          "base_rate": 0.147
+        },
+        "v2_masked": {
+          "episodes": 8,
+          "folds": 8,
+          "pooled_roc_auc": 0.7557,
+          "pooled_pr_auc": 0.3881,
+          "base_rate": 0.1875
+        }
+      },
+      "xgboost_grid": [
+        {
+          "trained_on": "v1",
+          "scored_on": "v1",
+          "pr_auc": 0.1501,
+          "roc_auc": 0.7076,
+          "f1": 0.3204,
+          "dd_POD": 0.474,
+          "dd_FAR": 0.82,
+          "dd_CSI": 0.15,
+          "dd_CSI_ci95": [
+            0.085,
+            0.223
+          ]
+        },
+        {
+          "trained_on": "v1",
+          "scored_on": "v2",
+          "pr_auc": 0.2059,
+          "roc_auc": 0.647,
+          "f1": 0.3963,
+          "dd_POD": 0.4,
+          "dd_FAR": 0.72,
+          "dd_CSI": 0.197,
+          "dd_CSI_ci95": [
+            0.124,
+            0.292
+          ]
+        },
+        {
+          "trained_on": "v1",
+          "scored_on": "v2_masked",
+          "pr_auc": 0.2157,
+          "roc_auc": 0.6421,
+          "f1": 0.4072,
+          "dd_POD": 0.4,
+          "dd_FAR": 0.696,
+          "dd_CSI": 0.209,
+          "dd_CSI_ci95": [
+            0.129,
+            0.305
+          ]
+        },
+        {
+          "trained_on": "v2",
+          "scored_on": "v1",
+          "pr_auc": 0.1126,
+          "roc_auc": 0.6858,
+          "f1": 0.1627,
+          "dd_POD": 0.368,
+          "dd_FAR": 0.857,
+          "dd_CSI": 0.115,
+          "dd_CSI_ci95": [
+            0.051,
+            0.183
+          ]
+        },
+        {
+          "trained_on": "v2",
+          "scored_on": "v2",
+          "pr_auc": 0.1844,
+          "roc_auc": 0.6371,
+          "f1": 0.25,
+          "dd_POD": 0.343,
+          "dd_FAR": 0.755,
+          "dd_CSI": 0.167,
+          "dd_CSI_ci95": [
+            0.097,
+            0.253
+          ]
+        },
+        {
+          "trained_on": "v2",
+          "scored_on": "v2_masked",
+          "pr_auc": 0.1982,
+          "roc_auc": 0.6338,
+          "f1": 0.2631,
+          "dd_POD": 0.343,
+          "dd_FAR": 0.733,
+          "dd_CSI": 0.176,
+          "dd_CSI_ci95": [
+            0.105,
+            0.265
+          ]
+        },
+        {
+          "trained_on": "v2_masked",
+          "scored_on": "v1",
+          "pr_auc": 0.1135,
+          "roc_auc": 0.6865,
+          "f1": 0.1627,
+          "dd_POD": 0.368,
+          "dd_FAR": 0.857,
+          "dd_CSI": 0.115,
+          "dd_CSI_ci95": [
+            0.051,
+            0.183
+          ]
+        },
+        {
+          "trained_on": "v2_masked",
+          "scored_on": "v2",
+          "pr_auc": 0.1826,
+          "roc_auc": 0.6363,
+          "f1": 0.25,
+          "dd_POD": 0.343,
+          "dd_FAR": 0.755,
+          "dd_CSI": 0.167,
+          "dd_CSI_ci95": [
+            0.097,
+            0.253
+          ]
+        },
+        {
+          "trained_on": "v2_masked",
+          "scored_on": "v2_masked",
+          "pr_auc": 0.1968,
+          "roc_auc": 0.6332,
+          "f1": 0.2631,
+          "dd_POD": 0.343,
+          "dd_FAR": 0.733,
+          "dd_CSI": 0.176,
+          "dd_CSI_ci95": [
+            0.105,
+            0.265
+          ]
+        }
+      ]
+    },
+    "before_after": [
+      {
+        "model": "Logistic Regression",
+        "roc_auc_before": 0.4512,
+        "pr_auc_before": 0.0379,
+        "f1_before": 0.1241,
+        "mcc_before": 0.1252,
+        "roc_auc_after": 0.7407,
+        "pr_auc_after": 0.1389,
+        "f1_after": 0.1879,
+        "mcc_after": 0.1332
+      },
+      {
+        "model": "Random Forest",
+        "roc_auc_before": 0.5954,
+        "pr_auc_before": 0.088,
+        "f1_before": 0.1397,
+        "mcc_before": 0.1238,
+        "roc_auc_after": 0.7881,
+        "pr_auc_after": 0.1523,
+        "f1_after": 0.2357,
+        "mcc_after": 0.1854
+      },
+      {
+        "model": "XGBoost",
+        "roc_auc_before": 0.5345,
+        "pr_auc_before": 0.0364,
+        "f1_before": 0.0815,
+        "mcc_before": 0.0611,
+        "roc_auc_after": 0.7076,
+        "pr_auc_after": 0.1501,
+        "f1_after": 0.3204,
+        "mcc_after": 0.2952
+      }
+    ],
+    "district_day": {
+      "model": "logistic",
+      "test_roc_auc": 0.782,
+      "test_pr_auc": 0.24,
+      "base_rate": 0.068,
+      "csi": 0.115,
+      "hybrid_csi": 0.169,
+      "external": "1/29",
+      "adopted": false
+    },
+    "model_upgrade": {
+      "e1": {
+        "roc_xgb": 0.7076,
+        "roc_ens": 0.7842,
+        "adopt": false
+      },
+      "e2": {
+        "csi_current": 0.169,
+        "csi_fitted": 0.088,
+        "median_event_24h": 42.4,
+        "adopt": false
+      },
+      "e3": {
+        "test_model": 0.455,
+        "test_prior": 0.409,
+        "external_model": 0.345,
+        "external_prior": 0.207,
+        "chance": 0.231,
+        "ranking": true
+      }
+    },
+    "rain_rule_tuning": {
+      "rule": {
+        "alert_24h": 64.5,
+        "fresh_6h": 0.0,
+        "susceptibility": true
+      },
+      "adopted": false,
+      "best_candidate": {
+        "alert_24h": 64.5,
+        "fresh_6h": 10.0,
+        "susceptibility": false
+      },
+      "adoption_rule": "best candidate's validation CSI CI lower bound > default validation CSI"
+    }
+  }
+}

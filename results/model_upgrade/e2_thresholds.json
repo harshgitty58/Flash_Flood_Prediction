@@ -1,0 +1,105 @@
+{
+  "thresholds_mm": {
+    "n_fit_events": 46,
+    "pooled": {
+      "r24": {
+        "ALERT": 12.0,
+        "SEVERE": 47.5,
+        "EXTREME": 108.5
+      },
+      "r72": {
+        "ALERT": 23.0,
+        "SEVERE": 91.5,
+        "EXTREME": 183.0
+      }
+    },
+    "plains": {
+      "r24": {
+        "ALERT": 12.0,
+        "SEVERE": 47.5,
+        "EXTREME": 108.5
+      },
+      "r72": {
+        "ALERT": 23.0,
+        "SEVERE": 91.5,
+        "EXTREME": 183.0
+      },
+      "n": 3
+    },
+    "hills": {
+      "r24": {
+        "ALERT": 12.0,
+        "SEVERE": 42.4,
+        "EXTREME": 108.3
+      },
+      "r72": {
+        "ALERT": 22.4,
+        "SEVERE": 87.0,
+        "EXTREME": 177.8
+      },
+      "n": 43
+    }
+  },
+  "event_rain_by_source": {
+    "cwc": 56,
+    "hydromet": 24
+  },
+  "current": {
+    "test_dd": {
+      "tp": 12,
+      "fp": 52,
+      "fn": 7,
+      "tn": 205,
+      "POD": 0.632,
+      "FAR": 0.812,
+      "POFD": 0.202,
+      "CSI": 0.169,
+      "ETS": 0.114,
+      "HSS": 0.205,
+      "bias": 3.368,
+      "alert_dd": 64,
+      "CSI_ci95": [
+        0.091,
+        0.253
+      ]
+    },
+    "pod_2025": "2/10",
+    "pod_2025_value": 0.2,
+    "alert_dd": {
+      "2024": 370,
+      "2025": 171
+    }
+  },
+  "fitted": {
+    "test_dd": {
+      "tp": 16,
+      "fp": 163,
+      "fn": 3,
+      "tn": 94,
+      "POD": 0.842,
+      "FAR": 0.911,
+      "POFD": 0.634,
+      "CSI": 0.088,
+      "ETS": 0.022,
+      "HSS": 0.042,
+      "bias": 9.421,
+      "alert_dd": 179,
+      "CSI_ci95": [
+        0.053,
+        0.125
+      ]
+    },
+    "pod_2025": "5/10",
+    "pod_2025_value": 0.5,
+    "alert_dd": {
+      "2024": 808,
+      "2025": 406
+    }
+  },
+  "decision": {
+    "csi_ok": false,
+    "pod_2025_ok": true,
+    "burden_ok": false,
+    "adopt": false
+  }
+}

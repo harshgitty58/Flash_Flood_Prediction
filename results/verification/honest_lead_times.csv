@@ -1,0 +1,19 @@
+district,event_day,status,lead_h_before_event_day
+Dehradun,2023-07-09,baseline (already on),
+Udham Singh Nagar,2023-07-09,baseline (already on),
+Uttarkashi,2023-07-10,missed,
+Pithoragarh,2023-07-11,missed,
+Rudraprayag,2023-07-11,warned,5.0
+Chamoli,2023-07-16,warned,-20.0
+Rudraprayag,2023-07-16,baseline (already on),
+Rudraprayag,2023-07-17,warned,16.0
+Rudraprayag,2023-08-04,baseline (already on),
+Tehri Garhwal,2023-08-06,warned,2.0
+Rudraprayag,2023-08-07,baseline (already on),
+Rudraprayag,2023-08-09,baseline (already on),
+Pauri Garhwal,2023-08-10,missed,
+Rudraprayag,2023-08-10,baseline (already on),
+Dehradun,2023-08-14,warned,48.0
+Tehri Garhwal,2023-08-14,warned,-5.0
+Tehri Garhwal,2023-08-21,missed,
+Pauri Garhwal,2023-08-23,missed,

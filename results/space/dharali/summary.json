@@ -1,0 +1,82 @@
+{
+  "name": "dharali",
+  "bbox": [
+    78.7,
+    30.98,
+    78.9,
+    31.1
+  ],
+  "event_utc": "2025-08-05 08:15:00",
+  "grid": {
+    "crs": "EPSG:32644",
+    "res_m": 10.0,
+    "w": 1936,
+    "h": 1369
+  },
+  "s1_pairs": [
+    {
+      "orbit": 129,
+      "state": "ascending",
+      "before_t": "2025-07-24 12:48:07.253733",
+      "after_t": "2025-08-05 12:48:07.077957",
+      "before_id": "S1A_IW_GRDH_1SDV_20250724T124754_20250724T124819_060226_rtc",
+      "after_id": "S1A_IW_GRDH_1SDV_20250805T124754_20250805T124819_060401_rtc"
+    },
+    {
+      "orbit": 63,
+      "state": "descending",
+      "before_t": "2025-08-01 00:43:39.376690",
+      "after_t": "2025-08-07 00:42:49.997477",
+      "before_id": "S1A_IW_GRDH_1SDV_20250801T004326_20250801T004351_060335_rtc",
+      "after_id": "S1C_IW_GRDH_1SDV_20250807T004233_20250807T004306_003559_rtc"
+    }
+  ],
+  "osm_snapshot": "2025-08-04",
+  "osm_counts": {
+    "buildings": 502,
+    "roads": 112,
+    "bridges": 16,
+    "places": 14,
+    "hospitals": 0,
+    "water": 11,
+    "waterways": 133
+  },
+  "flood": {
+    "water_km2": 13.112,
+    "debris_km2": 4.771,
+    "analysable_km2": 68.501,
+    "hidden_all_orbits_km2": 1.087,
+    "unspider_slope_masked_km2": 263.567,
+    "permanent_water_km2": 1.152,
+    "pairs": 2,
+    "corridor_km2": 70.076,
+    "ai_flood_km2_all": 10.474,
+    "ai_flood_km2_corridor": 4.656
+  },
+  "method": "Space mode \u2014 \"Where did the flood hit?\" Sentinel-1 change detection after the UN-SPIDER Recommended Practice.",
+  "detector": "AI U-Net (Kuro Siwo) within the 200 m river corridor",
+  "damage": {
+    "buildings": {
+      "total": 502,
+      "hit": 9
+    },
+    "roads": {
+      "total": 112,
+      "hit": 14
+    },
+    "bridges": {
+      "total": 16,
+      "hit": 1
+    }
+  },
+  "cutoff": {
+    "destination": "AOI exit",
+    "counts": {
+      "CUT OFF": 6,
+      "longer route": 0,
+      "connected": 4,
+      "not connected before": 4
+    },
+    "removed_road_ids": 14
+  }
+}

@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+@theme {
+  --color-bg: #09170f;
+  --color-panel: #10231a;
+  --color-line: #213c30;
+  --color-ink: #f1f8f3;
+  --color-mute: #a9c2b3;
+  --color-water: #4fb3f0;
+  --color-brand: #a3e635;
+  --color-moss: #2f6b47;
+  --color-normal: #3ddc97;
+  --color-watch: #f5d547;
+  --color-alert: #ff9f1c;
+  --color-severe: #ff4d2e;
+  --color-extreme: #e0115f;
+  --font-display: "Anton", Impact, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html, body, #root { height: 100%; }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 24px; }
+body { background: var(--color-bg); color: var(--color-ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+/* soft forest glow behind the whole app so large areas never read as flat black */
+.app-bg { background:
+  radial-gradient(1200px 600px at 85% -10%, rgba(79,179,240,.07), transparent 60%),
+  radial-gradient(900px 700px at -10% 110%, rgba(163,230,53,.05), transparent 60%),
+  linear-gradient(180deg, #0c1d14 0%, var(--color-bg) 55%); }
+.landing-bg { background:
+  radial-gradient(1000px 520px at 15% 0%, rgba(163,230,53,.07), transparent 60%),
+  radial-gradient(900px 600px at 95% 30%, rgba(79,179,240,.08), transparent 60%),
+  radial-gradient(800px 600px at 50% 100%, rgba(47,107,71,.25), transparent 70%),
+  linear-gradient(180deg, #0b1d14 0%, #0d2017 50%, #0a1a12 100%); }
+
+/* glassmorphism */
+.glass-strong { background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(255,255,255,.10); box-shadow: 0 8px 32px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06); }
+.nav-item { position: relative; display: flex; align-items: center; gap: .75rem; border-radius: .8rem; padding: .55rem .7rem; font-size: .875rem;
+  color: rgba(241,248,243,.82); border: 1px solid transparent; transition: background .25s, border-color .25s, color .2s, transform .2s, box-shadow .25s; }
+.nav-item svg { color: rgba(241,248,243,.7); transition: color .2s, filter .2s; }
+.nav-item:hover { color: #fff; transform: translateX(2px); background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+  border-color: rgba(255,255,255,.14); backdrop-filter: blur(12px); box-shadow: 0 6px 20px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.08); }
+.nav-item:hover svg { color: var(--color-brand); }
+.nav-item.active { color: #fff; font-weight: 600; background: linear-gradient(90deg, rgba(163,230,53,.18), rgba(79,179,240,.06) 70%, transparent);
+  border-color: rgba(163,230,53,.28); box-shadow: 0 0 24px rgba(163,230,53,.12), inset 0 1px 0 rgba(255,255,255,.08); }
+.nav-item.active svg { color: var(--color-brand); filter: drop-shadow(0 0 6px rgba(163,230,53,.6)); }
+.nav-item.active::before { content: ""; position: absolute; left: -.75rem; top: 22%; bottom: 22%; width: 3px; border-radius: 3px; background: var(--color-brand); box-shadow: 0 0 10px var(--color-brand); }
+.nav-group { margin: 1.1rem .7rem .35rem; font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(169,194,179,.75); }
+.top-link { border-radius: 9999px; padding: .45rem .9rem; font-size: .875rem; color: rgba(241,248,243,.85); border: 1px solid transparent; transition: all .2s; }
+.top-link:hover { color: #fff; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); backdrop-filter: blur(10px); }
+
+/* page enter + route transition */
+@keyframes page-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.page-in { animation: page-in .45s cubic-bezier(.2,.7,.2,1) both; }
+.fade-out { opacity: 0; transition: opacity .22s ease; }
+
+.glass { background: linear-gradient(140deg, rgba(22,46,34,.82), rgba(15,34,25,.70)); backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%); border: 1px solid rgba(255,255,255,.09);
+  box-shadow: 0 6px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.05); transition: border-color .25s, box-shadow .25s, transform .25s; }
+section.glass:hover, div.glass.rounded-xl:hover { border-color: rgba(163,230,53,.22); box-shadow: 0 10px 30px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.07); }
+.outline-text { color: transparent; -webkit-text-stroke: 2px var(--color-ink); }
+.label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #b9d1c2; }
+
+/* pulsing dashed-ring hotspot */
+.hotspot { width: var(--s); height: var(--s); cursor: pointer; }
+.hotspot::before, .hotspot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; }
+.hotspot::before { border: 1.5px dashed var(--c); opacity: .85; animation: spin 9s linear infinite; }
+.hotspot::after { inset: 32%; background: var(--c); box-shadow: 0 0 14px var(--c); }
+.hotspot .pulse { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--c); animation: pulse 2.4s ease-out infinite; }
+.hotspot.sel::before { border-style: solid; border-width: 2px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { from { transform: scale(.6); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+.flow { stroke-dasharray: 6 12; animation: flow 1.4s linear infinite; }
+.flow-b { stroke-dasharray: 3 15; animation-duration: 1.9s; opacity: .7; }
+.flow-c { stroke-dasharray: 4 20; animation-duration: 2.3s; opacity: .6; }
+@keyframes flow { to { stroke-dashoffset: -104; } }
+.dots::after { content: ''; animation: dots 1.2s steps(4) infinite; }
+@keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+@media (prefers-reduced-motion: reduce) { .flow, .hotspot::before, .hotspot .pulse { animation: none; } }
+
+.maplibregl-ctrl-attrib { background: #0008 !important; font-size: 10px; }
+.maplibregl-ctrl-attrib a { color: var(--color-mute) !important; }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 3px; }
+
+/* slow Ken Burns drift on the home hero image (off for reduced motion) */
+@keyframes kenburns { from { transform: scale(1.04) } to { transform: scale(1.14) translate(-1.5%, -1%) } }
+.kenburns { animation: kenburns 38s ease-in-out infinite alternate; transform-origin: 60% 40% }
+@media (prefers-reduced-motion: reduce) { .kenburns { animation: none } }
+/* hero: satellite view and a real flood photograph cross-fade */
+@keyframes herofade { 0%, 40% { opacity: 0 } 55%, 90% { opacity: .9 } 100% { opacity: 0 } }
+.hero-fade { opacity: 0; animation: herofade 20s ease-in-out infinite }
+@media (prefers-reduced-motion: reduce) { .hero-fade { animation: none } }

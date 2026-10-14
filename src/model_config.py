@@ -29,7 +29,7 @@ TARGET_COL = "flood_event_24h"
 # Train: < 2023-01-01 (Earlier period covering 2022 monsoon events)
 # Validation: 2023-01-01 to 2023-08-01 (Covering July 2023 peak monsoon events)
 # Test: >= 2023-08-01 (Covering August 2023 events and forward through 2026)
-TRAIN_END_DATE = "2023-01-01"
+TRAIN_END_DATE = "2023-07-01"  # train: 2022 monsoon + H1 2023 (2022 alone has only 19 stations)
 VAL_END_DATE = "2023-08-01"
 
 # Evaluation Metrics List

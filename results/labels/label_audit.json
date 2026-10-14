@@ -1,0 +1,100 @@
+{
+  "summary": {
+    "overlap_period": [
+      "2022-05-01..2022-10-31",
+      "2023-06-01..2023-08-25"
+    ],
+    "imd_district_days": 28,
+    "sandrp_district_days": 50,
+    "imd_events": 26,
+    "sandrp_events": 48,
+    "imd_days_confirmed_by_sandrp": 8,
+    "imd_confirmation_rate": 0.286,
+    "sandrp_only_days": 42,
+    "sandrp_only_events": 40,
+    "sandrp_only_by_split": {
+      "train": 22,
+      "test": 12,
+      "validation": 8
+    },
+    "sandrp_only_valtest_alerted_by_hybrid": "6/20",
+    "gate": {
+      "rule": "sandrp_only_events >= 25% of imd_events",
+      "share": 1.538,
+      "passed": true
+    },
+    "note": "SANDRP tracks cloudbursts / flash floods in the hills; IMD-only days are mostly heavy-rain floods and landslides it does not list, so a low confirmation rate does not mean IMD is wrong."
+  },
+  "by_district": [
+    {
+      "district": "Bageshwar",
+      "imd_days": 0,
+      "sandrp_days": 4,
+      "matched_imd_days": 0,
+      "sandrp_only_days": 4
+    },
+    {
+      "district": "Chamoli",
+      "imd_days": 2,
+      "sandrp_days": 9,
+      "matched_imd_days": 1,
+      "sandrp_only_days": 8
+    },
+    {
+      "district": "Dehradun",
+      "imd_days": 5,
+      "sandrp_days": 5,
+      "matched_imd_days": 1,
+      "sandrp_only_days": 4
+    },
+    {
+      "district": "Nainital",
+      "imd_days": 0,
+      "sandrp_days": 5,
+      "matched_imd_days": 0,
+      "sandrp_only_days": 5
+    },
+    {
+      "district": "Pauri Garhwal",
+      "imd_days": 3,
+      "sandrp_days": 8,
+      "matched_imd_days": 2,
+      "sandrp_only_days": 6
+    },
+    {
+      "district": "Pithoragarh",
+      "imd_days": 1,
+      "sandrp_days": 6,
+      "matched_imd_days": 0,
+      "sandrp_only_days": 6
+    },
+    {
+      "district": "Rudraprayag",
+      "imd_days": 9,
+      "sandrp_days": 5,
+      "matched_imd_days": 2,
+      "sandrp_only_days": 3
+    },
+    {
+      "district": "Tehri Garhwal",
+      "imd_days": 4,
+      "sandrp_days": 3,
+      "matched_imd_days": 2,
+      "sandrp_only_days": 1
+    },
+    {
+      "district": "Udham Singh Nagar",
+      "imd_days": 1,
+      "sandrp_days": 0,
+      "matched_imd_days": 0,
+      "sandrp_only_days": 0
+    },
+    {
+      "district": "Uttarkashi",
+      "imd_days": 3,
+      "sandrp_days": 5,
+      "matched_imd_days": 0,
+      "sandrp_only_days": 5
+    }
+  ]
+}

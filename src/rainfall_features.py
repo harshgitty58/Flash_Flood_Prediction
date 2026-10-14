@@ -19,9 +19,48 @@ def compute_antecedent_precipitation_index(rainfall_series: pd.Series, decay_fac
         api[i] = current_api
     return np.round(api, 3)
 
+OFFLINE_GAP_MONSOON_H = 7 * 24   # Jun-Sep: a week without any rain record = gauge offline
+OFFLINE_GAP_DRY_H = 45 * 24      # other months: dry spells are long, so allow 45 days
+
+
+def to_hourly_grid(df: pd.DataFrame) -> pd.DataFrame:
+    """Expand each station to a complete hourly series between its first and last record.
+
+    CWC telemetry files only list hours with non-zero rain (minimum 0.5 mm, no zeros), so an absent hour means
+    0 mm. Hours flagged invalid stay NaN. Stations with no valid reading at all (quarantined gauges) are dropped.
+    """
+    meta = (df.groupby(["station", "district", "latitude", "longitude"]).size().rename("n").reset_index()
+            .sort_values("n", ascending=False).drop_duplicates("station").drop(columns="n").set_index("station"))
+    parts = []
+    for st, g in df.groupby("station"):
+        if g["rainfall_clean"].notna().sum() == 0:
+            print(f"  dropping {st}: no valid readings (quarantined gauge)")
+            continue
+        g = g.set_index("datetime")
+        idx = pd.date_range(g.index.min(), g.index.max(), freq="h")
+        out = pd.DataFrame(index=idx)
+        out["rainfall_clean"] = g["rainfall_clean"].reindex(idx)
+        out["rainfall_quality_flag"] = g["rainfall_quality_flag"].reindex(idx).fillna("no_record_dry")
+        out.loc[out["rainfall_quality_flag"] == "no_record_dry", "rainfall_clean"] = 0.0
+        # A long silence is an outage, not a dry spell: hours inside gaps longer than the season's limit are dropped
+        # (station not reporting), so a dead gauge never looks like a confidently dry one.
+        rec = g.index.to_series()
+        gap_h = rec.diff().dt.total_seconds().div(3600)
+        limit = np.where(rec.dt.month.isin([6, 7, 8, 9]), OFFLINE_GAP_MONSOON_H, OFFLINE_GAP_DRY_H)
+        offline = pd.Series(False, index=idx)
+        for end, h in gap_h[gap_h > limit].items():
+            offline.loc[end - pd.Timedelta(hours=h - 1): end - pd.Timedelta(hours=1)] = True
+        out = out[~offline.to_numpy()]
+        out["station"] = st
+        parts.append(out.rename_axis("datetime").reset_index())
+    grid = pd.concat(parts, ignore_index=True).join(meta, on="station")
+    return grid[["station", "district", "latitude", "longitude", "datetime", "rainfall_clean", "rainfall_quality_flag"]]
+
+
 def generate_rainfall_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Computes backward-looking rolling sums, maximums, and API per station."""
-    # Ensure sorted by station and datetime
+    """Computes backward-looking rolling sums, maximums, and API per station on a complete hourly grid,
+    so the row windows are true clock-hour windows (rain_24h = last 24 hours, not last 24 rainy readings)."""
+    df = to_hourly_grid(df)
     df = df.sort_values(by=["station", "datetime"]).reset_index(drop=True)
     
     # Fill missing values temporarily with 0 for cumulative rolling sums to prevent cascade of NaNs,
@@ -33,15 +72,14 @@ def generate_rainfall_features(df: pd.DataFrame) -> pd.DataFrame:
     
     # 1h, 3h, 6h, 12h, 24h, 48h, 72h backward rolling sums
     df["rain_1h"] = df["rain_val_filled"]
-    df["rain_3h"] = grouped.rolling(window=3, min_periods=1).sum().reset_index(level=0, drop=True)
-    df["rain_6h"] = grouped.rolling(window=6, min_periods=1).sum().reset_index(level=0, drop=True)
-    df["rain_12h"] = grouped.rolling(window=12, min_periods=1).sum().reset_index(level=0, drop=True)
-    df["rain_24h"] = grouped.rolling(window=24, min_periods=1).sum().reset_index(level=0, drop=True)
-    df["rain_48h"] = grouped.rolling(window=48, min_periods=1).sum().reset_index(level=0, drop=True)
-    df["rain_72h"] = grouped.rolling(window=72, min_periods=1).sum().reset_index(level=0, drop=True)
-    
+    # Time-based windows ("24h" = last 24 clock hours): the grid has holes where a gauge was offline,
+    # so row counts would reach back across an outage.
+    ts = df.set_index("datetime").groupby("station")["rain_val_filled"]
+    for h in (3, 6, 12, 24, 48, 72):
+        df[f"rain_{h}h"] = ts.rolling(f"{h}h", min_periods=1).sum().to_numpy()
+
     # Rolling maximum intensity over 24h
-    df["rain_max_intensity_24h"] = grouped.rolling(window=24, min_periods=1).max().reset_index(level=0, drop=True)
+    df["rain_max_intensity_24h"] = ts.rolling("24h", min_periods=1).max().to_numpy()
     
     # Rain intensity change: current hour minus previous hour
     df["rain_intensity_change_1h"] = df.groupby("station")["rain_val_filled"].diff(1).fillna(0.0)

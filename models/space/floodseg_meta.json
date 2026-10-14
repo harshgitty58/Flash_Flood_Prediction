@@ -1,0 +1,50 @@
+{
+  "arch": "smp.Unet resnet34",
+  "channels": [
+    "flood_vv",
+    "flood_vh",
+    "sec1_vv",
+    "sec1_vh",
+    "sec2_vv",
+    "sec2_vh",
+    "dem_relative"
+  ],
+  "input": "S1 backscatter dB (10*log10 linear), DEM minus chip mean",
+  "mean": [
+    -10.902656555175781,
+    -17.194486618041992,
+    -11.654505729675293,
+    -18.595308303833008,
+    -11.96508502960205,
+    -19.066272735595703,
+    -7.532080559258247e-08
+  ],
+  "std": [
+    3.9764137268066406,
+    3.9643359184265137,
+    3.1192147731781006,
+    3.6124486923217773,
+    3.2023978233337402,
+    3.8944106101989746,
+    9.95617961883545
+  ],
+  "classes": [
+    "no_water",
+    "permanent_water",
+    "flood"
+  ],
+  "chip": 224,
+  "training_data": "Kuro Siwo GRD train split (Bountos et al. 2024, CC BY 4.0)",
+  "test_scores_unseen_events": {
+    "iou_nowater": 0.9644,
+    "iou_permanent": 0.0,
+    "iou_flood": 0.1485,
+    "flood_precision": 0.5655,
+    "flood_recall": 0.1676,
+    "flood_f1": 0.2586,
+    "miou": 0.371
+  },
+  "epochs": 1,
+  "steps": 750,
+  "trained_utc": "2026-10-14 17:11"
+}

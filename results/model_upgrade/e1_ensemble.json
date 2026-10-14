@@ -1,0 +1,112 @@
+{
+  "xgb": {
+    "threshold": 0.25,
+    "v1": {
+      "roc_auc": 0.7076,
+      "pr_auc": 0.1501,
+      "f1": 0.3204,
+      "precision": 0.2223,
+      "recall": 0.5736,
+      "dd_POD": 0.474,
+      "dd_FAR": 0.82,
+      "dd_CSI": 0.15,
+      "dd_CSI_ci95": [
+        0.085,
+        0.223
+      ]
+    },
+    "v2": {
+      "roc_auc": 0.647,
+      "pr_auc": 0.2059,
+      "f1": 0.3963,
+      "precision": 0.3428,
+      "recall": 0.4694,
+      "dd_POD": 0.4,
+      "dd_FAR": 0.72,
+      "dd_CSI": 0.197,
+      "dd_CSI_ci95": [
+        0.124,
+        0.292
+      ]
+    }
+  },
+  "ens": {
+    "threshold": 0.85,
+    "v1": {
+      "roc_auc": 0.7842,
+      "pr_auc": 0.1511,
+      "f1": 0.3091,
+      "precision": 0.2082,
+      "recall": 0.6,
+      "dd_POD": 0.474,
+      "dd_FAR": 0.827,
+      "dd_CSI": 0.145,
+      "dd_CSI_ci95": [
+        0.081,
+        0.218
+      ]
+    },
+    "v2": {
+      "roc_auc": 0.7355,
+      "pr_auc": 0.2323,
+      "f1": 0.3829,
+      "precision": 0.3166,
+      "recall": 0.4842,
+      "dd_POD": 0.4,
+      "dd_FAR": 0.731,
+      "dd_CSI": 0.192,
+      "dd_CSI_ci95": [
+        0.121,
+        0.288
+      ]
+    }
+  },
+  "rf": {
+    "threshold": 0.45,
+    "v1": {
+      "roc_auc": 0.7881,
+      "pr_auc": 0.1523,
+      "f1": 0.2357,
+      "precision": 0.1731,
+      "recall": 0.3694,
+      "dd_POD": 0.474,
+      "dd_FAR": 0.82,
+      "dd_CSI": 0.15,
+      "dd_CSI_ci95": [
+        0.085,
+        0.223
+      ]
+    },
+    "v2": {
+      "roc_auc": 0.7285,
+      "pr_auc": 0.2329,
+      "f1": 0.3068,
+      "precision": 0.2889,
+      "recall": 0.3272,
+      "dd_POD": 0.4,
+      "dd_FAR": 0.72,
+      "dd_CSI": 0.197,
+      "dd_CSI_ci95": [
+        0.124,
+        0.292
+      ]
+    }
+  },
+  "event_cv": {
+    "xgb": {
+      "pooled_roc_auc": 0.7006,
+      "pooled_pr_auc": 0.1879
+    },
+    "ens": {
+      "pooled_roc_auc": 0.7321,
+      "pooled_pr_auc": 0.2046
+    },
+    "folds": 6
+  },
+  "decision": {
+    "event_cv_ok": true,
+    "test_v1_ok": false,
+    "test_v2_ok": false,
+    "adopt": false
+  }
+}

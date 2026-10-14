@@ -1,0 +1,62 @@
+{
+  "logistic_regression_validation": [
+    [
+      18790,
+      1106
+    ],
+    [
+      288,
+      96
+    ]
+  ],
+  "logistic_regression_test": [
+    [
+      11275,
+      954
+    ],
+    [
+      161,
+      79
+    ]
+  ],
+  "random_forest_validation": [
+    [
+      19695,
+      201
+    ],
+    [
+      347,
+      37
+    ]
+  ],
+  "random_forest_test": [
+    [
+      12043,
+      186
+    ],
+    [
+      208,
+      32
+    ]
+  ],
+  "xgboost_validation": [
+    [
+      19305,
+      591
+    ],
+    [
+      307,
+      77
+    ]
+  ],
+  "xgboost_test": [
+    [
+      11763,
+      466
+    ],
+    [
+      210,
+      30
+    ]
+  ]
+}

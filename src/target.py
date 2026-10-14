@@ -6,33 +6,41 @@ Constructs 24-hour forward flood occurrence target and verifies causal integrity
 import pandas as pd
 import numpy as np
 
-def construct_flood_target_24h(base_df: pd.DataFrame, flood_inventory_df: pd.DataFrame) -> pd.DataFrame:
-    """Labels y(t) = 1 if a documented flood starts in the station's district within [t, t + 24 hours], else 0."""
+def v2_inventory(coverage_end: pd.Timestamp, min_confidence: str = "medium") -> pd.DataFrame:
+    """Label v2 (LABELS_PLAN.md §5): IMD ∪ SANDRP ∪ situation reports, one row per (district, day), clipped to the
+    IMD coverage end so 'no record' keeps meaning 'no flood' only where the official inventory still runs."""
+    from src.config import PROJECT_ROOT
+    rank = {"low": 0, "medium": 1, "high": 2}
+    d = pd.read_csv(PROJECT_ROOT / "data/external/labels/labels_daily.csv", parse_dates=["date"])
+    d = d[(d["date_confidence"].map(rank) >= rank[min_confidence]) & (d["date"] <= coverage_end)]
+    return d.drop_duplicates(["district", "date"]).rename(columns={"date": "start_datetime"})[["district", "start_datetime"]]
+
+
+def construct_flood_target_24h(base_df: pd.DataFrame, flood_inventory_df: pd.DataFrame,
+                               coverage_end: pd.Timestamp | None = None) -> pd.DataFrame:
+    """Labels y(t) = 1 if a flood is recorded in the station's district on t's calendar day or the next day, else 0."""
     flood_events = flood_inventory_df.dropna(subset=["start_datetime"]).copy()
     
-    district_events = {}
+    # The inventory only has event DATES (stored as 00:00). A "next 24 h from t" window therefore labelled the day
+    # *before* each flood and left the flood day itself (when the rain falls) as 0. With day-resolution labels the
+    # honest target is: a flood is recorded in this district on t's calendar day or the next one.
+    targets = np.zeros(len(base_df), dtype=float)
+    day = base_df["datetime"].dt.normalize().values.astype("datetime64[D]")
     for district, group in flood_events.groupby("district"):
-        district_events[district] = group["start_datetime"].values
-        
-    targets = []
-    
-    for _, row in base_df[["district", "datetime"]].iterrows():
-        dist = row["district"]
-        dt = row["datetime"]
-        
-        events = district_events.get(dist)
-        if events is None or len(events) == 0:
-            targets.append(0)
-            continue
-            
-        t_start = np.datetime64(dt)
-        t_end = t_start + np.timedelta64(24, "h")
-        
-        # Check if any event start date falls in [t_start, t_end]
-        is_hit = np.any((events >= t_start) & (events <= t_end))
-        targets.append(1 if is_hit else 0)
-        
-    base_df["flood_event_24h"] = targets
+        ev = np.unique(group["start_datetime"].values.astype("datetime64[D]"))
+        m = (base_df["district"] == district).to_numpy()
+        d = day[m]
+        targets[m] = (np.isin(d, ev) | np.isin(d + np.timedelta64(1, "D"), ev)).astype(float)
+
+    base_df["flood_event_24h"] = np.array(targets, dtype=float)
+    # The inventory has no records after its last event, so a 0 there means "unknown", not "no flood".
+    # Rows whose 24 h window extends past the coverage end are left unlabelled (NaN): they are excluded
+    # from training/evaluation and only used for inference/replay.
+    # Labels are known only while the window (today + tomorrow) lies inside the inventory's coverage.
+    coverage_end = np.datetime64((coverage_end or flood_events["start_datetime"].max()).normalize(), "D")
+    unlabelled = day + np.timedelta64(1, "D") > coverage_end
+    base_df.loc[unlabelled, "flood_event_24h"] = np.nan
+    base_df["label_available"] = ~unlabelled
     return base_df
 
 def verify_zero_future_leakage(df: pd.DataFrame) -> bool:

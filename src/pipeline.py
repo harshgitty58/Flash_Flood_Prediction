@@ -85,6 +85,10 @@ def run_objective_2_pipeline() -> pd.DataFrame:
         how="left"
     )
     
+    print("\n--- 7b. Enriching: ERA5 rain, soil moisture, station-relative normalisation, terrain ---")
+    from src.enrich_features import enrich
+    base = enrich(base)
+
     print("\n--- 8. Generating Calendar and Monsoon Features ---")
     base = generate_calendar_features(base, datetime_col="datetime")
     
@@ -97,20 +101,21 @@ def run_objective_2_pipeline() -> pd.DataFrame:
     
     print("\n--- 11. Defining Chronological Train/Test Partition ---")
     # Train on earlier records (before 2025-01-01), test on 2025+ holdout
-    base["split_partition"] = np.where(base["datetime"] < pd.to_datetime("2025-01-01"), "train", "test")
+    # Phase 3 (src/split.py) does the real train/val/test split; here we only flag label availability.
+    base["split_partition"] = np.where(base["label_available"], "labelled", "unlabelled_inference")
     
     # Export Final ML-Ready Datasets
     print("\n--- 12. Exporting Final ML-Ready Table ---")
     base.to_parquet(FINAL_PARQUET_FILE, index=False)
     
-    # Also export CSV for presentation and inspection
-    base.to_csv(FINAL_CSV_FILE, index=False)
+    # The hourly grid is ~1.3M rows, so the full CSV is no longer written; a labelled-period sample is kept for inspection.
+    base[base["label_available"]].sample(n=min(20000, int(base["label_available"].sum())), random_state=42).sort_values(["station", "datetime"]).to_csv(FINAL_CSV_FILE, index=False)
     
     print(f"\nSUCCESS! Master ML Dataset saved:")
     print(f"Parquet: {FINAL_PARQUET_FILE} ({base.shape[0]:,} rows x {base.shape[1]} columns)")
     print(f"CSV:     {FINAL_CSV_FILE}")
-    print(f"Train rows: {(base['split_partition'] == 'train').sum():,}")
-    print(f"Test rows:  {(base['split_partition'] == 'test').sum():,}")
+    print(f"Labelled rows: {int(base['label_available'].sum()):,}")
+    print(f"Unlabelled (replay) rows: {int((~base['label_available']).sum()):,}")
     print(f"Target distribution (flood_event_24h = 1): {(base['flood_event_24h'] == 1).sum():,} records")
     
     return base

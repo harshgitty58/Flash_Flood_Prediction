@@ -32,7 +32,17 @@ DISTRICT_SYNONYMS = {
     "tehri garhwal ": "Tehri Garhwal",
     "tehri-garhwal": "Tehri Garhwal",
     "pauri": "Pauri Garhwal",
-    "garhwal": "Garhwal (Regional)",  # Preserved as per guideline: do not invent specific district
+    # "Garhwal" is the official (Census 2011) name of the Pauri Garhwal district (HQ Pauri); Tehri Garhwal is
+    # always written in full. Mapping it is not false precision. Leaving it unmapped dropped 3 IMD flood
+    # event-days (2022-23) and Pauri's DFSI/population/fatality values.
+    "garhwal": "Pauri Garhwal",
+    "pauri garhwal ": "Pauri Garhwal",
+    # IMD inventory spellings: unmapped, they silently removed 9 Rudraprayag event-days and 1 Udham Singh
+    # Nagar event-day from the training labels.
+    "rudra prayag": "Rudraprayag",
+    "rudra-prayag": "Rudraprayag",
+    "udam singh nagar": "Udham Singh Nagar",
+    "us nagar": "Udham Singh Nagar",
     "bageshwari": "Bageshwar",
     "pithorgarh": "Pithoragarh",
     "u.s. nagar": "Udham Singh Nagar",
@@ -63,7 +73,9 @@ def generate_master_mapping_csv() -> pd.DataFrame:
         {"source_name": "Nainital", "standard_district": "Nainital", "source_dataset": "All", "mapping_status": "Exact", "notes": "Official Uttarakhand district"},
         {"source_name": "Pauri Garhwal", "standard_district": "Pauri Garhwal", "source_dataset": "All", "mapping_status": "Exact", "notes": "Official Uttarakhand district"},
         {"source_name": "PAURI GARHWAL", "standard_district": "Pauri Garhwal", "source_dataset": "CWC / Inventory", "mapping_status": "Standardized", "notes": "Case normalization"},
-        {"source_name": "Garhwal", "standard_district": "Garhwal (Regional)", "source_dataset": "Flood Impact / DFSI", "mapping_status": "Preserved Regional", "notes": "Historical administrative division covering multiple districts; preserved without false precision"},
+        {"source_name": "Garhwal", "standard_district": "Pauri Garhwal", "source_dataset": "Flood Impact / DFSI / IMD inventory", "mapping_status": "Standardized", "notes": "Census 2011 name of the Pauri Garhwal district (HQ Pauri)"},
+        {"source_name": "Rudra Prayag", "standard_district": "Rudraprayag", "source_dataset": "IMD inventory", "mapping_status": "Standardized", "notes": "Spaced spelling in IMD inventory"},
+        {"source_name": "Udam Singh Nagar", "standard_district": "Udham Singh Nagar", "source_dataset": "IMD inventory", "mapping_status": "Standardized", "notes": "Spelling variant in IMD inventory"},
         {"source_name": "Pithoragarh", "standard_district": "Pithoragarh", "source_dataset": "All", "mapping_status": "Exact", "notes": "Official Uttarakhand district"},
         {"source_name": "Pithorgarh", "standard_district": "Pithoragarh", "source_dataset": "Flood Inventory", "mapping_status": "Standardized", "notes": "Spelling variation"},
         {"source_name": "Rudraprayag", "standard_district": "Rudraprayag", "source_dataset": "All", "mapping_status": "Exact", "notes": "Official Uttarakhand district"},

@@ -24,6 +24,7 @@ from src.data_loader import (
     load_ml_dataset,
     get_features_and_target,
     FEATURE_EXPERIMENTS,
+    FINAL_EXPERIMENT,
 )
 from src.split import (
     get_chronological_splits,
@@ -128,7 +129,9 @@ def run_phase_3_pipeline():
     
     # 5. Full Models: Final Optimization on Exp E (Full Features)
     print("\n--- 5. Optimized Training on Full Feature Set (Exp E) ---")
-    full_features = FEATURE_EXPERIMENTS["Exp_E_Full_Multimodal"]
+    print(f"Final feature set: {FINAL_EXPERIMENT}")
+    full_features = FEATURE_EXPERIMENTS[FINAL_EXPERIMENT]
+    unlabelled_df = df[df[TARGET_COL].isna()].copy()
     X_train, y_train = train_df[full_features], train_df[TARGET_COL]
     X_val, y_val = val_df[full_features], val_df[TARGET_COL]
     X_test, y_test = test_df[full_features], test_df[TARGET_COL]
@@ -207,6 +210,14 @@ def run_phase_3_pipeline():
         pred_test_df["predicted_class"] = (test_p >= opt_t).astype(int)
         pred_test_df["model"] = name
         pred_test_df.to_csv(PREDICTIONS_DIR / f"test_{name.lower().replace(' ', '_')}.csv", index=False)
+
+        # Inference on the unlabelled period (after flood-inventory coverage) for replay in the web app
+        if len(unlabelled_df):
+            rp = unlabelled_df[["station", "datetime", "district"]].copy()
+            rp["predicted_probability"] = mdl.predict_proba(unlabelled_df[full_features])[:, 1]
+            rp["predicted_class"] = (rp["predicted_probability"] >= opt_t).astype(int)
+            rp["model"] = name
+            rp.to_csv(PREDICTIONS_DIR / f"replay_{name.lower().replace(' ', '_')}.csv", index=False)
         
         # Serialize Model & Save Metadata
         train_range = (str(train_df["datetime"].min())[:10], str(train_df["datetime"].max())[:10])
@@ -218,7 +229,7 @@ def run_phase_3_pipeline():
             metrics=test_metrics,
             threshold=opt_t,
             train_range=train_range,
-            notes=f"Trained on Exp_E_Full_Multimodal with {tr_time:.1f}s training time",
+            notes=f"Trained on {FINAL_EXPERIMENT} with {tr_time:.1f}s training time",
         )
         print(f"[{name}] Test ROC-AUC: {test_metrics['roc_auc']} | PR-AUC: {test_metrics['pr_auc']} | F1: {test_metrics['f1']} | Brier: {test_metrics['brier']}")
         
@@ -232,7 +243,7 @@ def run_phase_3_pipeline():
         
         row = {
             "model": name,
-            "feature_set": "Exp_E_Full_Multimodal",
+            "feature_set": FINAL_EXPERIMENT,
             "threshold": chosen_thresholds[name],
             "training_time_seconds": round(tr_t, 2),
             "val_roc_auc": v_m["roc_auc"],

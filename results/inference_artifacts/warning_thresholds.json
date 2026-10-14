@@ -1,0 +1,87 @@
+{
+  "base_rate": 0.0426,
+  "lift": {
+    "WATCH": 2,
+    "ALERT": 5,
+    "SEVERE": 10,
+    "EXTREME": 20
+  },
+  "thresholds": {
+    "WATCH": 0.08521,
+    "ALERT": 0.21302,
+    "SEVERE": 0.42604,
+    "EXTREME": 0.85207
+  },
+  "imd_24h_mm": {
+    "moderate": 15.6,
+    "heavy": 64.5,
+    "very_heavy": 115.6,
+    "extremely_heavy": 204.5
+  },
+  "cloudburst_1h_mm": 100.0,
+  "rain_rule": {
+    "alert_24h": 64.5,
+    "fresh_6h": 0.0,
+    "susceptibility": true
+  },
+  "dfsi_median": 14.17404358957349,
+  "alert_level": {
+    "validation_tier_ml": {
+      "precision": 0.239,
+      "recall": 0.112,
+      "f1": 0.153,
+      "false_alarm_rate": 0.0159,
+      "alerts": 406
+    },
+    "validation_tier_rain": {
+      "precision": 0.023,
+      "recall": 0.059,
+      "f1": 0.033,
+      "false_alarm_rate": 0.1124,
+      "alerts": 2234
+    },
+    "validation_tier": {
+      "precision": 0.054,
+      "recall": 0.166,
+      "f1": 0.082,
+      "false_alarm_rate": 0.1283,
+      "alerts": 2635
+    },
+    "test_tier_ml": {
+      "precision": 0.222,
+      "recall": 0.574,
+      "f1": 0.32,
+      "false_alarm_rate": 0.123,
+      "alerts": 1858
+    },
+    "test_tier_rain": {
+      "precision": 0.38,
+      "recall": 0.083,
+      "f1": 0.137,
+      "false_alarm_rate": 0.0083,
+      "alerts": 158
+    },
+    "test_tier": {
+      "precision": 0.234,
+      "recall": 0.65,
+      "f1": 0.344,
+      "false_alarm_rate": 0.1305,
+      "alerts": 2001
+    }
+  },
+  "test_alert_recall": 0.65,
+  "test_alert_precision": 0.234,
+  "test_false_alarm_rate": 0.1305,
+  "replay_tier_counts": {
+    "NORMAL": 298478,
+    "WATCH": 18592,
+    "ALERT": 69897,
+    "SEVERE": 3182,
+    "EXTREME": 1251
+  },
+  "replay_trigger_counts": {
+    "none": 298478,
+    "ml": 67817,
+    "rainfall": 25105
+  }
+}

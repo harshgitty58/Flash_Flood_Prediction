@@ -1,6 +1,6 @@
 {
   "classifier__solver": "liblinear",
   "classifier__penalty": "l2",
-  "classifier__class_weight": null,
+  "classifier__class_weight": "balanced",
   "classifier__C": 0.01
 }

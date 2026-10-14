@@ -10,6 +10,9 @@ from src.model_config import TRAIN_END_DATE, VAL_END_DATE, TARGET_COL
 
 def get_chronological_splits(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Splits dataset chronologically into Train, Validation, and Holdout Test."""
+    # Only rows inside the flood-inventory coverage carry a valid label.
+    df = df[df[TARGET_COL].notna()].copy()
+    df[TARGET_COL] = df[TARGET_COL].astype(int)
     dt = pd.to_datetime(df["datetime"])
     
     train_mask = dt < pd.to_datetime(TRAIN_END_DATE)
@@ -35,10 +38,22 @@ def get_chronological_splits(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFra
         val_mask = (dt >= t_split1) & (dt < t_split2)
         test_mask = dt >= t_split2
         
-    train_df = df[train_mask].copy().reset_index(drop=True)
-    val_df = df[val_mask].copy().reset_index(drop=True)
-    test_df = df[test_mask].copy().reset_index(drop=True)
-    
+    # Window A: never train on rows before the study start (sparse early telemetry).
+    from src.data_window import STUDY_START
+    in_window = dt >= STUDY_START
+    train_df = df[train_mask & in_window].copy().reset_index(drop=True)
+    val_df = df[val_mask & in_window].copy().reset_index(drop=True)
+    test_df = df[test_mask & in_window].copy().reset_index(drop=True)
+
+    # D5: record the exact partition once so every notebook / script reuses the same split.
+    import json
+    from src.model_config import RESULTS_DIR
+    rec = {name: {"start": str(d["datetime"].min()), "end": str(d["datetime"].max()), "rows": int(len(d)),
+                  "positives": int(d[TARGET_COL].sum()), "stations": int(d["station"].nunique())}
+           for name, d in (("train", train_df), ("validation", val_df), ("test", test_df))}
+    rec["rule"] = {"train_end": TRAIN_END_DATE, "val_end": VAL_END_DATE, "study_start": str(STUDY_START.date()),
+                   "unlabelled_rows_excluded": True}
+    (RESULTS_DIR / "splits.json").write_text(json.dumps(rec, indent=2))
     return train_df, val_df, test_df
 
 def compute_rare_event_stats(df: pd.DataFrame, split_name: str) -> Dict[str, Any]:

@@ -1,0 +1,4 @@
+nominal,coverage_all,coverage_flood,coverage_no_flood,share_uncertain,share_flood_singleton
+0.8,0.8841,1.0,0.877,0.8508,0.1492
+0.9,0.8841,1.0,0.877,0.851,0.149
+0.95,0.9726,1.0,0.9709,0.9658,0.0342

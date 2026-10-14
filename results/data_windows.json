@@ -1,0 +1,25 @@
+{
+  "A_train_window": {
+    "start": "2022-02-01",
+    "end": "2023-08-25",
+    "sources": "rainfall + labels (+ discharge where present)",
+    "used_for": "training / validation / test"
+  },
+  "B_all_sources": {
+    "start": "2023-06-07",
+    "end": "2023-08-25",
+    "sources": "rainfall + discharge + labels",
+    "used_for": "reported only (too short to train)"
+  },
+  "C_sensor_overlap": {
+    "start": "2023-06-07",
+    "end": "2025-12-31",
+    "sources": "rainfall + discharge (labels need curation)",
+    "used_for": "replay now; training after label curation"
+  },
+  "replay": {
+    "start": "2023-08-26",
+    "end": null,
+    "used_for": "inference / replay only (unlabelled)"
+  }
+}

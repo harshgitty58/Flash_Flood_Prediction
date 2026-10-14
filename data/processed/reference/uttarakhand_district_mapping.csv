@@ -9,7 +9,9 @@ Hardwar,Haridwar,DFSI / Historical,Standardized,Colonial / alternate spelling of
 Nainital,Nainital,All,Exact,Official Uttarakhand district
 Pauri Garhwal,Pauri Garhwal,All,Exact,Official Uttarakhand district
 PAURI GARHWAL,Pauri Garhwal,CWC / Inventory,Standardized,Case normalization
-Garhwal,Garhwal (Regional),Flood Impact / DFSI,Preserved Regional,Historical administrative division covering multiple districts; preserved without false precision
+Garhwal,Pauri Garhwal,Flood Impact / DFSI / IMD inventory,Standardized,Census 2011 name of the Pauri Garhwal district (HQ Pauri)
+Rudra Prayag,Rudraprayag,IMD inventory,Standardized,Spaced spelling in IMD inventory
+Udam Singh Nagar,Udham Singh Nagar,IMD inventory,Standardized,Spelling variant in IMD inventory
 Pithoragarh,Pithoragarh,All,Exact,Official Uttarakhand district
 Pithorgarh,Pithoragarh,Flood Inventory,Standardized,Spelling variation
 Rudraprayag,Rudraprayag,All,Exact,Official Uttarakhand district
