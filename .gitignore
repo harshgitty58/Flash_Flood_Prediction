@@ -44,3 +44,6 @@ models/space/best.pt
 node_modules/
 web/dist/
 *.log
+
+# model / data archives
+*.zip

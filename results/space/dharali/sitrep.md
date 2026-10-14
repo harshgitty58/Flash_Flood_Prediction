@@ -4,21 +4,25 @@
 
 ## Where did the flood hit?
 - Detector: **AI U-Net (Kuro Siwo) within the 200 m river corridor**.
-- Flooded area inside the 200 m river corridor: **4.656 km²** (whole area: 10.474 km²).
+- Flooded area inside the 200 m river corridor: **0.735 km²** (whole area: 2.136 km²).
 - Radar pairs used (same orbit): track 129 ascending 2025-07-24 → 2025-08-05 12:48; track 63 descending 2025-08-01 → 2025-08-07 00:42.
 - Not analysable: radar layover/shadow on 1.087 km²; permanent water 1.152 km².
 
 ## What was damaged? (pre-event OSM objects on flooded pixels)
-- Buildings: **9 of 502**
-- Road segments: **14 of 112** · Bridges: **1 of 16**
+- Buildings: **0 of 502**
+- Road segments: **0 of 112** · Bridges: **0 of 16**
 
 ## Who is cut off? (road connection to nearest AOI exit)
-- **6 settlements cut off**: Bagori, Bhaironghati, Dhakroliya, Halunga, Harsil, Lanka.
-- 0 reachable only by a longer route; 4 still connected; 4 had no mapped road link even before the flood.
+- **0 settlements cut off**: none.
+- 0 reachable only by a longer route; 10 still connected; 4 had no mapped road link even before the flood.
+
+## Possible debris (low confidence)
+- The AI model maps floodwater only. A rule-based radar-change layer marks **4.771 km²** of possible debris / ground change in the corridor (not validated).
+- On it: buildings 47 of 502, road segments 23 of 112, bridges 1 of 16; settlements cut off if those roads are blocked: 6.
 
 ## Model reliability
-- U-Net trained on Kuro Siwo; on unseen test events: flood precision 0.5655, recall 0.1676, F1 0.2586, IoU 0.1485.
-- Read as: when it says 'flooded' it is right about half the time; it misses many flooded pixels.
+- U-Net trained on Kuro Siwo; on unseen test events: flood precision 0.7392, recall 0.823, F1 0.7789, IoU 0.6378 (flood threshold 0.8, chosen on validation).
+- Read as: about 74 % of pixels it calls flooded are flooded, and it finds about 82 % of flooded pixels.
 
 ## Limitations (read before acting)
 - Sentinel-1 revisits every 6–12 days: this maps what the satellite saw, not the moment of the flood, and cannot warn in advance.

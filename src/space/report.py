@@ -37,11 +37,19 @@ def build(name: str) -> str:
          f"## Who is cut off? (road connection to nearest {c['destination']})",
          f"- **{len(cut)} settlements cut off**: " + (", ".join(sorted({r['name'] for r in cut if r['name']})) or "none") + ".",
          f"- {len(longer)} reachable only by a longer route; {c['counts'].get('connected', 0)} still connected; {c['counts'].get('not connected before', 0)} had no mapped road link even before the flood.", ""]
+    if s.get("debris_rule"):
+        dr = s["debris_rule"]; dd = dr["damage"]
+        L += ["## Possible debris (low confidence)",
+              f"- The AI model maps floodwater only. A rule-based radar-change layer marks **{dr['km2']} km²** of possible debris / ground change in the corridor (not validated).",
+              f"- On it: buildings {dd['buildings']['hit']} of {dd['buildings']['total']}, road segments {dd['roads']['hit']} of {dd['roads']['total']}, bridges {dd['bridges']['hit']} of {dd['bridges']['total']}; "
+              f"settlements cut off if those roads are blocked: {dr['cutoff'].get('CUT OFF', 0)}.", ""]
     if m:
         t = m.get("test_scores_unseen_events", {})
+        ft = t.get("flood_tuned") or {"precision": t.get("flood_precision"), "recall": t.get("flood_recall"), "f1": t.get("flood_f1"), "iou": t.get("iou_flood")}
         L += ["## Model reliability",
-              f"- U-Net trained on Kuro Siwo; on unseen test events: flood precision {t.get('flood_precision')}, recall {t.get('flood_recall')}, F1 {t.get('flood_f1')}, IoU {t.get('iou_flood')}.",
-              "- Read as: when it says 'flooded' it is right about half the time; it misses many flooded pixels.", ""]
+              f"- U-Net trained on Kuro Siwo; on unseen test events: flood precision {ft.get('precision')}, recall {ft.get('recall')}, F1 {ft.get('f1')}, IoU {ft.get('iou')}"
+              + (f" (flood threshold {round(m['flood_threshold'], 2)}, chosen on validation)." if m.get("flood_threshold") else "."),
+              f"- Read as: about {round(100 * (ft.get('precision') or 0))} % of pixels it calls flooded are flooded, and it finds about {round(100 * (ft.get('recall') or 0))} % of flooded pixels.", ""]
     L += ["## Limitations (read before acting)",
           "- Sentinel-1 revisits every 6–12 days: this maps what the satellite saw, not the moment of the flood, and cannot warn in advance.",
           "- Steep Himalayan slopes cause radar layover/shadow; narrow gorges and debris under forest can be missed.",

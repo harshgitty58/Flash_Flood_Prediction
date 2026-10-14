@@ -62,6 +62,21 @@ def run(name: str, bbox: tuple, event: pd.Timestamp, res=10.0) -> dict:
     cut = impact.cut_off(osm, dmg, bbox)
     for layer in ("buildings", "roads", "bridges"):
         (out / f"{layer}_hit.geojson").write_text(json.dumps(dmg[layer]), encoding="utf-8")
+    # secondary, low-confidence layer: debris / strong radar change from the rule baseline (the AI is trained on
+    # floodwater only; debris flows such as Dharali are rough deposits, not water). Reported separately.
+    rule_p = out / "flood_class_rule.tif"
+    if rule_p.exists():
+        with rasterio.open(rule_p) as src:
+            rule = src.read(1)
+        deb = np.where(rule == flood.DEBRIS, flood.DEBRIS, flood.NONE).astype("uint8")
+        save_tif(out / "debris_class.tif", deb, grid)
+        dmg_d = impact.damage(osm, deb, grid)
+        cut_d = impact.cut_off(osm, dmg_d, bbox)
+        for layer in ("buildings", "roads", "bridges"):
+            (out / f"{layer}_debris.geojson").write_text(json.dumps(dmg_d[layer]), encoding="utf-8")
+        (out / "cutoff_debris.json").write_text(json.dumps(cut_d, indent=2), encoding="utf-8")
+        summary["debris_rule"] = {"km2": round(float((deb == flood.DEBRIS).sum() * res * res / 1e6), 3), "damage": dmg_d["counts"],
+                                  "cutoff": cut_d.get("counts"), "note": "low confidence: rule-based radar change, not validated"}
     (out / "cutoff.json").write_text(json.dumps(cut, indent=2), encoding="utf-8")
     summary |= {"damage": dmg["counts"], "cutoff": {k: cut.get(k) for k in ("destination", "counts", "removed_road_ids")}}
     (out / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")

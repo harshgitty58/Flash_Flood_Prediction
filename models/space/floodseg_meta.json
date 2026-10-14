@@ -34,17 +34,31 @@
     "flood"
   ],
   "chip": 224,
-  "training_data": "Kuro Siwo GRD train split (Bountos et al. 2024, CC BY 4.0)",
+  "flood_threshold": 0.7999999999999999,
+  "water_threshold": 0.9249999999999999,
   "test_scores_unseen_events": {
-    "iou_nowater": 0.9644,
-    "iou_permanent": 0.0,
-    "iou_flood": 0.1485,
-    "flood_precision": 0.5655,
-    "flood_recall": 0.1676,
-    "flood_f1": 0.2586,
-    "miou": 0.371
+    "flood_argmax": {
+      "precision": 0.5923,
+      "recall": 0.8921,
+      "f1": 0.7119,
+      "iou": 0.5527
+    },
+    "flood_tuned": {
+      "precision": 0.7392,
+      "recall": 0.823,
+      "f1": 0.7789,
+      "iou": 0.6378
+    },
+    "any_water": {
+      "precision": 0.8612,
+      "recall": 0.7196,
+      "f1": 0.7841,
+      "iou": 0.6448
+    },
+    "flood_threshold": 0.7999999999999999,
+    "water_threshold": 0.9249999999999999,
+    "extra_steps": 1606
   },
-  "epochs": 1,
-  "steps": 750,
-  "trained_utc": "2026-10-14 17:11"
+  "training_data": "Kuro Siwo GRD train split (Bountos et al. 2024, CC BY 4.0)",
+  "trained_utc": "2026-10-14 17:59"
 }

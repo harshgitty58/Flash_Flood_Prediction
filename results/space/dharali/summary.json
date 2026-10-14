@@ -50,33 +50,57 @@
     "permanent_water_km2": 1.152,
     "pairs": 2,
     "corridor_km2": 70.076,
-    "ai_flood_km2_all": 10.474,
-    "ai_flood_km2_corridor": 4.656
+    "ai_flood_km2_all": 2.136,
+    "ai_flood_km2_corridor": 0.735
   },
   "method": "Space mode \u2014 \"Where did the flood hit?\" Sentinel-1 change detection after the UN-SPIDER Recommended Practice.",
   "detector": "AI U-Net (Kuro Siwo) within the 200 m river corridor",
   "damage": {
     "buildings": {
       "total": 502,
-      "hit": 9
+      "hit": 0
     },
     "roads": {
       "total": 112,
-      "hit": 14
+      "hit": 0
     },
     "bridges": {
       "total": 16,
-      "hit": 1
+      "hit": 0
     }
   },
   "cutoff": {
     "destination": "AOI exit",
     "counts": {
+      "CUT OFF": 0,
+      "longer route": 0,
+      "connected": 10,
+      "not connected before": 4
+    },
+    "removed_road_ids": 0
+  },
+  "debris_rule": {
+    "km2": 4.771,
+    "damage": {
+      "buildings": {
+        "total": 502,
+        "hit": 47
+      },
+      "roads": {
+        "total": 112,
+        "hit": 23
+      },
+      "bridges": {
+        "total": 16,
+        "hit": 1
+      }
+    },
+    "cutoff": {
       "CUT OFF": 6,
       "longer route": 0,
       "connected": 4,
       "not connected before": 4
     },
-    "removed_road_ids": 14
+    "note": "low confidence: rule-based radar change, not validated"
   }
 }
