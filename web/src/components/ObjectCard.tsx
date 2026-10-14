@@ -35,7 +35,7 @@ export default function ObjectCard({ o, stations, onClose }: { o: ObjProps; stat
       <dl className="mt-4 space-y-2 text-sm">
         {rows.map(([k, v]) => <div key={k} className="flex justify-between gap-3 border-b border-line pb-2"><dt className="text-mute">{k}</dt><dd className="text-right font-mono">{v}</dd></div>)}
       </dl>
-      <p className="mt-3 text-[11px] text-mute">Score = station hazard (max of √ML probability and warning-tier level) × (0.7 · low height above river + 0.3 · closeness to river). Exposure proxy, not a damage estimate.</p>
+      <p className="mt-3 text-[11px] text-mute">Class = hazard tier (IMD rainfall categories / hybrid model) stepped down by official river-setback zone: A ≤ 50 m (NGT 2017) keeps the tier, B 50–100 m (NGT / Jal Shakti 2025) one level lower, C 100–200 m (Uttarakhand HC 2013) two lower. Exposure class, not a damage estimate.</p>
     </aside>
   )
 }

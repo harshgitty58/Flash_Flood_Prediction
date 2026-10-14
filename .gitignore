@@ -47,3 +47,6 @@ web/dist/
 
 # model / data archives
 *.zip
+
+# submission assets (video/screens) are uploaded separately
+submission media/
