@@ -25,10 +25,10 @@ RANDOM_STATE = 42
 # Target Variable
 TARGET_COL = "flood_event_24h"
 
-# Date Thresholds for Chronological Splitting
-# Train: < 2023-01-01 (Earlier period covering 2022 monsoon events)
-# Validation: 2023-01-01 to 2023-08-01 (Covering July 2023 peak monsoon events)
-# Test: >= 2023-08-01 (Covering August 2023 events and forward through 2026)
+# Date Thresholds for Chronological Splitting (labelled rows only; labels end 2023-08-26, later hours are replay)
+# Train: < 2023-07-01 (2022 monsoon + H1 2023; 94,154 rows, 367 positives, 37 stations)
+# Validation: 2023-07-01 to 2023-08-01 (July 2023; also the calibration month for Venn-Abers / conformal)
+# Test: 2023-08-01 to 2023-08-25 (August 2023; the held-out month). See results/splits.json.
 TRAIN_END_DATE = "2023-07-01"  # train: 2022 monsoon + H1 2023 (2022 alone has only 19 stations)
 VAL_END_DATE = "2023-08-01"
 

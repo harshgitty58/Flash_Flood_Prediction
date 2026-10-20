@@ -21,6 +21,7 @@ from src.config import (
     UTTARAKHAND_BOUNDS,
 )
 from src.district_mapping import standardize_district_name
+from src.params import P
 
 def parse_cwc_timestamp(s: pd.Series) -> pd.Series:
     """Parses CWC timestamp string formatted typically as 'DD-MM-YYYY HH.MM' into datetime."""
@@ -30,9 +31,11 @@ def parse_cwc_timestamp(s: pd.Series) -> pd.Series:
         r'\s(\d{1,2})\.(\d{2})$', lambda m: f" {int(m.group(1)):02d}:{m.group(2)}:00", regex=True)
     return pd.to_datetime(cleaned, format='%d-%m-%Y %H:%M:%S', errors='coerce')
 
-SENTINEL_MM = 511.5
-MAX_PLAUSIBLE_MM_HR = 150.0
-FAULTY_SHARE = 0.20
+SENTINEL_MM = P["qc"]["rain_error_code_mm"]
+MAX_PLAUSIBLE_MM_HR = P["qc"]["rain_max_mm_h"]
+FAULTY_SHARE = P["qc"]["faulty_share"]
+FAULTY_MM_HR = P["qc"]["faulty_mm_h"]
+DISCHARGE_MAX_M3S = P["qc"]["discharge_max_m3s"]
 
 
 def clean_rainfall_data() -> pd.DataFrame:
@@ -70,7 +73,7 @@ def clean_rainfall_data() -> pd.DataFrame:
     # of the time is reporting garbage (e.g. Yamuna Colony: median 272 mm/h).
     r = df["rainfall_raw"]
     non_sentinel = r.where((r >= 0) & (r != SENTINEL_MM))
-    share_over_100 = (non_sentinel > 100).groupby(df["station"]).mean()
+    share_over_100 = (non_sentinel > FAULTY_MM_HR).groupby(df["station"]).mean()
     faulty = set(share_over_100[share_over_100 > FAULTY_SHARE].index)
 
     conditions = [
@@ -129,7 +132,7 @@ def clean_discharge_data() -> pd.DataFrame:
     conditions = [
         df["discharge_raw"].isna(),
         df["discharge_raw"] < 0,
-        df["discharge_raw"] > 15000,  # Extreme sentinel/high flood limit
+        df["discharge_raw"] > DISCHARGE_MAX_M3S,  # Extreme sentinel/high flood limit
         df["discharge_raw"] >= 0,
     ]
     flags = [

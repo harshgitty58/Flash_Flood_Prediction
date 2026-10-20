@@ -34,7 +34,7 @@
     "classifier__learning_rate": 0.01,
     "classifier__colsample_bytree": 1.0
   },
-  "validation_metrics": {
+  "test_metrics": {
     "roc_auc": 0.7076,
     "pr_auc": 0.1501,
     "precision": 0.2223,

@@ -1,0 +1,165 @@
+date,district,source,date_confidence,severity,type
+2022-05-07,Nainital,sandrp,high,high,cloudburst
+2022-05-10,Bageshwar,sandrp,high,moderate,flash_flood
+2022-06-27,Nainital,sandrp,high,low,cloudburst
+2022-07-05,Uttarkashi,sandrp,high,moderate,cloudburst
+2022-07-08,Bageshwar,sandrp,high,high,cloudburst
+2022-07-08,Pithoragarh,sandrp,high,moderate,cloudburst
+2022-07-09,Nainital,sandrp,high,moderate,flash_flood
+2022-07-14,Dehradun,sandrp,high,moderate,flash_flood
+2022-07-19,Rudraprayag,imd,high,high,heavy_rain_flood
+2022-07-20,Chamoli,sandrp,high,moderate,cloudburst
+2022-07-30,Chamoli,sandrp,high,high,cloudburst
+2022-07-30,Pithoragarh,sandrp,high,moderate,cloudburst
+2022-08-01,Pauri Garhwal,sandrp,high,low,cloudburst
+2022-08-09,Rudraprayag,sandrp,high,high,cloudburst
+2022-08-10,Chamoli,sandrp,high,moderate,flash_flood
+2022-08-11,Dehradun,sandrp,high,moderate,cloudburst
+2022-08-11,Uttarkashi,sandrp,high,moderate,flash_flood
+2022-08-19,Dehradun,imd,high,moderate,cloudburst
+2022-08-19,Pauri Garhwal,imd,high,high,cloudburst
+2022-08-19,Tehri Garhwal,imd,high,high,cloudburst
+2022-08-20,Dehradun,sandrp,high,high,cloudburst
+2022-08-20,Dehradun,sphere,high,high,cloudburst
+2022-08-20,Pauri Garhwal,sandrp,high,high,cloudburst
+2022-08-20,Tehri Garhwal,sandrp,high,high,cloudburst
+2022-08-20,Uttarkashi,sandrp,high,high,cloudburst
+2022-08-24,Rudraprayag,sandrp,high,moderate,cloudburst
+2022-08-24,Tehri Garhwal,sandrp,high,high,cloudburst
+2022-08-28,Dehradun,imd,high,high,heavy_rain_flood
+2022-09-22,Dehradun,imd,high,moderate,landslide_rain
+2022-09-22,Uttarkashi,imd,high,high,landslide_rain
+2022-09-25,Dehradun,sandrp,high,moderate,cloudburst
+2022-10-09,Pithoragarh,sandrp,high,high,cloudburst
+2023-06-24,Chamoli,sandrp,high,moderate,cloudburst
+2023-06-25,Rudraprayag,imd,high,high,heavy_rain_flood
+2023-06-25,Uttarkashi,imd,high,high,heavy_rain_flood
+2023-07-06,Pithoragarh,sandrp,high,moderate,flash_flood
+2023-07-09,Dehradun,imd,high,high,landslide_rain
+2023-07-09,Udham Singh Nagar,imd,high,high,heavy_rain_flood
+2023-07-10,Chamoli,sandrp,high,moderate,cloudburst
+2023-07-10,Uttarkashi,imd,high,high,heavy_rain_flood
+2023-07-11,Pithoragarh,imd,high,high,landslide_rain
+2023-07-11,Rudraprayag,imd,high,high,landslide_rain
+2023-07-15,Bageshwar,sandrp,high,moderate,cloudburst
+2023-07-16,Chamoli,imd,high,high,riverine_flood
+2023-07-16,Rudraprayag,imd,high,moderate,riverine_flood
+2023-07-17,Rudraprayag,imd,high,moderate,riverine_flood
+2023-07-18,Bageshwar,sandrp,high,moderate,flash_flood
+2023-07-18,Pithoragarh,sandrp,high,high,cloudburst
+2023-07-20,Pauri Garhwal,sandrp,high,moderate,cloudburst
+2023-07-22,Pithoragarh,sandrp,high,moderate,cloudburst
+2023-07-22,Uttarkashi,sandrp,high,moderate,cloudburst
+2023-08-01,Nainital,sandrp,high,moderate,cloudburst
+2023-08-04,Rudraprayag,imd,high,high,landslide_rain
+2023-08-04,Rudraprayag,sandrp,high,high,cloudburst
+2023-08-05,Chamoli,sandrp,high,moderate,cloudburst
+2023-08-06,Chamoli,sandrp,high,high,cloudburst
+2023-08-06,Tehri Garhwal,imd,high,high,heavy_rain_flood
+2023-08-06,Tehri Garhwal,sandrp,high,high,cloudburst
+2023-08-07,Rudraprayag,imd,high,high,landslide_rain
+2023-08-08,Dehradun,sandrp,high,moderate,debris_flow
+2023-08-08,Nainital,sandrp,high,moderate,cloudburst
+2023-08-08,Pauri Garhwal,sandrp,high,high,cloudburst
+2023-08-09,Rudraprayag,imd,high,high,landslide_rain
+2023-08-10,Pauri Garhwal,imd,high,high,heavy_rain_flood
+2023-08-10,Rudraprayag,imd,high,high,landslide_rain
+2023-08-11,Rudraprayag,sandrp,high,moderate,cloudburst
+2023-08-13,Chamoli,sandrp,high,high,cloudburst
+2023-08-13,Pauri Garhwal,sandrp,high,moderate,cloudburst
+2023-08-13,Rudraprayag,sandrp,high,high,cloudburst
+2023-08-14,Dehradun,imd,high,high,landslide_rain
+2023-08-14,Tehri Garhwal,imd,high,high,landslide_rain
+2023-08-14,Uttarkashi,sandrp,high,high,cloudburst
+2023-08-15,Chamoli,imd,high,moderate,heavy_rain_flood
+2023-08-16,Chamoli,sandrp,high,high,flash_flood
+2023-08-17,Pauri Garhwal,sandrp,high,moderate,cloudburst
+2023-08-18,Pauri Garhwal,sandrp,high,moderate,debris_flow
+2023-08-21,Tehri Garhwal,imd,high,high,landslide_rain
+2023-08-22,Pauri Garhwal,sandrp,high,low,cloudburst
+2023-08-23,Pauri Garhwal,imd,high,high,heavy_rain_flood
+2023-08-26,Chamoli,imd,high,high,riverine_flood
+2023-09-15,Almora,sandrp,high,moderate,cloudburst
+2024-07-08,Almora,sphere,low,moderate,riverine_flood
+2024-07-08,Bageshwar,sphere,low,moderate,riverine_flood
+2024-07-08,Chamoli,sphere,low,moderate,riverine_flood
+2024-07-08,Champawat,curated,medium,low,riverine
+2024-07-08,Champawat,sphere,medium,moderate,riverine_flood
+2024-07-08,Pauri Garhwal,sphere,low,moderate,riverine_flood
+2024-07-08,Pithoragarh,sphere,low,moderate,riverine_flood
+2024-07-08,Udham Singh Nagar,curated,medium,low,riverine
+2024-07-08,Udham Singh Nagar,sphere,medium,moderate,riverine_flood
+2024-07-08,Uttarkashi,sphere,low,moderate,riverine_flood
+2024-07-09,Almora,sphere,low,moderate,riverine_flood
+2024-07-09,Bageshwar,sphere,low,moderate,riverine_flood
+2024-07-09,Chamoli,sphere,low,moderate,riverine_flood
+2024-07-09,Champawat,sphere,medium,moderate,riverine_flood
+2024-07-09,Pauri Garhwal,sphere,low,moderate,riverine_flood
+2024-07-09,Pithoragarh,sphere,low,moderate,riverine_flood
+2024-07-09,Udham Singh Nagar,sphere,medium,moderate,riverine_flood
+2024-07-09,Uttarkashi,sphere,low,moderate,riverine_flood
+2024-07-31,Haridwar,curated,high,high,urban_flooding
+2024-07-31,Rudraprayag,curated,high,low,cloudburst
+2024-07-31,Rudraprayag,sphere,high,high,cloudburst
+2024-07-31,Tehri Garhwal,curated,high,high,cloudburst
+2024-07-31,Tehri Garhwal,sphere,high,high,cloudburst
+2025-06-29,Uttarkashi,curated,medium,low,cloudburst
+2025-08-05,Uttarkashi,curated,high,high,flash_flood
+2025-08-05,Uttarkashi,emdat,high,,mudslide
+2025-08-05,Uttarkashi,sphere,high,high,flash_flood
+2025-08-06,Pauri Garhwal,sandrp,high,high,flash_flood
+2025-08-06,Pauri Garhwal,sphere,high,high,flash_flood
+2025-08-22,Chamoli,curated,high,low,cloudburst
+2025-08-29,Bageshwar,curated,high,high,cloudburst
+2025-08-29,Chamoli,curated,high,high,cloudburst
+2025-08-29,Rudraprayag,curated,high,low,cloudburst
+2025-08-29,Tehri Garhwal,curated,medium,low,cloudburst
+2025-09-15,Bageshwar,emdat,medium,,flash flood
+2025-09-15,Bageshwar,sphere,medium,moderate,flash_flood
+2025-09-15,Champawat,emdat,medium,,flash flood
+2025-09-15,Champawat,sphere,medium,high,cloudburst
+2025-09-15,Dehradun,emdat,medium,,flash flood
+2025-09-15,Dehradun,sphere,high,high,cloudburst
+2025-09-15,Haridwar,emdat,medium,,flash flood
+2025-09-15,Haridwar,sphere,medium,moderate,flash_flood
+2025-09-15,Nainital,emdat,medium,,flash flood
+2025-09-15,Nainital,sphere,medium,moderate,flash_flood
+2025-09-15,Pauri Garhwal,emdat,medium,,flash flood
+2025-09-15,Pauri Garhwal,sphere,medium,moderate,flash_flood
+2025-09-15,Pithoragarh,emdat,medium,,flash flood
+2025-09-15,Pithoragarh,sphere,medium,moderate,flash_flood
+2025-09-15,Udham Singh Nagar,emdat,medium,,flash flood
+2025-09-15,Udham Singh Nagar,sphere,medium,moderate,flash_flood
+2025-09-16,Bageshwar,emdat,medium,,flash flood
+2025-09-16,Bageshwar,sphere,medium,moderate,flash_flood
+2025-09-16,Champawat,emdat,medium,,flash flood
+2025-09-16,Champawat,sphere,medium,high,cloudburst
+2025-09-16,Dehradun,curated,high,low,cloudburst
+2025-09-16,Dehradun,emdat,medium,,flash flood
+2025-09-16,Dehradun,sphere,high,high,cloudburst
+2025-09-16,Haridwar,emdat,medium,,flash flood
+2025-09-16,Haridwar,sphere,medium,moderate,flash_flood
+2025-09-16,Nainital,emdat,medium,,flash flood
+2025-09-16,Nainital,sphere,medium,moderate,flash_flood
+2025-09-16,Pauri Garhwal,emdat,medium,,flash flood
+2025-09-16,Pauri Garhwal,sphere,medium,moderate,flash_flood
+2025-09-16,Pithoragarh,emdat,medium,,flash flood
+2025-09-16,Pithoragarh,sphere,medium,moderate,flash_flood
+2025-09-16,Udham Singh Nagar,emdat,medium,,flash flood
+2025-09-16,Udham Singh Nagar,sphere,medium,moderate,flash_flood
+2025-09-17,Bageshwar,emdat,medium,,flash flood
+2025-09-17,Bageshwar,sphere,medium,moderate,flash_flood
+2025-09-17,Chamoli,curated,high,high,cloudburst
+2025-09-17,Champawat,emdat,medium,,flash flood
+2025-09-17,Champawat,sphere,medium,high,cloudburst
+2025-09-17,Dehradun,emdat,medium,,flash flood
+2025-09-17,Haridwar,emdat,medium,,flash flood
+2025-09-17,Haridwar,sphere,medium,moderate,flash_flood
+2025-09-17,Nainital,emdat,medium,,flash flood
+2025-09-17,Nainital,sphere,medium,moderate,flash_flood
+2025-09-17,Pauri Garhwal,emdat,medium,,flash flood
+2025-09-17,Pauri Garhwal,sphere,medium,moderate,flash_flood
+2025-09-17,Pithoragarh,emdat,medium,,flash flood
+2025-09-17,Pithoragarh,sphere,medium,moderate,flash_flood
+2025-09-17,Udham Singh Nagar,emdat,medium,,flash flood
+2025-09-17,Udham Singh Nagar,sphere,medium,moderate,flash_flood

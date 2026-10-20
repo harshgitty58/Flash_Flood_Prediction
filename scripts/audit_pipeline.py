@@ -4,6 +4,7 @@ Checks that every stage exists, is newer than its inputs (not stale), and agrees
 Run: python scripts/audit_pipeline.py
 """
 import glob
+import hashlib
 import json
 import re
 import sys
@@ -56,9 +57,10 @@ def main():
     cl = ROOT / "data/processed/cleaned/rainfall_cleaned.parquet"
     c = pd.read_parquet(cl)
     newer(cl, *raw)
-    twin_ok = all(Path(f).read_bytes() == (ROOT / "flash-flood-prediction" / Path(f).relative_to(ROOT)).read_bytes()
-                  for f in glob.glob(str(ROOT / "curated_dataset/**/*.csv"), recursive=True))
-    (ok if twin_ok else fail)("curated_dataset/ and flash-flood-prediction/curated_dataset/ are byte-identical (pipeline reads the latter)")
+    man = ROOT / "curated_dataset/MANIFEST.sha256"
+    pins = [ln.split("  ", 1) for ln in man.read_text(encoding="utf-8").splitlines() if ln]
+    pin_ok = all(hashlib.sha256((ROOT / "curated_dataset" / rel).read_bytes()).hexdigest() == h for h, rel in pins)
+    (ok if pin_ok else fail)(f"curated_dataset/ matches MANIFEST.sha256 ({len(pins)} raw files pinned; the pipeline reads this single copy)")
     kept = c["rainfall_quality_flag"].value_counts().to_dict()
     (ok if len(c) > 0.85 * t.notna().sum() - 25000 else fail)(f"rainfall_cleaned: {len(c):,} rows, flags {kept}")
     (ok if (c.loc[c.rainfall_quality_flag == 'valid', 'rainfall_clean'] <= 150).all() else fail)("no valid reading above 150 mm/h")

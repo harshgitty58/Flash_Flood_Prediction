@@ -8,11 +8,9 @@ const GROUPS: [string, string[]][] = [
   ['Situation', ['overview', 'forecast', 'map', 'impact']],
   ['Analysis', ['uncertainty', 'events']],
   ['Validation', ['model', 'metrics']],
-  ['Space · Track B', ['space']],
   ['Platform', ['system']],
 ]
 const NAV = [
-  ['space', 'Space mode', 'M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 14.6 7.1 17.2l.9-5.5-4-3.9 5.5-.8z'],
   ['overview', 'Overview', 'M3 12l9-8 9 8M5 10v10h14V10'],
   ['forecast', 'Forecast', 'M3 17l5-6 4 3 8-9M14 5h6v6'],
   ['map', 'Risk Map', 'M9 4l-6 2v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14'],

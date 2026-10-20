@@ -1,6 +1,6 @@
 import { Area, Bar as RBar, BarChart, ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { PageHead, Panel, Pending, Stat } from '../components/ui'
-import { fmtTime, pct, useData, type Events as EventsData, type Snapshot, type TimelinePt } from '../lib/data'
+import { fmtTime, pct, useData, type Events as EventsData, type Metrics, type Snapshot, type TimelinePt } from '../lib/data'
 
 const axis = { fontSize: 11, fill: '#a9c2b3' }
 const tip = { contentStyle: { background: '#10231a', border: '1px solid #213c30', borderRadius: 8, fontSize: 12 } }
@@ -8,6 +8,7 @@ const tip = { contentStyle: { background: '#10231a', border: '1px solid #213c30'
 export function Forecast() {
   const tl = useData<TimelinePt[]>('timeline')
   const snap = useData<Snapshot>('snapshot')
+  const lead = useData<Metrics>('metrics')?.verification?.lead_time
   if (!tl || !snap) return null
   const T = snap.replay_time.slice(0, 16)
   const after = tl.filter(p => p.t > T)
@@ -20,8 +21,8 @@ export function Forecast() {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <Stat label="Now (peak station)" value={pct(snap.peak_p)} color="var(--color-severe)" />
         <Stat label="Peak, next 24 h" value={peak ? pct(peak.max_p) : '—'} sub={peak ? fmtTime(peak.t) : 'no predictions after replay time'} />
-        <Stat label="Lead time" value={<span className="text-xl text-mute">not claimed</span>}
-          sub="no forecast input (nowcasting); alerts at several gauges are mostly the district baseline. See Metrics." />
+        <Stat label="Warned before the event day" value={lead ? `${lead.warned_before}/${lead.events}` : '—'}
+          sub={lead ? `median lead ${lead.median_lead_h ?? '—'} h (first sustained ≥ ALERT); ${lead.baseline_only} already on as a district baseline, ${lead.missed} missed. Nowcast: no weather-forecast input.` : 'see Metrics'} />
         <Stat label="Stations in window" value={Math.max(...tl.map(p => p.n))} sub="max per hour" />
       </div>
       <Panel title="Flood probability · replay window" className="mt-4">

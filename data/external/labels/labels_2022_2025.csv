@@ -1,0 +1,97 @@
+event_id,date,end_date,district,place,type,hour_local,deaths,severity,date_confidence,sources,source_count,n_reports,source_ref
+EV-20220507-NAIN,2022-05-07,2022-05-07,Nainital,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220510-BAGE,2022-05-10,2022-05-10,Bageshwar,,flash_flood,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220627-NAIN,2022-06-27,2022-06-27,Nainital,,cloudburst,,,low,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220705-UTTA,2022-07-05,2022-07-05,Uttarkashi,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220708-BAGE,2022-07-08,2022-07-08,Bageshwar,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220708-PITH,2022-07-08,2022-07-08,Pithoragarh,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220709-NAIN,2022-07-09,2022-07-09,Nainital,,flash_flood,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220714-DEHR,2022-07-14,2022-07-14,Dehradun,,flash_flood,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220719-RUDR,2022-07-19,2022-07-19,Rudraprayag,,heavy_rain_flood,,2.0,high,high,imd,1,1,UEI-IMD-FL-2022-1098
+EV-20220720-CHAM,2022-07-20,2022-07-20,Chamoli,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220730-CHAM,2022-07-30,2022-07-30,Chamoli,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220730-PITH,2022-07-30,2022-07-30,Pithoragarh,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220801-PAUR,2022-08-01,2022-08-01,Pauri Garhwal,,cloudburst,,,low,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220809-RUDR,2022-08-09,2022-08-09,Rudraprayag,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220810-CHAM,2022-08-10,2022-08-10,Chamoli,,flash_flood,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220811-DEHR,2022-08-11,2022-08-11,Dehradun,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220811-UTTA,2022-08-11,2022-08-11,Uttarkashi,,flash_flood,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220819-DEHR,2022-08-19,2022-08-20,Dehradun,"Raipur block: Sarkhet, Maldevta, Thano (Song bridge), Tapkeshwar",cloudburst,02:40,,high,high,imd;sandrp;sphere,3,3,UEI-IMD-FL-2022-1099 | sitreps/sitrep1_floods_hp_uk_odisha_2022-08-20.pdf | sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220819-PAUR,2022-08-19,2022-08-20,Pauri Garhwal,,cloudburst,,2.0,high,high,imd;sandrp,2,2,UEI-IMD-FL-2022-1100 | sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220819-TEHR,2022-08-19,2022-08-20,Tehri Garhwal,,cloudburst,,5.0,high,high,imd;sandrp,2,2,UEI-IMD-FL-2022-1101 | sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220820-UTTA,2022-08-20,2022-08-20,Uttarkashi,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220824-RUDR,2022-08-24,2022-08-24,Rudraprayag,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220824-TEHR,2022-08-24,2022-08-24,Tehri Garhwal,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20220828-DEHR,2022-08-28,2022-08-28,Dehradun,,heavy_rain_flood,,3.0,high,high,imd,1,1,UEI-IMD-FL-2022-1102
+EV-20220922-DEHR,2022-09-22,2022-09-22,Dehradun,,landslide_rain,,,moderate,high,imd,1,1,UEI-IMD-FL-2022-1103
+EV-20220922-UTTA,2022-09-22,2022-09-22,Uttarkashi,,landslide_rain,,1.0,high,high,imd,1,1,UEI-IMD-FL-2022-1104
+EV-20220925-DEHR,2022-09-25,2022-09-25,Dehradun,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20221009-PITH,2022-10-09,2022-10-09,Pithoragarh,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2022.html
+EV-20230624-CHAM,2023-06-24,2023-06-24,Chamoli,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230625-RUDR,2023-06-25,2023-06-25,Rudraprayag,,heavy_rain_flood,,1.0,high,high,imd,1,1,UEI-IMD-FL-2023-0574
+EV-20230625-UTTA,2023-06-25,2023-06-25,Uttarkashi,,heavy_rain_flood,,1.0,high,high,imd,1,1,UEI-IMD-FL-2023-0575
+EV-20230706-PITH,2023-07-06,2023-07-06,Pithoragarh,,flash_flood,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230709-DEHR,2023-07-09,2023-07-09,Dehradun,,landslide_rain,,3.0,high,high,imd,1,1,UEI-IMD-FL-2023-0576
+EV-20230709-UDHA,2023-07-09,2023-07-09,Udham Singh Nagar,,heavy_rain_flood,,2.0,high,high,imd,1,1,UEI-IMD-FL-2023-0577
+EV-20230710-CHAM,2023-07-10,2023-07-10,Chamoli,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230710-UTTA,2023-07-10,2023-07-10,Uttarkashi,,heavy_rain_flood,,4.0,high,high,imd,1,1,UEI-IMD-FL-2023-0578
+EV-20230711-PITH,2023-07-11,2023-07-11,Pithoragarh,,landslide_rain,,5.0,high,high,imd,1,1,UEI-IMD-FL-2023-0579
+EV-20230711-RUDR,2023-07-11,2023-07-11,Rudraprayag,,landslide_rain,,3.0,high,high,imd,1,1,UEI-IMD-FL-2023-0580
+EV-20230715-BAGE,2023-07-15,2023-07-15,Bageshwar,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230716-CHAM,2023-07-16,2023-07-16,Chamoli,,riverine_flood,,5.0,high,high,imd,1,1,UEI-IMD-FL-2023-0581
+EV-20230716-RUDR,2023-07-16,2023-07-17,Rudraprayag,,riverine_flood,,,moderate,high,imd,1,2,UEI-IMD-FL-2023-0582 | UEI-IMD-FL-2023-0583
+EV-20230718-BAGE,2023-07-18,2023-07-18,Bageshwar,,flash_flood,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230718-PITH,2023-07-18,2023-07-18,Pithoragarh,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230720-PAUR,2023-07-20,2023-07-20,Pauri Garhwal,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230722-PITH,2023-07-22,2023-07-22,Pithoragarh,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230722-UTTA,2023-07-22,2023-07-22,Uttarkashi,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230801-NAIN,2023-08-01,2023-08-01,Nainital,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230804-RUDR,2023-08-04,2023-08-04,Rudraprayag,,cloudburst,,10.0,high,high,imd;sandrp,2,2,sandrp/uttarakhand_cloudbursts_2023.html | UEI-IMD-FL-2023-0584
+EV-20230805-CHAM,2023-08-05,2023-08-06,Chamoli,,cloudburst,,,high,high,sandrp,1,2,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230806-TEHR,2023-08-06,2023-08-06,Tehri Garhwal,,cloudburst,,2.0,high,high,imd;sandrp,2,2,sandrp/uttarakhand_cloudbursts_2023.html | UEI-IMD-FL-2023-0585
+EV-20230807-RUDR,2023-08-07,2023-08-07,Rudraprayag,,landslide_rain,,3.0,high,high,imd,1,1,UEI-IMD-FL-2023-0586
+EV-20230808-DEHR,2023-08-08,2023-08-08,Dehradun,,debris_flow,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230808-NAIN,2023-08-08,2023-08-08,Nainital,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230808-PAUR,2023-08-08,2023-08-08,Pauri Garhwal,,cloudburst,,,high,high,sandrp,1,2,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230809-RUDR,2023-08-09,2023-08-11,Rudraprayag,,landslide_rain,,7.0,high,high,imd;sandrp,2,3,UEI-IMD-FL-2023-0587 | UEI-IMD-FL-2023-0589 | sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230810-PAUR,2023-08-10,2023-08-10,Pauri Garhwal,,heavy_rain_flood,,1.0,high,high,imd,1,1,UEI-IMD-FL-2023-0588
+EV-20230813-CHAM,2023-08-13,2023-08-13,Chamoli,,cloudburst,,,high,high,sandrp,1,3,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230813-PAUR,2023-08-13,2023-08-13,Pauri Garhwal,,cloudburst,,,moderate,high,sandrp,1,2,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230813-RUDR,2023-08-13,2023-08-13,Rudraprayag,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230814-DEHR,2023-08-14,2023-08-14,Dehradun,,landslide_rain,,4.0,high,high,imd,1,1,UEI-IMD-FL-2023-0590
+EV-20230814-TEHR,2023-08-14,2023-08-14,Tehri Garhwal,,landslide_rain,,4.0,high,high,imd,1,1,UEI-IMD-FL-2023-0591
+EV-20230814-UTTA,2023-08-14,2023-08-14,Uttarkashi,,cloudburst,,,high,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230815-CHAM,2023-08-15,2023-08-16,Chamoli,,heavy_rain_flood,,,high,high,imd;sandrp,2,2,UEI-IMD-FL-2023-0592 | sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230817-PAUR,2023-08-17,2023-08-18,Pauri Garhwal,,cloudburst,,,moderate,high,sandrp,1,2,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20230821-TEHR,2023-08-21,2023-08-21,Tehri Garhwal,,landslide_rain,,5.0,high,high,imd,1,1,UEI-IMD-FL-2023-0593
+EV-20230822-PAUR,2023-08-22,2023-08-23,Pauri Garhwal,,cloudburst,,1.0,high,high,imd;sandrp,2,2,sandrp/uttarakhand_cloudbursts_2023.html | UEI-IMD-FL-2023-0594
+EV-20230826-CHAM,2023-08-26,2023-08-26,Chamoli,,riverine_flood,,2.0,high,high,imd,1,1,UEI-IMD-FL-2023-0633
+EV-20230915-ALMO,2023-09-15,2023-09-15,Almora,,cloudburst,,,moderate,high,sandrp,1,1,sandrp/uttarakhand_cloudbursts_2023.html
+EV-20240708-ALMO,2024-07-08,2024-07-09,Almora,,riverine_flood,,,moderate,low,sphere,1,1,sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240708-BAGE,2024-07-08,2024-07-09,Bageshwar,,riverine_flood,,,moderate,low,sphere,1,1,sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240708-CHAM,2024-07-08,2024-07-09,Chamoli,,riverine_flood,,,moderate,low,sphere,1,1,sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240708-CHAM,2024-07-08,2024-07-09,Champawat,"Banbasa, Tanakpur; Banbasa barrage (Sharda)",riverine,,,moderate,high,curated;sphere,2,2,https://www.newsonair.gov.in/imd-issues-warnings-of-low-to-moderate-threat-of-flash-floods-in-various-districts-of-uttarakhand | sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240708-PAUR,2024-07-08,2024-07-09,Pauri Garhwal,,riverine_flood,,,moderate,low,sphere,1,1,sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240708-PITH,2024-07-08,2024-07-09,Pithoragarh,,riverine_flood,,,moderate,low,sphere,1,1,sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240708-UDHA,2024-07-08,2024-07-09,Udham Singh Nagar,"Khatima, Sitarganj",riverine,,,moderate,high,curated;sphere,2,2,https://www.newsonair.gov.in/imd-issues-warnings-of-low-to-moderate-threat-of-flash-floods-in-various-districts-of-uttarakhand | sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240708-UTTA,2024-07-08,2024-07-09,Uttarkashi,,riverine_flood,,,moderate,low,sphere,1,1,sitreps/sitrep1_india_floods_2024-07-09.pdf
+EV-20240731-HARI,2024-07-31,2024-07-31,Haridwar,"Bhupatwala, Kankhal, Jwalapur",urban_flooding,,,high,high,curated,1,1,https://reliefweb.int/report/india/situation-report-1-uttarakhand-cloudburst-flash-floods-date-05th-aug-2024-mon-time-900-am-ist
+EV-20240731-RUDR,2024-07-31,2024-07-31,Rudraprayag,"Kedarnath trek route: Ghoraparav, Lincholi, Bhimbali; Bhimbali, Kedarnath trek route",cloudburst,,,high,high,curated;sphere,2,2,sitreps/sitrep1_uttarakhand_cloudburst_2024-08-05.pdf | https://www.businesstoday.in/india/story/kedarnath-cloudburst-200-pilgrims-trapped-red-alert-across-uttarakhand-439642-2024-08-01
+EV-20240731-TEHR,2024-07-31,2024-07-31,Tehri Garhwal,"Ghansali; Bal Ganga & Budhakedar (Bhilangana block); Ghansali, Nautar stream",cloudburst,,,high,high,curated;sphere,2,2,sitreps/sitrep1_uttarakhand_cloudburst_2024-08-05.pdf | https://www.socialnews.xyz/2024/07/31/cloudbursts-in-uttarakhand-claim-two-lives-in-tehri-leave-200-stranded-in-kedarnath/
+EV-20250629-UTTA,2025-06-29,2025-06-29,Uttarkashi,Yamunotri highway (Silai band),cloudburst,,,low,medium,curated,1,1,https://news24online.com/india/from-kedarnath-to-dharali-six-devastating-cloudbursts-that-shook-uttarakhand-to-its-core/612417/
+EV-20250805-UTTA,2025-08-05,2025-08-05,Uttarkashi,"Dharali, Sukhi Top, Harsil, Kheer Ganga catchment; Dharali (Kheer Ganga), near Harsil; Dharali village (Uttarkashi district, Uttarakhand state)",flash_flood,13:45,6.0,high,high,curated;emdat;sphere,3,3,sitreps/sitrep1_uttarakhand_dharali_2025-08-06.pdf; sitreps/sitrep2_uttarakhand_dharali_2025-08-07.pdf | https://en.wikipedia.org/wiki/2025_Uttarakhand_flash_flood | https://public.emdat.be/ (DisNo. 2025-0651-IND)
+EV-20250806-PAUR,2025-08-06,2025-08-06,Pauri Garhwal,"Thalisain block: Bankura (Katola gaad), West Nayyar, Kalgarhi bridge",flash_flood,07:30,2.0,high,high,sandrp;sphere,2,1,sitreps/sitrep2_uttarakhand_dharali_2025-08-07.pdf; sandrp/pauri_flashflood_2025-08.html
+EV-20250822-CHAM,2025-08-22,2025-08-22,Chamoli,Tharali (Tunri stream),cloudburst,,,low,high,curated,1,1,https://www.newsonair.gov.in/uttarakhand-cloudburst-in-chamoli-district-caused-widespread-damage-in-tharali-tehsil
+EV-20250829-BAGE,2025-08-29,2025-08-29,Bageshwar,Kapkot (Pausari gram panchayat),cloudburst,,,high,high,curated,1,1,https://thefederal.com/category/states/north/uttarakhand/uttarakhand-cloudburst-in-chamoli-rudraprayag-several-missing-stranded-204024
+EV-20250829-CHAM,2025-08-29,2025-08-29,Chamoli,Dewal block,cloudburst,,,high,high,curated,1,1,https://www.theweek.in/news/india/2025/08/29/uttarakhand-cloudbursts-several-feared-trapped-in-debris-in-rudraprayag-chamoli-districts.amp.html
+EV-20250829-RUDR,2025-08-29,2025-08-29,Rudraprayag,multiple villages,cloudburst,,,low,high,curated,1,1,https://www.newsonair.gov.in/uttarakhand-cloudburst-in-rudraprayag-chamoli-causes-widespread-damage
+EV-20250829-TEHR,2025-08-29,2025-08-29,Tehri Garhwal,,cloudburst,,,low,medium,curated,1,1,https://www.nationalheraldindia.com/amp/story/national/cloudbursts-landslides-ravage-uttarakhand-6-dead-11-missing
+EV-20250915-BAGE,2025-09-15,2025-09-17,Bageshwar,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",flash flood,,,moderate,high,emdat;sphere,2,2,https://public.emdat.be/ (DisNo. 2025-0803-IND) | sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf
+EV-20250915-CHAM,2025-09-15,2025-09-17,Champawat,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",flash flood,,,high,high,emdat;sphere,2,2,https://public.emdat.be/ (DisNo. 2025-0803-IND) | sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf
+EV-20250915-DEHR,2025-09-15,2025-09-17,Dehradun,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak; Sahastradhara, Maldevta, Tapkeshwar, P",cloudburst,,13.0,high,high,curated;emdat;sphere,3,3,https://public.emdat.be/ (DisNo. 2025-0803-IND) | sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf | https://www.business-standard.com/india-news/uttarakhand-cloudburst-dehradun-sahastradhara-river-pushkar-dhami-125091600359_1.html
+EV-20250915-HARI,2025-09-15,2025-09-17,Haridwar,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",flash flood,,,moderate,high,emdat;sphere,2,2,https://public.emdat.be/ (DisNo. 2025-0803-IND) | sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf
+EV-20250915-NAIN,2025-09-15,2025-09-17,Nainital,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",flash flood,,1.0,moderate,high,emdat;sphere,2,2,https://public.emdat.be/ (DisNo. 2025-0803-IND) | sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf
+EV-20250915-PAUR,2025-09-15,2025-09-17,Pauri Garhwal,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",flash_flood,,,moderate,high,emdat;sphere,2,2,sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf | https://public.emdat.be/ (DisNo. 2025-0803-IND)
+EV-20250915-PITH,2025-09-15,2025-09-17,Pithoragarh,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",flash flood,,1.0,moderate,high,emdat;sphere,2,2,https://public.emdat.be/ (DisNo. 2025-0803-IND) | sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf
+EV-20250915-UDHA,2025-09-15,2025-09-17,Udham Singh Nagar,"Dehradun, Champawat, Haridwar, Pauri Garhwal, Bageshwar, Pithoragarh, Nainital, and Udham Singh Nagar districts (Uttarak",flash flood,,,moderate,high,emdat;sphere,2,2,https://public.emdat.be/ (DisNo. 2025-0803-IND) | sitreps/sitrep1_uttarakhand_cloudburst_2025-09-17.pdf
+EV-20250917-CHAM,2025-09-17,2025-09-17,Chamoli,Nanda Nagar,cloudburst,,,high,high,curated,1,1,https://ianslive.in/cloudburst-in-uttarakhands-chamoli-leaves-5-missing-washes-away-six-houses--20250918080222

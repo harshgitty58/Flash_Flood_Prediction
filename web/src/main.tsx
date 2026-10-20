@@ -14,7 +14,6 @@ import DataLoader, { RiverOverlay, RouteTransition } from './components/RiverLoa
 const Uncertainty = lazy(() => import('./pages/Uncertainty'))
 const Metrics = lazy(() => import('./pages/Metrics'))
 const System = lazy(() => import('./pages/System'))
-const Space = lazy(() => import('./pages/Space'))
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -35,7 +34,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="model" element={<Model />} />
           <Route path="metrics" element={<Metrics />} />
           <Route path="system" element={<System />} />
-          <Route path="space" element={<Space />} />
+          <Route path="space" element={<Navigate to="/app/overview" replace />} />
         </Route>
       </Routes>
       </Suspense>

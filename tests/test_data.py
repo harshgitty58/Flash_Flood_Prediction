@@ -26,12 +26,14 @@ def inventory():
     return pd.read_parquet(CLEANED_DIR / "flood_inventory_cleaned.parquet")
 
 
-def test_raw_copies_identical():
-    """Pipeline reads flash-flood-prediction/curated_dataset; repo ships curated_dataset — must be the same bytes."""
-    for f in glob.glob(str(PROJECT_ROOT / "curated_dataset" / "**" / "*.csv"), recursive=True):
-        twin = PROJECT_ROOT / "flash-flood-prediction" / Path(f).relative_to(PROJECT_ROOT)
-        assert twin.exists(), twin
-        assert hashlib.md5(Path(f).read_bytes()).hexdigest() == hashlib.md5(twin.read_bytes()).hexdigest(), f
+def test_raw_files_match_manifest():
+    """The pipeline reads curated_dataset/ (one copy); every raw CSV must match its SHA-256 in MANIFEST.sha256."""
+    root = PROJECT_ROOT / "curated_dataset"
+    manifest = dict(line.split("  ", 1)[::-1] for line in (root / "MANIFEST.sha256").read_text(encoding="utf-8").splitlines() if line)
+    on_disk = {Path(f).relative_to(root).as_posix() for f in glob.glob(str(root / "**" / "*.csv"), recursive=True)}
+    assert on_disk == set(manifest), on_disk ^ set(manifest)
+    for rel, digest in manifest.items():
+        assert hashlib.sha256((root / rel).read_bytes()).hexdigest() == digest, rel
 
 
 def test_every_timestamp_parses():

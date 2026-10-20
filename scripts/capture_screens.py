@@ -48,12 +48,6 @@ def main():
             pg.mouse.wheel(0, 900); time.sleep(1.5)
         shot("12_metrics_ground_truth")
         go("/app/system", 4); shot("13_system")
-        go("/app/space", 9); shot("14_space_mode_dharali")
-        try:
-            pg.get_by_text("Who is cut off", exact=False).first.scroll_into_view_if_needed(); time.sleep(1.5)
-        except Exception:  # noqa: BLE001
-            pg.mouse.wheel(0, 1100); time.sleep(1.5)
-        shot("15_space_cutoff_model_card")
         b.close()
 
 

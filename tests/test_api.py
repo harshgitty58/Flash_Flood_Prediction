@@ -62,3 +62,25 @@ def test_external_services_reachable(client):
     r = client.get("/health/external").json()
     down = [s["name"] for s in r["services"] if not s["ok"]]
     assert r["ok"] >= r["total"] - 2, f"external services down: {down}"
+
+
+def test_admin_reload_is_protected(client, monkeypatch):
+    monkeypatch.delenv("PRAHAR_ADMIN_TOKEN", raising=False)
+    assert client.post("/admin/reload").status_code == 403                      # disabled without a server token
+    monkeypatch.setenv("PRAHAR_ADMIN_TOKEN", "test-token")
+    assert client.post("/admin/reload").status_code == 401                      # no header
+    assert client.post("/admin/reload", headers={"X-Admin-Token": "wrong"}).status_code == 401
+    assert client.post("/admin/reload", headers={"X-Admin-Token": "test-token"}).status_code == 200
+
+
+def test_cors_is_an_allow_list(client):
+    ok = client.get("/stations", headers={"Origin": "http://localhost:5173"})
+    assert ok.headers.get("access-control-allow-origin") == "http://localhost:5173"
+    bad = client.get("/stations", headers={"Origin": "https://evil.example"})
+    assert "access-control-allow-origin" not in bad.headers
+
+
+def test_reading_cap_matches_cleaning():
+    from backend.app import Reading
+    from src.cleaning import MAX_PLAUSIBLE_MM_HR
+    assert Reading.model_fields["rain_mm"].metadata[-1].le == MAX_PLAUSIBLE_MM_HR

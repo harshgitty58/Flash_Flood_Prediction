@@ -1,0 +1,46 @@
+# PRAHAR: one place for every modelling and quality-control constant (PRAHAR_MASTER_PLAN.md WS-02.1, Appendix B).
+# Modules read these values through src/params.py, so a change here propagates everywhere (and is visible in review).
+# Values below are the ones the reported results were produced with; change them only through a pre-registered rule.
+
+qc:
+  rain_error_code_mm: 511.5        # CWC telemetry error code
+  rain_max_mm_h: 150.0             # plausibility cap; also the API input limit for /predict readings (V-35)
+  faulty_share: 0.20               # quarantine a gauge if > 20 % of its readings exceed faulty_mm_h
+  faulty_mm_h: 100.0
+  discharge_max_m3s: 15000.0       # sentinel / physically implausible discharge
+  offline_gap_monsoon_h: 168       # Jun-Sep: no record for 7 days = gauge offline (absent hours are dry by CWC design)
+  offline_gap_dry_h: 1080          # other months: 45 days
+
+features:
+  rain_windows_h: [3, 6, 12, 24, 48, 72]
+  api_decay_hourly: 0.85           # half-life 4.3 h (V-12); daily API to be added (WS-04.3)
+
+event_cv:
+  window_days: 3                   # test rows within +/- 3 days of a held-out episode
+  buffer_days: 7                   # training rows further than 7 days from it
+  merge_days: 4                    # flood days <= 4 days apart form one episode
+
+conformal:
+  alphas: [0.20, 0.10, 0.05]
+  grid_points: 400                 # Venn-Abers look-up grid (latency)
+
+tiers:
+  names: [NORMAL, WATCH, ALERT, SEVERE, EXTREME]
+  lift: {WATCH: 2, ALERT: 5, SEVERE: 10, EXTREME: 20}   # ML cut-off = lift x calibration base rate
+
+rain:
+  imd_24h_mm: {moderate: 15.6, heavy: 64.5, very_heavy: 115.6, extremely_heavy: 204.5}   # IMD categories
+  cloudburst_1h_mm: 100.0
+  default_rule: {alert_24h: 64.5, fresh_6h: 0.0, susceptibility: true}
+
+impact:
+  radius_km: 5.0
+  setback_zones_m: [50.0, 100.0, 200.0]   # NGT 2017 / Jal Shakti 2025 / Uttarakhand HC 2013
+  level_score: [5, 25, 45, 65, 85]        # MINIMAL..CRITICAL (class cut-offs 20/40/60/80)
+  stale_days: 7
+  town_km: 3.0
+
+api:
+  # browser origins allowed to call the API (the web app normally goes through the Vite proxy, i.e. same origin)
+  cors_origins: ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:4173", "http://127.0.0.1:4173"]
+  cors_origin_regex: "https://.*\\.vercel\\.app"

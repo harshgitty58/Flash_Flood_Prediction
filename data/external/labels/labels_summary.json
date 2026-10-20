@@ -1,0 +1,25 @@
+{
+  "events": 96,
+  "district_days": 130,
+  "by_year": {
+    "2022": 28,
+    "2023": 40,
+    "2024": 11,
+    "2025": 17
+  },
+  "by_confidence": {
+    "high": 88,
+    "low": 6,
+    "medium": 2
+  },
+  "by_source_family": {
+    "curated": 14,
+    "emdat": 25,
+    "imd": 29,
+    "sandrp": 52,
+    "sphere": 44
+  },
+  "corroborated_events": 22,
+  "excluded": 1,
+  "unresolved": 0
+}

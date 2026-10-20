@@ -7,7 +7,7 @@ from pathlib import Path
 
 # Base Paths
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-CURATED_DATA_DIR = PROJECT_ROOT / "flash-flood-prediction" / "curated_dataset"
+CURATED_DATA_DIR = PROJECT_ROOT / "curated_dataset"  # single copy; checked against curated_dataset/MANIFEST.sha256
 DATA_DIR = PROJECT_ROOT / "data"
 PROCESSED_DIR = DATA_DIR / "processed"
 RESULTS_DIR = PROJECT_ROOT / "results"

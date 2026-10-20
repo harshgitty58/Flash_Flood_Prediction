@@ -1,4 +1,4 @@
-"""Home-page imagery: Sentinel-2 L2A true-colour scenes of Uttarakhand flood sites (no people — Track B rule).
+"""Home-page imagery: Sentinel-2 L2A true-colour scenes of Uttarakhand flood sites (landscapes only, no people).
 
 Searches the public Earth Search STAC (Element 84, AWS open data, no account) for the clearest scene in a window,
 reads only the needed window of the 10 m 'visual' COG, and writes a compressed WebP to web/public/img/home/.

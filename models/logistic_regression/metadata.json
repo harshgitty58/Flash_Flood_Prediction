@@ -32,7 +32,7 @@
     "classifier__class_weight": "balanced",
     "classifier__C": 0.01
   },
-  "validation_metrics": {
+  "test_metrics": {
     "roc_auc": 0.7407,
     "pr_auc": 0.1389,
     "precision": 0.1693,

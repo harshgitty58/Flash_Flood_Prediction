@@ -1,5 +1,8 @@
 # Objective 2: Data Preparation & Transformation Technical Report
 
+> **Historical report (Objective 2 stage, September 2026).** Several figures below were superseded by later data fixes (timestamp parsing, offline-gauge handling, label join, duplicate station-hours). Current values: 518,304 station-hours, 44 rain gauges, labels to 2023-08-26, splits train < 2023-07-01 / validation July 2023 / test 1–25 Aug 2023. See `results/splits.json`, `web/public/data/model.json` and `results/phase4_report.md`.
+
+
 **Project Title:** Evaluating Multi-Source Data Fusion and Uncertainty in Hyper-Local Flash-Flood Prediction for Hilly Regions of India  
 **Study Region:** Uttarakhand, India  
 **Objective:** Objective 2 — Data Transformation, Cleaning, Alignment, Normalization, and Feature Engineering  
@@ -15,7 +18,7 @@ All operations strictly adhered to the requirements established in [`ANTIGRAVITY
 * **Zero Target Leakage**: Backward-looking rolling windows only. Historical hazard exposure constructed exclusively from events preceding prediction time $t$.
 * **No Artificial Imputation**: Sensor failures and negative readings flagged explicitly (`negative_invalid`, `missing`) without blanket `fillna(0)` zero-substitution.
 * **Geographical Integrity**: Preserved district-level precision for historical disaster records rather than fabricating artificial point coordinates.
-* **Chronological Splitting**: Pre-configured temporal boundary (train $< 2025$, holdout test $\ge 2025$) to prevent future-to-past data leakage.
+* **Chronological Splitting**: train < 2023-07-01, validation July 2023, held-out test 1–25 Aug 2023 (labels end 2023-08-26; later hours are unlabelled replay), so no future data reaches the past (see `results/splits.json`).
 
 ---
 

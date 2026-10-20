@@ -33,6 +33,7 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 import requests
+import yaml
 from PIL import Image
 from shapely.geometry import LineString, Point, shape
 from shapely.ops import nearest_points, transform  # noqa: shapely 2.x still supports it
@@ -42,10 +43,11 @@ import shapely
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web" / "public" / "data"
 CACHE = ROOT / "data" / "external"
-RADIUS_KM, H_MAX_M, D_MAX_M, DEM_Z = 5.0, 25.0, 500.0, 13
-ZONES_M = (50.0, 100.0, 200.0)  # official river-setback zones A/B/C (see docstring)
-LEVEL_SCORE = (5, 25, 45, 65, 85)  # representative score per class MINIMAL..CRITICAL (class cut-offs 20/40/60/80)
-D_MAX_STREAM_M, GATE_M, STALE_DAYS, TOWN_KM = 200.0, 1500.0, 7, 3.0
+P = yaml.safe_load((ROOT / "params.yaml").read_text(encoding="utf-8"))  # shared constants (WS-02.1)
+RADIUS_KM, H_MAX_M, D_MAX_M, DEM_Z = P["impact"]["radius_km"], 25.0, 500.0, 13
+ZONES_M = tuple(P["impact"]["setback_zones_m"])  # official river-setback zones A/B/C (see docstring)
+LEVEL_SCORE = tuple(P["impact"]["level_score"])  # representative score per class MINIMAL..CRITICAL (class cut-offs 20/40/60/80)
+D_MAX_STREAM_M, GATE_M, STALE_DAYS, TOWN_KM = 200.0, 1500.0, P["impact"]["stale_days"], P["impact"]["town_km"]
 # processed first (city centres, then pilgrimage/event sites), so a suburb never claims a capital's circle
 SITES = {"Dehradun": (30.3165, 78.0322), "Haridwar": (29.9457, 78.1642), "Rishikesh": (30.0869, 78.2676), "Roorkee": (29.8543, 77.888),
          "Rudrapur": (28.9845, 79.4141), "Kashipur": (29.2104, 78.9619), "Almora": (29.5971, 79.6591), "Pithoragarh": (29.5829, 80.2182),
@@ -57,7 +59,7 @@ CHUNK = 3  # stations per Overpass query (one big query times out)
 NAMED_KEYS = ("amenity", "tourism", "historic", "shop", "healthcare", "office", "leisure", "man_made", "building")  # indexed per-key filters (a key regex is too slow)
 PLACE_RANK = {"city": 1, "town": 1, "village": 2, "suburb": 2, "hamlet": 3}
 CLASSES = [(80, "CRITICAL", "#e0115f"), (60, "HIGH", "#ff4d2e"), (40, "MODERATE", "#ff9f1c"), (20, "LOW", "#f5d547"), (0, "MINIMAL", "#3ddc97")]
-UA = {"User-Agent": "FloodGuard-course-project/0.1"}
+UA = {"User-Agent": "PRAHAR-course-project/1.0 (+https://github.com/harshgitty58/Flash_Flood_Prediction)"}
 
 
 def strict(o):

@@ -32,15 +32,19 @@ desktop.ini
 
 # Parquet (large ML dataset) - comment out if you want it tracked
 # data/processed/final/*.parquet
-data/external/
+data/external/*
+# ...except the derived label set (small CSV/JSON, needed by tests/test_labels.py); raw PDFs/HTML and EM-DAT exports stay out (licences)
+!data/external/labels/
+data/external/labels/*
+!data/external/labels/*.csv
+!data/external/labels/labels_summary.json
+data/external/labels/emdat_*
 
-# Large, regenerable outputs (rebuilt by scripts/run_all.py / src.space.run); GitHub rejects files > 100 MB
+# Large, regenerable outputs (rebuilt by scripts/run_all.py); GitHub rejects files > 100 MB
 results/impact/buildings.geojson
 results/conformal/cp_replay_predictions.csv
 results/shap/shap_top_drivers.csv
 results/warning_levels/replay_warning_levels.csv
-results/space/*/osm_before.json
-models/space/best.pt
 node_modules/
 web/dist/
 *.log
@@ -50,5 +54,6 @@ web/dist/
 
 # submission assets (video/screens) are uploaded separately
 submission media/
-results/space/_cache/
-results/space/*/s2_clear.tif
+
+# nested duplicate of curated_dataset/ (old data repo); the pipeline reads curated_dataset/ only
+flash-flood-prediction/

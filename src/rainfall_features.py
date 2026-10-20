@@ -6,7 +6,9 @@ Constructs strictly backward-looking cumulative precipitation, API, and intensit
 import pandas as pd
 import numpy as np
 
-def compute_antecedent_precipitation_index(rainfall_series: pd.Series, decay_factor: float = 0.85) -> np.ndarray:
+from src.params import P
+
+def compute_antecedent_precipitation_index(rainfall_series: pd.Series, decay_factor: float = P["features"]["api_decay_hourly"]) -> np.ndarray:
     """Computes Antecedent Precipitation Index (API): API_t = API_{t-1} * k + P_t."""
     vals = rainfall_series.fillna(0.0).values
     api = np.zeros(len(vals), dtype=np.float64)
@@ -19,8 +21,8 @@ def compute_antecedent_precipitation_index(rainfall_series: pd.Series, decay_fac
         api[i] = current_api
     return np.round(api, 3)
 
-OFFLINE_GAP_MONSOON_H = 7 * 24   # Jun-Sep: a week without any rain record = gauge offline
-OFFLINE_GAP_DRY_H = 45 * 24      # other months: dry spells are long, so allow 45 days
+OFFLINE_GAP_MONSOON_H = P["qc"]["offline_gap_monsoon_h"]   # Jun-Sep: a week without any rain record = gauge offline
+OFFLINE_GAP_DRY_H = P["qc"]["offline_gap_dry_h"]           # other months: dry spells are long, so allow 45 days
 
 
 def to_hourly_grid(df: pd.DataFrame) -> pd.DataFrame:

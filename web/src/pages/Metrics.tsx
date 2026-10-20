@@ -50,15 +50,17 @@ export default function Metrics() {
         <div className="overflow-x-auto">
           <table className="w-full font-mono text-sm">
             <thead><tr className="text-left text-mute"><th className="py-2 font-normal">Model</th><th className="font-normal">Split</th>
-              {COLS.map(([, h]) => <th key={h} className="px-2 text-right font-normal">{h}</th>)}</tr></thead>
+              {COLS.map(([, h]) => <th key={h} className="px-2 text-right font-normal">{h}</th>)}<th className="px-2 text-right font-normal">Base rate</th><th className="px-2 text-right font-normal">PR-AUC lift</th></tr></thead>
             <tbody>{m.hour_level.map(r => (
               <tr key={r.model + r.split} className={`border-t border-line ${r.model === 'xgboost' ? 'text-brand' : ''}`}>
                 <td className="py-1.5 font-sans">{NAME[r.model]}</td><td className="text-mute">{r.split}</td>
                 {COLS.map(([c, , f]) => <td key={c} className="px-2 text-right">{r[c] == null ? '—' : f(Number(r[c]))}</td>)}
+                <td className="px-2 text-right">{(Number(r.positives) / Number(r.rows)).toFixed(3)}</td>
+                <td className="px-2 text-right">{(Number(r.pr_auc) / (Number(r.positives) / Number(r.rows))).toFixed(1)}×</td>
               </tr>))}</tbody>
           </table>
         </div>
-        <p className="mt-2 text-[11px] text-mute">Rare events: base rate ≈ {pct(m.splits.test.positives / m.splits.test.rows, 1)} of test hours are flood hours, so PR-AUC and F1 matter more than accuracy. Green = deployed model.</p>
+        <p className="mt-2 text-[11px] text-mute">Rare events: base rate ≈ {pct(m.splits.test.positives / m.splits.test.rows, 1)} of test hours are flood hours, so PR-AUC and F1 matter more than accuracy. PR-AUC lift = PR-AUC ÷ base rate (1× = chance). Green = deployed model.</p>
       </Panel>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-[1.5fr_1fr]">

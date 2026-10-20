@@ -19,11 +19,12 @@ import pandas as pd
 from sklearn.isotonic import IsotonicRegression
 
 from src.model_config import RESULTS_DIR, TARGET_COL
+from src.params import P
 
 PRED_DIR = RESULTS_DIR / "predictions"
 OUT_DIR = RESULTS_DIR / "conformal"
-ALPHAS = (0.20, 0.10, 0.05)
-GRID_POINTS = 400
+ALPHAS = tuple(P["conformal"]["alphas"])
+GRID_POINTS = P["conformal"]["grid_points"]
 
 
 def venn_abers(cal_s: np.ndarray, cal_y: np.ndarray, s: np.ndarray) -> tuple[np.ndarray, np.ndarray]:

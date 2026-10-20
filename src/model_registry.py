@@ -36,7 +36,7 @@ def save_model_artifact(
         "feature_count": len(feature_list),
         "features": feature_list,
         "selected_hyperparameters": hyperparameters,
-        "validation_metrics": metrics,
+        "test_metrics": metrics,  # held-out test split (train_pipeline passes test_metrics)
         "operating_threshold": threshold,
         "training_start_date": train_range[0],
         "training_end_date": train_range[1],
@@ -55,15 +55,18 @@ def save_model_artifact(
         "train_start": train_range[0],
         "train_end": train_range[1],
         "threshold": threshold,
-        "val_roc_auc": metrics.get("roc_auc"),
-        "val_pr_auc": metrics.get("pr_auc"),
-        "val_f1": metrics.get("f1"),
+        "test_roc_auc": metrics.get("roc_auc"),
+        "test_pr_auc": metrics.get("pr_auc"),
+        "test_f1": metrics.get("f1"),
+        "status": "current",
         "model_path": str(model_path.relative_to(MODELS_DIR.parent)),
         "notes": notes,
     }
     
     if REGISTRY_CSV.exists():
         reg_df = pd.read_csv(REGISTRY_CSV)
+        if "status" in reg_df:  # one current run per model; earlier runs stay as history
+            reg_df.loc[reg_df["model_name"] == model_name, "status"] = "superseded"
         reg_df = pd.concat([reg_df, pd.DataFrame([record])], ignore_index=True)
     else:
         reg_df = pd.DataFrame([record])

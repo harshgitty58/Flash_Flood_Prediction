@@ -9,21 +9,30 @@ Latency design
 - GZip for responses > 1 KB; long Cache-Control for immutable building tiles
 - /predict uses O(1) incremental features + lookup-table calibration (backend/inference.py)
 - every response carries X-Process-Time-ms so latency is measured, not assumed
+
+Security: CORS is an allow-list (params.yaml → api, overridable with PRAHAR_CORS_ORIGINS, comma-separated);
+POST /admin/reload needs the header X-Admin-Token equal to the PRAHAR_ADMIN_TOKEN environment variable
+(the route is disabled when the variable is not set).
 """
 import asyncio
 import hashlib
 import json
+import os
+import secrets
 import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 import httpx
 import pandas as pd
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, Header, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel, Field
 
 from backend.inference import Engine
+from src.cleaning import MAX_PLAUSIBLE_MM_HR
+from src.params import P
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "web/public/data"
@@ -41,9 +50,18 @@ EXTERNAL = {
     "google_fonts": "https://fonts.googleapis.com/css2?family=Anton&display=swap",
 }
 
-app = FastAPI(title="PRAHAR API", version="1.0")
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    load_all()
+    yield
+
+
+app = FastAPI(title="PRAHAR API", version="1.0", lifespan=lifespan)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+CORS_ORIGINS = [o.strip() for o in os.environ.get("PRAHAR_CORS_ORIGINS", ",".join(P["api"]["cors_origins"])).split(",") if o.strip()]
+app.add_middleware(CORSMiddleware, allow_origins=CORS_ORIGINS, allow_origin_regex=P["api"]["cors_origin_regex"],
+                   allow_methods=["GET", "POST"], allow_headers=["*"])
 
 STATE: dict = {}
 
@@ -65,11 +83,6 @@ def load_all():
     # which browsers reject as JSON, so the Metrics page was blank in API mode)
     STATE.update(blobs=blobs, tiles={}, engine=Engine(), loaded_at=time.time())
     STATE["startup_ms"] = round((time.perf_counter() - t0) * 1000, 1)
-
-
-@app.on_event("startup")
-def _startup():
-    load_all()
 
 
 @app.middleware("http")
@@ -194,7 +207,7 @@ def landmarks(request: Request):
 # ---------------- live inference ---------------------------------------------------------------------------------
 class Reading(BaseModel):
     datetime: str
-    rain_mm: float = Field(ge=0, le=150)
+    rain_mm: float = Field(ge=0, le=MAX_PLAUSIBLE_MM_HR)  # same cap as data cleaning (params.yaml → qc)
 
 
 class PredictIn(BaseModel):
@@ -229,146 +242,11 @@ def scenario(body: PredictIn):
 
 
 @app.post("/admin/reload")
-def reload():
+def reload(x_admin_token: str | None = Header(default=None)):
+    expected = os.environ.get("PRAHAR_ADMIN_TOKEN")
+    if not expected:
+        raise HTTPException(403, "admin routes are disabled: set PRAHAR_ADMIN_TOKEN on the server")
+    if not x_admin_token or not secrets.compare_digest(x_admin_token, expected):
+        raise HTTPException(401, "missing or wrong X-Admin-Token")
     load_all()
     return {"reloaded": True, "startup_ms": STATE["startup_ms"]}
-
-
-# ---------------- Space mode (Track B): run the satellite pipeline for any area + date ---------------------------
-import re  # noqa: E402
-import subprocess  # noqa: E402
-import sys  # noqa: E402
-import threading  # noqa: E402
-import uuid  # noqa: E402
-
-JOBS: dict = {}
-STAGES = [("grid", "Preparing the map grid"), ("S1 pairs", "Found Sentinel-1 before/after pairs"), ("S2:", "Sentinel-2 checked"),
-          ('"flood"', "Damage and cut-off computed"), ("Situation report", "Situation report written"), ("space_", "Published to the dashboard")]
-
-
-class SpaceRun(BaseModel):
-    bbox: list[float] = Field(..., min_length=4, max_length=4, description="W,S,E,N in WGS84")
-    date: str = Field(..., description="event time UTC, e.g. 2026-08-25 22:00")
-    name: str | None = None
-    res: float = Field(10.0, ge=10.0, le=30.0)
-
-
-def _space_job(jid: str, req: SpaceRun):
-    j = JOBS[jid]
-    log = RESULTS / "space" / f"{j['name']}_run.log"
-    log.parent.mkdir(parents=True, exist_ok=True)
-    cmds = [[sys.executable, "-u", "-m", "src.space.run", "--name", j["name"], "--bbox", ",".join(map(str, req.bbox)), "--date", req.date, "--res", str(req.res)],
-            [sys.executable, "-m", "src.space.report", "--name", j["name"]],
-            [sys.executable, "scripts/export_space.py", "--name", j["name"]]]
-    with open(log, "w", encoding="utf-8") as fh:
-        for c in cmds:
-            j["proc"] = subprocess.Popen(c, cwd=ROOT, stdout=fh, stderr=subprocess.STDOUT, env={**__import__("os").environ, "PYTHONIOENCODING": "utf-8"})
-            if j["proc"].wait() != 0 or j["status"] == "cancelled":
-                j.update(status="cancelled" if j["status"] == "cancelled" else "failed", finished=time.time())
-                return
-    for p in DATA.glob("space*.json"):
-        STATE["blobs"][p.stem] = _blob(p)
-    j.update(status="done", finished=time.time())
-
-
-@app.post("/space/run")
-def space_run(req: SpaceRun):
-    w, s, e, n = req.bbox
-    if not (w < e and s < n) or (e - w) * (n - s) > 0.06:
-        raise HTTPException(422, "bbox must be W<E, S<N and at most ~0.06 deg² (about 600 km²) for a live run")
-    name = re.sub(r"[^a-z0-9_]", "_", (req.name or f"run_{req.date[:10]}_{w:.2f}_{s:.2f}").lower())[:48]
-    if any(j["status"] == "running" for j in JOBS.values()):
-        raise HTTPException(429, "a Space-mode run is already in progress")
-    jid = uuid.uuid4().hex[:10]
-    JOBS[jid] = {"id": jid, "name": name, "status": "running", "started": time.time()}
-    threading.Thread(target=_space_job, args=(jid, req), daemon=True).start()
-    return _pub(JOBS[jid])
-
-
-def _pub(j: dict) -> dict:
-    return {k: v for k, v in j.items() if k != "proc"}
-
-
-@app.get("/space/jobs")
-def space_jobs():
-    return [_pub(j) for j in JOBS.values()]
-
-
-@app.post("/space/jobs/{jid}/cancel")
-def space_cancel(jid: str):
-    j = JOBS.get(jid)
-    if not j:
-        raise HTTPException(404, "unknown job")
-    if j["status"] == "running":
-        j["status"] = "cancelled"
-        if j.get("proc"):
-            j["proc"].kill()
-    return _pub(j)
-
-
-@app.get("/space/check")
-def space_check(bbox: str, date: str):
-    """Fast pre-check (catalogue search only): are there same-orbit Sentinel-1 before/after pairs for this area and date?"""
-    from src.space import data as sdata
-    try:
-        b = tuple(float(v) for v in bbox.split(","))
-        pairs = sdata.s1_pairs(b, pd.Timestamp(date))
-    except Exception as e:  # noqa: BLE001
-        raise HTTPException(422, f"bad input or catalogue unavailable: {type(e).__name__}")
-    return {"ok": bool(pairs), "pairs": [{k: p[k] for k in ("orbit", "state", "before_t", "after_t")} for p in pairs],
-            "message": None if pairs else "No same-orbit Sentinel-1 pair within 12 days after the event: try a later date or a larger area."}
-
-
-@app.get("/space/events")
-def space_events(request: Request):
-    return send(blob_or_404("space_index"), request)
-
-
-SITREP_LOCAL = {"hi": "## हिन्दी", "ne": "## नेपाली"}
-
-
-@app.get("/space/{name}/sitrep")
-def space_sitrep(name: str, lang: str = "en", fmt: str = "md"):
-    p = RESULTS / "space" / re.sub(r"[^a-z0-9_]", "", name) / "sitrep.md"
-    if not p.exists():
-        raise HTTPException(404, "no sitrep for this event")
-    parts = re.split(r"\n(?=## )", p.read_text(encoding="utf-8"))
-    local = lambda x: any(x.startswith(h) for h in SITREP_LOCAL.values())  # noqa: E731
-    if lang in SITREP_LOCAL:
-        parts = [parts[0].split("\n")[0], ""] + [x for x in parts if x.startswith(SITREP_LOCAL[lang])]
-    else:
-        parts = [x for x in parts if not local(x)]
-    md = "\n".join(parts)
-    if fmt != "html":
-        return Response(md, media_type="text/markdown; charset=utf-8")
-    import html as _h
-    body = "".join(f"<h2>{_h.escape(x[3:])}</h2>" if x.startswith("## ") else f"<h1>{_h.escape(x[2:])}</h1>" if x.startswith("# ")
-                   else f"<li>{_h.escape(x[2:])}</li>" if x.startswith("- ") else f"<p>{_h.escape(x)}</p>" if x else "" for x in md.split("\n")).replace("**", "")
-    return Response(f"<!doctype html><meta charset=utf-8><title>PRAHAR sitrep {name}</title><style>body{{font:13px/1.45 system-ui;max-width:760px;margin:20px auto}}h1{{font-size:18px}}h2{{font-size:14px;border-bottom:1px solid #ccc}}</style>{body}",
-                    media_type="text/html; charset=utf-8")
-
-
-@app.get("/space/{name}/layers.zip")
-def space_layers(name: str):
-    import io
-    import zipfile
-    d = RESULTS / "space" / re.sub(r"[^a-z0-9_]", "", name)
-    if not (d / "summary.json").exists():
-        raise HTTPException(404, "unknown event")
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-        for f in sorted(d.iterdir()):
-            if f.suffix in (".geojson", ".tif", ".json", ".md", ".html", ".png") and f.name not in ("osm_before.json", "dem.tif"):
-                z.write(f, f.name)
-    return Response(buf.getvalue(), media_type="application/zip", headers={"Content-Disposition": f'attachment; filename="{d.name}_prahar_layers.zip"'})
-
-
-@app.get("/space/jobs/{jid}")
-def space_job(jid: str):
-    j = JOBS.get(jid)
-    if not j:
-        raise HTTPException(404, "unknown job")
-    log = RESULTS / "space" / f"{j['name']}_run.log"
-    txt = log.read_text(encoding="utf-8", errors="replace") if log.exists() else ""
-    done = [label for key, label in STAGES if key in txt]
-    return _pub(j) | {"elapsed_s": round((j.get("finished") or time.time()) - j["started"]), "stages": done, "log_tail": txt.splitlines()[-6:]}

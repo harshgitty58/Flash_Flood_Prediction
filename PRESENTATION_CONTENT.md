@@ -36,9 +36,9 @@ Every number comes from the repo outputs (`results/`) of the last full run: **pi
 | IMD flood event inventory | 121 events (29 district-events in 2022-23) | 1970 → 2023-08-26 |
 | District indices (DFSI, flooded area %, fatalities, flood duration, population) | 13 districts | static |
 | Label set 2022-25 (IMD + SANDRP + Sphere India SitReps + EM-DAT + curated news) | 96 events / 130 district-days | audit + external validation |
-| Microsoft ML Building Footprints | 90,837 buildings near alert stations | current |
-| OpenStreetMap | rivers/streams, 804 road segments, 99 bridges, 1,639 named landmarks | current |
-| AWS Terrain Tiles (SRTM-based DEM, ~30 m) | 69 tiles at zoom 13 | ~2000 |
+| Microsoft ML Building Footprints | 261,030 buildings within 5 km of the 27 reporting gauges (replay 12 Sep 2024) | current |
+| OpenStreetMap | rivers/streams, 1,327 road segments, 228 bridges, 13,752 named places and landmarks | current |
+| AWS Terrain Tiles (SRTM-based DEM) | 2,566 tiles at zoom 13 (impact) + 99 at zoom 12 (gauge terrain) | ~2000 |
 
 ## A5. The data story: five silent bugs found by testing the data
 - **Timestamps:** hours 0-9 had no leading zero and were silently dropped → **47 % of all rainfall rows lost**.
@@ -57,20 +57,21 @@ Every number comes from the repo outputs (`results/`) of the last full run: **pi
 - **Fixing the label join** (bug 5) lifted XGBoost on the unseen test month from ROC-AUC 0.53 → **0.71**, PR-AUC 0.04 → **0.15**, F1 0.08 → **0.32**, MCC 0.06 → **0.30**.
 - **Leave-one-event-out ROC-AUC 0.70**, now consistent with the test month (the earlier 0.86 was inflated: positives came from only 5 districts).
 - **Hybrid warning** at ≥ ALERT on the test month: precision **0.23**, recall **0.65**, F1 **0.34** (ML alone 0.22 / 0.57).
-- **Label audit:** SANDRP documents **40 damaging events that IMD misses** (vs 26 IMD events). Scored against that fuller answer key, the same model's district-day CSI rises 0.15 → 0.20.
+- **Label audit:** SANDRP documents **40 damaging events that IMD misses** (vs 26 IMD events). Scored against that fuller answer key, XGBoost's district-day CSI (lenient "today or tomorrow" day) rises 0.15 → 0.20.
+- **District-day verification (strict WMO-style, hybrid ≥ ALERT, Aug 2023 test):** CSI **0.095** [0.03–0.17], POD 0.70, FAR 0.90. That is 2–3× the district-prior (0.036) and persistence (0.053) baselines, but low in absolute terms. BSS vs climatology **0.073**, ECE **0.012**.
 - **External validation:** 29 documented events after Aug 2023; hybrid ≥ ALERT POD **7/21 = 0.33** [0.14, 0.52] where a gauge was reporting.
 - **Honest:** the ML tier over-alerts in replay (~18 % of hours ≥ ALERT); the model is good at *where*, weak at *which hour*.
 
 ## A8. The platform
-- 10-page web app with a dark-forest glass UI, satellite/terrain/3D maps, building-level exposure, explanations, metrics and system health.
+- 10-page web app (landing + 9 console pages; the hackathon Track B "Space mode" was moved to a separate archive) with a dark-forest glass UI, satellite/terrain/3D maps, building-level exposure, explanations, metrics and system health.
 - FastAPI backend: live prediction, what-if scenarios, ~1 ms data endpoints.
-- Latency engineering: buildings per map view **22.8 MB → ≤ 0.7 MB**, feature update **O(1)**, calibration **~1000× faster**.
+- Latency engineering: buildings per map view **66 MB → 0.74 MB** (3.0 s → 0.17 s p95), feature update **O(1)** (1.3 → 0.17 ms), calibration **~700× faster** (4.3 → 0.006 ms); `/predict` 17 ms p95.
 
 ## A9. Demo script (3 min)
-1. Landing → "Replay a real event" → Overview: EXTREME at Haldwani, **141 mm in 24 h** (set by the rainfall rule); 7 stations ≥ SEVERE; 45k buildings exposed.
+1. Landing → "Replay a real event" → Overview: EXTREME at Haldwani, **141 mm in 24 h** (set by the rainfall rule; the ML tier says NORMAL); 5 stations ≥ SEVERE; 27/44 gauges reporting; 10,297 buildings at MODERATE or above.
 2. Risk Map → Satellite → Pithoragarh: drawer shows *IMD rainfall SEVERE vs ML NORMAL*, so the rule layer catches what the model misses.
 3. Impact → fly to Haldwani → building outlines coloured by exposure → click a building for its score breakdown.
-4. Metrics: Ground-truth panel (label fix before/after, IMD vs SANDRP audit, v2 decision); hybrid recall 0.65; external-validation table with sources (Kedarnath route 2024: warning switched on ~44 h before).
+4. Metrics: Ground-truth panel (label fix before/after, IMD vs SANDRP audit, v2 decision); hybrid recall 0.65; external-validation table with sources (7 of 21 caught, e.g. the Kedarnath trek route on 31 Jul 2024 and Dharali on 5 Aug 2025, both at SEVERE). Then the verification panel: district-day CSI 0.095 against district-prior 0.036 and persistence 0.053.
 5. System: every service green; latency table.
 6. Close: the data story + honest limits.
 
@@ -85,7 +86,7 @@ Every number comes from the repo outputs (`results/`) of the last full run: **pi
 - **Nowcasting, not forecasting:** no weather-forecast input.
 - **Labels:** 29 district-level IMD *dates* (2022-23); every gauge in a district is marked "flood". IMD misses ~60 % of SANDRP-documented hill events; adding them to training (label v2) did **not** help on the test month, so it was not adopted.
 - **ML tier ≈ district prior:** some gauges are at ALERT > 95 % of hours.
-- **Lead time not claimed:** genuine "warning switched on before the event" observed only twice (Kedarnath route 2024 ~44 h, Haridwar 2024 ~4 h).
+- **Lead time is modest:** on the 2023 validation and test floods, 6 of 18 were warned before the event day (median 3.5 h); 7 had the alert already on as a district baseline, and 5 were missed (`verification.json`). For the post-2023 external events, the "48 h" shown means the alert was already on when the 48 h window opened, not a true lead.
 - Rainfall rule over-alerts in some months (July 2023 precision 0.01).
 - Impact score is a hand-tuned exposure proxy; DEM ~30 m from ~2000.
 
@@ -138,7 +139,7 @@ backend/app.py (FastAPI)  ◄──►  web/ (React + MapLibre)
 | IMD flood inventory | CSV, 121 events | start/end date, districts, cause, fatalities | Expanded to 334 district-event records (multi-district events) |
 | District indices | 3 CSVs × 13 districts | DFSI, corrected % flooded area, fatalities, injured, population, mean flood duration | Static |
 | Curated 2024-25 events | `supplement_2024_2025.csv`, 12 rows | date, district, place, type, date confidence, source URL | Evaluation only, never training |
-- The pipeline reads `flash-flood-prediction/curated_dataset/`; the repo also ships `curated_dataset/`. A test asserts both copies are **byte-identical** (MD5).
+- The pipeline reads `curated_dataset/` (a single copy). `curated_dataset/MANIFEST.sha256` pins every raw file, and a test plus the audit check the hashes.
 - District names are standardised through a master crosswalk (`src/district_mapping.py`) across all sources.
 
 ## B3. Cleaning rules (`src/cleaning.py`)
@@ -312,11 +313,11 @@ backend/app.py (FastAPI)  ◄──►  web/ (React + MapLibre)
 ## B18. Latency engineering (`scripts/bench_latency.py`, latest run)
 | Path | Old | New | Algorithm |
 |---|---|---|---|
-| Buildings for one map view | one 22.8 MB GeoJSON, ~432 ms to parse | ≤ 0.7 MB tile (~104 KB gzipped), ~56 ms | **adaptive quadtree tiling**: z12 tiles split recursively until ≤ 3,000 buildings (max z15); client loads only tiles in view (zoom ≥ 11) and caches them; overview markers below that |
-| Rain features per station-hour | 0.46 ms batch recompute | **0.034 ms** | **O(1) incremental state**: 72-h ring buffer with running window sums, monotonic deque for the 24-h max, recursive API; verified identical to batch over 3,000 hours |
-| Calibrate one score | 1.7 ms (2 isotonic fits) | **0.002 ms** | precomputed Venn-Abers lookup table |
-| `POST /predict` | — | ~6.6 ms p50 | above + per-station history index (no full-table scan) |
-| Data endpoints | — | ~1 ms; ~0.5 ms cached | in-memory blobs + ETag/304 + gzip |
+| Buildings for one map view | one 66.5 MB GeoJSON, 2.6 s p50 / 3.0 s p95 | densest tile 0.74 MB, 156 ms p50 / 175 ms p95 | **adaptive quadtree tiling**: z12 tiles split recursively until ≤ 3,000 buildings (max z15); client loads only tiles in view (zoom ≥ 11) and caches them; overview markers below that |
+| Rain features per station-hour | 1.27 ms batch recompute (96 h) | **0.167 ms** | **O(1) incremental state**: 72-h ring buffer with running window sums, monotonic deque for the 24-h max, recursive API; verified identical to batch over 3,000 hours |
+| Calibrate one score | 4.32 ms (2 isotonic fits) | **0.006 ms** | precomputed Venn-Abers lookup table |
+| `POST /predict` | — | 15.1 ms p50 / 17.1 ms p95 | above + per-station history index (no full-table scan) |
+| Data endpoints | — | snapshot 1.2 ms p50; 0.6 ms cached (304) | in-memory blobs + ETag/304 + gzip |
 | Impact layer rebuild | 25+ min, died on a DNS error | ~1 min | regex pre-filter + vectorised Shapely 2 + retry/backoff + caching |
 | Map page bundle | single bundle | per-page chunks | lazy routes; full building file no longer shipped |
 (Absolute timings vary run to run; ratios are stable.)
@@ -364,7 +365,7 @@ cd web && npm install && npm run dev:api                # frontend on :5173 (or 
 8. **Impact proxy:** nearest mapped stream ≠ drainage-connected HAND; nearest gauge ≠ upstream catchment; DEM ~30 m, ±5-10 m vertical, ~2000; weights not calibrated on damage.
 9. **Discharge unused:** 7 gauges, district-mean matching.
 10. **No labels after 2023-08** beyond 12 curated major events.
-11. **Map rendering:** ~45k polygons render slowly without a GPU; main JS chunk 1.3 MB.
+11. **Map rendering:** 261k building polygons are served as 589 quadtree tiles (~150 ms per view); the MapLibre chunk is still ~1 MB.
 
 ## B23. Roadmap
 - **Metrics:** lead time from alert switch-on; ML alerts relative to each station's baseline; nested CV.

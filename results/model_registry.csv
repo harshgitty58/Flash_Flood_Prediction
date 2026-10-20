@@ -1,40 +1,4 @@
-model_id,model_name,feature_set,train_start,train_end,threshold,val_roc_auc,val_pr_auc,val_f1,model_path,notes
-logistic regression_20260923_000130,Logistic Regression,32 features,2022-01-31,2024-08-05,0.05,,,0.0,models\logistic_regression\model.joblib,Trained on Exp_E_Full_Multimodal with 1.9s training time
-random forest_20260923_000130,Random Forest,32 features,2022-01-31,2024-08-05,0.05,,,0.0,models\random_forest\model.joblib,Trained on Exp_E_Full_Multimodal with 7.6s training time
-xgboost_20260923_000130,XGBoost,32 features,2022-01-31,2024-08-05,0.05,,,0.0,models\xgboost\model.joblib,Trained on Exp_E_Full_Multimodal with 2.1s training time
-logistic regression_20260923_001321,Logistic Regression,32 features,2022-01-31,2022-12-31,0.05,0.8808,0.005,0.003,models\logistic_regression\model.joblib,Trained on Exp_E_Full_Multimodal with 0.2s training time
-random forest_20260923_001321,Random Forest,32 features,2022-01-31,2022-12-31,0.05,0.1829,0.0007,0.0,models\random_forest\model.joblib,Trained on Exp_E_Full_Multimodal with 2.5s training time
-xgboost_20260923_001321,XGBoost,32 features,2022-01-31,2022-12-31,0.25,0.6672,0.0021,0.0023,models\xgboost\model.joblib,Trained on Exp_E_Full_Multimodal with 1.3s training time
-logistic regression_20261009_104218,Logistic Regression,30 features,2022-01-31,2022-12-31,0.05,0.5856,0.0338,0.0541,models\logistic_regression\model.joblib,Trained on Exp_F_No_Location with 0.3s training time
-random forest_20261009_104219,Random Forest,30 features,2022-01-31,2022-12-31,0.05,0.4348,0.027,0.0,models\random_forest\model.joblib,Trained on Exp_F_No_Location with 6.0s training time
-xgboost_20261009_104219,XGBoost,30 features,2022-01-31,2022-12-31,0.25,0.4661,0.0339,0.0396,models\xgboost\model.joblib,Trained on Exp_F_No_Location with 0.7s training time
-logistic regression_20261009_104435,Logistic Regression,25 features,2022-01-31,2022-12-31,0.05,0.671,0.0423,0.0,models\logistic_regression\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 0.2s training time
-random forest_20261009_104435,Random Forest,25 features,2022-01-31,2022-12-31,0.1,0.4138,0.0245,0.0,models\random_forest\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 5.3s training time
-xgboost_20261009_104436,XGBoost,25 features,2022-01-31,2022-12-31,0.5,0.6128,0.1527,0.1905,models\xgboost\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 0.8s training time
-logistic regression_20261009_111959,Logistic Regression,25 features,2022-01-31,2022-12-31,0.05,0.5926,0.0288,0.0,models\logistic_regression\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 3.8s training time
-random forest_20261009_112011,Random Forest,25 features,2022-01-31,2022-12-31,0.05,0.4245,0.011,0.0118,models\random_forest\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 8.2s training time
-xgboost_20261009_112017,XGBoost,25 features,2022-01-31,2022-12-31,0.05,0.6236,0.0177,0.0,models\xgboost\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 2.0s training time
-logistic regression_20261009_112544,Logistic Regression,25 features,2022-01-31,2022-12-31,0.05,0.6016,0.0588,0.075,models\logistic_regression\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 3.7s training time
-random forest_20261009_112554,Random Forest,25 features,2022-01-31,2022-12-31,0.05,0.4719,0.0242,0.0274,models\random_forest\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 15.5s training time
-xgboost_20261009_112604,XGBoost,25 features,2022-01-31,2022-12-31,0.05,0.6537,0.0422,0.0,models\xgboost\model.joblib,Trained on Exp_D_Rainfall_Discharge_Flood_Landslide with 5.3s training time
-logistic regression_20261009_113653,Logistic Regression,23 features,2022-01-31,2022-12-31,0.1,0.5537,0.0329,0.0116,models\logistic_regression\model.joblib,Trained on Exp_G_Static_History with 2.2s training time
-random forest_20261009_113704,Random Forest,23 features,2022-01-31,2022-12-31,0.1,0.5141,0.0567,0.0991,models\random_forest\model.joblib,Trained on Exp_G_Static_History with 8.7s training time
-xgboost_20261009_113713,XGBoost,23 features,2022-01-31,2022-12-31,0.05,0.5686,0.0394,0.0518,models\xgboost\model.joblib,Trained on Exp_G_Static_History with 2.8s training time
-logistic regression_20261011_222944,Logistic Regression,23 features,2022-06-21,2023-06-30,0.45,0.4512,0.0379,0.1241,models\logistic_regression\model.joblib,Trained on Exp_G_Static_History with 9.9s training time
-random forest_20261011_222950,Random Forest,23 features,2022-06-21,2023-06-30,0.05,0.5954,0.088,0.1397,models\random_forest\model.joblib,Trained on Exp_G_Static_History with 33.6s training time
-xgboost_20261011_222956,XGBoost,23 features,2022-06-21,2023-06-30,0.7,0.5345,0.0364,0.0815,models\xgboost\model.joblib,Trained on Exp_G_Static_History with 11.6s training time
-logistic regression_20261011_230540,Logistic Regression,23 features,2022-06-21,2023-06-30,0.45,0.4512,0.0379,0.1241,models\logistic_regression\model.joblib,Trained on Exp_G_Static_History with 6.7s training time
-random forest_20261011_230543,Random Forest,23 features,2022-06-21,2023-06-30,0.05,0.5954,0.088,0.1397,models\random_forest\model.joblib,Trained on Exp_G_Static_History with 19.9s training time
-xgboost_20261011_230544,XGBoost,23 features,2022-06-21,2023-06-30,0.7,0.5345,0.0364,0.0815,models\xgboost\model.joblib,Trained on Exp_G_Static_History with 6.8s training time
-logistic regression_20261012_002229,Logistic Regression,23 features,2022-06-21,2023-06-30,0.45,0.4512,0.0379,0.1241,models\logistic_regression\model.joblib,Trained on Exp_G_Static_History with 10.6s training time
-random forest_20261012_002236,Random Forest,23 features,2022-06-21,2023-06-30,0.05,0.5954,0.088,0.1397,models\random_forest\model.joblib,Trained on Exp_G_Static_History with 34.4s training time
-xgboost_20261012_002242,XGBoost,23 features,2022-06-21,2023-06-30,0.7,0.5345,0.0364,0.0815,models\xgboost\model.joblib,Trained on Exp_G_Static_History with 12.4s training time
-logistic regression_20261012_104258,Logistic Regression,23 features,2022-06-21,2023-06-30,0.45,0.4512,0.0379,0.1241,models\logistic_regression\model.joblib,Trained on Exp_G_Static_History with 6.2s training time
-random forest_20261012_104300,Random Forest,23 features,2022-06-21,2023-06-30,0.05,0.5954,0.088,0.1397,models\random_forest\model.joblib,Trained on Exp_G_Static_History with 17.9s training time
-xgboost_20261012_104302,XGBoost,23 features,2022-06-21,2023-06-30,0.7,0.5345,0.0364,0.0815,models\xgboost\model.joblib,Trained on Exp_G_Static_History with 5.8s training time
-logistic regression_20261012_122136,Logistic Regression,23 features,2022-06-21,2023-06-30,0.45,0.4512,0.0379,0.1241,models\logistic_regression\model.joblib,Trained on Exp_G_Static_History with 6.7s training time
-random forest_20261012_122139,Random Forest,23 features,2022-06-21,2023-06-30,0.05,0.5954,0.088,0.1397,models\random_forest\model.joblib,Trained on Exp_G_Static_History with 17.8s training time
-xgboost_20261012_122141,XGBoost,23 features,2022-06-21,2023-06-30,0.7,0.5345,0.0364,0.0815,models\xgboost\model.joblib,Trained on Exp_G_Static_History with 5.8s training time
-logistic regression_20261013_112441,Logistic Regression,23 features,2022-06-21,2023-06-30,0.85,0.7407,0.1389,0.1879,models\logistic_regression\model.joblib,Trained on Exp_G_Static_History with 7.2s training time
-random forest_20261013_112444,Random Forest,23 features,2022-06-21,2023-06-30,0.45,0.7881,0.1523,0.2357,models\random_forest\model.joblib,Trained on Exp_G_Static_History with 22.4s training time
-xgboost_20261013_112445,XGBoost,23 features,2022-06-21,2023-06-30,0.25,0.7076,0.1501,0.3204,models\xgboost\model.joblib,Trained on Exp_G_Static_History with 6.9s training time
+model_id,model_name,feature_set,train_start,train_end,threshold,val_roc_auc,val_pr_auc,val_f1,test_roc_auc,test_pr_auc,test_f1,status,model_path,notes
+logistic regression_20261013_112441,Logistic Regression,Exp_G_Static_History (23 features),2022-06-21,2023-06-30,0.85,0.6422,0.0755,0.1584,0.7407,0.1389,0.1879,current (baseline),models/logistic_regression/model.joblib,Trained on Exp_G_Static_History with 7.2s training time
+random forest_20261013_112444,Random Forest,Exp_G_Static_History (23 features),2022-06-21,2023-06-30,0.45,0.6323,0.1131,0.2115,0.7881,0.1523,0.2357,current (baseline),models/random_forest/model.joblib,Trained on Exp_G_Static_History with 22.4s training time
+xgboost_20261013_112445,XGBoost,Exp_G_Static_History (23 features),2022-06-21,2023-06-30,0.25,0.7193,0.1087,0.2013,0.7076,0.1501,0.3204,current (deployed),models/xgboost/model.joblib,Trained on Exp_G_Static_History with 6.9s training time

@@ -58,7 +58,7 @@ export default function Model() {
           </div>
         </Panel>
 
-        <Panel title="Top features · XGBoost gain">
+        <Panel title="Top features · share of mean |SHAP| (deployed XGBoost)">
           <div className="space-y-2">
             {m.importance.slice(0, 10).map(f => (
               <div key={f.feature}>
@@ -67,7 +67,7 @@ export default function Model() {
               </div>
             ))}
           </div>
-          {loc && <p className="mt-3 text-[11px] text-mute">Latitude/longitude carry {(loc.importance * 100).toFixed(0)}% of gain (orange): the model partly memorises <i>where</i> floods happened. Phase 4 should test a location-free variant.</p>}
+          {loc && <p className="mt-3 text-[11px] text-mute">Latitude/longitude carry {(loc.importance * 100).toFixed(0)}% of the importance (orange): the model partly memorises <i>where</i> floods happened.</p>}
         </Panel>
       </div>
 

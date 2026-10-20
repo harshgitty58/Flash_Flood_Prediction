@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import TrackBCard from '../components/TrackBCard'
+import VerifiedResults from '../components/VerifiedResults'
 import { fmtTime, pct, pretty, TIER_COLOR, useData, type ModelData, type Snapshot } from '../lib/data'
 
 const CHAIN = [
@@ -10,7 +10,7 @@ const CHAIN = [
   ['05', "What's exposed?", 'Buildings, roads, bridges, schools and hospitals in the predicted zone.'],
 ]
 
-// Sentinel-2 L2A true-colour scenes (scripts/fetch_home_imagery.py); landscapes only, no people (Track B rule)
+// Sentinel-2 L2A true-colour scenes (scripts/fetch_home_imagery.py); landscapes only, no people
 // Real flood photographs: Wikimedia Commons, CC BY-SA (resized/darkened here; adaptations shared under the same licence)
 const IMG: Record<string, [string, string]> = {
   dharali: ['Dharali & Kheer Ganga fan, Uttarkashi', 'Sentinel-2 · 9 Nov 2025'], kedarnath: ['Mandakini valley, Kedarnath route', 'Sentinel-2 · 14 Dec 2024'],
@@ -38,7 +38,7 @@ function Band({ img, children, className = '' }: { img: keyof typeof IMG; childr
 
 const LAYERS = [
   ['Hazard', 'Will flooding occur?', 'Multimodal prediction + uncertainty'],
-  ['Inundation', 'Where, and how deep?', 'Extent, depth and forecast window'],
+  ['Uncertainty', 'How sure are we?', 'Calibrated probability + conformal confidence'],
   ['Exposure', 'What could be affected?', 'Buildings, roads, critical assets'],
 ]
 
@@ -98,8 +98,8 @@ export default function Landing() {
         )}
       </section>
 
-      {/* TRACK B headline result */}
-      <section id="trackb" className="mx-auto max-w-6xl px-6 py-16"><TrackBCard /></section>
+      {/* Verified results on held-out data */}
+      <section id="results" className="mx-auto max-w-6xl px-6 py-16"><VerifiedResults /></section>
 
       {/* CHAIN */}
       <Band img="real-rudraprayag-2013"><section id="how" className="mx-auto max-w-6xl px-6 py-28">

@@ -1,4 +1,4 @@
-"""Export real pipeline outputs to static JSON for the FloodGuard web app.
+"""Export real pipeline outputs to static JSON for the PRAHAR web app.
 
 Usage: python scripts/export_frontend_data.py [--replay "2026-09-05 19:00"]
 Everything shown in the UI must come from here — no hard-coded metrics in the frontend.
@@ -16,7 +16,6 @@ sys.path.insert(0, str(ROOT))
 OUT = ROOT / "web" / "public" / "data"
 MODEL = "xgboost"
 
-TIERS = [(0.75, "EXTREME"), (0.5, "SEVERE"), (0.3, "ALERT"), (0.15, "WATCH"), (0.0, "NORMAL")]
 
 MODALITY = {
     "Rainfall": ["rain_1h", "rain_3h", "rain_6h", "rain_12h", "rain_24h", "rain_48h", "rain_72h",
@@ -42,8 +41,6 @@ EXPERIMENTS = {
 }
 
 
-def tier(p):
-    return next(name for cut, name in TIERS if p >= cut)
 
 
 def clean(v):
@@ -79,6 +76,7 @@ def records(df):
 
 def main(replay):
     from src.data_loader import FEATURE_EXPERIMENTS, FINAL_EXPERIMENT  # noqa: E402
+    from src.warning_levels import TIERS  # noqa: E402  (single source of the tier names, V-01)
     OUT.mkdir(parents=True, exist_ok=True)
     T = pd.Timestamp(replay) if replay != "auto" else None
 
@@ -144,9 +142,9 @@ def main(replay):
         {"name": "River discharge", "status": "available" if win_ds.discharge_clean.notna().any() else "missing",
          "detail": f"{int(win_ds.discharge_clean.notna().sum())} readings joined (24 h)"},
         {"name": "Landslide inventory", "status": "available", "detail": f"{len(ls):,} GSI records (static)"},
-        {"name": "Flood history", "status": "available", "detail": f"{len(inv)} IMD events + district indices"},
-        {"name": "DEM / terrain", "status": "pending", "detail": "not yet ingested into model"},
-        {"name": "Satellite precipitation", "status": "pending", "detail": "not yet ingested into model"},
+        {"name": "Flood history", "status": "available", "detail": f"{len(inv)} IMD inventory events (training labels) + district indices"},
+        {"name": "DEM / terrain", "status": "pending", "detail": "terrain features built and tested (Exp H); not in the deployed model"},
+        {"name": "Satellite precipitation", "status": "pending", "detail": "not yet ingested (GPM IMERG planned)"},
     ]
     dump("snapshot.json", {
         "replay_time": T.isoformat(), "model": f"XGBoost · {EXPERIMENTS[FINAL_EXPERIMENT]} · {len(FEATURE_EXPERIMENTS[FINAL_EXPERIMENT])} features",
@@ -154,7 +152,7 @@ def main(replay):
         "conformal": json.loads((ROOT / "results/conformal/cp_summary.json").read_text()),
         "peak_p": snap[0]["p"] if snap else None, "peak_p_3h_ago": prev_max,
         "stations_reporting": len(snap), "stations_total": int(st.shape[0]),
-        "tier_counts": {t: sum(s["tier"] == t for s in snap) for _, t in TIERS},
+        "tier_counts": {t: sum(s["tier"] == t for s in snap) for t in reversed(TIERS)},
         "stations": snap, "sources": sources,
     })
 

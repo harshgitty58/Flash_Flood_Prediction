@@ -17,8 +17,9 @@ from xgboost import XGBClassifier
 
 from src.data_loader import FEATURE_EXPERIMENTS, load_ml_dataset
 from src.model_config import RANDOM_STATE, RESULTS_DIR, TARGET_COL
+from src.params import P
 
-WINDOW_DAYS, BUFFER_DAYS, MERGE_DAYS = 3, 7, 4
+WINDOW_DAYS, BUFFER_DAYS, MERGE_DAYS = (P["event_cv"][k] for k in ("window_days", "buffer_days", "merge_days"))
 OUT_DIR = RESULTS_DIR / "event_cv"
 
 

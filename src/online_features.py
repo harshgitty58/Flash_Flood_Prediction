@@ -20,9 +20,10 @@ from dataclasses import dataclass, field
 import pandas as pd
 
 from src.rainfall_features import OFFLINE_GAP_DRY_H, OFFLINE_GAP_MONSOON_H
+from src.params import P
 
-WINDOWS = (3, 6, 12, 24, 48, 72)
-DECAY = 0.85
+WINDOWS = tuple(P["features"]["rain_windows_h"])
+DECAY = P["features"]["api_decay_hourly"]
 
 
 @dataclass

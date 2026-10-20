@@ -20,18 +20,20 @@ With the live API:
 python -m uvicorn backend.app:app --port 8000
 cd web && npm run dev:api                  # Vite proxies /api → :8000 (mode file web/.env.api)
 ```
+API security: CORS is an allow-list (`params.yaml` → `api`, or `PRAHAR_CORS_ORIGINS=https://a.example,https://b.example`). `POST /admin/reload` is disabled unless `PRAHAR_ADMIN_TOKEN` is set on the server, and then needs the header `X-Admin-Token`.
 `python scripts/run_notebooks.py` re-executes notebooks 09–14, the step-by-step record of the run.
 
 ## Layout
 | Path | What |
 |---|---|
-| `curated_dataset/` | raw curated sources (the pipeline reads the byte-identical copy in `flash-flood-prediction/curated_dataset/`) |
-| `data/external/` | downloaded sources: ERA5, USDMA hydromet, DEM tiles, building footprints, OSM, and `labels/` (SANDRP, Sphere India SitReps, EM-DAT, CSE) |
-| `src/` | pipeline, features, target, training, event CV, calibration, warning tiers, verification, label audit and experiments, district-day model |
+| `curated_dataset/` | raw curated sources, read directly by the pipeline; `MANIFEST.sha256` pins every file (checked by tests and the audit) |
+| `data/external/` | downloaded sources (not in git): ERA5, USDMA hydromet, DEM tiles, building footprints, OSM; only the derived label set in `labels/*.csv` is versioned |
+| `params.yaml` | every quality-control, feature, tier, rain-rule, impact and API constant in one place (read through `src/params.py`) |
+| `src/` | pipeline, features, target, training, event CV, calibration, warning tiers, verification, label audit and experiments, district-day model; `terrain.py` (Priority-Flood D8, flow accumulation, slope, aspect, TRI, TWI, SPI, HAND) |
 | `backend/` | FastAPI service: data endpoints, `/predict`, `/predict/scenario`, `/health/external` |
 | `web/` | React + MapLibre frontend |
 | `scripts/` | label building, export, impact layer, tiling, reports, latency benchmark, API checks, end-to-end audit |
-| `tests/` | data contracts, label set, online-vs-batch features, API contract |
+| `tests/` | data contracts, raw-file hashes, label set, online-vs-batch features, terrain algorithms, API contract and security (47 tests) |
 | `results/` | every metric and report: `label_impact.md`, `model_upgrade.md`, `verification/`, `metrics/`, `labels/` … |
 
 ## Data window and labels
@@ -43,43 +45,25 @@ cd web && npm run dev:api                  # Vite proxies /api → :8000 (mode f
 
 ## Headline results (test month Aug 2023, after the label-join fix)
 - **XGBoost:** ROC-AUC 0.71, PR-AUC 0.15 (base rate 5.8 %), F1 0.32. Before the district-name fix these were 0.53 / 0.04 / 0.08.
-- **Hybrid tiers at ≥ ALERT:** precision 0.23, recall 0.65. District-day CSI is 0.17 against IMD labels and 0.20 against the fuller event list.
+- **Hybrid tiers at ≥ ALERT:** station-hour precision 0.23, recall 0.65.
+- **District-day CSI at ≥ ALERT** (hybrid, Aug 2023 test), by definition of a "flood day":
+  - **0.095** (POD 0.70, FAR 0.90, 95 % CI 0.03–0.17): strict WMO-style, flood starting on day D and warnings counted D−1..D (`results/verification/verification.json`, shown on the Metrics page). Baselines: district prior 0.036, persistence 0.053.
+  - 0.17 (POD 0.63, FAR 0.81): the training target's definition (flood on day D or D+1) (`results/warning_levels/rain_rule.json`).
+  - XGBoost alone at its frozen threshold, same lenient definition: 0.15 against IMD labels and 0.20 against the fuller multi-source event list (`results/label_impact.md`).
 - **External validation:** 7 of 21 documented post-2023 events were caught where a gauge was reporting.
 - **Experiments tested and not adopted** (ensemble, event-fitted rain thresholds, district-day alerts, label v2): each was judged by a rule fixed before it ran.
   - The limit is the labels and the gauges' blindness to local cloudbursts, not the model class. See `results/model_upgrade.md`.
 
 ## Verifying a run
 - `python scripts/audit_pipeline.py` checks that every stage exists, is newer than its inputs and agrees with the previous stage.
-- `pytest -q tests` checks data contracts, the label set, feature equivalence and the API.
+- `pytest -q -m "not network" tests` (47 tests) checks data contracts, raw-file hashes, the label set, feature equivalence, terrain algorithms and the API.
+- GitHub Actions (`.github/workflows/ci.yml`) runs the tests and the web type-check/build on every push.
 
 ## What this is not
 A decision-support prototype. It gives estimates of hazard and exposure with stated uncertainty, not damage, casualty or evacuation decisions.
 
-## Track B: Space mode (Mapping Flood Damage from Space)
-Satellite-only damage mapping for **any area and date**. It uses only the inputs Track B allows: Sentinel-1/2, Copernicus DEM GLO-30, pre-event OSM via ohsome, and Kuro Siwo for training. Full write-up: `TRACKB_REPORT.md`.
-```bash
-pip install rasterio onnxruntime networkx scipy requests pandas shapely matplotlib
-# put the trained model in models/space/ (floodseg.onnx + floodseg_meta.json); train it with notebooks/trackB_train_floodseg_colab.ipynb
-python -m src.space.run    --name dharali --bbox 78.70,30.98,78.90,31.10 --date "2025-08-05 08:15"   # UTC
-python -m src.space.report --name dharali     # one-page sitrep: results/space/dharali/sitrep.md / .html
-python scripts/export_space.py --name dharali # dashboard data: web/public/data/space_dharali.json + space_index.json
-# Trishuli GLOF case study, checked against Copernicus EMS EMSR927 (vectors used ONLY for checking):
-python -m src.space.run --name trishuli --bbox 85.30,28.14,85.40,28.29 --date "2026-08-25 22:00"
-python scripts/check_emsr.py --name trishuli --emsr data/external/emsr927 --aois 1,2
-```
-Live runs from the dashboard: start the API (`uvicorn backend.app:app`) and set `VITE_API_URL`. The Space page's "Map any flood" box then calls `POST /space/run` and polls `GET /space/jobs/{id}`.
+## Plan and archive
+- The full industry-grade roadmap is in `PRAHAR_MASTER_PLAN.md` (value audit, 24 workstreams, scoreboard, risks); `PRESENTATION_CHEATSHEET.md` lists every headline number with its definition.
+- The hackathon Track B work ("Space mode": satellite flood-damage mapping) was moved out of this project to `../hackathon track-b/`; see the README there to restore it.
 
-What each run adds on top of the flood map:
-- Sentinel-2 fusion where the sky is clear (MNDWI new water; vegetated → barren debris);
-- rescue priorities (buildings per cut-off settlement);
-- helicopter landing candidates (ICAO Annex 14 slope limits);
-- a flood-path tracer (D8 on the Copernicus DEM);
-- Hindi and Nepali sitrep summaries;
-- run timing.
-Outputs in `results/space/<name>/`:
-- flood map (AI and rule baseline GeoTIFFs);
-- hit buildings, roads and bridges (GeoJSON);
-- cut-off settlements (`cutoff.json`);
-- `summary.json`, `map.png`, and the sitrep.
-
-Attribution: Contains modified Copernicus Sentinel data 2025–2026 · Copernicus WorldDEM-30 © DLR e.V. 2010–2014 and © Airbus Defence and Space GmbH 2014–2018 provided under COPERNICUS by the EU and ESA; all rights reserved · © OpenStreetMap contributors · Kuro Siwo (Bountos et al., NeurIPS 2024, CC BY 4.0).
+Attribution: Landing-page imagery contains modified Copernicus Sentinel data 2024–2025 (Sentinel-2 L2A via Earth Search, AWS Open Data) · terrain tiles: AWS Terrain Tiles (Terrarium) · buildings: Microsoft Global ML Building Footprints (ODbL) · © OpenStreetMap contributors (ODbL) · ERA5 / ERA5-Land via Open-Meteo (Copernicus Climate Change Service) · photographs: Wikimedia Commons (CC BY-SA, credited on the page).

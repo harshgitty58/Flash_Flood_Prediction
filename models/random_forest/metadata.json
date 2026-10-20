@@ -33,7 +33,7 @@
     "classifier__max_depth": 5,
     "classifier__class_weight": "balanced_subsample"
   },
-  "validation_metrics": {
+  "test_metrics": {
     "roc_auc": 0.7881,
     "pr_auc": 0.1523,
     "precision": 0.1731,

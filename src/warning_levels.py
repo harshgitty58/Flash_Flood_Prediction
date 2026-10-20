@@ -24,19 +24,20 @@ import pandas as pd
 
 from src.data_loader import load_ml_dataset
 from src.model_config import RESULTS_DIR, TARGET_COL
+from src.params import P
 
 CONF_DIR = RESULTS_DIR / "conformal"
 OUT_DIR = RESULTS_DIR / "warning_levels"
-TIERS = ["NORMAL", "WATCH", "ALERT", "SEVERE", "EXTREME"]
+TIERS = list(P["tiers"]["names"])
 # ML cut-offs are multiples of the calibration-set base rate, so they stay meaningful when the calibration month
 # changes (a fixed 1 % WATCH sat below the calibrated floor once calibration moved to the July monsoon).
-LIFT = {"WATCH": 2, "ALERT": 5, "SEVERE": 10, "EXTREME": 20}
+LIFT = dict(P["tiers"]["lift"])
 
 
 def thresholds_for(base_rate: float) -> dict:
     return {t: round(min(0.95, k * base_rate), 5) for t, k in LIFT.items()}
-IMD_24H = {"moderate": 15.6, "heavy": 64.5, "very_heavy": 115.6, "extremely_heavy": 204.5}
-CLOUDBURST_1H = 100.0
+IMD_24H = dict(P["rain"]["imd_24h_mm"])
+CLOUDBURST_1H = P["rain"]["cloudburst_1h_mm"]
 CONTEXT = ["rain_1h", "rain_6h", "rain_24h", "is_landslide_hotspot", "district_flood_severity_index"]
 
 
@@ -50,7 +51,7 @@ def ml_tier_index(df: pd.DataFrame, thresholds: dict) -> np.ndarray:
 
 # Station-local rainfall rule. DEFAULT_RULE is the original IMD-category rule; src.tier_tuning searches a small grid on
 # validation (district-day CSI) and writes results/warning_levels/rain_rule.json, which run() and the backend then use.
-DEFAULT_RULE = {"alert_24h": IMD_24H["heavy"], "fresh_6h": 0.0, "susceptibility": True}
+DEFAULT_RULE = dict(P["rain"]["default_rule"])
 RULE_FILE = OUT_DIR / "rain_rule.json"
 
 
