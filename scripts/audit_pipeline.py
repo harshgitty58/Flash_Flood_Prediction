@@ -59,7 +59,8 @@ def main():
     newer(cl, *raw)
     man = ROOT / "curated_dataset/MANIFEST.sha256"
     pins = [ln.split("  ", 1) for ln in man.read_text(encoding="utf-8").splitlines() if ln]
-    pin_ok = all(hashlib.sha256((ROOT / "curated_dataset" / rel).read_bytes()).hexdigest() == h for h, rel in pins)
+    pin_ok = all(hashlib.sha256((ROOT / "curated_dataset" / rel).read_bytes().replace(b"\r\n", b"\n")).hexdigest() == h  # EOL-neutral
+                 for h, rel in pins)
     (ok if pin_ok else fail)(f"curated_dataset/ matches MANIFEST.sha256 ({len(pins)} raw files pinned; the pipeline reads this single copy)")
     kept = c["rainfall_quality_flag"].value_counts().to_dict()
     (ok if len(c) > 0.85 * t.notna().sum() - 25000 else fail)(f"rainfall_cleaned: {len(c):,} rows, flags {kept}")

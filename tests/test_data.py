@@ -27,13 +27,14 @@ def inventory():
 
 
 def test_raw_files_match_manifest():
-    """The pipeline reads curated_dataset/ (one copy); every raw CSV must match its SHA-256 in MANIFEST.sha256."""
+    """The pipeline reads curated_dataset/ (one copy); every raw CSV must match its SHA-256 in MANIFEST.sha256.
+    Hashes are over LF-normalised bytes, so a Windows (CRLF) and a Linux (LF) checkout give the same digest."""
     root = PROJECT_ROOT / "curated_dataset"
     manifest = dict(line.split("  ", 1)[::-1] for line in (root / "MANIFEST.sha256").read_text(encoding="utf-8").splitlines() if line)
     on_disk = {Path(f).relative_to(root).as_posix() for f in glob.glob(str(root / "**" / "*.csv"), recursive=True)}
     assert on_disk == set(manifest), on_disk ^ set(manifest)
     for rel, digest in manifest.items():
-        assert hashlib.sha256((root / rel).read_bytes()).hexdigest() == digest, rel
+        assert hashlib.sha256((root / rel).read_bytes().replace(b"\r\n", b"\n")).hexdigest() == digest, rel
 
 
 def test_every_timestamp_parses():
