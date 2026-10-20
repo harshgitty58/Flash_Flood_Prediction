@@ -9,3 +9,5 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.7
+      - key: PRAHAR_ADMIN_TOKEN      # protects POST /admin/reload; Render generates a random value (see the service's Environment tab)
+        generateValue: true
