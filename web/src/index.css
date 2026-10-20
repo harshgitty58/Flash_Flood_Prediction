@@ -97,10 +97,13 @@ section.glass:hover, div.glass.rounded-xl:hover { border-color: rgba(163,230,53,
 @keyframes herofade { 0%, 40% { opacity: 0 } 55%, 90% { opacity: .9 } 100% { opacity: 0 } }
 .hero-fade { opacity: 0; animation: herofade 20s ease-in-out infinite }
 @media (prefers-reduced-motion: reduce) { .hero-fade { animation: none } }
-/* 3-D page transition: card swings in from depth and floats; the river lies on a tilted plane */
-.card3d { transform-style: preserve-3d; animation: card3d-in .5s cubic-bezier(.2,.8,.2,1) both, card3d-float 3.4s ease-in-out .5s infinite alternate; }
-@keyframes card3d-in { from { opacity: 0; transform: rotateX(32deg) rotateY(-14deg) translateZ(-220px) scale(.86) } to { opacity: 1; transform: rotateX(14deg) rotateY(-7deg) } }
-@keyframes card3d-float { from { transform: rotateX(14deg) rotateY(-7deg) translateY(0) } to { transform: rotateX(9deg) rotateY(7deg) translateY(-8px) } }
-.river-plane { transform: rotateX(46deg) translateZ(18px); transform-origin: 50% 55%; filter: drop-shadow(0 18px 14px rgba(0,0,0,.45)); }
-.z-lift { transform: translateZ(60px); }
-@media (prefers-reduced-motion: reduce) { .card3d { animation: none; transform: none } .river-plane { transform: none } }
+/* Page transition: a flat card; inside it the river lies on a ground plane tilted away from the viewer (perspective),
+   so it emerges tiny at the horizon and widens as it flows towards the screen. Streaks move downstream = towards you. */
+.card-in { animation: card-in .35s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes card-in { from { opacity: 0; transform: translateY(10px) scale(.98) } to { opacity: 1; transform: none } }
+.river-stage { position: relative; width: min(460px, 80vw); height: 210px; overflow: hidden; perspective: 210px; perspective-origin: 50% 0%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 92%, transparent 100%); }
+.river-3d { position: absolute; left: 50%; bottom: -30px; width: 300px; height: 1000px; transform-origin: 50% 100%;
+  transform: translateX(-50%) rotateX(76deg); filter: drop-shadow(0 10px 10px rgba(0,0,0,.35)); }
+@media (prefers-reduced-motion: reduce) { .card-in { animation: none } .flow { animation: none } }
