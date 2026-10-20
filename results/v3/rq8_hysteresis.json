@@ -1,0 +1,174 @@
+{
+  "deployed": {
+    "flicker_val_test": 0.412,
+    "flicker_replay": 0.177,
+    "district_day": {
+      "validation": {
+        "POD": 0.625,
+        "FAR": 0.973,
+        "CSI": 0.027,
+        "CSI_ci95": [
+          0.005,
+          0.057
+        ],
+        "alert_district_days": 184
+      },
+      "test": {
+        "POD": 0.7,
+        "FAR": 0.901,
+        "CSI": 0.095,
+        "CSI_ci95": [
+          0.034,
+          0.165
+        ],
+        "alert_district_days": 71
+      },
+      "both": {
+        "POD": 0.667,
+        "FAR": 0.953,
+        "CSI": 0.046,
+        "CSI_ci95": [
+          0.021,
+          0.078
+        ],
+        "alert_district_days": 255
+      }
+    },
+    "lead": {
+      "baseline (already on)": 7,
+      "warned": 6,
+      "missed": 5
+    }
+  },
+  "variants": {
+    "hold_3h": {
+      "flicker_val_test": 0.417,
+      "flicker_replay": 0.19,
+      "district_day": {
+        "validation": {
+          "POD": 0.75,
+          "FAR": 0.969,
+          "CSI": 0.031,
+          "CSI_ci95": [
+            0.006,
+            0.063
+          ],
+          "alert_district_days": 192
+        },
+        "test": {
+          "POD": 0.7,
+          "FAR": 0.901,
+          "CSI": 0.095,
+          "CSI_ci95": [
+            0.034,
+            0.165
+          ],
+          "alert_district_days": 71
+        },
+        "both": {
+          "POD": 0.722,
+          "FAR": 0.951,
+          "CSI": 0.049,
+          "CSI_ci95": [
+            0.023,
+            0.082
+          ],
+          "alert_district_days": 263
+        }
+      },
+      "lead": {
+        "baseline (already on)": 7,
+        "warned": 6,
+        "missed": 5
+      }
+    },
+    "hold_6h": {
+      "flicker_val_test": 0.387,
+      "flicker_replay": 0.18,
+      "district_day": {
+        "validation": {
+          "POD": 0.75,
+          "FAR": 0.969,
+          "CSI": 0.03,
+          "CSI_ci95": [
+            0.006,
+            0.062
+          ],
+          "alert_district_days": 196
+        },
+        "test": {
+          "POD": 0.7,
+          "FAR": 0.907,
+          "CSI": 0.09,
+          "CSI_ci95": [
+            0.03,
+            0.158
+          ],
+          "alert_district_days": 75
+        },
+        "both": {
+          "POD": 0.722,
+          "FAR": 0.952,
+          "CSI": 0.047,
+          "CSI_ci95": [
+            0.022,
+            0.079
+          ],
+          "alert_district_days": 271
+        }
+      },
+      "lead": {
+        "baseline (already on)": 8,
+        "missed": 5,
+        "warned": 5
+      }
+    },
+    "hold_12h": {
+      "flicker_val_test": 0.35,
+      "flicker_replay": 0.162,
+      "district_day": {
+        "validation": {
+          "POD": 0.75,
+          "FAR": 0.971,
+          "CSI": 0.029,
+          "CSI_ci95": [
+            0.005,
+            0.058
+          ],
+          "alert_district_days": 206
+        },
+        "test": {
+          "POD": 0.7,
+          "FAR": 0.907,
+          "CSI": 0.09,
+          "CSI_ci95": [
+            0.03,
+            0.158
+          ],
+          "alert_district_days": 75
+        },
+        "both": {
+          "POD": 0.722,
+          "FAR": 0.954,
+          "CSI": 0.045,
+          "CSI_ci95": [
+            0.021,
+            0.075
+          ],
+          "alert_district_days": 281
+        }
+      },
+      "lead": {
+        "baseline (already on)": 10,
+        "missed": 4,
+        "warned": 4
+      }
+    }
+  },
+  "adoption": {
+    "flicker_halved": false,
+    "csi_within_0.01": true,
+    "pod_within_0.05": true,
+    "adopt": false
+  }
+}

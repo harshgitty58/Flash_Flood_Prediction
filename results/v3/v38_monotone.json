@@ -1,0 +1,119 @@
+{
+  "features": [
+    "rain_1h",
+    "rain_3h",
+    "rain_6h",
+    "rain_12h",
+    "rain_24h",
+    "rain_48h",
+    "rain_72h",
+    "rain_max_intensity_24h",
+    "rain_intensity_change_1h",
+    "api_decay_85",
+    "discharge_clean",
+    "discharge_change_1h",
+    "discharge_change_3h",
+    "discharge_anomaly",
+    "district_flood_severity_index",
+    "district_flooded_area_pct",
+    "district_historical_fatalities",
+    "district_population",
+    "district_mean_flood_duration_days",
+    "dist_to_nearest_landslide_km",
+    "landslide_count_5km",
+    "landslide_count_10km",
+    "is_landslide_hotspot"
+  ],
+  "constrained_increasing": [
+    "api_decay_85",
+    "discharge_anomaly",
+    "discharge_clean",
+    "rain_12h",
+    "rain_1h",
+    "rain_24h",
+    "rain_3h",
+    "rain_48h",
+    "rain_6h",
+    "rain_72h",
+    "rain_max_intensity_24h"
+  ],
+  "params": {
+    "classifier__subsample": 0.8,
+    "classifier__scale_pos_weight": 255.55,
+    "classifier__n_estimators": 100,
+    "classifier__max_depth": 5,
+    "classifier__learning_rate": 0.01,
+    "classifier__colsample_bytree": 1.0
+  },
+  "models": {
+    "deployed (retrained)": {
+      "validation": {
+        "roc_auc": 0.7193,
+        "pr_auc": 0.1087,
+        "base_rate": 0.0426,
+        "distinct_scores": 168
+      },
+      "test": {
+        "roc_auc": 0.7076,
+        "pr_auc": 0.1501,
+        "base_rate": 0.0577,
+        "distinct_scores": 109
+      },
+      "violations": {
+        "+5mm": {
+          "share_lower": 0.0187,
+          "share_higher": 0.0764,
+          "worst_drop": -0.2012
+        },
+        "+20mm": {
+          "share_lower": 0.0318,
+          "share_higher": 0.0848,
+          "worst_drop": -0.2854
+        },
+        "+50mm": {
+          "share_lower": 0.0611,
+          "share_higher": 0.071,
+          "worst_drop": -0.3182
+        }
+      }
+    },
+    "monotone": {
+      "validation": {
+        "roc_auc": 0.7146,
+        "pr_auc": 0.1048,
+        "base_rate": 0.0426,
+        "distinct_scores": 62
+      },
+      "test": {
+        "roc_auc": 0.6949,
+        "pr_auc": 0.1351,
+        "base_rate": 0.0577,
+        "distinct_scores": 40
+      },
+      "violations": {
+        "+5mm": {
+          "share_lower": 0.0,
+          "share_higher": 0.082,
+          "worst_drop": 0.0
+        },
+        "+20mm": {
+          "share_lower": 0.0,
+          "share_higher": 0.082,
+          "worst_drop": 0.0
+        },
+        "+50mm": {
+          "share_lower": 0.0,
+          "share_higher": 0.082,
+          "worst_drop": 0.0
+        }
+      }
+    }
+  },
+  "reproduces_deployed": true,
+  "adoption": {
+    "no_violations": true,
+    "test_pr_auc_within_0.01": false,
+    "val_pr_auc_within_0.01": true,
+    "candidate_for_v1": false
+  }
+}

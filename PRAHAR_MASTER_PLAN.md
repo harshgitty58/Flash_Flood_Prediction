@@ -9,7 +9,7 @@
 | Scope | The whole PRAHAR system for Uttarakhand: data, labels, features, models, uncertainty, warnings, impact, API, database, frontend, MLOps, infrastructure, security, testing, research report. |
 | Out of scope | Track B / "Space mode" (removed, see WS-00); Himachal Pradesh and Sikkim until the stretch phase (WS-23). |
 | Status | Plan, approved for execution once the new repository exists. |
-| Progress (2026-10-21) | **Done:** WS-00.2 (`src/terrain.py` + 7 tests), 00.3, 00.4, 00.6 (single raw copy + SHA-256 manifest), 00.7, 02.1 (`params.yaml`, values unchanged), 09.1 (one tier table), 13.1, 16.1 (clean registry; test metrics had been labelled validation), 17.3 (GitHub Actions), 19.1 (admin token + CORS allow-list), 11.2 (lifespan), 21.6 (stale comments / report note), 06.2 (base rate + PR-AUC lift on Metrics), 06.7 in the UI (one lead-time number on Forecast and Landing), V-35 (one rain cap). 47 tests pass, audit 0 fail. Repo: github.com/harshgitty58/Flash_Flood_Prediction. **Next:** data downloads without accounts (IMD grid, GLO-30, HydroSHEDS, WorldCover, OSM), then WS-07 calibration fixes. |
+| Progress (2026-10-21) | **Done:** WS-00.2 (`src/terrain.py` + 7 tests), 00.3, 00.4, 00.6 (single raw copy + SHA-256 manifest), 00.7, 02.1 (`params.yaml`, values unchanged), 09.1 (one tier table), 13.1, 16.1 (clean registry; test metrics had been labelled validation), 17.3 (GitHub Actions), 19.1 (admin token + CORS allow-list), 11.2 (lifespan), 21.6 (stale comments / report note), 06.2 (base rate + PR-AUC lift on Metrics), 06.7 in the UI (one lead-time number on Forecast and Landing), V-35 (one rain cap). 47 tests pass, audit 0 fail. Repo: github.com/harshgitty58/Flash_Flood_Prediction. **Next:** data downloads without accounts (IMD grid, GLO-30, HydroSHEDS, WorldCover, OSM), then WS-07 calibration fixes. **Round 2 (2026-10-21):** WS-07.2/07.3 study (RQ4: Platt/beta pass, candidate for v1.0), WS-09.6 (hysteresis not needed, 0.41 changes/gauge-day), WS-05.7 monotone study (V-38 found; constraints cost 0.015 PR-AUC, not adopted), WS-20.6 + 08.5 behaviour tests, WS-01.9 / 04.7 terrain at 51 gauges from GLO-30, WS-22.1 licences, WS-06.7 docs/metrics.md, WS-21.4 architecture, WS-21.5 ADRs (ADR-007 committed before tuning), WS-18.6 runbook. 51 tests. |
 | Supersedes | `REMAINING_TASKS.md`, `EXECUTION_PLAN.md`, `INDUSTRY_UPGRADE_PLAN.md`, `REMAINING_PHASES_PLAN.md`, `PLATFORM_BUILD_PLAN.md`, `UTTARAKHAND_FOCUS_PLAN.md`. Keep those as history and do new work from this file. |
 | Companion docs | `Data Science Course Project (1).md` (the brief), `flood_intelligence_platform.md` (product spec), `LABELS_PLAN.md`, `MODEL_UPGRADE_PLAN.md`, `COVERAGE_PLAN.md` |
 
@@ -21,7 +21,7 @@
 1. Executive summary
 2. Product definition: users, jobs, principles, scope
 3. Current-state audit: the system as built
-4. Value audit: every number in the repo, checked (37 findings)
+4. Value audit: every number in the repo, checked (38 findings)
 
 **Part II: Target design**
 5. Target architecture
@@ -348,6 +348,7 @@ I read every configured constant, exported value and reported metric for consist
 | V-12 | **API decay 0.85 per hour has a half-life of 4.3 h** (ln 0.5 / ln 0.85). That is a 6-hour memory, not an antecedent-wetness index; the classical API is daily with k ≈ 0.85–0.95. | rainfall_features.py, online_features.py `DECAY` | 🟠 | WS-04.3 |
 | V-13 | **XGBoost search is too narrow and likely underfits.** 100 trees × learning rate 0.01, no early stopping, max_depth fixed by a small grid. | xgboost_best_params.json | 🟠 | WS-05.6 |
 | V-14 | **scale_pos_weight 255.55 = neg/pos of train.** It inflates raw scores (hence raw threshold 0.25) and makes calibration carry the whole probability scale. | same | 🟡 | WS-05.6 |
+| V-38 | **More rain can lower the deployed model's risk.** Adding +20 mm to the 24/48/72 h sums lowers the score in 3.2 % of labelled hours (worst −0.29); +50 mm changes nothing in ~87 % of hours. Monotone constraints remove every violation but cost 0.015 test PR-AUC, so they are not adopted yet (`results/v3/v38_monotone.md`). The coarse probabilities (V-02) come mostly from the model: 109 distinct raw scores, 72 % of test hours share one (`results/v3/rq4_calibration.md`). | v38_monotone.md, rq4_calibration.md | 🟠 | WS-05.6, WS-05.7 |
 | V-15 | **Offline-gauge gaps of 7 days (monsoon) and 45 days (dry season)** decide when a silent gauge is "offline". Inside that gap, missing hours must not be read as 0 mm, or a dead gauge looks like a dry one. Check and make explicit. | rainfall_features.py:22–23 | 🔴 (until verified) | WS-02.6 |
 | V-16 | **The faulty-gauge quarantine** (more than 20 % of readings over 100 mm/h → whole station dropped) is silent. Which stations were quarantined isn't reported anywhere a user can see. | cleaning.py `FAULTY_SHARE` | 🟡 | WS-02.7 |
 | V-17 | **Terrain and soil exist but aren't deployed.** `src/enrich_features.py` builds ERA5, soil moisture, terrain and source-agreement features (Exp H, ROC 0.703), yet the snapshot labels "DEM / terrain" and "Satellite precipitation" as *pending*. Inconsistent wording. | snapshot.json `sources`, event_cv_summary.csv | 🟡 | WS-13.1 |

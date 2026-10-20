@@ -1,0 +1,228 @@
+{
+  "calibration_rows": 20280,
+  "calibration_positives": 864,
+  "test_rows": 12469,
+  "test_positives": 720,
+  "raw_distinct_scores_test": 109,
+  "raw_top_score_share_test": 0.72,
+  "candidates": {
+    "raw": {
+      "log_loss": 0.33831,
+      "brier": 0.09282,
+      "ece": 0.1841,
+      "distinct_values": 109,
+      "roc_auc": 0.7076,
+      "mean_p": 0.2419,
+      "conformal": {
+        "80": {
+          "coverage": 0.8708,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8629,
+          "singleton_share": 0.1638
+        },
+        "90": {
+          "coverage": 0.9019,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8959,
+          "singleton_share": 0.1304
+        },
+        "95": {
+          "coverage": 0.94,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.9363,
+          "singleton_share": 0.069
+        },
+        "nested": true,
+        "levels_distinct": true
+      }
+    },
+    "platt": {
+      "log_loss": 0.19986,
+      "brier": 0.0518,
+      "ece": 0.0133,
+      "distinct_values": 109,
+      "roc_auc": 0.7076,
+      "mean_p": 0.0456,
+      "conformal": {
+        "80": {
+          "coverage": 0.8708,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8629,
+          "singleton_share": 0.1638
+        },
+        "90": {
+          "coverage": 0.9019,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8959,
+          "singleton_share": 0.1304
+        },
+        "95": {
+          "coverage": 0.94,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.9363,
+          "singleton_share": 0.069
+        },
+        "nested": true,
+        "levels_distinct": true
+      }
+    },
+    "beta": {
+      "log_loss": 0.19858,
+      "brier": 0.05156,
+      "ece": 0.0133,
+      "distinct_values": 109,
+      "roc_auc": 0.7076,
+      "mean_p": 0.0456,
+      "conformal": {
+        "80": {
+          "coverage": 0.8708,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8629,
+          "singleton_share": 0.1638
+        },
+        "90": {
+          "coverage": 0.9019,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8959,
+          "singleton_share": 0.1304
+        },
+        "95": {
+          "coverage": 0.94,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.9363,
+          "singleton_share": 0.069
+        },
+        "nested": true,
+        "levels_distinct": true
+      }
+    },
+    "isotonic": {
+      "log_loss": 0.20372,
+      "brier": 0.05187,
+      "ece": 0.0309,
+      "distinct_values": 8,
+      "roc_auc": 0.71,
+      "mean_p": 0.0418,
+      "conformal": {
+        "80": {
+          "coverage": 0.8841,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.877,
+          "singleton_share": 0.1492
+        },
+        "90": {
+          "coverage": 0.9019,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8959,
+          "singleton_share": 0.1303
+        },
+        "95": {
+          "coverage": 0.9727,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.971,
+          "singleton_share": 0.0341
+        },
+        "nested": true,
+        "levels_distinct": true
+      }
+    },
+    "ivap (deployed)": {
+      "log_loss": 0.20348,
+      "brier": 0.05179,
+      "ece": 0.0311,
+      "distinct_values": 22,
+      "roc_auc": 0.71,
+      "mean_p": 0.0423,
+      "conformal": {
+        "80": {
+          "coverage": 0.8841,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.877,
+          "singleton_share": 0.1492
+        },
+        "90": {
+          "coverage": 0.8841,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.877,
+          "singleton_share": 0.149
+        },
+        "95": {
+          "coverage": 0.9726,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.9709,
+          "singleton_share": 0.0342
+        },
+        "nested": true,
+        "levels_distinct": true
+      }
+    },
+    "cvap": {
+      "log_loss": 0.20361,
+      "brier": 0.05184,
+      "ece": 0.031,
+      "distinct_values": 37,
+      "roc_auc": 0.7051,
+      "mean_p": 0.0424,
+      "conformal": {
+        "80": {
+          "coverage": 0.8817,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.8745,
+          "singleton_share": 0.1523
+        },
+        "90": {
+          "coverage": 0.8841,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.877,
+          "singleton_share": 0.149
+        },
+        "95": {
+          "coverage": 0.9653,
+          "coverage_flood": 1.0,
+          "coverage_no_flood": 0.9631,
+          "singleton_share": 0.0427
+        },
+        "nested": true,
+        "levels_distinct": true
+      }
+    }
+  },
+  "adoption": {
+    "raw": {
+      "logloss_1pct_better": false,
+      "ece_le_0.02": false,
+      "distinct_ge_50": true,
+      "cov90_each_class_ge_0.88": true,
+      "adopt": false
+    },
+    "platt": {
+      "logloss_1pct_better": true,
+      "ece_le_0.02": true,
+      "distinct_ge_50": true,
+      "cov90_each_class_ge_0.88": true,
+      "adopt": true
+    },
+    "beta": {
+      "logloss_1pct_better": true,
+      "ece_le_0.02": true,
+      "distinct_ge_50": true,
+      "cov90_each_class_ge_0.88": true,
+      "adopt": true
+    },
+    "isotonic": {
+      "logloss_1pct_better": false,
+      "ece_le_0.02": false,
+      "distinct_ge_50": false,
+      "cov90_each_class_ge_0.88": true,
+      "adopt": false
+    },
+    "cvap": {
+      "logloss_1pct_better": false,
+      "ece_le_0.02": false,
+      "distinct_ge_50": false,
+      "cov90_each_class_ge_0.88": false,
+      "adopt": false
+    }
+  },
+  "decision": "candidate(s) passing the rule: ['platt', 'beta']; recorded for v1.0, to be re-checked on protocol P-2 before deployment"
+}

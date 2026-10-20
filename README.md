@@ -33,7 +33,7 @@ API security: CORS is an allow-list (`params.yaml` → `api`, or `PRAHAR_CORS_OR
 | `backend/` | FastAPI service: data endpoints, `/predict`, `/predict/scenario`, `/health/external` |
 | `web/` | React + MapLibre frontend |
 | `scripts/` | label building, export, impact layer, tiling, reports, latency benchmark, API checks, end-to-end audit |
-| `tests/` | data contracts, raw-file hashes, label set, online-vs-batch features, terrain algorithms, API contract and security (47 tests) |
+| `tests/` | data contracts, raw-file hashes, label set, online-vs-batch features, terrain algorithms, API contract and security (51 tests) |
 | `results/` | every metric and report: `label_impact.md`, `model_upgrade.md`, `verification/`, `metrics/`, `labels/` … |
 
 ## Data window and labels
@@ -56,13 +56,15 @@ API security: CORS is an allow-list (`params.yaml` → `api`, or `PRAHAR_CORS_OR
 
 ## Verifying a run
 - `python scripts/audit_pipeline.py` checks that every stage exists, is newer than its inputs and agrees with the previous stage.
-- `pytest -q -m "not network" tests` (47 tests) checks data contracts, raw-file hashes, the label set, feature equivalence, terrain algorithms and the API.
+- `pytest -q -m "not network" tests` (51 tests) checks data contracts, raw-file hashes, the label set, feature equivalence, terrain algorithms and the API.
 - GitHub Actions (`.github/workflows/ci.yml`) runs the tests and the web type-check/build on every push.
 
 ## What this is not
 A decision-support prototype. It gives estimates of hazard and exposure with stated uncertainty, not damage, casualty or evacuation decisions.
 
 ## Plan and archive
+- Docs: `docs/architecture.md`, `docs/metrics.md` (one definition per number), `docs/licences.md`, `docs/adr/`, `docs/ops/runbook.md`.
+- v1.0 research studies (calibration, hysteresis, monotone constraints, 30 m terrain at gauges): `results/v3/README.md`.
 - The full industry-grade roadmap is in `PRAHAR_MASTER_PLAN.md` (value audit, 24 workstreams, scoreboard, risks); `PRESENTATION_CHEATSHEET.md` lists every headline number with its definition.
 - The hackathon Track B work ("Space mode": satellite flood-damage mapping) was moved out of this project to `../hackathon track-b/`; see the README there to restore it.
 
