@@ -1,1411 +1,463 @@
-# Flood Intelligence Platform — Multimodal & Uncertainty-Aware Flash-Flood Prediction
+# PRAHAR Master Brief: Multi-Source, Uncertainty-Aware Flash-Flood Intelligence for Uttarakhand
 
-> **Project concept:** A multimodal, uncertainty-aware flood intelligence platform for hilly regions of India that predicts flash-flood risk, estimates when risk may peak, visualizes where flooding may occur, and translates the forecast into building/infrastructure exposure.
+> **What this file is.** The single master brief ("master prompt") for the project. It is enough for a person or an AI assistant to understand PRAHAR, work on it, extend it or present it. It describes the product (what each feature does and its status), the as-built data and model, the rules that must not be broken, and where the detail lives.
+>
+> **Status legend:** ✅ built and verified · 🟡 partly built · ❌ planned (see `PRAHAR_MASTER_PLAN.md`).
+>
+> **Detail lives in:**
+> - `PROJECT_DATA_GUIDE.md`: every dataset, model and metric
+> - `PRAHAR_MASTER_PLAN.md`: the 240-task roadmap and the value audit
+> - `docs/metrics.md`: metric definitions
+> - `docs/architecture.md`, `docs/adr/`, `docs/ops/runbook.md`
+> - `PRESENTATION_CHEATSHEET.md`: the numbers to say
+> - `Data Science Course Project (1).md`: the original course brief (do not edit)
+>
+> **Project concept:** a multi-source, uncertainty-aware flash-flood early-warning platform for Uttarakhand. It predicts the chance of a flood in each district and at each rain gauge in the next 24 hours, says how sure it is and why, and translates the hazard into building and infrastructure exposure inside official river-setback zones.
 
 ---
 
-## 1. Core Product Vision
+## 0. Hard rules (read first)
 
-The system should not stop at:
+1. **Course project only.** The hackathon "Track B / Space mode" work was moved to `../hackathon track-b/` and is not part of this project.
+2. **Every number shown comes from the pipeline.** The UI reads exported JSON (`web/public/data/`) produced by `scripts/export_frontend_data.py`. Never hard-code a metric.
+3. **Honest evaluation.** Adoption rules are fixed before an experiment runs. Results come with baselines and confidence intervals. Failed experiments are reported, not hidden.
+4. **One definition per number** (`docs/metrics.md`):
+   - The headline district-day CSI is the **strict** one: **0.095**.
+   - The "flood today or tomorrow" version (0.169) is always labelled.
+   - Lead time = the first sustained (≥ 3 h) switch-on to ALERT before the event day: **6/18 warned, median 3.5 h**.
+5. **No leakage.** Features use the past only. Splits are chronological. Normalisation and calibration are fitted on train/calibration data only. Lat/lon are not model features.
+6. **Decision support only.** No claims of damage, casualties, evacuation decisions, inundation depth or guaranteed arrival times.
+7. **All constants live in `params.yaml`.** Change one only through a pre-registered rule; rerun the pipeline; tests and audit must stay green.
+8. **Git: commits are authored and pushed only as `harshgitty58`.** No AI or tool attribution in commits or files. Local hooks enforce this. Push only to `github.com/harshgitty58/Flash_Flood_Prediction`.
 
-> **“Flood probability = 82%.”**
+---
 
-Instead, it should answer the complete chain:
+## 1. Core product vision ✅
 
-> **Will flooding happen? → When? → Where? → How certain are we? → What could be affected? → How severe could the impact be?**
+The system does not stop at "flood probability = 82 %". It answers the chain:
 
-### Core product loop
+> **Will flooding happen? → When? → Where? → How sure are we? → What could be affected? → Why?**
 
 ```text
-PREDICT
-   ↓
-EXPLAIN
-   ↓
-LOCATE
-   ↓
-QUANTIFY IMPACT
-   ↓
-SHOW UNCERTAINTY
+PREDICT → EXPLAIN → LOCATE → QUANTIFY EXPOSURE → SHOW UNCERTAINTY → VERIFY
 ```
 
-The platform combines multiple environmental and geospatial data sources and produces a decision-support view for disaster-management analysts, authorities, researchers, and field users.
+**Users:**
+- state and district disaster-management analysts (USDMA SEOC / DEOCs);
+- hydromet forecasters;
+- researchers and examiners;
+- later, a simplified public / field view.
 
 ---
 
-# 2. Main System Architecture
+## 2. System architecture (as built) ✅
 
 ```text
-                         DATA SOURCES
- ┌────────────┬────────────┬────────────┬────────────┬─────────────┐
- │ Satellite  │ Rainfall   │ River      │ Soil       │ DEM/Terrain │
- │ Imagery    │            │ Level      │ Moisture   │             │
- └──────┬─────┴─────┬──────┴──────┬─────┴──────┬─────┴──────┬──────┘
-        │            │             │            │             │
-        └────────────┴─────────────┴────────────┴─────────────┘
-                              ↓
-                    DATA INGESTION & QA
-                              ↓
-                 CLEANING / NORMALIZATION
-                              ↓
-                MULTIMODAL FEATURE FUSION
-                              ↓
-                    FLOOD RISK MODEL
-                              ↓
-          ┌───────────────────┼────────────────────┐
-          ↓                   ↓                    ↓
-   FLOOD PROBABILITY     UNCERTAINTY         FORECAST WINDOW
-          │                   │                    │
-          └───────────────────┴────────────────────┘
-                              ↓
-                 INUNDATION / FLOOD EXTENT
-                              ↓
-              ┌───────────────┴────────────────┐
-              ↓                                ↓
-       BUILDING FOOTPRINTS                GIS ASSETS
-              ↓                                ↓
-       BUILDING EXPOSURE             ROADS / BRIDGES /
-              │                       SCHOOLS / HOSPITALS /
-              │                       SETTLEMENTS
-              └───────────────┬────────────────┘
-                              ↓
-                      IMPACT ENGINE
-                              ↓
-                 WEB/PWA + MOBILE INTERFACE
+                                 DATA SOURCES
+ ┌─────────────┬──────────────┬───────────────┬───────────────┬──────────────┬──────────────┐
+ │ CWC hourly  │ CWC river    │ IMD flood     │ GSI landslide │ District     │ ERA5 / DEM   │
+ │ rain (44)   │ discharge(7) │ inventory(121)│ points (5,443)│ indices (13) │ (research)   │
+ └──────┬──────┴──────┬───────┴───────┬───────┴───────┬───────┴──────┬───────┴──────┬───────┘
+        └─────────────┴───────────────┴───────────────┴──────────────┴──────────────┘
+                                         ↓
+                CLEANING & QC (error code 511.5, cap 150 mm/h, quarantine, offline gauges)
+                                         ↓
+                HOURLY FEATURE TABLE (518,304 station-hours; 23 features; past-only)
+                                         ↓
+                XGBoost (LR, RF baselines) → Venn-Abers calibration → Mondrian conformal sets
+                                         ↓
+                HYBRID WARNING TIERS = max(ML tier, IMD rainfall tier) + trigger
+                                         ↓
+          ┌──────────────────────────────┼──────────────────────────────┐
+          ↓                              ↓                              ↓
+   WMO-style verification        SHAP explanations          IMPACT ENGINE: 575,339 buildings,
+   (CIs, baselines, external)    (top-3 drivers)            roads, bridges, POIs × setback zones
+                                         ↓
+                    JSON export → FastAPI (/predict, /risk, /impact …) → React + MapLibre console
 ```
+
+One command runs everything: `python scripts/run_all.py` (28 stages). Then `scripts/audit_pipeline.py` must report **0 fail, 0 warn**.
 
 ---
 
-# 3. Key Output Categories
+## 3. Key output categories
 
-## 3.1 Flood Probability
+### 3.1 Flood probability ✅
+- **What it is:** a calibrated probability (Venn-Abers) that a flood is recorded in the gauge's district today or tomorrow.
+- **How to read it:** it is read against the base rate (about 4–6 %), not as a 0–100 % "risk score".
+- **Known issue:** the model emits only about 109 distinct scores, so probabilities look stepped (V-02). The fix is planned.
 
-A continuous probability score:
+### 3.2 Warning tiers (severity of the warning) ✅
+`NORMAL · WATCH · ALERT · SEVERE · EXTREME`, mapped to IMD colours Green · Yellow · Orange · Red · Red + "extreme".
+
+**ML layer.** Calibrated probability against multiples of the base rate (0.0426):
+
+| Tier | Multiple | Cut-off |
+|---|---|---|
+| WATCH | 2× | 0.085 |
+| ALERT | 5× | 0.213 |
+| SEVERE | 10× | 0.426 |
+| EXTREME | 20× | 0.852 |
+
+A conformal FLOOD-only 90 % set lifts the tier to at least ALERT.
+
+**Rainfall layer (IMD 24 h categories):**
+
+| IMD category | 24 h rain | Tier |
+|---|---|---|
+| moderate | 15.6 mm | WATCH |
+| heavy | 64.5 mm | ALERT |
+| very heavy | 115.6 mm | SEVERE |
+| extremely heavy | 204.5 mm, or a cloudburst ≥ 100 mm in 1 h | EXTREME |
+
+Susceptibility shifts the rain tier by ±1 level (landslide hotspot and flood-prone district).
+
+**Final tier** = the higher of the two. The `trigger` (ml / rainfall) is always shown.
+
+Flood *severity* (deaths, damage classes) is a planned secondary target ❌.
+
+### 3.3 Lead time 🟡
+- **Measured:** 6 of 18 floods warned before the event day, median **3.5 h** (strict definition).
+- It is a nowcast: there are no weather-forecast inputs yet.
+- No "expected peak at 15:20" style claims until forecast inputs exist ❌.
+
+### 3.4 Confidence / uncertainty ✅
+- Each prediction carries: Venn-Abers interval, conformal p-values, **confidence** and **credibility**, and a **90 % set** ({FLOOD} / {NO FLOOD} / UNCERTAIN).
+- Coverage on the held-out month: every flood hour fell inside the 90 % set.
+- **Planned:** plain-language confidence classes (High / Medium / Low) that explain *why*, for example "2 of 4 gauges offline" ❌.
+
+### 3.5 Multi-source agreement 🟡
+- **Built:** source-health card (gauges reporting n/N, discharge readings, static sources).
+- **Research features exist** (Exp H): gauge-vs-ERA5 rain ratio, "both wet" flag.
+- **Planned:** a per-station agreement score once satellite rain (IMERG, already downloaded) is in the model ❌.
+
+### 3.6 Missing-data impact ✅
+These numbers are measured from real inference-time degradation, not hard-coded (`results/robustness/`):
+
+| Scenario | ROC-AUC | Change |
+|---|---|---|
+| Baseline | 0.716 | — |
+| Rain noise 20 % | 0.712 | −0.004 |
+| Discharge offline | 0.716 | 0.000 |
+| 25 % of inputs dropped | 0.647 | −0.069 |
+| **Flood history missing** | **0.500** | **−0.216** |
+
+Shown on the Uncertainty page. **Finding:** the model leans on district history (prior dominance).
+
+### 3.7 Explainable prediction ✅
+- **Per prediction:** the top 3 SHAP drivers, in the station drawer.
+- **Global importance:** flood history 66 %, rainfall 24 %, landslide 10 %, discharge 0 %.
+- **Wording:** "contribution / importance", never causation.
+
+---
+
+## 4. Building-level exposure module ✅
+
+### 4.1 Goal
+Translate the hazard tier at each gauge (or a district estimate where no gauge reports) into building and infrastructure exposure, within the **legal frame of official river-setback zones**.
 
 ```text
-0–20%   → Low
-20–50%  → Moderate
-50–75%  → High
-75–100% → Very High
+Hazard tier per centre (5 km radius) → distance of each building to the nearest mapped river
+→ official zone A/B/C → exposure class (+ height above river shown for information)
 ```
 
-Example:
-
-> **Flood Probability: 78%**
+### 4.2 Building footprints ✅
+- **Microsoft Global ML Building Footprints:** polygons extracted from imagery by a pretrained deep segmentation model. **575,339 buildings** are scored.
+- **OSM via Overpass:** rivers and streams, roads, bridges, schools, hospitals, place names.
+- **Not used:** a home-trained building detector. It's optional, and existing footprints are more reliable.
 
 ---
 
-## 3.2 Flood Severity
+## 5. Exposure calculation (as built) ✅
 
-Move beyond binary flood/no-flood classification.
+| Zone | Distance from river | Legal basis | Class |
+|---|---|---|---|
+| A | ≤ 50 m | NGT order, Dec 2017 | = hazard tier |
+| B | 50–100 m | NGT; Jal Shakti Flood Plain Zoning guidelines 2025 | one level lower |
+| C | 100–200 m | Uttarakhand High Court, Aug 2013 | two levels lower |
+| — | beyond 200 m | — | MINIMAL |
 
-Suggested categories:
+- **Classes:** MINIMAL · LOW · MODERATE · HIGH · CRITICAL (score bands 0–20 / 20–40 / 40–60 / 60–80 / 80–100).
+- **Audit:** `scripts/audit_impact.py` finds **0 zone and 0 class mismatches** across all buildings.
+- **Not computed:** water depth, inundated footprint %, duration. The legal flood plain is the 1-in-100-year highest flood level + 1 m, and those maps are not public. Height above river is information only.
+- **Planned** ❌: real HAND from the 30 m DEM (the code exists: `src/terrain.py`); a probability-aware risk score beside the legal class; population exposure; lake and canal distances.
+
+### 5.1 Building card (as built) ✅
+Click a building to see: zone, distance to river, height above river, the hazard tier of its centre, the source of the hazard (live gauge / last report / district estimate), and the class.
+
+---
+
+## 6. Infrastructure exposure 🟡
+- **Built:** 1,327 road segments, 228 bridges, schools and hospitals near water, and 13,752 named places and landmarks are listed and searchable. OSM gaps are stated ("0 schools mapped" means OSM is missing them, not that there are none).
+- **Planned** ❌: roads coloured by exposure, and population counts.
+- **Always described as exposure estimates**, never emergency decisions.
+
+---
+
+## 7. Risk priority 🟡
+- **Built:** "Districts to watch", a daily ranking from the district-day model. Recall@3 on external events is 0.345, against a prior of 0.207 and chance of 0.231.
+- **Planned** ❌: a transparent ranking by (tier, exposed population, critical facilities in zones A/B, bridges at risk).
+- **Known flag:** the "top 3 = ALERT" rule fires even on dry days. The fix is to use an absolute probability cut-off.
+
+---
+
+## 8. User interface ✅
+
+**Navigation** (PRAHAR console, `/app/*`): Overview · Forecast · Risk Map · Impact · Uncertainty · Events · Data & Model · Metrics · System, plus the Landing page `/`.
+
+**Persistent header:** replay time (currently 12 Sep 2024 19:00), gauges reporting (27/44), model version, and data-source health.
+
+**Visual language:**
+- dark-forest glass UI;
+- tier colours as tokens (NORMAL #3ddc97, WATCH #f5d547, ALERT #ff9f1c, SEVERE #ff4d2e, EXTREME #e0115f);
+- a river-landscape page transition: a flat card in which the river widens toward the viewer.
+
+**Modes:**
+- **static:** reads `web/public/data`; used for Vercel;
+- **API:** the Vite proxy `/api` to FastAPI.
+
+---
+
+## 9. Landing ✅ and Overview ✅
+- **Landing:**
+  - hero with Sentinel-2 landscapes and 2013 flood photographs;
+  - live replay card (top station, tier, trigger, stations ≥ SEVERE);
+  - "One question leads to the next";
+  - "Three intelligence layers": Hazard · Uncertainty · Exposure;
+  - **Verified results** (CSI 0.095 vs baselines, 7/21 external, BSS 0.073, 6/18 warned);
+  - numbers band and disclaimer.
+- **Overview:**
+  - peak-station tier with its **trigger** (for example "EXTREME · 141 mm · set by rainfall · ML 2 %");
+  - ≥ SEVERE count, reporting share, conformal confidence, exposed buildings;
+  - regional risk trajectory, global drivers (SHAP by group), "Districts to watch", data sources.
+
+## 10. Forecast 🟡
+- **Built:** probability over the replay window with a station-spread band; peak in the next 24 h; the lead-time result card.
+- **Planned** ❌: a conformal band per hour, horizons of 6 / 12 / 24 h, observed rain bars.
+
+## 11. Risk Map ✅
+- **Built:**
+  - MapLibre, with Dark / Satellite / Terrain basemaps and 3-D terrain;
+  - stations coloured by tier;
+  - the **station drawer**: calibrated p, confidence, credibility, 90 % set, ML vs rain tier, trigger, top-3 SHAP drivers;
+  - place search with auto-zoom, and hover coordinates.
+- **Planned** ❌: a time scrubber, an IMERG rain overlay, catchment layers, and "what rain would make this ALERT".
+
+## 12. Impact ✅
+- **Built:** building outlines by class (quadtree tiles, about 0.74 MB per view), landmarks, bridges and roads lists, an object card, and place search (towns, villages, gauges).
+- **Planned** ❌: PMTiles, a probability-aware score alongside the legal class, population, a critical-facility filter, exports.
+
+## 13. Uncertainty ✅
+- **Built:** source health, the **fusion ablation** (event-CV ROC per experiment: rain only 0.50 → + flood history 0.77), conformal coverage at 80 / 90 / 95 %, and the inference-time degradation table.
+- **Planned** ❌: a reliability diagram, coverage by stratum, coverage under degradation.
+
+## 14. Events 🟡
+- **Built:** the IMD event list (121) and recent events. External validation with source links appears on Metrics.
+- **Planned** ❌: **event replay** (T−72 h → T+24 h animation with hit / miss / false alarm and lead time).
+
+## 15. Data & Model ✅ (+ Metrics ✅, System ✅)
+- **Data & Model:** model comparison (validation vs test), SHAP importance, leave-one-event-out table, coverage by month, normalisation parameters.
+- **Metrics:**
+  - hour-level table with **base rate and PR-AUC lift**, a threshold slider (exploration only), the confusion matrix;
+  - layer contribution and event-level table;
+  - **WMO-style verification** (POD / FAR / CSI / ETS / HSS with 95 % CIs; baselines: climatology, persistence, district prior, rain rule);
+  - BSS / ECE, honest lead time, relative economic value;
+  - external validation (29 events, sources), and the ground-truth / label-audit panel.
+- **System:** external services up/down, API status, measured latency (p50 / p95).
+
+## 16. Mobile / field view ❌
+Planned: a `/field` PWA showing "my location → nearest gauge, district tier, bulletin, offline cache", in English and Hindi. The desktop console is responsive meanwhile.
+
+## 17. Cross-page flow (demo journey) ✅
 
 ```text
-NORMAL
-WATCH
-ALERT
-SEVERE
-EXTREME
+LANDING (verified results) → OVERVIEW ("EXTREME at Haldwani, 141 mm, set by rainfall; ML says 2 %")
+→ RISK MAP (Pithoragarh: rain SEVERE vs ML NORMAL; 90 % set UNCERTAIN; SHAP drivers)
+→ IMPACT (Haldwani: buildings by setback zone; click one)
+→ UNCERTAINTY (fusion ablation; what fails if a source drops)
+→ METRICS (CSI 0.095 vs baselines 0.036 / 0.053; external 7/21 with sources)
+→ close on limits
 ```
 
-Severity should be derived from the project's validated prediction/inundation methodology rather than arbitrary thresholds presented as scientific truth.
+Story: **Predict → Explain → Locate → Quantify exposure → Show uncertainty → Verify**.
+
+## 18. Counterfactual sensor reliability ✅
+Built as the inference-time degradation table (§3.6). The API also offers `POST /predict/scenario` (what-if overrides, for example `rain_24h = 120`).
+
+## 19. Area exposure summary 🟡
+Per-centre counts by class exist in `impact.json` (`by_station`, `by_class`). A zone summary card is planned ❌.
+
+## 20. "Why is this area risky?" ✅
+The station drawer shows the SHAP top-3, the ML vs rainfall tier and the trigger. Source agreement is planned (§3.5).
+
+## 21. Zone comparison ❌
+Planned: compare two zones by hazard against exposure.
 
 ---
 
-## 3.3 Lead Time / Forecast Window
+## 22. Technical stack (as built)
 
-Show when the system expects risk to become significant.
-
-Example:
-
-> **Expected high-risk window: 14:00–16:00**
-
-or
-
-> **Estimated lead time: ~2.4 hours**
-
-Only report these values after they have been validated against held-out events.
-
----
-
-## 3.4 Confidence / Uncertainty
-
-Example:
-
-```text
-Flood probability: 78%
-Confidence:         61%
-Uncertainty:        HIGH
-```
-
-The platform should also explain why uncertainty increased.
-
-Example:
-
-```text
-⚠ Rainfall observation delayed
-⚠ Satellite observation partially unavailable
-✓ DEM available
-✓ River data available
-```
-
----
-
-## 3.5 Multimodal Source Agreement
-
-This is one of the project's strongest differentiators.
-
-Show whether different modalities are giving consistent signals.
-
-Example:
-
-| Data source | Signal |
+| Layer | Stack |
 |---|---|
-| Rainfall | 🔴 Extreme |
-| River level | 🔴 Rising |
-| Satellite precipitation | 🟠 Heavy |
-| Soil moisture | 🔴 Saturated |
-| Terrain | 🔴 High susceptibility |
+| Data / ML | Python 3.12, pandas 2.3, NumPy, scikit-learn 1.7, **XGBoost 3.2**, SHAP 0.51, SciPy, rasterio (DEM), PyYAML |
+| Uncertainty | own Venn-Abers + Mondrian conformal (`src/conformal.py`) |
+| Geo | Shapely 2 (STRtree), MS footprints, OSM Overpass, AWS Terrarium tiles, Copernicus GLO-30, `src/terrain.py` (D8, HAND, TWI, SPI) |
+| Backend | FastAPI + Uvicorn; ETag/304 blobs; O(1) online features; CORS allow-list; token-protected admin |
+| Frontend | React 19, Vite 8, TypeScript, Tailwind 4, MapLibre GL 6, Recharts 3 |
+| Quality | pytest (51 tests), audit script, GitHub Actions CI |
+| Hosting | Vercel (web, static mode), Render free tier (API, 335 MB RAM) |
+| Planned | PostgreSQL + PostGIS, MLflow, Prefect, PMTiles (`PRAHAR_MASTER_PLAN.md` §5) |
 
-Then summarize:
-
-> **Source agreement: 86% — strong cross-source support**
-
-Conversely:
-
-> **Source disagreement detected → uncertainty increased**
-
-This directly communicates the multimodal-fusion concept to judges.
+**Model policy:** use the simplest model that works for the data. No deep learning for show; about 50 training flood-days can't support it.
 
 ---
 
-## 3.6 Missing-Data Impact
-
-The system should explicitly show how missing data affects the forecast.
-
-Example:
-
-| Scenario | Flood probability | Confidence |
-|---|---:|---:|
-| All sources | 82% | 78% |
-| Without rainfall | 69% | 53% |
-| Without river data | 64% | 49% |
-| Without satellite | 76% | 68% |
-
-Possible UI insight:
-
-> **River-level observations currently have the largest effect on forecast stability.**
-
-This should be calculated from actual model experiments, not hard-coded.
-
----
-
-## 3.7 Explainable Prediction
-
-Show the major contributing features/signals.
-
-Example:
-
-```text
-WHY IS THIS ZONE HIGH-RISK?
-
-Rainfall              ██████████
-River level            ████████
-Soil moisture          ███████
-Terrain susceptibility █████
-Satellite signal       ████
-```
-
-The wording should remain appropriately cautious: contribution/importance, not causal proof.
-
----
-
-# 4. Building-Level Flood Impact Module
-
-## 4.1 Goal
-
-Add a simple geospatial impact-assessment layer that takes the predicted flood extent/depth and estimates which buildings and infrastructure fall inside the affected area.
-
-The idea is:
-
-```text
-Flood prediction
-      ↓
-Flood extent / depth
-      ↓
-Building footprints
-      ↓
-Spatial intersection
-      ↓
-Affected buildings
-      ↓
-Impact severity
-```
-
----
-
-## 4.2 Building Footprints
-
-### Preferred hackathon path
-
-Use an existing building-footprint dataset instead of training a new building detector from scratch.
-
-Potential source:
-
-- **Microsoft Global ML Building Footprints**
-- Worldwide building polygons
-- Suitable for a GIS overlay workflow
-
-### Optional AI enhancement
-
-Run a pretrained remote-sensing building segmentation/detection model on satellite imagery.
-
-Possible tooling:
-
-- TorchGeo / pretrained geospatial models
-- Other pretrained building-segmentation models appropriate to the imagery
-
-For the MVP, the recommended approach is:
-
-> **Use existing building footprints for reliable spatial exposure analysis; treat AI-based building detection as an optional demo/research enhancement.**
-
-This keeps the scope realistic.
-
----
-
-# 5. Building Impact Calculation
-
-For each building:
-
-```text
-Building footprint
-          +
-Flood probability
-          +
-Estimated water depth
-          +
-Inundated footprint %
-          +
-Expected duration
-          +
-Elevation relationship
-          ↓
-     Impact Score
-```
-
-Conceptually:
-
-\[
-Impact = f(P_{flood}, Depth, InundatedArea, Duration, Elevation)
-\]
-
-Do not present this as a scientifically validated structural-damage equation unless it has been properly calibrated and validated.
-
----
-
-## 5.1 Example Building Card
-
-```text
-BUILDING B104
-
-Impact                 CRITICAL
-
-Flood Probability      91%
-Estimated Water Depth  1.7 m
-Inundated Footprint    94%
-Expected Duration      5–7 h
-Estimated Elevation    +1.1 m
-Confidence             74%
-
-Impact Drivers
-Depth                  █████████
-Duration               ███████
-Flood probability      █████████
-Elevation              █████
-```
-
-Suggested impact classes:
-
-```text
-0–20     Minimal
-20–40    Low
-40–60    Moderate
-60–80    High
-80–100   Critical
-```
-
-These are prototype presentation bands and must be validated/tuned for the final methodology.
-
----
-
-# 6. Beyond Buildings: Infrastructure Exposure
-
-The same spatial-overlay engine can be applied to:
-
-### Roads
-Output:
-
-> Potentially inundated road segments
-
-### Bridges
-Output:
-
-> Bridges intersecting the predicted flood zone
-
-### Schools
-Output:
-
-> Schools within predicted impact areas
-
-### Hospitals
-Output:
-
-> Critical medical facilities exposed to predicted inundation
-
-### Settlements
-Output:
-
-> Number of settlements overlapping the predicted flood zone
-
-The system should describe these as **exposure estimates**, not autonomous emergency decisions.
-
----
-
-# 7. Risk Priority Score
-
-A useful product-level metric is:
-
-```text
-Hazard
-   ×
-Exposure
-   ×
-Uncertainty
-   ↓
-Risk Priority
-```
-
-Example:
-
-> **Risk Priority: 91/100 — Critical**
-
-A zone with very high flood probability but little nearby infrastructure may have a lower priority than a slightly lower-probability zone containing multiple critical assets.
-
-The exact formula should be documented and validated rather than treated as a universal disaster-management standard.
-
----
-
-# 8. User Interface / UX
-
-## Navigation
-
-Keep the product focused. Do not create a huge collection of disconnected pages.
-
-Recommended navigation:
-
-```text
-🌊 FloodGuard
-
-├── 🏠 Overview
-├── 🔮 Forecast
-├── 🗺 Risk Map
-├── 🏘 Impact
-├── ⚠ Uncertainty
-├── 📅 Events
-└── 🧬 Data & Model
-```
-
-Persistent top-right status:
-
-```text
-● LIVE
-Last updated: 12:42 PM
-Data sources: 5/6
-```
-
----
-
-# 9. Page 1 — Overview
-
-## Purpose
-
-Answer:
-
-> **What is happening right now?**
-
-The landing dashboard should communicate the complete system in a few seconds.
-
-### Hero section
-
-```text
-UTTARAKHAND FLOOD INTELLIGENCE
-
-CURRENT RISK
-
-          HIGH
-          78%
-
-↑ +12% since 3 hours ago
-```
-
-### Forecast window
-
-```text
-FORECAST WINDOW
-
-Next 6 hours
-
-13:00 ───── 15:00 ───── 17:00
-              ▲
-         HIGH-RISK WINDOW
-```
-
-### KPI cards
-
-```text
-┌─────────────┐ ┌─────────────┐
-│ Flood Risk  │ │ Confidence  │
-│    78%      │ │    71%      │
-└─────────────┘ └─────────────┘
-
-┌─────────────┐ ┌─────────────┐
-│ High-Risk   │ │ Buildings   │
-│ Zones: 12   │ │ Exposed:127 │
-└─────────────┘ └─────────────┘
-```
-
-### Main map
-
-Display:
-
-- flood risk
-- rivers
-- settlements
-- buildings
-- roads
-- critical infrastructure
-
-### Explain the risk
-
-```text
-WHY IS RISK INCREASING?
-
-Rainfall              ██████████
-River level            ████████
-Soil moisture          ███████
-Terrain susceptibility █████
-```
-
-### Data quality
-
-```text
-System status: 5/6 data sources available
-```
-
----
-
-# 10. Page 2 — Forecast
-
-## Purpose
-
-Answer:
-
-> **What is likely to happen over the next few hours?**
-
-This is the main machine-learning showcase.
-
-### Main chart
-
-Use a time-series forecast:
-
-```text
-Flood Probability Forecast
-
-100% ┤
- 80% ┤                    ╭───╮
- 60% ┤              ╭─────╯   ╰───
- 40% ┤       ╭──────╯
- 20% ┤───────╯
-     └──────────────────────────────
-       Now  +1h +2h +3h +4h +6h
-```
-
-### Add an uncertainty band
-
-The graph should display:
-
-- predicted probability
-- uncertainty range/confidence interval
-
-Conceptually:
-
-```text
-             █████ uncertainty █████
-
-            ╭───────────╮
-        ╭───╯           ╰───╮
-───────╯                     ╰──────
-          predicted probability
-```
-
-### Forecast summary cards
-
-```text
-Peak Risk         84%
-Peak Time         15:20
-Lead Time         2h 18m
-Expected Severity Severe
-```
-
-Only show values produced by the actual system.
-
----
-
-# 11. Page 3 — Risk Map
-
-## Purpose
-
-Answer:
-
-> **Where exactly is the risk?**
-
-This should be one of the most interactive pages.
-
-### Map layers
-
-```text
-LAYERS
-
-☑ Flood Probability
-☑ Flood Extent
-☐ Water Depth
-☐ Rainfall
-☐ River Level
-☐ Soil Moisture
-☐ Buildings
-☐ Roads
-☐ Critical Infrastructure
-```
-
-### Forecast time slider
-
-```text
-TIME
-
-← NOW | +1h | +2h | +3h | +4h | +6h →
-```
-
-The map should update as the user changes time.
-
-### Clickable zone
-
-Example:
-
-```text
-ZONE UTH-042
-
-Flood probability     87%
-Estimated depth       1.4 m
-Expected duration     4.2 h
-Confidence            72%
-
-Top factors:
-Rainfall       HIGH
-River level    HIGH
-Soil moisture  MEDIUM
-Terrain        HIGH
-```
-
----
-
-# 12. Page 4 — Impact
-
-## Purpose
-
-Answer:
-
-> **What gets affected?**
-
-This is where the building/infrastructure analysis becomes a first-class product feature.
-
-### Exposure KPIs
-
-```text
-PREDICTED EXPOSURE
-
-127 Buildings
-14 Road Segments
-2 Bridges
-3 Schools
-1 Hospital
-8 Settlements
-```
-
-### Map
-
-Display building polygons/points colored by impact:
-
-```text
-🟢 Low
-🟡 Moderate
-🟠 High
-🔴 Critical
-```
-
-### Entity tabs
-
-```text
-[ BUILDINGS ] [ ROADS ] [ CRITICAL ASSETS ]
-```
-
-### Building click interaction
-
-Clicking a building opens a side drawer.
-
-Example:
-
-```text
-BUILDING B104
-
-Impact                 CRITICAL
-
-Flood Probability      91%
-Estimated Water Depth  1.7 m
-Inundated Footprint    94%
-Expected Duration      5–7 h
-
-Estimated Elevation    +1.1 m
-Confidence             74%
-
-────────────────────
-
-Impact Drivers
-
-Depth                  █████████
-Duration               ███████
-Flood probability      █████████
-Elevation              █████
-```
-
----
-
-# 13. Page 5 — Uncertainty
-
-## Purpose
-
-Answer:
-
-> **How much can we trust the prediction?**
-
-This is the research differentiator.
-
-### Hero metrics
-
-```text
-FORECAST RELIABILITY
-
-          71%
-       CONFIDENCE
-
-        MEDIUM
-      UNCERTAINTY
-```
-
-### Source health
-
-```text
-DATA SOURCE             STATUS
-
-Rainfall                 ✓ Available
-River sensor             ✓ Available
-Satellite                ⚠ Delayed
-Soil moisture            ✓ Available
-DEM                      ✓ Available
-Historical records       ✓ Available
-```
-
-### Missing-data experiment
-
-```text
-                 Probability   Confidence
-
-All sources         82%           78%
-
-No rainfall         69%           53%
-
-No river data       64%           49%
-
-No satellite        76%           68%
-```
-
-### Interpretation
-
-> **Forecast stability is most sensitive to the removal of the river-level input.**
-
-This statement should be generated from actual model ablation experiments.
-
----
-
-# 14. Page 6 — Events
-
-## Purpose
-
-Answer:
-
-> **How did the model perform on historical flood events?**
-
-This page turns historical data into a visual evaluation tool.
-
-## Flood Event Replay
-
-Example:
-
-```text
-24 JUNE 2025
-Flash Flood Event
-
-[ ▶ PLAY EVENT ]
-```
-
-Timeline:
-
-```text
-T-6h → T-4h → T-2h → T-1h → EVENT
-```
-
-As the timeline plays:
-
-- map updates
-- predicted risk evolves
-- predicted extent evolves
-- uncertainty evolves
-
-### Predicted vs observed
-
-Show side-by-side or toggle between:
-
-```text
-PREDICTED
-vs
-OBSERVED
-```
-
-### Performance metrics
-
-Once properly evaluated:
-
-```text
-Prediction Performance
-
-Precision       0.XX
-Recall           0.XX
-F1 Score         0.XX
-AUROC            0.XX
-
-Average Lead Time
-XX minutes
-```
-
-Also show:
-
-- false alarms
-- missed events
-- successful detections
-- calibration/reliability where available
-
-Do not invent historical lead-time or performance numbers for the demo.
-
----
-
-# 15. Page 7 — Data & Model
-
-## Purpose
-
-Answer:
-
-> **Where did this prediction come from?**
-
-This page is mainly for judges and technical reviewers.
-
-### Pipeline visualization
-
-```text
-SATELLITE
-    │
-RAINFALL ───┐
-RIVER ──────┤
-SOIL ───────┼──► MULTIMODAL FUSION
-DEM ────────┤
-HISTORY ────┘
-                 │
-                 ▼
-          FLOOD PREDICTION
-                 │
-        ┌────────┴────────┐
-        ▼                 ▼
-      EXTENT         UNCERTAINTY
-        │                 │
-        └────────┬────────┘
-                 ▼
-            IMPACT ENGINE
-                 │
-       Buildings / Roads /
-       Bridges / Hospitals
-```
-
-### Show
-
-- data source names
-- preprocessing stages
-- feature groups
-- model architecture
-- validation metrics
-- data freshness
-- missing-data statistics
-- model version
-
-Do not turn this page into a wall of library names.
-
----
-
-# 16. Mobile / PWA Experience
-
-Do not simply shrink the desktop dashboard onto mobile.
-
-## Web/PWA
-
-Target user:
-
-> Disaster-management analyst / authority / researcher
-
-Features:
-
-- full map
-- layer controls
-- forecast graphs
-- impact analysis
-- uncertainty diagnostics
-- historical replay
-- detailed data/model page
-
-## Mobile
-
-Target user:
-
-> Field user / monitored-area user
-
-Keep it simple.
-
-Example:
-
-```text
-🔴 HIGH FLOOD RISK
-
-Monitored Area:
-Rishikesh Sector 4
-
-Risk                  82%
-Expected onset        ~2h
-Confidence            71%
-
-────────────────────
-
-Affected Assets
-
-🏠 27 Buildings
-🛣 2 Roads
-🌉 1 Bridge
-
-────────────────────
-
-[ OPEN MAP ]
-
-[ VIEW DETAILS ]
-```
-
-Also show:
-
-> **Data quality warning:** River sensor unavailable
-
-The mobile experience should focus on **current status, location, affected assets, and data reliability**.
-
----
-
-# 17. Cross-Page Interaction Flow
-
-The pages should not feel like separate dashboards.
-
-Create a guided drill-down.
-
-## Example Demo Journey
-
-```text
-OVERVIEW
-   │
-   │  "High risk — 78%"
-   ↓
-FORECAST
-   │
-   │  "Peak risk 84% in 2h"
-   ↓
-RISK MAP
-   │
-   │  Select Zone UTH-042
-   ↓
-IMPACT
-   │
-   │  "23 buildings exposed"
-   ↓
-BUILDING B104
-   │
-   │  "91% flood probability"
-   ↓
-UNCERTAINTY
-   │
-   │  "Confidence 74%"
-   │  "Satellite data delayed"
-   ↓
-DATA / MODEL
-   │
-   │  Show source + fusion pipeline
-   ↓
-EVENTS
-      "Compare with historical event"
-```
-
-This creates a story:
-
-> **Predict → Locate → Explain → Quantify → Validate**
-
----
-
-# 18. Optional Counterfactual Sensor Reliability View
-
-This is one of the strongest research-oriented additions.
-
-Show:
-
-```text
-WHAT HAPPENS IF A DATA SOURCE DISAPPEARS?
-
-                         Probability   Confidence
-
-ALL SOURCES                  82%           78%
-
-WITHOUT RAINFALL             71%           55%
-
-WITHOUT SATELLITE            79%           68%
-
-WITHOUT RIVER DATA            64%           49%
-```
-
-Then:
-
-> **Most sensitive modality: River-level observations**
-
-This should be calculated through real ablation experiments.
-
----
-
-# 19. Optional Building-Level Asset Impact Summary
-
-For a selected region:
-
-```text
-ZONE UTH-042
-
-Buildings
-──────────────
-Critical       6
-High           11
-Moderate       8
-Low            13
-
-Roads
-──────────────
-High exposure  3
-Moderate       5
-
-Critical Assets
-──────────────
-Hospital       1
-School         2
-Bridge         1
-```
-
-This provides a quick executive view.
-
----
-
-# 20. Optional “Why Is This Area Risky?” Panel
-
-For a selected location:
-
-```text
-WHY IS THIS AREA RISKY?
-
-Rainfall                 HIGH
-River level              HIGH
-Soil moisture             HIGH
-Terrain susceptibility    HIGH
-Satellite precipitation  MEDIUM
-
-Source agreement: 86%
-Confidence: 72%
-```
-
-This makes the model interpretable without claiming causal reasoning.
-
----
-
-# 21. Optional Risk Comparison
-
-Allow the analyst to compare two zones.
-
-```text
-ZONE A                         ZONE B
-
-Flood probability  88%        Flood probability  74%
-Confidence          76%        Confidence          61%
-Buildings exposed   19         Buildings exposed   47
-Roads exposed         2        Roads exposed         6
-Critical assets       0        Critical assets       3
-
-Priority             HIGH      Priority            CRITICAL
-```
-
-This makes the **hazard vs exposure** distinction visible.
-
----
-
-# 22. Suggested Technical Stack
-
-The exact stack can change depending on what the team already knows.
-
-## Frontend
-
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- MapLibre GL JS / Mapbox-compatible mapping
-- Recharts / ECharts
-- PWA support
-
-## Backend
-
-- FastAPI and/or Spring Boot
-- PostgreSQL + PostGIS
-- Redis / background jobs where needed
-
-## ML
-
-Possible model families:
-
-- Gradient boosting
-- Random Forest
-- XGBoost / LightGBM
-- LSTM / temporal models
-- CNN / raster models
-- multimodal feature fusion
-- probabilistic or ensemble uncertainty estimation
-
-Use the simplest model that performs well enough for the available data. Do not add deep learning solely for presentation.
-
-## Geospatial
-
-- GeoPandas
-- Rasterio
-- Shapely
-- PostGIS
-- GDAL ecosystem
-
-## Optional geospatial AI
-
-- TorchGeo
-- pretrained building segmentation/detection model
-
----
-
-# 23. Recommended ML Output Contract
-
-Each prediction should ideally return something close to:
+## 23. ML output contract (as built: `POST /predict`, snapshot rows)
 
 ```json
 {
-  "location_id": "UTH-042",
-  "timestamp": "2026-10-08T14:00:00",
-  "flood_probability": 0.78,
-  "severity": "HIGH",
-  "prediction_interval": {
-    "lower": 0.66,
-    "upper": 0.87
-  },
-  "confidence": 0.71,
-  "source_agreement": 0.86,
-  "estimated_lead_time_hours": 2.4,
-  "data_quality": {
-    "rainfall": "available",
-    "river": "available",
-    "satellite": "delayed",
-    "soil_moisture": "available",
-    "dem": "available"
-  }
+  "station": "Haldwani_1",
+  "time": "2024-09-12T19:00:00",
+  "p": 0.0182,                    // calibrated probability (Venn-Abers)
+  "raw_score": 0.1835,            // XGBoost raw score
+  "confidence": 0.668, "credibility": 0.634,
+  "cp_set_90": "UNCERTAIN",       // FLOOD | NO_FLOOD | UNCERTAIN
+  "tier": "EXTREME", "tier_ml": "NORMAL", "tier_rain": "EXTREME", "trigger": "rainfall",
+  "signals": { "rain_24h": 140.5, "rain_1h": 0.0 },
+  "drivers": [ { "feature": "district_flood_severity_index", "shap": -0.84, "value": 1.15 } ],
+  "latency_ms": 15.1
 }
 ```
 
-The actual uncertainty representation should match the selected model/calibration method.
+Planned additions ❌: `confidence_class`, `data_health`, `valid_from` / `valid_to`, `model_version`, PREPARE district outlook.
 
----
+## 24. Impact output contract (as built: building tiles `web/public/data/bld/{z}/{x}/{y}.json`)
 
-# 24. Recommended Impact Output Contract
-
-Example:
+Each building is a GeoJSON polygon with compact properties (kept small for fast map tiles):
 
 ```json
-{
-  "asset_id": "B104",
-  "asset_type": "building",
-  "zone_id": "UTH-042",
-  "flood_probability": 0.91,
-  "estimated_water_depth_m": 1.7,
-  "inundated_footprint_percent": 94,
-  "expected_duration_hours": 5.5,
-  "confidence": 0.74,
-  "impact_score": 82,
-  "impact_class": "CRITICAL"
-}
+{ "i": 1, "st": 6, "src": 0, "z": 3, "s": 5, "h": 112, "d": 809, "a": 163 }
 ```
 
-This is a product-level schema; it should be adjusted once the actual flood-depth and exposure methodology is finalized.
+| Key | Meaning |
+|---|---|
+| `i` | building id within the export |
+| `st` | index of the hazard centre (gauge or district-estimate town) in `impact.json` |
+| `src` | hazard source: 0 live gauge · 1 last report ≤ 7 days · 2 district estimate |
+| `z` | setback zone: 0 = A ≤ 50 m · 1 = B 50–100 m · 2 = C 100–200 m · 3 = outside |
+| `s` | exposure score (class bands: MINIMAL < 20 ≤ LOW < 40 ≤ MODERATE < 60 ≤ HIGH < 80 ≤ CRITICAL) |
+| `h` | height above the nearest river (m, information only) |
+| `d` | distance to the nearest mapped river or stream (m) |
+| `a` | footprint area (m²) |
+
+Summary keys: `buildings_in_radius`, `buildings_exposed`, `by_class`, `by_station`, `by_source`, `roads`, `bridges`, `schools`, `health`, `coverage`.
 
 ---
 
-# 25. What NOT to Claim
-
-The system should remain a **decision-support / forecasting and exposure platform**.
-
-Avoid claiming:
-
-- exact structural damage
-- exact monetary loss
-- exact casualty prediction
-- autonomous evacuation decisions
-- guaranteed flood arrival times
-- clinically/emergency-authoritatively certified outputs
-- causality from feature importance alone
-
-Better wording:
-
-- predicted
-- estimated
-- potentially affected
-- exposed
-- model confidence
-- forecast uncertainty
-- monitoring priority
+## 25. What NOT to claim ✅ (enforced in UI copy and docs)
+- **Never claim:**
+  - structural damage, monetary loss, casualties, or evacuation decisions;
+  - inundation depth or extent (this is an exposure proxy);
+  - guaranteed arrival times or lead times beyond the measured 3.5 h median;
+  - "accuracy %" as the headline (use PR-AUC with base rate, CSI / POD / FAR, BSS);
+  - causation from SHAP.
+- **Use:** predicted, estimated, potentially exposed, model confidence, decision support.
+- **Disclaimer on every page:** "Decision-support prototype; follow IMD / USDMA / district advisories."
 
 ---
 
-# 26. MVP Scope for a Hackathon
+## 26. Scope delivered for the course (replaces "MVP for a hackathon")
 
-Do not attempt to build everything at once.
+| Course objective | Delivered |
+|---|---|
+| 1. Multi-source curation | ✅ CWC rain + discharge, IMD floods, GSI landslides, district indices, ERA5, DEM; 96-event multi-source label set; IMERG 2001–2025 downloaded |
+| 2. Cleaning, normalisation, features | ✅ QC rules with tests; 5 silent bugs fixed; 23 past-only features; parameterised normalisation; O(1) online features |
+| 3. Multi-model training and evaluation | ✅ LR / RF / XGBoost; time-series tuning; chronological + leave-one-event-out; fusion ablation A–T |
+| 4. Uncertainty and robustness | ✅ Venn-Abers + Mondrian conformal; sensor-failure suite; hybrid warning tiers; WMO verification; external validation |
+| Product | ✅ 10-page console, building-level exposure, FastAPI, CI, docs |
 
-## Tier 1 — Must Have
+## 27. Next differentiators (v1.0) ❌
+- **District-day "PREPARE" model:** trained on 2001–2025 gridded data (IMERG, ERA5 / ERA5-Land, GloFAS).
+- **Labels and features:** labels back-filled to 2001; the 30 m terrain suite; soil moisture, runoff, CAPE.
+- **Model:**
+  - a finer XGBoost with Platt / beta calibration (both passed the pre-set rule in `results/v3/rq4_calibration.md`);
+  - fixes to the alert logic: no ML alert without rain, district estimates by probability, lake-side exposure.
+- **Product:** time scrubber, event replay, alerts and sitrep PDF, database mode.
 
-### Data
-- 3–6 meaningful modalities
-- cleaned and normalized
-- aligned by time and geography
+## 28. Showcase features (later) ❌
+Zone comparison, the mobile `/field` PWA, Hindi UI, a CAP alert feed (status "Exercise"), and Himachal Pradesh / Sikkim transfer.
 
-### ML
-- baseline model
-- multimodal model
-- uncertainty estimation
-- validation on held-out data
+## 29. Demo sequence (3 minutes) ✅
+1. **Landing.** Verified results: "CSI 0.095, 2–3× the baselines; 7 of 21 later floods caught."
+2. **Overview.** "EXTREME at Haldwani: 141 mm in 24 h, set by the IMD rule; the ML layer says 2 %. We show both."
+3. **Risk Map → Pithoragarh.** "Rain says SEVERE, ML says NORMAL, and the 90 % set says UNCERTAIN. Here's why (SHAP)."
+4. **Impact → Haldwani.** "Buildings within 50 / 100 / 200 m of the river, by the official NGT / Jal Shakti / High Court zones."
+5. **Uncertainty.** "Rain at the gauge alone is no better than chance; flood history matters most; here's what fails if a sensor drops."
+6. **Metrics.** "WMO-style scores with confidence intervals against baselines; external events with sources."
+7. **Close.** The five data bugs we found and the honest limits.
 
-### Product
-- Overview
-- Forecast
-- Risk Map
-- Impact
+## 30. Final product definition
 
-### Impact
-- building footprints
-- spatial intersection
-- affected-building count
-- basic impact severity
+> **PRAHAR is an uncertainty-aware, multi-source flash-flood early-warning platform for Uttarakhand. It fuses gauge rainfall, river discharge and flood/landslide history into calibrated 24-hour flood probabilities, combines them with IMD rainfall rules into explainable warning tiers with conformal confidence, and translates them into building-level exposure inside official river-setback zones, verified honestly against baselines and independent events.**
 
----
+**Three intelligence layers:**
 
-# 27. Tier 2 — Strong Differentiators
+| Layer | Question | How |
+|---|---|---|
+| **1. Hazard** | will a flood happen? | calibrated XGBoost + IMD rainfall rule |
+| **2. Uncertainty** | how sure are we? | conformal sets, source health, robustness |
+| **3. Exposure** | what could be affected? | buildings, roads, bridges, POIs × setback zones |
 
-Add:
+**One-line pitch:** *"From 'flood probability = 82 %' to 'this district, this rainfall, these buildings along this river, with this much confidence, verified against real floods'."*
 
-- Uncertainty page
-- source agreement
-- missing-data experiments
-- water-depth view
-- exposure layer for roads and bridges
-- critical infrastructure
-- time-slider map
+## 31. Design principles ✅
+1. Map-first, not chart-first.
+2. Every prediction carries uncertainty.
+3. Every risk is spatially explorable.
+4. Every number is traceable to a source file.
+5. No ML jargon in the main flow; details on click (progressive disclosure).
+6. Desktop for analysis; mobile for field awareness (planned).
+7. Prototype scores are never presented as validated damage predictions.
+8. Never hard-code metrics.
+9. Show the trigger: users must know whether rain or the model raised an alert.
+10. One memorable end-to-end story.
 
----
-
-# 28. Tier 3 — Showcase Features
-
-Add only if the core system works:
-
-- historical event replay
-- predicted vs observed comparison
-- counterfactual sensor ablation
-- building-height/floor approximation
-- zone comparison
-- automated report generation
-- mobile/PWA field view
-
----
-
-# 29. Recommended Demo Sequence
-
-A strong live demo could be:
-
-### Step 1
-Open **Overview**
-
-> “The system currently detects high flood risk.”
-
-### Step 2
-Open **Forecast**
-
-> “Risk is expected to peak in approximately X hours.”
-
-### Step 3
-Open **Risk Map**
-
-> “This is where the model expects the highest-risk area.”
-
-### Step 4
-Turn on **Buildings**
-
-> “Now we translate the flood prediction into physical exposure.”
-
-### Step 5
-Click a building
-
-> “This building has X% predicted flood probability and Y% estimated footprint inundation.”
-
-### Step 6
-Open **Uncertainty**
-
-> “But here's the important part: the model is not blindly confident. Satellite data is delayed, so uncertainty increases.”
-
-### Step 7
-Open **Events**
-
-> “Finally, we replay historical events and compare what the model predicted against what actually happened.”
-
-That is a clean **2–4 minute judge demo**.
+## 32. The core "wow"
+The moment the demo moves from a district warning ("EXTREME, 141 mm, set by rainfall") to **specific buildings along a specific river inside the legal 50 m zone**, while the confidence and the verification stay visible. That's where PRAHAR becomes a complete, honest flood-intelligence platform rather than another flood model.
 
 ---
 
-# 30. Final Product Definition
+## Appendix A: As-built facts sheet (quote these)
 
-The project can be described as:
+| Item | Value | Source |
+|---|---|---|
+| Station-hours / labelled / flood hours | 518,304 / 126,904 / 1,951 | `web/public/data/model.json` |
+| Gauges / districts | 44 rain + 7 river / 13 | same |
+| Splits | train < 2023-07-01 (94,154 rows, 367 floods) · val Jul 2023 (20,280, 864) · test 1–25 Aug 2023 (12,469, 720) | `results/splits.json` |
+| Deployed model | XGBoost, 23 features (Exp G); 100 trees, depth 5, lr 0.01, scale_pos_weight 255.55 | `models/xgboost/metadata.json` |
+| Test hour level (XGBoost) | ROC-AUC 0.708 · PR-AUC 0.150 (base 0.058, 2.6×) · F1 0.320 · MCC 0.295 | `results/metrics/metrics_summary.csv` |
+| Leave-one-event-out (deployed) | ROC-AUC 0.701 · PR-AUC 0.186 (base 0.081) | `results/event_cv/event_cv_summary.csv` |
+| Hybrid ≥ ALERT, station-hour test | precision 0.234 · recall 0.650 | `results/warning_levels/warning_thresholds.json` |
+| District-day CSI, strict (test) | **0.095** [0.034–0.165], POD 0.70, FAR 0.90; prior 0.036, persistence 0.053 | `results/verification/verification.json` |
+| BSS / ECE | 0.073 / 0.012 | same |
+| Honest lead time | 6 / 18 warned before the event day, median 3.5 h | same |
+| External validation | 7 / 21 (POD 0.33 [0.14–0.52]), events 2023-09 → 2025-09 | `results/metrics/external_validation.json` |
+| Conformal 90 % | coverage 0.884; flood hours 1.00; 85 % uncertain | `results/conformal/cp_summary.json` |
+| Labels | 96 events / 130 district-days (2022–25), 5 source families | `data/external/labels/labels_summary.json` |
+| Impact | 575,339 buildings; 0 zone / class mismatches; 1,327 roads; 228 bridges; 13,752 places | `scripts/audit_impact.py`, `impact.json` |
+| Latency | `/predict` 17 ms p95; tile 0.74 MB / 175 ms; API RAM 335 MB | `results/latency/benchmarks.csv` |
+| Quality | 51 tests; audit 0 fail; CI green | `tests/`, `.github/workflows/ci.yml` |
 
-> **An uncertainty-aware multimodal flash-flood intelligence platform that fuses environmental observations, predicts flood risk and lead time, maps potential inundation, and translates the prediction into building and infrastructure exposure.**
+## Appendix B: Repository map
 
-### The three intelligence layers
-
-```text
-┌────────────────────────────────────────────┐
-│  LAYER 1 — HAZARD                          │
-│  Will flooding occur?                      │
-│                                            │
-│  Multimodal flood prediction + uncertainty │
-└──────────────────────┬─────────────────────┘
-                       ↓
-┌────────────────────────────────────────────┐
-│  LAYER 2 — INUNDATION                      │
-│  Where/how deep could it be?               │
-│                                            │
-│  Flood extent + depth + forecast window    │
-└──────────────────────┬─────────────────────┘
-                       ↓
-┌────────────────────────────────────────────┐
-│  LAYER 3 — EXPOSURE & IMPACT               │
-│  What could be affected?                   │
-│                                            │
-│  Buildings + roads + bridges + critical    │
-│  infrastructure                            │
-└────────────────────────────────────────────┘
-```
-
-## One-line pitch
-
-> **“We don't just predict where a flash flood may occur — we quantify uncertainty, estimate inundation, and translate the forecast into building- and infrastructure-level exposure.”**
-
----
-
-# 31. Design Principles
-
-1. **Map-first, not chart-first.**
-2. **Every prediction should have uncertainty.**
-3. **Every risk should be spatially explorable.**
-4. **Every important output should be traceable to data sources.**
-5. **Do not overload the user with ML jargon.**
-6. **Use progressive disclosure: overview first, details on click.**
-7. **Desktop is for analysis; mobile is for field awareness.**
-8. **Do not present prototype scores as scientifically validated damage predictions.**
-9. **Never hard-code impressive metrics.**
-10. **Build the demo around one memorable end-to-end story.**
-
----
-
-# 32. The Core Wow Factor
-
-The project should make the judge experience this progression:
-
-```text
-                    FLOOD RISK
-                        ↓
-                 "82% probability"
-                        ↓
-                  WHERE?
-                        ↓
-                  "This zone"
-                        ↓
-                 WHEN?
-                        ↓
-                  "In ~2h"
-                        ↓
-              HOW CERTAIN?
-                        ↓
-                "Confidence 71%"
-                        ↓
-                 WHAT GETS HIT?
-                        ↓
-             "127 buildings + roads"
-                        ↓
-                HOW BAD?
-                        ↓
-           "41 high/critical assets"
-                        ↓
-               WHY THIS RISK?
-                        ↓
-       "Rain + river + soil + terrain"
-                        ↓
-              CAN WE TRUST IT?
-                        ↓
-           "Show uncertainty + ablation"
-```
-
----
-
-## Final UI Philosophy
-
-The system should feel like one continuous intelligence workflow rather than a collection of dashboards:
-
-> **Situation → Forecast → Location → Impact → Uncertainty → Validation**
-
-The most important hackathon moment is the transition from a flood-risk heatmap to a building-level exposure view while keeping uncertainty visible. That is where the project moves from **“another flood prediction model”** to a much more complete **flood intelligence platform**.
+| Path | What |
+|---|---|
+| `params.yaml` | all constants (QC, features, tiers, rain rule, impact, API) |
+| `curated_dataset/` (+ `MANIFEST.sha256`) | raw sources, pinned |
+| `src/` | pipeline, features, target, training, event CV, conformal, tiers, verification, labels, district-day, studies, terrain |
+| `scripts/` | `run_all.py`, export, impact layer, tiles, labels, fetchers (IMERG, CDS), audits, benchmarks |
+| `backend/` | FastAPI app + inference engine |
+| `web/` | React console |
+| `results/` | every metric and report; `results/v3/` = v1.0 studies |
+| `docs/` | architecture, metrics, licences, ADRs, runbook |
+| `tests/` | data, labels, online features, terrain, model behaviour, API and security |
