@@ -101,9 +101,9 @@ section.glass:hover, div.glass.rounded-xl:hover { border-color: rgba(163,230,53,
    so it emerges tiny at the horizon and widens as it flows towards the screen. Streaks move downstream = towards you. */
 .card-in { animation: card-in .35s cubic-bezier(.2,.8,.2,1) both; }
 @keyframes card-in { from { opacity: 0; transform: translateY(10px) scale(.98) } to { opacity: 1; transform: none } }
-.river-stage { position: relative; width: min(460px, 80vw); height: 210px; overflow: hidden; perspective: 210px; perspective-origin: 50% 0%;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 88%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 92%, transparent 100%); }
-.river-3d { position: absolute; left: 50%; bottom: -30px; width: 300px; height: 1000px; transform-origin: 50% 100%;
-  transform: translateX(-50%) rotateX(76deg); filter: drop-shadow(0 10px 10px rgba(0,0,0,.35)); }
-@media (prefers-reduced-motion: reduce) { .card-in { animation: none } .flow { animation: none } }
+.river-stage { position: relative; width: min(460px, 80vw); height: 210px; overflow: hidden; border-radius: 18px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%);
+          mask-image: linear-gradient(to bottom, transparent 0%, #000 22%); }
+.rain { animation: rain .7s linear infinite; }
+@keyframes rain { from { transform: translate(0, 0) } to { transform: translate(-16px, 48px) } }
+@media (prefers-reduced-motion: reduce) { .card-in, .rain { animation: none } }
